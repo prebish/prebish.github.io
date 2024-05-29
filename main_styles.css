@@ -1,0 +1,59 @@
+body {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    font-family: Times New Roman, sans-serif;
+    text-align: center;
+}
+
+#header {
+    display: flex;
+    text-align: center;
+    margin-bottom: 65px;
+}
+
+#menu-btn {
+    width: 40px;
+    height: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    border-radius: 100%;
+}
+
+#title {
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    font-size: 50;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    border: solid white;
+    border-radius: 100px;
+    font-family: Brush Script MT, 'Times New Roman', sans-serif;
+}
+
+#dark-mode-btn {
+    width: 40px;
+    height: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: rgb(0, 0, 0);
+    border-radius: 100%;
+}
+
+
+
+/* FRONT CARD */
+
+#menu-card {
+    display: inline-block;
+    vertical-align: top;
+    border: solid white 1.5px;
+}
+
+.main-img {
+    height: 250px;
+    width: 250px;
+}
+
