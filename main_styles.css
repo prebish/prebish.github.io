@@ -14,6 +14,7 @@ body {
 #menu-btn {
     width: 50px;
     height: 50px;
+    margin-left: 10;
     margin-top: auto;
     margin-bottom: auto;
     color: rgb(230, 237, 243);
@@ -24,7 +25,7 @@ body {
 #title {
     margin-left: auto;
     margin-right: auto;
-    width: 85%;
+    width: 75%;
     font-size: 40;
     color: rgb(230, 237, 243);
     background-color: rgb(13, 17, 23);
@@ -37,6 +38,7 @@ body {
 #dark-mode-btn {
     width: 50px;
     height: 50px;
+    margin-right: 10;
     margin-top: auto;
     margin-bottom: auto;
     background-color: rgb(13, 17, 23);
@@ -84,14 +86,17 @@ body {
 }
 
 /* FRONT CARD */
-#menu-card {
+.menu-card {
     display: inline-block;
     vertical-align: top;
     border: groove 2px rgb(230, 237, 243);
+    border-radius: 10px;
     background-color: rgb(13, 17, 23);
+    margin: 10px;
 }
 
 .main-img {
+    border-radius: 10px;
     height: 250px;
     width: 250px;
 }
