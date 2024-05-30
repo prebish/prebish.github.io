@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ePortfolio</title>
+    <title></title>
     <link rel="stylesheet" href="main_styles.css">
 </head>
 
@@ -15,7 +15,7 @@
 
     <!-- H E A D E R -->
     <div id="header">
-        <button id="menu-btn">•••</button>
+        <button id="menu-btn", onclick="toggleMenu()">•••</button>
 
         <div id="title">
             <strong>~ Joel W. Prebish ~</strong>
@@ -28,9 +28,59 @@
     <br>
     <div id="menu-card">
         <img class="main-img" src="static-img\thispersondoesnotexist.jpg" alt="img">
-        <p id="main-img-description">This is a sample image. From: thispersondoesnotexist.com</p>
+        <p id="main-img-description">Not a real person. <br>Image from: <a href="https://thispersondoesnotexist.com/">this site</a></p>
+    </div>
+    <br>
+    <br>
+    <div id="menu-card">
+        <img class="main-img" src="static-img\thispersondoesnotexist.jpg" alt="img">
+        <p id="main-img-description">Not a real person. <br>Image from: <a href="https://thispersondoesnotexist.com/">this site</a></p>
+    </div>
+    <br>
+    <p>This is some subtext</p>
+
+
+    <div id="menuOverlay" hidden>
+        <ul id="overlayList">
+            <li class="overlayListItems">
+                <label class="overlayButtons">
+                    <a href="Resume.html" class="overlayLinks" >Resume</a>
+                </label>
+            </li>
+            <li class="overlayListItems">
+                <label class="overlayButtons">
+                    <a href="Projects.html" class="overlayLinks" >Resume</a>
+                </label>
+            </li>
+            <li class="overlayListItems">
+                <label class="overlayButtons">
+                    <a href="ContactMe.html" class="overlayLinks" >📨 Contact Me</a>
+                </label>
+            </li>
+        </ul>
     </div>
 
+
+
+
+
+
+
+    <!-- S C R I P T -->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menuOverlay");
+            if (menu.style.display === "none" || menu.style.display === "") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+    </script>
 
 
 
