@@ -21,6 +21,9 @@ body {
     background-color: rgb(13, 17, 23);
     border-radius: 10px;
 }
+#menu-btn:hover {
+    background-color: rgb(75, 77, 78);
+}
 
 #title {
     margin-left: auto;
@@ -67,7 +70,6 @@ body {
     margin: 10px;
     font-size: larger;
 }
-
 .overlayListItems:hover {
     .overlayButtons {
         background-color: rgb(75, 77, 78); 
@@ -81,7 +83,7 @@ body {
 
 .overlayButtons {
     padding: 5px;
-    border-radius: 2px;
+    border-radius: 4px;
     background-color: rgb(13, 17, 23);
 }
 
