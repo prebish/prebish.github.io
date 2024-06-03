@@ -100,12 +100,14 @@ body {
     border-radius: 10px;
     background-color: var(--elem-background);
     margin: 10px;
+
+    transition: transform 0.3s ease-in-out; /* Add this line */
 }
 
 /* makes cards bigger on hover */
 .menu-card:hover {
     background-color: rgb(75, 77, 78);
-    transform: scale(1.1); /* Scale the card by 10% on hover */
+    transform: scale(1.050); /* Scale the card by 10% on hover */
 }
 
 .main-img {

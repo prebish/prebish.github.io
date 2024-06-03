@@ -1,0 +1,159 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="main_styles.css">
+</head>
+
+<body>
+
+    <!-- H E A D E R -->
+    <div id="header">
+        <button id="menu-btn", onclick="toggleMenu()">• • •</button>
+        <div id="title"> <strong>Joel Prebish</strong> </div>
+        <button id="dark-mode-btn">🔆</button>
+    </div>
+
+    <!-- M E N U   C A R D S -->
+
+    <!-- subheader -->
+    <div class="menu-card-section-header">
+        <h1>Featured</h1>
+    </div>
+    <br><br>
+
+    <a href="joel-prebish.pdf">
+    <div class="menu-card">
+        <img class="main-img" src="static-img\resume.png" alt="img">
+        <p id="main-img-description">
+            <strong>Resume</strong>
+            <br>
+            <small>Digitalized Document</small>
+        </p>
+    </div></a>
+
+    <a href="">
+    <div class="menu-card">
+        <img class="main-img" src="static-img\codefolder.png" alt="img">
+        <p id="main-img-description">
+            <strong>Project Center</strong>
+            <br>
+            <small>Featured Works</small>
+        </p>
+    </div></a>
+    
+    <a href="mailto:collaborate-prebish@outlook.com">
+        <div class="menu-card">
+            <img class="main-img" src="static-img\email.png" alt="img">
+            <p id="main-img-description">
+                <strong>Email</strong>
+                <br>
+                <small>Contact Me</small>
+            </p>
+        </div>
+    </a>
+    <br><br>
+
+    <!-- subheader -->
+    <div class="menu-card-section-header">
+        <h1>Project Highlights</h1>
+    </div>
+    <br><br>
+
+    <a href="">
+        <div class="menu-card">
+            <img class="main-img" src="static-img\redstonehd.png" alt="img">
+            <p id="main-img-description">
+                <strong>Redstone Tools Mod</strong>
+                <br>
+                <small>for Minecraft: Bedrock</small>
+            </p>
+        </div>
+    </a>
+    <br><br>
+
+    <!-- subheader -->
+    <div class="menu-card-section-header">
+        <h1>Social Media</h1>
+    </div>
+    <br><br>
+
+    <a href="https://github.com/prebish">
+        <div class="menu-card">
+            <img class="main-img" src="static-img\github_icon.png" alt="github">
+            <p id="main-img-description">
+                <strong>GitHub</strong>
+                <br>
+                <small>View Repos</small>
+            </p>
+        </div></a>
+
+    <a href="https://stackoverflow.com/users/23487199/joel-prebish">
+        <div class="menu-card">
+            <img class="main-img" src="static-img\stackoverflow.png" alt="stackoverflow">
+            <p id="main-img-description">
+                <strong>Stack Overflow</strong>
+                <br>
+                <small>View Activity</small>
+            </p>
+        </div>
+    </a>
+
+    <a href="https://leetcode.com/u/prebish/">
+            <div class="menu-card">
+            <img class="main-img" src="static-img\leetcode.png" alt="leetcode">
+            <p id="main-img-description">
+                <strong>LeetCode</strong>
+                <br>
+                <small>View Solutions</small>
+            </p>
+        </div>
+    </a>
+
+    <a href="https://leetcode.com/u/prebish/">
+        <div class="menu-card">
+            <img class="main-img" src="static-img\linkedin.png" alt="linkedin">
+            <p id="main-img-description">
+                <strong>LinkedIn</strong>
+                <br>
+                <small>Connect with me</small>
+            </p>
+        </div>
+    </a>
+    <br><br>
+
+    <!-- O V E R L A Y   M E N U -->
+    <div id="menuOverlay" hidden>
+        <ul id="overlayList">
+            <li class="overlayListItems">
+                <label class="overlayButtons">
+                    <a href="Projects.html" class="overlayLinks">⚒️ Project Center</a>
+                </label>
+            </li>
+            <li class="overlayListItems">
+                <label class="overlayButtons">
+                    <a href="Favorites.html" class="overlayLinks">⭐ Favorites Sites</a>
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- S C R I P T I N G -->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menuOverlay");
+            if (menu.style.display === "none" || menu.style.display === "") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
