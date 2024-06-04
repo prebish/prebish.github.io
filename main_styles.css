@@ -38,9 +38,6 @@ body {
     border: groove var(--text);
     border-radius: 10px;
 }
-#menu-btn:hover {
-    background-color: rgb(75, 77, 78);
-}
 
 #title {
     margin-left: auto;
@@ -147,6 +144,31 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+    .header-items {
+        background-color: var(--elem-background);
+        border: groove var(--text);
+        border-radius: 10px;
+        color: var(--text);
+        border-width: 2px;
+        font-family: Brush Script MT, 'Times New Roman', sans-serif;
+        
+    }
+
+    #title {
+        font-size: 40;
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+    }
+
+    #menu-btn, #dark-mode-btn {
+        font-size: large;
+        height: 50px;
+        margin-bottom: auto;
+        margin-top: auto;
+        width: 50px;
+    }
+
     .menu-card {
         display: inline-block;
         vertical-align: top;
@@ -160,8 +182,8 @@ a {
 
     .main-img {
         border-radius: 8px;
-        height: 190px;
-        width: 200px;
+        height: 140px;
+        width: 160px;
     }
     
 }

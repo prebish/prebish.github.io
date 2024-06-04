@@ -11,93 +11,78 @@
 
     <!-- H E A D E R -->
     <div id="header">
-        <button id="menu-btn", onclick="toggleMenu()">• • •</button>
-
-        <div id="title">
-            <strong>Favorite Websites</strong>
-        </div>
-        
-        <button id="dark-mode-btn">🔆</button>
+        <button id="menu-btn", onclick="toggleMenu()">≡</button>
+        <div id="title"><strong>Favorite Websites</strong></div>
+        <button id="dark-mode-btn", onclick="toggleColors()">🌓</button>
     </div>
+
 
 
     <!-- M E N U   C A R D S -->
 
-    <!-- subheader -->
-    <div class="menu-card-section-header"><h1>Time Killers</h1></div><br><br>
-
+    <!-- section -->
+    <div class="menu-card-section-header">
+        <h1>- Tools -</h1>
+    </div><br><br>
+    <!-- cards -->
+    <div class="card-container">
+    <a href="">
     <div class="menu-card">
-        <img class="main-img" src="static-img\codefolder.svg" alt="img">
-        <p id="main-img-description"><strong>Projects</strong><br><small>Featured Works</small></p>
+        <img class="main-img" src="static-img\" alt="webp">
+        <p class="main-img-description">
+            <strong>Image Upscaler</strong>
+            <br>
+            <small>Enhance in batch processes</small>
+        </p>
     </div></a>
+    </div><br><br>
 
-    <a href="mailto:collaborate-prebish@outlook.com">
-        <div class="menu-card">
-            <img class="main-img" src="static-img\email.png" alt="img">
-            <p id="main-img-description"><strong>Email</strong><br><small>For collaboration</small></p>
-        </div></a>
-    <br><br>
-
-    <!-- subheader -->
-    <div class="menu-card-section-header"><h1>Online Tools</h1></div><br><br>
-
-    <a href="https://www.remove.bg/"><div class="menu-card">
-        <img class="main-img" src="https://www.remove.bg/" alt="img">
-        <p id="main-img-description"><strong>Remove.bg</strong><br><small>remove backgrounds</small></p>
+    <!-- section -->
+    <div class="menu-card-section-header">
+        <h1>- Misc -</h1>
+    </div><br><br>
+    <!-- cards -->
+    <div class="card-container">
+    <a href="https://github.com/prebish/redstone-tools-mcaddon">
+    <div class="menu-card">
+        <img class="main-img" src="static-img\redstone.png" alt="redstone-img">
+        <p class="main-img-description">
+            <strong>Redstone Tools Mod</strong>
+            <br>
+            <small>for Minecraft: Bedrock</small>
+        </p>
     </div></a>
+    <a href="https://github.com/prebish/python-projects-hub">
+    <div class="menu-card">
+        <img class="main-img" src="static-img\python.png" alt="python-img">
+        <p class="main-img-description">
+            <strong>Python Projects Hub</strong>
+            <br>
+            <small>FREE educational projects</small>
+        </p>
+    </div></a>
+    </div><br><br>
 
-    <br><br>
 
-    <!-- subheader -->
-    <div class="menu-card-section-header"><h1>Miscellaneous</h1></div><br><br>
-
-    <a href="https://killedbygoogle.com/">
-        <div class="menu-card">
-            <img class="main-img" src="https://static.killedbygoogle.com/com/tombstone.svg" alt="img">
-            <p id="main-img-description">Killed by Google</p>
-        </div></a>
-    <a href="https://www.flaticon.com/">
-        <div class="menu-card">
-            <img class="main-img" src="https://media.flaticon.com/dist/min/img/logos/flaticon-color-negative.svg" alt="img">
-            <p id="main-img-description">Flat Icon</p>
-        </div></a>
-    <a href="https://haveibeenpwned.com/">
-        <div class="menu-card">
-            <img class="main-img" src="static-img\haveibeenpwned.jpg" alt="img">
-            <p id="main-img-description">Have I Been Pwned?</p>
-        </div>
-    </a>
-
-    <br><br><br>
-    <strong>Disclaimer: </strong>
-    <small><i>These links are provided for convenience and 
-        informational purposes only; they do not constitute an endorsement or an approval by me 
-        of any of the products, services, or opinions of the corporation or organization or individual. 
-        I bear no responsibility for the accuracy, legality, or content of the external site or for that 
-        of subsequent links. Contact the external site for answers to questions regarding its content.
-    </i></small>
 
     <!-- O V E R L A Y   M E N U -->
     <div id="menuOverlay" hidden>
         <ul id="overlayList">
             <li class="overlayListItems">
                 <label class="overlayButtons">
-                    <a href="index.html" class="overlayLinks" >🏡 Home Page</a>
+                    <a href="Projects.html" class="overlayLinks">⚒️ Project Center</a>
                 </label>
             </li>
             <li class="overlayListItems">
                 <label class="overlayButtons">
-                    <a href="Resume.html" class="overlayLinks" >📜 Resume</a>
-                </label>
-            </li>
-            <li class="overlayListItems">
-                <label class="overlayButtons">
-                    <a href="Projects.html" class="overlayLinks" >⚒️ Projects</a>
+                    <a href="Favorites.html" class="overlayLinks">⭐ Favorites Sites</a>
                 </label>
             </li>
         </ul>
     </div>
 
+
+    
     <!-- S C R I P T I N G -->
     <script>
         function toggleMenu() {
@@ -109,8 +94,20 @@
             }
         }
 
-        function redirectTo(page) {
-            window.location.href = page;
+        let darkMode = true;
+
+        function toggleColors() {
+            const root = document.documentElement;
+            if (darkMode) {
+                root.style.setProperty('--text', 'var(--text-lm)');
+                root.style.setProperty('--background', 'var(--background-lm)');
+                root.style.setProperty('--elem-background', 'var(--elem-background-lm)');
+            } else {
+                root.style.setProperty('--text', 'var(--text-dm)');
+                root.style.setProperty('--background', 'var(--background-dm)');
+                root.style.setProperty('--elem-background', 'var(--elem-background-dm)');
+            }
+            darkMode = !darkMode;
         }
     </script>
 </body>
