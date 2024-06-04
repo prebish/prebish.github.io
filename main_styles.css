@@ -32,6 +32,7 @@ body {
     float: left;
     margin-top: auto;
     margin-bottom: auto;
+    font-size: x-large;
     color: var(--text);
     background-color: var(--elem-background);
     border: groove var(--text);
@@ -60,6 +61,8 @@ body {
     float: right;
     margin-top: auto;
     margin-bottom: auto;
+    font-size: large;
+    color: var(--text);
     background-color: var(--elem-background);
     border: groove var(--text);
     border-radius: 10px;
@@ -112,7 +115,7 @@ body {
     background-color: var(--elem-background);
     margin: 10px;
 
-    transition: transform 0.3s ease-in-out; /* Add this line */
+    transition: transform 0.3s ease-in-out;
 }
 
 /* makes cards bigger on hover */
@@ -152,7 +155,7 @@ a {
         background-color: var(--elem-background);
         margin: 10px;
     
-        transition: transform 0.3s ease-in-out; /* Add this line */
+        transition: transform 0.3s ease-in-out;
     }
 
     .main-img {

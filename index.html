@@ -11,9 +11,9 @@
 
     <!-- H E A D E R -->
     <div id="header">
-        <button id="menu-btn", onclick="toggleMenu()">• • •</button>
+        <button id="menu-btn", onclick="toggleMenu()">≡</button>
         <div id="title"><strong>Joel Prebish</strong></div>
-        <button id="dark-mode-btn", onclick="toggleColors()">🔆</button>
+        <button id="dark-mode-btn", onclick="toggleColors()">🌓</button>
     </div>
 
 
@@ -51,6 +51,15 @@
             <strong>Email</strong>
             <br>
             <small>Contact Me</small>
+        </p>
+    </div></a>
+    <a href=".\Favorites.html">
+    <div class="menu-card">
+        <img class="main-img" src="static-img\star.png" alt="star-img">
+        <p class="main-img-description">
+            <strong>Farovite Websites</strong>
+            <br>
+            <small>Kill Some Time</small>
         </p>
     </div></a>
     </div><br><br>
@@ -160,9 +169,7 @@
 
         function toggleColors() {
             const root = document.documentElement;
-            console.log("button presssed.");
             if (darkMode) {
-                console.log("darkMode true, setting light.");
                 root.style.setProperty('--text', 'var(--text-lm)');
                 root.style.setProperty('--background', 'var(--background-lm)');
                 root.style.setProperty('--elem-background', 'var(--elem-background-lm)');
