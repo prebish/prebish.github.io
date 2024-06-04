@@ -121,7 +121,33 @@ body {
     margin: auto;
 }
 
+.card-container {
+    /*background-color: #333;*/
+    overflow: auto;
+    white-space: nowrap;
+    /*border-radius: 10px;*/
+}
+
 a {
     color: var(--text);
 }
 
+@media only screen and (max-width: 600px) {
+    .menu-card {
+        display: inline-block;
+        vertical-align: top;
+        border: groove 2px var(--text);
+        border-radius: 10px;
+        background-color: var(--elem-background);
+        margin: 10px;
+    
+        transition: transform 0.3s ease-in-out; /* Add this line */
+    }
+
+    .main-img {
+        border-radius: 8px;
+        height: 190px;
+        width: 200px;
+    }
+    
+}
