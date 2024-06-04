@@ -1,7 +1,16 @@
 :root {
-    --text: rgb(230, 237, 243);
-    --background: rgb(13, 17, 23);
-    --elem-background: rgb(1, 4, 9);
+    --text: var(--text-dm);
+    --background: var(--background-dm);
+    --elem-background: var(--elem-background-dm);
+
+    --text-lm: rgb(13, 17, 23);
+    --text-dm: rgb(230, 237, 243);
+
+    --background-lm: rgb(234, 219, 200);
+    --background-dm: rgb(13, 17, 23);
+
+    --elem-background-lm: rgb(181, 193, 142);
+    --elem-background-dm: rgb(1, 4, 9);
   }
 
 body {
@@ -20,11 +29,12 @@ body {
 #menu-btn {
     width: 50px;
     height: 50px;
-    margin-left: 10;
+    float: left;
     margin-top: auto;
     margin-bottom: auto;
     color: var(--text);
     background-color: var(--elem-background);
+    border: groove var(--text);
     border-radius: 10px;
 }
 #menu-btn:hover {
@@ -47,10 +57,11 @@ body {
 #dark-mode-btn {
     width: 50px;
     height: 50px;
-    margin-right: 10;
+    float: right;
     margin-top: auto;
     margin-bottom: auto;
     background-color: var(--elem-background);
+    border: groove var(--text);
     border-radius: 10px;
 }
 

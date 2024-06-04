@@ -12,8 +12,8 @@
     <!-- H E A D E R -->
     <div id="header">
         <button id="menu-btn", onclick="toggleMenu()">• • •</button>
-        <div id="title"> <strong>Joel Prebish</strong> </div>
-        <button id="dark-mode-btn">🔆</button>
+        <div id="title"><strong>Joel Prebish</strong></div>
+        <button id="dark-mode-btn", onclick="toggleColors()">🔆</button>
     </div>
 
 
@@ -156,8 +156,22 @@
             }
         }
 
-        function redirectTo(page) {
-            window.location.href = page;
+        let darkMode = true;
+
+        function toggleColors() {
+            const root = document.documentElement;
+            console.log("button presssed.");
+            if (darkMode) {
+                console.log("darkMode true, setting light.");
+                root.style.setProperty('--text', 'var(--text-lm)');
+                root.style.setProperty('--background', 'var(--background-lm)');
+                root.style.setProperty('--elem-background', 'var(--elem-background-lm)');
+            } else {
+                root.style.setProperty('--text', 'var(--text-dm)');
+                root.style.setProperty('--background', 'var(--background-dm)');
+                root.style.setProperty('--elem-background', 'var(--elem-background-dm)');
+            }
+            darkMode = !darkMode;
         }
     </script>
 </body>
