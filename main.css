@@ -269,3 +269,101 @@ section h2 {
     color: var(--secondary-color);
     text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .header-content .subtitle {
+        font-size: 1rem;
+    }
+
+    .header-cta {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .menu {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .menu a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .menu li {
+        margin: 0.5rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .card {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .card h2 {
+        font-size: 1rem;
+    }
+
+    .card p {
+        font-size: 0.75rem;
+    }
+
+    .card-icon {
+        font-size: 1.5rem;
+    }
+
+    .card-image {
+        height: 100px;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    .social-icon {
+        font-size: 1.5rem;
+    }
+
+    .connect-card .card-icon {
+        font-size: 2rem;
+    }
+
+    .connect-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .connect-card p {
+        font-size: 0.75rem;
+    }
+
+    .connect-card a {
+        font-size: 0.8rem;
+    }
+
+    .card-centered {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 15px rgba(0, 255, 0, 0.2);
+        background-color: var(--card-hover-bg);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-centered::before {
+        transform: scaleX(1);
+    }
+}
