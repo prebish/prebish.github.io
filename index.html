@@ -1,194 +1,176 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="main_styles.css">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
 </head>
 
 <body>
 
-    <!-- H E A D E R -->
-    <div id="header">
-        <button class="header-items" id="menu-btn", onclick="toggleMenu()">≡</button>
-        <div class="header-items" id="title"><strong>Joel Prebish</strong></div>
-        <button class="header-items" id="dark-mode-btn", onclick="toggleColors()">🌓</button>
-    </div>
+    <header w-tid="6">
+        <div class="matrix-bg" w-tid="7">
+            <div class="matrix-column" style="left: 10%; animation-delay: -2s;" w-tid="8"></div>
+            <div class="matrix-column" style="left: 20%; animation-delay: -4s;" w-tid="9"></div>
+            <div class="matrix-column" style="left: 30%; animation-delay: -6s;" w-tid="10"></div>
+            <div class="matrix-column" style="left: 40%; animation-delay: -8s;" w-tid="11"></div>
+            <div class="matrix-column" style="left: 50%; animation-delay: -10s;" w-tid="12"></div>
+            <div class="matrix-column" style="left: 60%; animation-delay: -12s;" w-tid="13"></div>
+            <div class="matrix-column" style="left: 70%; animation-delay: -14s;" w-tid="14"></div>
+            <div class="matrix-column" style="left: 80%; animation-delay: -16s;" w-tid="15"></div>
+            <div class="matrix-column" style="left: 90%; animation-delay: -18s;" w-tid="16"></div>
+        </div>
+        <div class="header-content" w-tid="17">
+            <h1 w-tid="18">Joel Prebish</h1>
+            <p class="subtitle" w-tid="19">Computer Scientist | Hacker | Innovator</p>
+            <a href=""
+                class="header-cta" w-tid="20">Connect With Me</a>
+        </div>
+    </header>
 
-
-
-    <!-- M E N U   C A R D S -->
-
-    <!-- section -->
-    <div class="menu-card-section-header">
-        <h1>- Featured -</h1>
-    </div><br><br>
-    <!-- cards -->
-    <div class="card-container">
-    <a href="joel-prebish.pdf">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\resume.png" alt="papers-img">
-        <p class="main-img-description">
-            <strong>Resume</strong>
-            <br>
-            <small>Digitalized Document</small>
-        </p>
-    </div></a>
-    <a href="">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\codefolder.png" alt="vscode-img">
-        <p class="main-img-description">
-            <strong>Project Center</strong>
-            <br>
-            <small>Featured Works</small>
-        </p>
-    </div></a>
-    <a href="mailto:collaborate-prebish@outlook.com">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\email.png" alt="email-img">
-        <p class="main-img-description">
-            <strong>Email</strong>
-            <br>
-            <small>Contact Me</small>
-        </p>
-    </div></a>
-    <a href=".\Favorites.html">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\star.png" alt="star-img">
-        <p class="main-img-description">
-            <strong>Favorite Websites</strong>
-            <br>
-            <small>Kill Some Time</small>
-        </p>
-    </div></a>
-    </div><br><br>
-
-    <!-- section -->
-    <div class="menu-card-section-header">
-        <h1>- Highlights -</h1>
-    </div><br><br>
-    <!-- cards -->
-    <div class="card-container">
-    <a href="https://github.com/prebish/redstone-tools-mcaddon">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\redstone.png" alt="redstone-img">
-        <p class="main-img-description">
-            <strong>Redstone Tools Mod</strong>
-            <br>
-            <small>for Minecraft: Bedrock</small>
-        </p>
-    </div></a>
-    <a href="https://github.com/prebish/python-projects-hub">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\python.png" alt="python-img">
-        <p class="main-img-description">
-            <strong>Python Projects Hub</strong>
-            <br>
-            <small>FREE educational projects</small>
-        </p>
-    </div></a>
-    <a href="https://github.com/prebish/operating-by-python">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\OS.png" alt="os-img">
-        <p class="main-img-description">
-            <strong>Operating by Python</strong>
-            <br>
-            <small>abstracted OS demos</small>
-        </p>
-    </div></a>
-    </div><br><br>
-
-    <!-- section -->
-    <div class="menu-card-section-header">
-        <h1>- Social Media -</h1>
-    </div><br><br>
-    <!-- cards -->
-    <div class="card-container">
-    <a href="https://github.com/prebish">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\github_icon.png" alt="github">
-        <p class="main-img-description">
-            <strong>GitHub</strong>
-            <br>
-            <small>View Repos</small>
-        </p>
-    </div></a>
-    <a href="https://stackoverflow.com/users/23487199/joel-prebish">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\stackoverflow.png" alt="stackoverflow">
-        <p class="main-img-description">
-            <strong>Stack Overflow</strong>
-            <br>
-            <small>View Activity</small>
-        </p>
-    </div></a>
-    <a href="https://leetcode.com/u/prebish/">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\leetcode.png" alt="leetcode">
-        <p class="main-img-description">
-            <strong>LeetCode</strong>
-            <br>
-            <small>View Solutions</small>
-        </p>
-    </div></a>
-    <a href="https://www.linkedin.com/">
-    <div class="menu-card">
-        <img class="main-img" src="static-img\linkedin.png" alt="linkedin">
-        <p class="main-img-description">
-            <strong>LinkedIn</strong>
-            <br>
-            <small>Connect with me</small>
-        </p>
-    </div></a>
-    </div><br><br>
-
-
-
-    <!-- O V E R L A Y   M E N U -->
-    <div id="menuOverlay" hidden>
-        <ul id="overlayList">
-            <li class="overlayListItems">
-                <label class="overlayButtons">
-                    <a href="Projects.html" class="overlayLinks">⚒️ Project Center</a>
-                </label>
-            </li>
-            <li class="overlayListItems">
-                <label class="overlayButtons">
-                    <a href="Favorites.html" class="overlayLinks">⭐ Favorites Sites</a>
-                </label>
-            </li>
+    <nav w-tid="21">
+        <ul class="menu" w-tid="22">
+            <li w-tid="23"><a
+                    href="https://eportfolio.websim.ai Add new pictures to each card please. Make em cool to look at#home"
+                    w-tid="24">Home</a></li>
+            <li w-tid="25"><a
+                    href="https://eportfolio.websim.ai Add new pictures to each card please. Make em cool to look at#featured"
+                    w-tid="26">Featured</a></li>
+            <li w-tid="27"><a
+                    href="https://eportfolio.websim.ai Add new pictures to each card please. Make em cool to look at#highlights"
+                    w-tid="28">Highlights</a></li>
+            <li w-tid="29"><a
+                    href="https://eportfolio.websim.ai Add new pictures to each card please. Make em cool to look at#projects"
+                    w-tid="30">Projects</a></li>
+            <li w-tid="31"><a
+                    href=""
+                    w-tid="32">Connect</a></li>
         </ul>
+    </nav>
+
+    <div class="container" w-tid="33">
+        <section id="featured" w-tid="34">
+            <h2 w-tid="35">Featured</h2>
+            <div class="grid" w-tid="36">
+                <div class="card" w-tid="37">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97"
+                        alt="Computer code on a screen, neon glow" class="card-image" width="240" height="150"
+                        w-tid="38" data-image_id="0">
+                    <h2 w-tid="39">Resume</h2>
+                    <p w-tid="40">View my professional experience and skills</p>
+                </div>
+                <div class="card" w-tid="41">
+                    <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea"
+                        alt="Holographic projection of code and data" class="card-image" width="240" height="150"
+                        w-tid="42" data-image_id="1">
+                    <h2 w-tid="43">Project Center</h2>
+                    <p w-tid="44">Explore my featured works and contributions</p>
+                </div>
+                <div class="card" w-tid="45">
+                    <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107"
+                        alt="Futuristic communication concept, glowing lines" class="card-image" width="240"
+                        height="150" w-tid="46" data-image_id="2">
+                    <h2 w-tid="47">Email</h2>
+                    <p w-tid="48">Get in touch for opportunities or collaborations</p>
+                </div>
+                <div class="card" w-tid="49">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+                        alt="Abstract digital network concept" class="card-image" width="240" height="150" w-tid="50"
+                        data-image_id="3">
+                    <h2 w-tid="51">Favorite Sites</h2>
+                    <p w-tid="52">Discover the online resources I value most</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="highlights" w-tid="53">
+            <h2 w-tid="54">Highlights</h2>
+            <div class="grid" w-tid="55">
+                <div class="card" w-tid="56">
+                    <img src="https://images.unsplash.com/photo-1537884944318-390069bb8665"
+                        alt="Futuristic circuit board with glowing elements" class="card-image" width="240" height="150"
+                        w-tid="57" data-image_id="4">
+                    <h2 w-tid="58">Redstone Tools Mod</h2>
+                    <p w-tid="59">Enhancing Minecraft with advanced redstone capabilities</p>
+                </div>
+                <div class="card" w-tid="60">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"
+                        alt="Python code on a dark background with neon highlights" class="card-image" width="240"
+                        height="150" w-tid="61" data-image_id="5">
+                    <h2 w-tid="62">Python Projects Hub</h2>
+                    <p w-tid="63">A collection of my Python-based innovations</p>
+                </div>
+                <div class="card" w-tid="64">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31"
+                        alt="Abstract representation of operating system processes" class="card-image" width="240"
+                        height="150" w-tid="65" data-image_id="6">
+                    <h2 w-tid="66">Operating by Python</h2>
+                    <p w-tid="67">Exploring operating systems through Python</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" w-tid="68">
+            <h2 w-tid="69">Recent Projects</h2>
+            <div class="grid" w-tid="70">
+                <div class="card" w-tid="71">
+                    <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7"
+                        alt="Cybersecurity concept with digital lock" class="card-image" width="240" height="150"
+                        w-tid="72" data-image_id="7">
+                    <h2 w-tid="73">CryptoGuard</h2>
+                    <p w-tid="74">State-of-the-art encryption for secure communications</p>
+                </div>
+                <div class="card" w-tid="75">
+                    <img src="https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2"
+                        alt="Web of interconnected data nodes" class="card-image" width="240" height="150" w-tid="76"
+                        data-image_id="8">
+                    <h2 w-tid="77">WebCrawler Pro</h2>
+                    <p w-tid="78">Advanced web scraping tool for data analysis</p>
+                </div>
+                <div class="card" w-tid="79">
+                    <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b"
+                        alt="Futuristic firewall concept" class="card-image" width="240" height="150" w-tid="80"
+                        data-image_id="9">
+                    <h2 w-tid="81">FirewallX</h2>
+                    <p w-tid="82">Next-gen firewall with AI-powered threat detection</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" w-tid="83">
+            <h2 w-tid="84">Connect With Me</h2>
+            <div class="grid" w-tid="85">
+                <div class="card connect-card" w-tid="86">
+                    <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb"
+                        alt="GitHub logo with futuristic background" class="card-image" width="240" height="150"
+                        w-tid="87" data-image_id="10">
+                    <h2 w-tid="88">GitHub</h2>
+                    <p w-tid="89">Explore my open-source projects and contributions</p>
+                    <a href="https://github.com/joelprebish" w-tid="90">@joelprebish</a>
+                </div>
+                <div class="card connect-card" w-tid="91">
+                    <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159"
+                        alt="Stack Overflow concept with programming elements" class="card-image" width="240"
+                        height="150" w-tid="92" data-image_id="11">
+                    <h2 w-tid="93">Stack Overflow</h2>
+                    <p w-tid="94">Check out my problem-solving skills and community involvement</p>
+                    <a href="https://stackoverflow.com/users/joelprebish" w-tid="95">Joel Prebish</a>
+                </div>
+                <div class="card connect-card" w-tid="96">
+                    <img src="https://images.unsplash.com/photo-1611944212129-29977ae1398c"
+                        alt="LinkedIn logo with network connections" class="card-image" width="240" height="150"
+                        w-tid="97" data-image_id="12">
+                    <h2 w-tid="98">LinkedIn</h2>
+                </div>
+            </div>
+        </section>
     </div>
 
 
-    
-    <!-- S C R I P T I N G -->
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById("menuOverlay");
-            if (menu.style.display === "none" || menu.style.display === "") {
-                menu.style.display = "block";
-            } else {
-                menu.style.display = "none";
-            }
-        }
-
-        let darkMode = true;
-
-        function toggleColors() {
-            const root = document.documentElement;
-            if (darkMode) {
-                root.style.setProperty('--text', 'var(--text-lm)');
-                root.style.setProperty('--background', 'var(--background-lm)');
-                root.style.setProperty('--elem-background', 'var(--elem-background-lm)');
-            } else {
-                root.style.setProperty('--text', 'var(--text-dm)');
-                root.style.setProperty('--background', 'var(--background-dm)');
-                root.style.setProperty('--elem-background', 'var(--elem-background-dm)');
-            }
-            darkMode = !darkMode;
-        }
-    </script>
 </body>
+
 </html>
