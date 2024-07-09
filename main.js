@@ -1,3 +1,24 @@
+async function getDocument(path) {
+    const response = await fetch(path);
+        
+    // Check if the request was successful
+    if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+
+    // Get the text of the response
+    const text = await response.text();
+
+    // Parse the HTML content
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+    return doc;
+    // const projectCenterContent = doc.getElementById('project-center-content').innerHTML;
+
+    // Insert the content into the main element in index.html
+    // document.getElementById('content').innerHTML = projectCenterContent;
+}
+
 function onScroll() {
     const cards = document.querySelectorAll('.card');
     const windowHeight = window.innerHeight;
