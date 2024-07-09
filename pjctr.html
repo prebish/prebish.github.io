@@ -1,0 +1,347 @@
+<html><head><base href="https://eportfolio.websim.ai%20add%20gifs%20now"><title>Joel Prebish - Project Center</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
+
+  :root {
+    --bg-color: #050505;
+    --text-color: #e0e0e0;
+    --accent-color: #00ff00;
+    --secondary-color: #00ccff;
+    --tertiary-color: #ff00ff;
+    --card-bg: rgba(20, 20, 20, 0.8);
+    --card-hover-bg: rgba(30, 30, 30, 0.9);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  header {
+    background: linear-gradient(45deg, #000000, #1a1a1a);
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+    margin-bottom: 1rem;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+    }
+    to {
+      text-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color), 0 0 45px var(--accent-color);
+    }
+  }
+
+  nav {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+  }
+
+  .menu {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 1rem 0;
+  }
+
+  .menu li {
+    margin: 0 1rem;
+  }
+
+  .menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+
+  .menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .menu a:hover {
+    color: var(--accent-color);
+  }
+
+  .menu a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .project {
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 255, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .project:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 255, 0, 0.2);
+    background-color: var(--card-hover-bg);
+  }
+
+  .project:hover::before {
+    opacity: 1;
+  }
+
+  .project h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .project h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--secondary-color), transparent);
+  }
+
+  .project-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
+    transition: all 0.5s ease;
+  }
+
+  .project:hover .project-image {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 255, 0, 0.3);
+  }
+
+  .project p {
+    font-size: 1rem;
+    color: #bbb;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .project:hover p {
+    color: #fff;
+  }
+
+  .project ul {
+    list-style-type: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .project ul li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .project ul li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+  }
+
+  .project-link {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: transparent;
+    color: var(--accent-color);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent-color);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .project-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--accent-color);
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  .project-link:hover {
+    color: var(--bg-color);
+  }
+
+  .project-link:hover::before {
+    width: 100%;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-color);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Project Center</h1>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="https://eportfolio.websim.ai">Home</a></li>
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Connect</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="project">
+      <h2>CryptoGuard</h2>
+      <img src="https://media.giphy.com/media/l0O9z6Xd8otiabWZG/giphy.gif" alt="Animated encryption process showing data being secured" class="project-image" width="1000" height="300">
+      <p>CryptoGuard is a state-of-the-art encryption tool designed for secure communications. It utilizes advanced algorithms to protect sensitive data from unauthorized access. The project incorporates cutting-edge cryptographic techniques, ensuring that your messages and files remain confidential in transit and at rest.</p>
+      <ul>
+        <li>End-to-end encryption for messages and file transfers</li>
+        <li>Quantum-resistant algorithms for future-proof security</li>
+        <li>User-friendly interface for easy adoption</li>
+        <li>Cross-platform compatibility (desktop and mobile)</li>
+      </ul>
+      <a href="https://github.com/joelprebish/cryptoguard" class="project-link">View Project</a>
+    </div>
+
+    <div class="project">
+      <h2>WebCrawler Pro</h2>
+      <img src="https://media.giphy.com/media/3o7btNhMBytxAM6YBa/giphy.gif" alt="Animated web crawler process showing data collection" class="project-image" width="1000" height="300">
+      <p>WebCrawler Pro is an advanced web scraping tool designed for efficient data analysis. This powerful software navigates through websites, extracting valuable information and organizing it into easily digestible formats. It's perfect for researchers, marketers, and data scientists looking to gather large amounts of web data quickly and accurately.</p>
+      <ul>
+        <li>Intelligent crawling algorithms to avoid detection and respect robots.txt</li>
+        <li>Customizable data extraction patterns</li>
+        <li>Multi-threaded architecture for high-speed crawling</li>
+        <li>Export options in various formats (CSV, JSON, SQL)</li>
+        <li>Built-in data cleaning and preprocessing tools</li>
+      </ul>
+      <a href="https://github.com/joelprebish/webcrawlerpro" class="project-link">View Project</a>
+    </div>
+
+    <div class="project">
+      <h2>FirewallX</h2>
+      <img src="https://media.giphy.com/media/3o85fYKy5qPfR6wJoI/giphy.gif" alt="Animated firewall blocking malicious traffic" class="project-image" width="1000" height="300">
+      <p>FirewallX is a next-generation firewall solution that leverages AI-powered threat detection to provide unparalleled network security. This innovative system continuously learns from network traffic patterns, identifying and neutralizing potential threats before they can cause damage. FirewallX is designed to protect both small businesses and large enterprises from the ever-evolving landscape of cyber threats.</p>
+      <ul>
+        <li>Real-time threat analysis using machine learning algorithms</li>
+        <li>Adaptive rule generation based on network behavior</li>
+        <li>Deep packet inspection for thorough traffic analysis</li>
+        <li>Integration with popular SIEM tools for comprehensive security management</li>
+        <li>User-friendly dashboard for easy monitoring and configuration</li>
+      </ul>
+      <a href="https://github.com/joelprebish/firewallx" class="project-link">View Project</a>
+    </div>
+
+    <div class="project">
+      <h2>Redstone Tools Mod</h2>
+      <img src="https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif" alt="Animated Minecraft redstone contraption in action" class="project-image" width="1000" height="300">
+      <p>The Redstone Tools Mod is a game-changing modification for Minecraft that enhances the redstone mechanics, providing players with advanced capabilities for creating complex contraptions and automated systems. This mod introduces new components and tools that expand the possibilities of in-game engineering, allowing for more compact and efficient redstone designs.</p>
+      <ul>
+        <li>New redstone components like logic gates and timers</li>
+        <li>Advanced wiring tools for easier circuit creation</li>
+        <li>Compact redstone blocks for space-efficient designs</li>
+        <li>Redstone programming interface for complex automation</li>
+        <li>Tutorial system to help players master advanced techniques</li>
+      </ul>
+      <a href="https://github.com/joelprebish/redstonetools" class="project-link">View Project</a>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.project').forEach(project => {
+      project.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = project.getBoundingClientRect();
+        const x = (e.clientX - left) / width;
+        const y = (e.clientY - top) / height;
+        
+        project.style.setProperty('--x', x);
+        project.style.setProperty('--y', y);
+      });
+    });
+  </script>
+</body></html>
