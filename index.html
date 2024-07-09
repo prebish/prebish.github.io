@@ -14,21 +14,31 @@
 
     <header w-tid="6">
         <div class="matrix-bg" w-tid="7">
-            <div class="matrix-column" style="left: 10%; animation-delay: -2s;" w-tid="8"></div>
-            <div class="matrix-column" style="left: 20%; animation-delay: -4s;" w-tid="9"></div>
-            <div class="matrix-column" style="left: 30%; animation-delay: -6s;" w-tid="10"></div>
-            <div class="matrix-column" style="left: 40%; animation-delay: -8s;" w-tid="11"></div>
-            <div class="matrix-column" style="left: 50%; animation-delay: -10s;" w-tid="12"></div>
-            <div class="matrix-column" style="left: 60%; animation-delay: -12s;" w-tid="13"></div>
-            <div class="matrix-column" style="left: 70%; animation-delay: -14s;" w-tid="14"></div>
-            <div class="matrix-column" style="left: 80%; animation-delay: -16s;" w-tid="15"></div>
-            <div class="matrix-column" style="left: 90%; animation-delay: -18s;" w-tid="16"></div>
+            <div class="matrix-column" style="left: 5%; animation-delay: -6s;" w-tid="8"></div>
+            <div class="matrix-column" style="left: 10%; animation-delay: -12s;" w-tid="9"></div>
+            <div class="matrix-column" style="left: 15%; animation-delay: -2s;" w-tid="10"></div>
+            <div class="matrix-column" style="left: 20%; animation-delay: -5s;" w-tid="11"></div>
+            <div class="matrix-column" style="left: 25%; animation-delay: -9s;" w-tid="12"></div>
+            <div class="matrix-column" style="left: 30%; animation-delay: -3s;" w-tid="13"></div>
+            <div class="matrix-column" style="left: 35%; animation-delay: -0s;" w-tid="14"></div>
+            <div class="matrix-column" style="left: 40%; animation-delay: -18s;" w-tid="15"></div>
+            <div class="matrix-column" style="left: 45%; animation-delay: -1s;" w-tid="16"></div>
+
+            <div class="matrix-column" style="left: 50%; animation-delay: -4s;" w-tid="16"></div>
+            
+            <div class="matrix-column" style="left: 55%; animation-delay: -7s;" w-tid="8"></div>
+            <div class="matrix-column" style="left: 60%; animation-delay: -10s;" w-tid="9"></div>
+            <div class="matrix-column" style="left: 65%; animation-delay: -3s;" w-tid="10"></div>
+            <div class="matrix-column" style="left: 70%; animation-delay: -5s;" w-tid="11"></div>
+            <div class="matrix-column" style="left: 75%; animation-delay: -9s;" w-tid="12"></div>
+            <div class="matrix-column" style="left: 80%; animation-delay: -11s;" w-tid="13"></div>
+            <div class="matrix-column" style="left: 85%; animation-delay: -9s;" w-tid="14"></div>
+            <div class="matrix-column" style="left: 90%; animation-delay: -8s;" w-tid="15"></div>
+            <div class="matrix-column" style="left: 95%; animation-delay: -0s;" w-tid="16"></div>
         </div>
         <div class="header-content" w-tid="17">
-            <h1 w-tid="18">Joel Prebish</h1>
+            <h1 id="title" w-tid="18">Joel Prebish</h1>
             <p class="subtitle" w-tid="19">Developer.  Innovator.  Visionary.</p>
-            <!-- <a href=""
-                class="header-cta" w-tid="20">Connect With Me</a> -->
         </div>
     </header>
 
@@ -36,23 +46,28 @@
         <ul class="menu" w-tid="22">
             <li w-tid="23"><a
                     href=""
-                    w-tid="24">Home</a></li>
+                    w-tid="24"
+                    onclick=displayHome(this)>HOME</a></li>
             <li w-tid="25"><a
-                    href=""
-                    w-tid="26">Featured</a></li>
+                    href="#featured"
+                    w-tid="26"
+                    onclick=activateMenuButton(this)>FEATURED</a></li>
             <li w-tid="27"><a
                     href=""
-                    w-tid="28">Highlights</a></li>
+                    w-tid="28"
+                    onclick=activateMenuButton(this)>HIGHLIGHTS</a></li>
             <li w-tid="29"><a
                     href=""
-                    w-tid="30">Projects</a></li>
+                    w-tid="30"
+                    onclick=displayProjects(event,this)>PROJECTS</a></li>
             <li w-tid="31"><a
                     href=""
-                    w-tid="32">Connect</a></li>
+                    w-tid="32"
+                    onclick=activateMenuButton(this)>CONNECT</a></li>
         </ul>
     </nav>
 
-    <div class="container" w-tid="33">
+    <div class="container" id="container" w-tid="33">
         <section id="featured" w-tid="34">
             <h2 w-tid="35">Featured</h2>
             <div class="grid" w-tid="36">
@@ -90,6 +105,13 @@
         <section id="highlights" w-tid="53">
             <h2 w-tid="54">Highlights</h2>
             <div class="grid" w-tid="55">
+                <div class="card" w-tid="56">
+                    <img src="https://images.unsplash.com/photo-1537884944318-390069bb8665"
+                        alt="Futuristic circuit board with glowing elements" class="card-image" width="240" height="150"
+                        w-tid="57" data-image_id="4">
+                    <h2 w-tid="58">Redstone Tools Mod</h2>
+                    <p w-tid="59">Enhancing Minecraft with advanced redstone capabilities</p>
+                </div>
                 <div class="card" w-tid="56">
                     <img src="https://images.unsplash.com/photo-1537884944318-390069bb8665"
                         alt="Futuristic circuit board with glowing elements" class="card-image" width="240" height="150"
@@ -144,7 +166,7 @@
         <section id="contact" w-tid="83">
             <h2 w-tid="84">Connect With Me</h2>
             <div class="grid" w-tid="85">
-                <div class="card connect-card" w-tid="86">
+                <div class="card" w-tid="86">
                     <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb"
                         alt="GitHub logo with futuristic background" class="card-image" width="240" height="150"
                         w-tid="87" data-image_id="10">
@@ -152,7 +174,7 @@
                     <p w-tid="89">Explore my open-source projects and contributions</p>
                     <a href="https://github.com/joelprebish" w-tid="90">@joelprebish</a>
                 </div>
-                <div class="card connect-card" w-tid="91">
+                <div class="card" w-tid="91">
                     <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159"
                         alt="Stack Overflow concept with programming elements" class="card-image" width="240"
                         height="150" w-tid="92" data-image_id="11">
@@ -160,7 +182,7 @@
                     <p w-tid="94">Check out my problem-solving skills and community involvement</p>
                     <a href="https://stackoverflow.com/users/joelprebish" w-tid="95">Joel Prebish</a>
                 </div>
-                <div class="card connect-card" w-tid="96">
+                <div class="card" w-tid="96">
                     <img src="https://images.unsplash.com/photo-1611944212129-29977ae1398c"
                         alt="LinkedIn logo with network connections" class="card-image" width="240" height="150"
                         w-tid="97" data-image_id="12">
