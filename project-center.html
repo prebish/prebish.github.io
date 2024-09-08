@@ -4,260 +4,53 @@
   <base href="">
   <title>Joel Prebish - Project Center</title>
   <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
-
-    .project {
-      background-color: var(--card-bg);
-      border-radius: 15px;
-      padding: 2rem;
-      margin-bottom: 3rem;
-      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      border: 1px solid rgba(0, 255, 0, 0.2);
-      box-shadow: 0 10px 30px rgba(0, 255, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(0, 255, 0, 0.2);
-      background-color: var(--card-hover-bg);
-    }
-
-    .project:hover::before {
-      opacity: 1;
-    }
-
-    .project h2 {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--secondary-color);
-      margin-bottom: 1rem;
-      font-size: 2rem;
-      position: relative;
-      display: inline-block;
-    }
-
-    .project h2::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--secondary-color), transparent);
-    }
-
-    .project-image {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-      box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
-      transition: all 0.5s ease;
-    }
-
-    .project:hover .project-image {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(0, 255, 0, 0.3);
-    }
-
-    .project p {
-      font-size: 1rem;
-      color: #bbb;
-      margin-bottom: 1rem;
-      transition: color 0.3s ease;
-    }
-
-    .project:hover p {
-      color: #fff;
-    }
-
-    .project ul {
-      list-style-type: none;
-      margin-bottom: 1.5rem;
-    }
-
-    .project ul li {
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-
-    .project ul li::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      color: var(--accent-color);
-    }
-
-    .project-link {
-      display: inline-block;
-      padding: 0.7rem 1.5rem;
-      background-color: transparent;
-      color: var(--accent-color);
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      border: 2px solid var(--accent-color);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .project-link::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background-color: var(--accent-color);
-      transition: all 0.3s ease;
-      z-index: -1;
-    }
-
-    .project-link:hover {
-      color: var(--bg-color);
-    }
-
-    .project-link:hover::before {
-      width: 100%;
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg-color);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent-color);
-      border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--secondary-color);
-    }
-  </style>
+  <script src='main.js'></script>
 </head>
 
 <body>
   <header>
-    <h1>Project Center</h1>
+    <div class="matrix-bg" w-tid="7">
+        <div class="matrix-column" style="left: 5%; animation-delay: -6s;"></div>
+        <div class="matrix-column" style="left: 10%; animation-delay: -12s;"></div>
+        <div class="matrix-column" style="left: 15%; animation-delay: -2s;"></div>
+        <div class="matrix-column" style="left: 20%; animation-delay: -5s;"></div>
+        <div class="matrix-column" style="left: 25%; animation-delay: -9s;"></div>
+        <div class="matrix-column" style="left: 30%; animation-delay: -3s;"></div>
+        <div class="matrix-column" style="left: 35%; animation-delay: -0s;"></div>
+        <div class="matrix-column" style="left: 40%; animation-delay: -18s;"></div>
+        <div class="matrix-column" style="left: 45%; animation-delay: -1s;"></div>
+
+        <div class="matrix-column" style="left: 50%; animation-delay: -4s;"></div>
+        
+        <div class="matrix-column" style="left: 55%; animation-delay: -7s;"></div>
+        <div class="matrix-column" style="left: 60%; animation-delay: -10s;"></div>
+        <div class="matrix-column" style="left: 65%; animation-delay: -3s;"></div>
+        <div class="matrix-column" style="left: 70%; animation-delay: -5s;"></div>
+        <div class="matrix-column" style="left: 75%; animation-delay: -9s;"></div>
+        <div class="matrix-column" style="left: 80%; animation-delay: -11s;"></div>
+        <div class="matrix-column" style="left: 85%; animation-delay: -9s;"></div>
+        <div class="matrix-column" style="left: 90%; animation-delay: -8s;"></div>
+        <div class="matrix-column" style="left: 95%; animation-delay: -0s;"></div>
+    </div>
+    <div class="header-content" w-tid="17">
+        <h1 id="title" w-tid="18">Project Center</h1>
+        <p class="subtitle" w-tid="19"></p>
+    </div>
   </header>
 
-  <nav w-tid="21">
-    <ul class="menu" w-tid="22">
-      <li w-tid="23"><a href="./index.html" w-tid="24">HOME</a></li>
-      <li w-tid="25"><a href="#featured" w-tid="26">FEATURED</a></li>
-      <li w-tid="27"><a href="" w-tid="28">HIGHLIGHTS</a></li>
-      <li class="active" w-tid="29"><a href="./project-center.html" w-tid="30">PROJECTS</a></li>
-      <li w-tid="31"><a href="" w-tid="32">CONNECT</a></li>
+  <nav>
+    <ul class="menu">
+        <li><a
+                href="./index.html"
+                onclick=displayHome(this)>HOME</a></li><li>|</li> <!-- List item seperator -> '|' -->
+        <li><a
+                href=""
+                onclick=activateMenuButton(this)>REPO-SITES</a></li><li>|</li> <!-- List item seperator -> '|' -->
+        <li><a
+                href="https://github.com/prebish"
+                onclick=activateMenuButton(this)>GITHUB</a></li>
     </ul>
   </nav>
 
-  <div class="container">
-    <div class="project">
-      <h2>MIPS Classic Frogger</h2>
-      <img src="https://media.giphy.com/media/l0O9z6Xd8otiabWZG/giphy.gif"
-        alt="Animated encryption process showing data being secured" class="project-image" width="1000" height="300">
-      <p>CryptoGuard is a state-of-the-art encryption tool designed for secure communications. It utilizes advanced
-        algorithms to protect sensitive data from unauthorized access. The project incorporates cutting-edge
-        cryptographic techniques, ensuring that your messages and files remain confidential in transit and at rest.</p>
-      <ul>
-        <li>End-to-end encryption for messages and file transfers</li>
-        <li>Quantum-resistant algorithms for future-proof security</li>
-        <li>User-friendly interface for easy adoption</li>
-        <li>Cross-platform compatibility (desktop and mobile)</li>
-      </ul>
-      <a href="https://github.com/joelprebish/cryptoguard" class="project-link">View Project</a>
-    </div>
-
-    <div class="project">
-      <h2>WebCrawler Pro</h2>
-      <img src="https://media.giphy.com/media/3o7btNhMBytxAM6YBa/giphy.gif"
-        alt="Animated web crawler process showing data collection" class="project-image" width="1000" height="300">
-      <p>WebCrawler Pro is an advanced web scraping tool designed for efficient data analysis. This powerful software
-        navigates through websites, extracting valuable information and organizing it into easily digestible formats.
-        It's perfect for researchers, marketers, and data scientists looking to gather large amounts of web data quickly
-        and accurately.</p>
-      <ul>
-        <li>Intelligent crawling algorithms to avoid detection and respect robots.txt</li>
-        <li>Customizable data extraction patterns</li>
-        <li>Multi-threaded architecture for high-speed crawling</li>
-        <li>Export options in various formats (CSV, JSON, SQL)</li>
-        <li>Built-in data cleaning and preprocessing tools</li>
-      </ul>
-      <a href="https://github.com/joelprebish/webcrawlerpro" class="project-link">View Project</a>
-    </div>
-
-    <div class="project">
-      <h2>FirewallX</h2>
-      <img src="https://media.giphy.com/media/3o85fYKy5qPfR6wJoI/giphy.gif"
-        alt="Animated firewall blocking malicious traffic" class="project-image" width="1000" height="300">
-      <p>FirewallX is a next-generation firewall solution that leverages AI-powered threat detection to provide
-        unparalleled network security. This innovative system continuously learns from network traffic patterns,
-        identifying and neutralizing potential threats before they can cause damage. FirewallX is designed to protect
-        both small businesses and large enterprises from the ever-evolving landscape of cyber threats.</p>
-      <ul>
-        <li>Real-time threat analysis using machine learning algorithms</li>
-        <li>Adaptive rule generation based on network behavior</li>
-        <li>Deep packet inspection for thorough traffic analysis</li>
-        <li>Integration with popular SIEM tools for comprehensive security management</li>
-        <li>User-friendly dashboard for easy monitoring and configuration</li>
-      </ul>
-      <a href="https://github.com/joelprebish/firewallx" class="project-link">View Project</a>
-    </div>
-
-    <div class="project">
-      <h2>Redstone Tools Mod</h2>
-      <img src="https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif"
-        alt="Animated Minecraft redstone contraption in action" class="project-image" width="1000" height="300">
-      <p>The Redstone Tools Mod is a game-changing modification for Minecraft that enhances the redstone mechanics,
-        providing players with advanced capabilities for creating complex contraptions and automated systems. This mod
-        introduces new components and tools that expand the possibilities of in-game engineering, allowing for more
-        compact and efficient redstone designs.</p>
-      <ul>
-        <li>New redstone components like logic gates and timers</li>
-        <li>Advanced wiring tools for easier circuit creation</li>
-        <li>Compact redstone blocks for space-efficient designs</li>
-        <li>Redstone programming interface for complex automation</li>
-        <li>Tutorial system to help players master advanced techniques</li>
-      </ul>
-      <a href="https://github.com/joelprebish/redstonetools" class="project-link">View Project</a>
-    </div>
-  </div>
-
-  <script>
-    document.querySelectorAll('.project').forEach(project => {
-      project.addEventListener('mousemove', (e) => {
-        const { left, top, width, height } = project.getBoundingClientRect();
-        const x = (e.clientX - left) / width;
-        const y = (e.clientY - top) / height;
-
-        project.style.setProperty('--x', x);
-        project.style.setProperty('--y', y);
-      });
-    });
-  </script>
 </body>
-
 </html>

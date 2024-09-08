@@ -112,6 +112,8 @@ nav {
     justify-content: center;
     list-style-type: none;
     padding: 1rem 0;
+    padding-bottom: 0;
+    border-bottom: 2px solid #00cc0035;
 }
 
 .menu li {
@@ -126,7 +128,8 @@ nav {
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 2px;
+    /* changes the height below  */
+    height: 1px; 
     background-color: var(--accent-color);
 }
 

@@ -4,86 +4,149 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>GitHub/prebish</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <style>
+        .slideshow-container {
+          position: relative;
+          width: 100%;
+          max-width: 50%;
+          height: 300px; /* Fixed height to prevent shifting */
+          margin: auto;
+          overflow: hidden;
+          background: #f3f3f3; /* Background to prevent flickering */
+          border-radius: 15px;
+          border: 2px solid var(--tertiary-color);
+        }
+    
+        .slide {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          display: none;
+          object-fit: cover; /* Ensure images cover the container without distortion */
+        }
+    
+        .active {
+          display: block;
+        }
+    
+        .fade {
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+        }
+    
+        .active.fade {
+          opacity: 1;
+        }
+    
+        /* Next & previous buttons */
+        .prev, .next {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          padding: 16px;
+          margin-top: -22px;
+          color: white;
+          font-weight: bold;
+          font-size: 18px;
+          transition: 0.6s ease;
+          user-select: none;
+        }
+    
+        .next {
+          right: 0;
+        }
+    
+        .prev {
+          left: 0;
+        }
+    
+        /* Buttons hover effect */
+        .prev:hover, .next:hover {
+          background-color: rgba(0,0,0,0.8);
+        }
+    
+    </style>
     <script src='main.js'></script>
 </head>
 
 <body>
 
-    <header w-tid="6">
+    <header>
         <div class="matrix-bg" w-tid="7">
-            <div class="matrix-column" style="left: 5%; animation-delay: -6s;" w-tid="8"></div>
-            <div class="matrix-column" style="left: 10%; animation-delay: -12s;" w-tid="9"></div>
-            <div class="matrix-column" style="left: 15%; animation-delay: -2s;" w-tid="10"></div>
-            <div class="matrix-column" style="left: 20%; animation-delay: -5s;" w-tid="11"></div>
-            <div class="matrix-column" style="left: 25%; animation-delay: -9s;" w-tid="12"></div>
-            <div class="matrix-column" style="left: 30%; animation-delay: -3s;" w-tid="13"></div>
-            <div class="matrix-column" style="left: 35%; animation-delay: -0s;" w-tid="14"></div>
-            <div class="matrix-column" style="left: 40%; animation-delay: -18s;" w-tid="15"></div>
-            <div class="matrix-column" style="left: 45%; animation-delay: -1s;" w-tid="16"></div>
+            <div class="matrix-column" style="left: 5%; animation-delay: -6s;"></div>
+            <div class="matrix-column" style="left: 10%; animation-delay: -12s;"></div>
+            <div class="matrix-column" style="left: 15%; animation-delay: -2s;"></div>
+            <div class="matrix-column" style="left: 20%; animation-delay: -5s;"></div>
+            <div class="matrix-column" style="left: 25%; animation-delay: -9s;"></div>
+            <div class="matrix-column" style="left: 30%; animation-delay: -3s;"></div>
+            <div class="matrix-column" style="left: 35%; animation-delay: -0s;"></div>
+            <div class="matrix-column" style="left: 40%; animation-delay: -18s;"></div>
+            <div class="matrix-column" style="left: 45%; animation-delay: -1s;"></div>
 
-            <div class="matrix-column" style="left: 50%; animation-delay: -4s;" w-tid="16"></div>
+            <div class="matrix-column" style="left: 50%; animation-delay: -4s;"></div>
             
-            <div class="matrix-column" style="left: 55%; animation-delay: -7s;" w-tid="8"></div>
-            <div class="matrix-column" style="left: 60%; animation-delay: -10s;" w-tid="9"></div>
-            <div class="matrix-column" style="left: 65%; animation-delay: -3s;" w-tid="10"></div>
-            <div class="matrix-column" style="left: 70%; animation-delay: -5s;" w-tid="11"></div>
-            <div class="matrix-column" style="left: 75%; animation-delay: -9s;" w-tid="12"></div>
-            <div class="matrix-column" style="left: 80%; animation-delay: -11s;" w-tid="13"></div>
-            <div class="matrix-column" style="left: 85%; animation-delay: -9s;" w-tid="14"></div>
-            <div class="matrix-column" style="left: 90%; animation-delay: -8s;" w-tid="15"></div>
-            <div class="matrix-column" style="left: 95%; animation-delay: -0s;" w-tid="16"></div>
+            <div class="matrix-column" style="left: 55%; animation-delay: -7s;"></div>
+            <div class="matrix-column" style="left: 60%; animation-delay: -10s;"></div>
+            <div class="matrix-column" style="left: 65%; animation-delay: -3s;"></div>
+            <div class="matrix-column" style="left: 70%; animation-delay: -5s;"></div>
+            <div class="matrix-column" style="left: 75%; animation-delay: -9s;"></div>
+            <div class="matrix-column" style="left: 80%; animation-delay: -11s;"></div>
+            <div class="matrix-column" style="left: 85%; animation-delay: -9s;"></div>
+            <div class="matrix-column" style="left: 90%; animation-delay: -8s;"></div>
+            <div class="matrix-column" style="left: 95%; animation-delay: -0s;"></div>
         </div>
         <div class="header-content" w-tid="17">
             <h1 id="title" w-tid="18">Joel Prebish</h1>
-            <p class="subtitle" w-tid="19">Developer.  Innovator.  Visionary.</p>
+            <p class="subtitle" w-tid="19"></p>
         </div>
     </header>
 
-    <nav w-tid="21">
-        <ul class="menu" w-tid="22">
-            <li class="active" w-tid="23"><a
+    <nav>
+        <ul class="menu">
+            <li class="active"><a
                     href="./index.html"
-                    w-tid="24"
-                    onclick=displayHome(this)>HOME</a></li>
-            <li w-tid="25"><a
-                    href="#featured"
-                    w-tid="26"
-                    onclick=activateMenuButton(this)>FEATURED</a></li>
-            <li w-tid="27"><a
+                    onclick=displayHome(this)>HOME</a></li><li>|</li> <!-- List item seperator -> '|' -->
+            <li><a
                     href=""
-                    w-tid="28"
-                    onclick=activateMenuButton(this)>HIGHLIGHTS</a></li>
-            <li w-tid="29"><a
+                    onclick=activateMenuButton(this)>HIGHLIGHTS</a></li><li>|</li> <!-- List item seperator -> '|' -->
+            <li><a
                     href="./project-center.html"
-                    w-tid="30"
-                    onclick=activateMenuButton(this)>PROJECTS</a></li>
-            <li w-tid="31"><a
-                    href=""
-                    w-tid="32"
-                    onclick=activateMenuButton(this)>CONNECT</a></li>
+                    onclick=activateMenuButton(this)>PROJECT CENTER</a></li><li>|</li> <!-- List item seperator -> '|' -->
+            <li><a
+                    href="https://github.com/prebish"
+                    onclick=activateMenuButton(this)>GITHUB</a></li>
         </ul>
     </nav>
 
     <div class="container" id="container" w-tid="33">
-        <section id="featured" w-tid="34">
-            <h2 w-tid="35">Featured</h2>
+        <section id="slideshow" w-tid="34">
             <div class="grid" w-tid="36">
+
+                <div class="slideshow-container">
+                    <img src="./static-img/golden-triangle-v0-cv8gi02rw7nd1.webp" class="slide active fade">
+                    <img src="./static-img/pittsburgh-skyline-v0-r1mdtjmz1and1.webp" class="slide fade">
+                  
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="featured">
+            <h2>Featured</h2>  <!-- Section Title -->
+            <div class="grid">
                 <div class="card" w-tid="37">
                     <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97"
                         alt="Computer code on a screen, neon glow" class="card-image" width="240" height="150"
                         w-tid="38" data-image_id="0">
                     <h2 w-tid="39">Resume</h2>
                     <p w-tid="40">View my professional experience and skills</p>
-                </div>
-                <div class="card" w-tid="41">
-                    <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea"
-                        alt="Holographic projection of code and data" class="card-image" width="240" height="150"
-                        w-tid="42" data-image_id="1">
-                    <h2 w-tid="43">Project Center</h2>
-                    <p w-tid="44">Explore my featured works and contributions</p>
                 </div>
                 <div class="card" w-tid="45">
                     <img src="./static-img/macOSemail.jpg"
@@ -102,89 +165,88 @@
             </div>
         </section>
 
-        <section id="highlights" w-tid="53">
-            <h2 w-tid="54">Highlights</h2>
-            <div class="grid" w-tid="55">
-                <div class="card" w-tid="56">
+        <section id="highlights">
+            <h2>Ongoing Projects</h2> <!-- Section Title -->
+            <div class="grid">
+                <div class="card">
                     <img src="./static-img/redstoneblock.jpg"
-                        alt="Futuristic circuit board with glowing elements" class="card-image" width="240" height="150"
-                        w-tid="57" data-image_id="4">
-                    <h2 w-tid="58">Redstone Tools Mod</h2>
-                    <p w-tid="59">Enhancing Minecraft with advanced redstone capabilities</p>
+                        alt="Futuristic circuit board with glowing elements" class="card-image" width="240" height="150" data-image_id="4">
+                    <h2>Redstone Tools Mod</h2>
+                    <p>MCBE Addon-pack that increases the usefulness of redstone</p>
                 </div>
                 <div class="card" w-tid="60">
                     <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"
                         alt="Python code on a dark background with neon highlights" class="card-image" width="240"
                         height="150" w-tid="61" data-image_id="5">
                     <h2 w-tid="62">Python Projects Hub</h2>
-                    <p w-tid="63">A collection of my Python-based innovations</p>
+                    <p w-tid="63">Free educational python projects for everyone</p>
                 </div>
-                <div class="card" w-tid="64">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31"
-                        alt="Abstract representation of operating system processes" class="card-image" width="240"
-                        height="150" w-tid="65" data-image_id="6">
-                    <h2 w-tid="66">Operating by Python</h2>
-                    <p w-tid="67">Exploring operating systems through Python</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" w-tid="68">
-            <h2 w-tid="69">Recent Projects</h2>
-            <div class="grid" w-tid="70">
-                <div class="card" w-tid="71">
-                    <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7"
-                        alt="Cybersecurity concept with digital lock" class="card-image" width="240" height="150"
-                        w-tid="72" data-image_id="7">
-                    <h2 w-tid="73">CryptoGuard</h2>
-                    <p w-tid="74">State-of-the-art encryption for secure communications</p>
-                </div>
-                <div class="card" w-tid="75">
-                    <img src="https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2"
-                        alt="Web of interconnected data nodes" class="card-image" width="240" height="150" w-tid="76"
-                        data-image_id="8">
-                    <h2 w-tid="77">WebCrawler Pro</h2>
-                    <p w-tid="78">Advanced web scraping tool for data analysis</p>
-                </div>
-                <div class="card" w-tid="79">
-                    <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b"
-                        alt="Futuristic firewall concept" class="card-image" width="240" height="150" w-tid="80"
-                        data-image_id="9">
-                    <h2 w-tid="81">FirewallX</h2>
-                    <p w-tid="82">Next-gen firewall with AI-powered threat detection</p>
+                <div class="card">
+                    <img src="./static-img/finance-me-logo.png"
+                        alt="finance me app" class="card-image" width="240"
+                        height="150" data-image_id="6">
+                    <h2 w-tid="66">Finance Me - iOS</h2>
+                    <p w-tid="67">An app to help you keep track of your finances</p>
                 </div>
             </div>
         </section>
 
-        <section id="contact" w-tid="83">
-            <h2 w-tid="84">Connect With Me</h2>
-            <div class="grid" w-tid="85">
-                <div class="card" w-tid="86">
+        <section id="contact">
+            <h2>Socials</h2> <!-- Section Title -->
+            <div class="grid">
+                <a href="https://github.com/prebish"><div class="card">
                     <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb"
-                        alt="GitHub logo with futuristic background" class="card-image" width="240" height="150"
-                        w-tid="87" data-image_id="10">
-                    <h2 w-tid="88">GitHub</h2>
-                    <p w-tid="89">Explore my open-source projects and contributions</p>
-                    <a href="https://github.com/joelprebish" w-tid="90">@joelprebish</a>
-                </div>
-                <div class="card" w-tid="91">
+                        alt="GitHub logo" class="card-image" width="240" height="150" data-image_id="10">
+                    <h2>GitHub</h2>
+                    <p>Explore my open-source projects and contributions</p>
+                </div></a>
+
+                
+                <a href="https://stackoverflow.com/users/23487199/joel-prebish"><div class="card">
                     <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159"
-                        alt="Stack Overflow concept with programming elements" class="card-image" width="240"
-                        height="150" w-tid="92" data-image_id="11">
-                    <h2 w-tid="93">Stack Overflow</h2>
-                    <p w-tid="94">Check out my problem-solving skills and community involvement</p>
-                    <a href="https://stackoverflow.com/users/joelprebish" w-tid="95">Joel Prebish</a>
-                </div>
-                <div class="card" w-tid="96">
+                        alt="Stack Overflow" class="card-image" width="240" height="150" data-image_id="11">
+                    <h2>Stack Overflow</h2>
+                    <p>Check out my Stack Overflow activity</p>
+                </div></a>
+
+                
+                <a href="https://www.linkedin.com/in/dev-prebish/"><div class="card">
                     <img src="https://images.unsplash.com/photo-1611944212129-29977ae1398c"
-                        alt="LinkedIn logo with network connections" class="card-image" width="240" height="150"
-                        w-tid="97" data-image_id="12">
-                    <h2 w-tid="98">LinkedIn</h2>
-                </div>
+                        alt="LinkedIn logo" class="card-image" width="240" height="150" data-image_id="12">
+                    <h2>LinkedIn</h2>
+                    <p w-tid="94">Connect with me on LinkedIn!</p>
+                </div></a>
+                
             </div>
         </section>
     </div>
 
+<script>
+    let slideIndex = 0;
+    showSlides();
+    
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+        for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+        slides[slideIndex - 1].classList.add("active");
+        setTimeout(showSlides, 5000); // Change image every 5 seconds
+    }
+    
+    function changeSlide(n) {
+        let slides = document.getElementsByClassName("slide");
+        slideIndex += n;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+        if (slideIndex < 1) { slideIndex = slides.length; }
+        for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+        }
+        slides[slideIndex - 1].classList.add("active");
+    }
+</script>
 
 </body>
 

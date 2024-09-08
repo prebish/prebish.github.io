@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Links Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('your-background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .quick-link {
+            width: 100px;
+            height: 100px;
+            background-color: #444;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .quick-link img {
+            width: 50px;
+            height: 50px;
+            margin-top: 20px;
+        }
+
+        .quick-link p {
+            color: white;
+            font-size: 12px;
+            position: absolute;
+            bottom: 5px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #addLinkForm {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 5px;
+        }
+
+        #addLinkForm input, #addLinkForm button {
+            margin: 5px;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container" id="linksContainer">
+    <!-- Links will be added dynamically here -->
+</div>
+
+<!-- Form to add a new link -->
+<div id="addLinkForm">
+    <input type="text" id="linkName" placeholder="Link Name">
+    <input type="text" id="linkUrl" placeholder="Link URL">
+    <button onclick="addLink()">Add Link</button>
+</div>
+
+<script>
+    // Array to store the quick links
+    let links = [];
+
+    // Function to render the links
+    function renderLinks() {
+        const container = document.getElementById('linksContainer');
+        container.innerHTML = ''; // Clear current links
+
+        links.forEach((link, index) => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'quick-link';
+            linkElement.innerHTML = `
+                <a href="${link.url}" target="_blank">
+                    <img src="https://via.placeholder.com/50" alt="${link.name}">
+                    <p>${link.name}</p>
+                </a>
+                <button class="remove-btn" onclick="removeLink(${index})">x</button>
+            `;
+            container.appendChild(linkElement);
+        });
+    }
+
+    // Function to add a new link
+    function addLink() {
+        const name = document.getElementById('linkName').value;
+        const url = document.getElementById('linkUrl').value;
+
+        if (name && url) {
+            links.push({ name, url });
+            renderLinks();
+            // Clear the input fields
+            document.getElementById('linkName').value = '';
+            document.getElementById('linkUrl').value = '';
+        }
+    }
+
+    // Function to remove a link
+    function removeLink(index) {
+        links.splice(index, 1);
+        renderLinks();
+    }
+
+    // Initial render
+    renderLinks();
+</script>
+
+</body>
+</html>
