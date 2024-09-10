@@ -1,19 +1,2 @@
-#profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* This will push the image to the right */
-    gap: 1rem; /* Space between the content */
-}
 
-.container {
-    justify-content: end;
-}
-
-.profile-img {
-    width: 240px;
-    height: 150px;
-    border-radius: 8px;
-    object-fit: cover;
-    border: 3px solid var(--accent-color);
-}
 
