@@ -53,7 +53,6 @@
             <li><a
                     href="https://github.com/prebish"
                     onclick=activateMenuButton(this)>GITHUB</a></li>
-            <!-- <button style="float: right;">=</button> -->
         </ul>
         
     </nav>
@@ -63,107 +62,74 @@
         <section id="featured">
             <h2>Featured</h2>  <!-- Section Title -->
             <div class="grid">
-                <div class="card">
-                    <img src="./img/cards/resume.png"
-                        alt="" class="card-image" width="240" height="150" data-image_id="0">
-                    <h2>Resume</h2>
-                    <p>A .pdf file of my resume</p>
-                </div>
-                <div class="card">
-                    <img src="./img/cards/email.png"
-                        alt="img" class="card-image" width="240"
-                        height="150" data-image_id="2">
+                <a  class="card" href="./Joel-Prebish.pdf">
+                        <img src="./img/cards/resume.png" alt="img" class="card-image" width="240" height="150" data-image_id="0">
+                        <h2>Resume</h2>
+                        <p>A .pdf file of my resume</p>
+                </a>
+                
+                <a class="card">
+                    <img src="./img/cards/email.png" alt="img" class="card-image" width="240" height="150" data-image_id="2">
                     <h2>Email</h2>
                     <p>Get in touch for opportunities or collaborations</p>
-                </div>
-                <div class="card">
-                    <img src="./img/cards/websites.png"
-                        alt="img" class="card-image" width="240" height="150" w-tid="50"
-                        data-image_id="3">
+                </a>
+
+                <a class="card">
+                    <img src="./img/cards/websites.png" alt="img" class="card-image" width="240" height="150" data-image_id="3">
                     <h2>Favorite Sites</h2>
                     <p>Discover the online resources I value most</p>
-                </div>
+                </a>
             </div>
         </section>
 
         <section id="highlights">
             <h2>Ongoing Projects</h2> <!-- Section Title -->
             <div class="grid">
-                <div class="card">
+                <a class="card">
                     <img src="./img/cards/redstoneblock.jpg"
                         alt="img" class="card-image" width="240" height="150" data-image_id="4">
                     <h2>Redstone Tools Mod</h2>
                     <p>MCBE Addon-pack that increases the usefulness of redstone</p>
-                </div>
-                <div class="card">
+                </a>
+                <a class="card">
                     <img src="./img/cards/python.png"
                         class="card-image" width="240"
                         height="150" data-image_id="5">
                     <h2>Python Projects Hub</h2>
                     <p>Free educational python projects for everyone</p>
-                </div>
-                <div class="card">
-                    <img src="./img/cards/finance-me-logo.png"
-                        alt="img" class="card-image" width="240"
+                </a>
+                <a class="card">
+                    <img src="./img/cards/finance-me-logo.png" alt="img" class="card-image" width="240"
                         height="150" data-image_id="6">
                     <h2>Finance Me - iOS</h2>
                     <p>An app to help you keep track of your finances</p>
-                </div>
+                </a>
             </div>
         </section>
 
         <section id="contact">
             <h2>Socials</h2> <!-- Section Title -->
             <div class="grid">
-                <a href="https://github.com/prebish"><div class="card">
-                    <img src="" class="card-image" width="240" height="150" data-image_id="10">
+                <a class="card" href="https://github.com/prebish">
+                    <img src="./img/cards/github.png" class="card-image" width="240" height="150" data-image_id="10">
                     <h2>GitHub</h2>
                     <p>Explore my projects and contributions</p>
-                </div></a>
-
+                </a>
                 
-                <a href="https://stackoverflow.com/users/23487199/joel-prebish"><div class="card">
-                    <img src="" class="card-image" width="240" height="150" data-image_id="11">
+                <a class="card" href="https://stackoverflow.com/users/23487199/joel-prebish">
+                    <img src="./img/cards/stackoverflow.png" class="card-image" width="240" height="150" data-image_id="11">
                     <h2>Stack Overflow</h2>
                     <p>Check out my Stack Overflow activity</p>
-                </div></a>
+                </a>
 
-                
-                <a href="https://www.linkedin.com/in/dev-prebish/"><div class="card">
+                <a class="card" href="https://www.linkedin.com/in/dev-prebish/">
                     <img src="" class="card-image" width="240" height="150" data-image_id="12">
                     <h2>LinkedIn</h2>
                     <p>Connect with me on LinkedIn!</p>
-                </div></a>
+                </a>
             </div>
         </section>
     </div>
-
-<script>
-    let slideIndex = 0;
-    showSlides();
-    
-    function showSlides() {
-        let slides = document.getElementsByClassName("slide");
-        for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove("active");
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1; }
-        slides[slideIndex - 1].classList.add("active");
-        setTimeout(showSlides, 5000); // Change image every 5 seconds
-    }
-    
-    function changeSlide(n) {
-        let slides = document.getElementsByClassName("slide");
-        slideIndex += n;
-        if (slideIndex > slides.length) { slideIndex = 1; }
-        if (slideIndex < 1) { slideIndex = slides.length; }
-        for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove("active");
-        }
-        slides[slideIndex - 1].classList.add("active");
-    }
-</script>
 
 </body>
 </html>
