@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
 
 :root {
-    --bg-color: #0f0f0f;
+    --bg-color: #0a0a0a;
     --text-color: #e0e0e0;
     --accent-color: #00ff00;
     --secondary-color: #00cc00;
@@ -21,6 +21,8 @@
 body {
     font-family: 'Fira Code', monospace;
     background-color: var(--bg-color);
+    background-image: url("./img/textures/asfalt-light.png");
+    background-repeat: repeat;
     color: var(--text-color);
     line-height: 1.6;
 }
@@ -29,6 +31,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    padding-top: 0;
 }
 
 header {
@@ -49,25 +52,12 @@ h1 {
     font-family: 'Share Tech Mono', monospace;
     font-size: 3rem;
     color: var(--accent-color);
-    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-    margin-bottom: 0.5rem;
-    animation: subtle-pulse 2s ease-in-out infinite alternate;
-}
-
-@keyframes subtle-pulse {
-    from {
-        text-shadow: 0 0 2px var(--accent-color);
-    }
-
-    to {
-        text-shadow: 0 0 8px var(--accent-color);
-    }
+    text-shadow: 0 0 50px var(--accent-color);
 }
 
 .subtitle {
     font-size: 1.2rem;
     color: var(--secondary-color);
-    margin-bottom: 0.5rem;
 }
 
 .matrix-bg {
@@ -77,10 +67,11 @@ h1 {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    opacity: 0.1;
+    opacity: 0.25;
+    /* Matrix rain brightness ^ */
 }
-
-.matrix-column {
+/* Matrix Rain color */
+.matrix-column { 
     position: absolute;
     top: -100%;
     width: 1px;
@@ -112,8 +103,8 @@ nav {
     justify-content: center;
     list-style-type: none;
     padding: 1rem 0;
-    padding-bottom: 0;
-    border-bottom: 2px solid #00cc0035;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--card-hover-bg);
 }
 
 .menu li {
@@ -142,7 +133,12 @@ nav {
 }
 
 .menu a:hover {
+    cursor: pointer;
     color: var(--accent-color);
+}
+
+.seperator:hover {
+    cursor: default;
 }
 
 .grid {
@@ -155,9 +151,9 @@ nav {
     background-color: var(--card-bg);
     border-radius: 12px;
     padding: 1.25rem;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     position: relative;
-    overflow: hidden;
+    overflow: scroll;
     border: 1px solid var(--tertiary-color);
     box-shadow: 0 4px 8px rgba(0, 255, 0, 0.1);
 }
@@ -196,7 +192,7 @@ nav {
     font-size: 2.5rem;
     margin-bottom: 0.75rem;
     color: var(--accent-color);
-    text-shadow: 0 0 5px var(--accent-color);
+    text-shadow: 0 0 3px var(--accent-color);
 }
 
 .card p {
@@ -207,8 +203,9 @@ nav {
 .card-image {
     width: 100%;
     height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
+    object-fit: scale-down;
+    border-bottom: 0.1px solid var(--accent-color);
+    padding-bottom: 10px;
     margin-bottom: 1rem;
 }
 
@@ -217,28 +214,11 @@ section {
 }
 
 section h2 {
-    text-align: center;
+    text-align: left;
     font-family: 'Share Tech Mono', monospace;
     color: var(--accent-color);
     margin-bottom: 1.5rem;
     font-size: 2.2rem;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-}
-
-.social-icon {
-    font-size: 2rem;
-    color: var(--text-color);
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-icon:hover {
-    color: var(--accent-color);
-    transform: scale(1.2);
 }
 
 @media (max-width: 768px) {
@@ -248,17 +228,7 @@ section h2 {
         color: var(--accent-color);
         text-shadow: 0 0 1px var(--accent-color);
         animation: subtle-pulse 4s ease-in-out infinite alternate;
-        margin-bottom: 1rem;
-    }
-    
-    @keyframes subtle-pulse {
-        from {
-            text-shadow: 0 0 0px var(--accent-color);
-        }
-    
-        to {
-            text-shadow: 0 0 3px var(--accent-color);
-        }
+        margin-bottom: 0rem;
     }
 
     .container {
@@ -298,7 +268,9 @@ section h2 {
     }
 
     .grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+        /* Cards will fit horizontally */
         gap: 1rem;
     }
 
@@ -321,18 +293,11 @@ section h2 {
 
     .card-image {
         height: 100px;
+        width: auto;
     }
 
     section h2 {
         font-size: 1.8rem;
-    }
-
-    .social-icon {
-        font-size: 1.5rem;
-    }
-
-    .connect-card .card-icon {
-        font-size: 2rem;
     }
 
     .card-centered {

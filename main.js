@@ -62,11 +62,15 @@ function displayHome(element) {
     activateMenuButton(element);
     document.getElementById("title").textContent = "Home";
 }
+// -----------------------------------
 
-function displayProjects(event, element) {
-    event.preventDefault();
-    activateMenuButton(element);
-    document.getElementById("title").textContent = "Project Center";
+async function portfolioPage(element) {
+    activateMenuButton(element); // underline nav list item
+    
+    const newDocument = await getDocument("./components/portfolio.html");
+    const newPageContent = newDocument.getElementById("container").innerHTML;
+
+    document.getElementById("container").innerHTML = newPageContent;
 }
 
 window.addEventListener('scroll', onScroll);
