@@ -67,7 +67,15 @@ function displayHome(element) {
 async function portfolioPage(element) {
     activateMenuButton(element); // underline nav list item
     
-    const newDocument = await getDocument("./components/portfolio.html");
+    const newDocument = await getDocument("./components/portfolio-content.html");
+    const newPageContent = newDocument.getElementById("container").innerHTML;
+    document.getElementById("container").innerHTML = newPageContent;
+}
+
+async function homePage(element) {
+    activateMenuButton(element); // underline nav list item
+    
+    const newDocument = await getDocument("./components/index-content.html");
     const newPageContent = newDocument.getElementById("container").innerHTML;
 
     document.getElementById("container").innerHTML = newPageContent;
@@ -75,3 +83,10 @@ async function portfolioPage(element) {
 
 window.addEventListener('scroll', onScroll);
 document.addEventListener('DOMContentLoaded', onScroll);
+
+window.onload = function() {
+    const homeButton = document.getElementById("nav-home");
+    homePage(document.getElementById('nav-home')); // Now passing the home button element to homePage
+    document.getElementById('nav-home').classList.add('active');
+};
+

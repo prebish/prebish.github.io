@@ -154,24 +154,21 @@ nav {
 
 .photo-section {
     display: flex;
-    justify-content: space-between; /* Ensures there's space between text and image */
-    align-items: center; /* Vertically aligns the text and image */
 }
 
 .photo-section h2 {
-    flex: 1; /* Ensures the text takes up the remaining space */
-    margin-right: 20px; /* Adds space between the text and image */
-    margin-top: auto;
-    margin-bottom: 0%;
+    flex: 100%; /* Ensures the text takes up the remaining space */
+    margin: auto 0 0; /* Adds space between the text and image */
 }
 
 .profile-img {
     flex-shrink: 0; /* Keeps the image at its original size */
-    width: 250px;
-    height: 250px;
+    width: 175px;
+    height: 175px;
+    margin-bottom: 11px;
     object-fit: cover; /* Preserves aspect ratio */
     border-radius: 50%;
-    border: 5px groove var(--accent-color)
+    border: 5px groove var(--accent-color);
 }
 
 /* EO Profile Page Section */
