@@ -45,12 +45,15 @@ function onScroll() {
 }
 
 function activateMenuButton(element) {
+
     // Get all menu items
-    let menuItems = document.querySelectorAll('.navbar li');
+    let menuItems = document.querySelectorAll('.menu li');
+    
     // Remove the active class from all menu items
     menuItems.forEach(item => {
         item.classList.remove('active');
     });
+    
     // Add the active class to the clicked menu item
     element.parentElement.classList.add('active');
 }
@@ -61,18 +64,18 @@ function displayHome(element) {
 }
 // -----------------------------------
 
-async function worksPage(element) {
+async function portfolioPage(element) {
     activateMenuButton(element); // underline nav list item
     
-    const newDocument = await getDocument("./components/works-content.html");
+    const newDocument = await getDocument("./components/index-content.html");
     const newPageContent = newDocument.getElementById("container").innerHTML;
     document.getElementById("container").innerHTML = newPageContent;
 }
 
-async function profilePage(element) {
+async function homePage(element) {
     activateMenuButton(element); // underline nav list item
     
-    const newDocument = await getDocument("./components/profile-content.html");
+    const newDocument = await getDocument("./components/portfolio-content.html");
     const newPageContent = newDocument.getElementById("container").innerHTML;
 
     document.getElementById("container").innerHTML = newPageContent;

@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
+
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #e0e0e0;
+    --accent-color: #00ff00;
+    --secondary-color: #00cc00;
+    --tertiary-color: #008000;
+    --menu-bg: rgba(15, 15, 15, 0.8);
+    --card-bg: #1a1a1a;
+    --card-hover-bg: #222;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fira Code', monospace;
+    background-color: var(--bg-color);
+    background-image: url("../../../img/textures/argyle.png");
+    background-repeat: repeat;
+    color: var(--text-color);
+}
+
+/*#region HEADER STYLES */
+header {
+    background: linear-gradient(45deg, #000000, #1a1a1a);
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+.header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+.header-content h1 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 3rem;
+    color: var(--accent-color);
+    text-shadow: 0 0 50px var(--accent-color);
+}
+
+/* MATRIX RAIN  */
+.matrix-column {
+    position: absolute;
+    top: -100%;
+    width: 1px;
+    height: 100%;
+    background-image: linear-gradient(0deg, var(--accent-color) 0%, transparent 100%);
+    animation: matrix-rain 20s infinite linear;
+}
+@keyframes matrix-rain {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+/*#endregion */
+
+/*#region NAVIGATION BAR */
+nav {
+    background-color: var(--menu-bg);
+    position: sticky;
+    top: 0; 
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.navbar {
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 1rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--card-hover-bg);
+}
+.navbar li {
+    margin: 0 1rem;
+    position: relative;
+    padding-bottom: 5px;
+}
+.navbar li.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /* changes the height below  */
+    height: 1px;
+    background-color: var(--accent-color);
+}
+.navbar a {
+    color: var(--text-color);
+    text-decoration: none;
+    /* font-size: 1.1rem; */
+    transition: color 0.3s ease;
+}
+.navbar a:hover {
+    cursor: pointer;
+    color: var(--accent-color);
+}
+.seperator:hover {
+    cursor: default;
+}
+/*#endregion  */
+
+/*#region SECTION STYLES  */
+.card-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.section-header {
+    margin-top: 15px;
+    color: var(--secondary-color);
+}
+.text-card-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+}
+/* includes text card on left, and side content on right */
+.hybrid-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+/*#endregion */
+
+/*#region CARD STYLES */
+.card, .card-img-only {
+    width: auto;
+    height: auto;
+    background-color: var(--card-bg);
+    border: 1px solid var(--tertiary-color);
+}
+.card img {
+    width: 100%;
+    height: 50%;
+}
+.card h2 {
+    color: var(--secondary-color);
+}
+.card p {
+
+}
+.card-img-only img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    /* Preserves aspect ratio */
+}
+/*#endregion  */
+
+

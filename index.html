@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>GitHub/prebish</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'> 
-    <script src='main.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Index</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
 
+<body>
     <header>
+        <!-- HEADER, MATRIX RAIN -->
         <div class="matrix-bg">
             <div class="matrix-column" style="left: 5%; animation-delay: -6s;"></div>
             <div class="matrix-column" style="left: 10%; animation-delay: -12s;"></div>
@@ -22,9 +19,9 @@
             <div class="matrix-column" style="left: 35%; animation-delay: -0s;"></div>
             <div class="matrix-column" style="left: 40%; animation-delay: -18s;"></div>
             <div class="matrix-column" style="left: 45%; animation-delay: -1s;"></div>
-
+    
             <div class="matrix-column" style="left: 50%; animation-delay: -4s;"></div>
-            
+    
             <div class="matrix-column" style="left: 55%; animation-delay: -7s;"></div>
             <div class="matrix-column" style="left: 60%; animation-delay: -10s;"></div>
             <div class="matrix-column" style="left: 65%; animation-delay: -3s;"></div>
@@ -35,25 +32,97 @@
             <div class="matrix-column" style="left: 90%; animation-delay: -8s;"></div>
             <div class="matrix-column" style="left: 95%; animation-delay: -0s;"></div>
         </div>
-        <div class="header-content" w-tid="17">
+        <div class="header-content">
             <h1 id="title">Joel Prebish</h1>
         </div>
     </header>
 
+    <!-- NAVIGATION BAR -->
     <nav>
-        <ul class="menu">
-            <li class="active" id="nav-home"><a
-                    onclick=homePage(this)>HOME</a></li><li class="seperator">|</li> <!-- List item seperator -> '|' -->
-            <li><a
-                    onclick=portfolioPage(this)>PROJECTS</a></li><li class="seperator">|</li> <!-- List item seperator -> '|' -->
-            <li><a
-                    href="https://github.com/prebish"
-                    onclick=activateMenuButton(this)>GITHUB</a></li>
+        <ul class="navbar">
+            <li class="active" id="profile"><a onclick=profilePage(this)>PROFILE</a></li>
+            <li class="seperator">|</li>
+            <li><a onclick=worksPage(this)>WORKS</a></li>
+            <li class="seperator">|</li>
+            <li><a href="https://github.com/prebish" onclick=activateMenuButton(this)>GITHUB ></a></li>
         </ul>
-        
     </nav>
 
-    <div class="container" id="container"></div>
-
+    <div class="container" id="container">
+        <!-- CARD SECTION -->
+        <h2 class="section-header">About Me</h2>
+        <section class="hybrid-section">
+        
+            <div class="card">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium placeat quae sunt vitae, velit animi
+                    exercitationem explicabo ducimus impedit molestiae? Nobis, ex! Ducimus incidunt vel vero quasi saepe. Eius,
+                    minus.</p>
+            </div>
+            <div class="card-img-only">
+                <img src="./img/cards/profilepic.JPEG" alt="img">
+            </div>
+        
+        </section>
+    
+        <!-- CARD SECTION -->
+        <h2 class="section-header">Skills</h2>
+        <section class="text-card-section">
+        
+            <div class="card">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium placeat quae sunt vitae, velit animi
+                    exercitationem explicabo ducimus impedit molestiae? Nobis, ex! Ducimus incidunt vel vero quasi saepe. Eius,
+                    minus.</p>
+            </div>
+        </section>
+    
+        <!-- CARD SECTION -->
+        <h2 class="section-header">Current Projects</h2>
+        <section class="card-section">
+    
+            <div class="card">
+                <img src="./img/cards/email.png" class="card-image">
+                <h2>Email</h2>
+                <p>Get in touch for opportunities or collaborations</p>
+            </div>
+    
+            <div class="card">
+                <img src="./img/cards/email.png" class="card-image">
+                <h2>Email</h2>
+                <p>Get in touch for opportunities or collaborations</p>
+            </div>
+    
+            <div class="card">
+                <img src="./img/cards/email.png" class="card-image">
+                <h2>Email</h2>
+                <p>Get in touch for opportunities or collaborations</p>
+            </div>
+    
+        </section>
+    
+        <!-- CARD SECTION -->
+        <h2 class="section-header">Social</h2>
+        <section class="card-section">
+            <div class="card">
+                <img src="./img/cards/github.png" class="card-image">
+                <h2>GitHub</h2>
+                <p>See my projects and contributions</p>
+            </div>
+            
+            <div class="card">
+                <img src="./img/cards/stackoverflow.png" class="card-image">
+                <h2>Stack Overflow</h2>
+                <p>Check out my activity</p>
+            </div>
+            
+            <div class="card">
+                <img src="./img/cards/linkedin_logo.png" class="card-image">
+                <h2>LinkedIn</h2>
+                <p>Connect with me on LinkedIn!</p>
+            </div>
+        </section>
+    </div>
+    
+    
 </body>
+<script src='main.js'></script>
 </html>

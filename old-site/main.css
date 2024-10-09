@@ -151,24 +151,26 @@ nav {
 }
 
 /* Profile Page Section */
+#section-about-me {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
 
-.photo-section {
-    display: flex;
 }
 
-.photo-section h2 {
-    flex: 100%; /* Ensures the text takes up the remaining space */
-    margin: auto 0 0; /* Adds space between the text and image */
+#bio {
+    margin-bottom: 0;
+    height: auto;
 }
 
 .profile-img {
     flex-shrink: 0; /* Keeps the image at its original size */
-    width: 175px;
-    height: 175px;
-    margin-bottom: 11px;
+    width: 180px;
+    height: 180px;
     object-fit: cover; /* Preserves aspect ratio */
-    border-radius: 50%;
-    border: 5px groove var(--accent-color);
+    border-radius: 5%;
+    border: 3px groove var(--accent-color);
 }
 
 /* EO Profile Page Section */
@@ -238,10 +240,6 @@ nav {
     margin-bottom: 1rem;
 }
 
-#bio {
-    width: 20%;
-}
-
 section {
     margin-top: 3rem;
 }
@@ -252,6 +250,10 @@ section h2 {
     color: var(--accent-color);
     margin-bottom: 1.5rem;
     font-size: 2.2rem;
+}
+
+#about-me {
+    margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
