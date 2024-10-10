@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', onScroll);
 
 window.onload = function() {
     const homeButton = document.getElementById("nav-home");
-    homePage(document.getElementById('nav-home')); // Now passing the home button element to homePage
+    profilePage(document.getElementById('nav-home')); // Now passing the home button element to homePage
     document.getElementById('nav-home').classList.add('active');
 };
 
