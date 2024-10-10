@@ -21,7 +21,7 @@
 body {
     font-family: 'Fira Code', monospace;
     background-color: var(--bg-color);
-    background-image: url("../../../img/textures/argyle.png");
+    background-image: url("./img/textures/argyle.png");
     background-repeat: repeat;
     color: var(--text-color);
 }
