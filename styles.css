@@ -118,47 +118,103 @@ nav {
     margin-top: 15px;
     color: var(--secondary-color);
 }
-.card-section {
+/* .card-section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 30px;
+    gap: 25px;
+    /* cards centered */
+    /* justify-items: center;
+    align-items: center;
+    margin-bottom: 30px; */
+/* } */ 
+.card-section {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows cards to wrap to the next line if needed */
+    justify-content: space-around;
+    /* Distributes cards evenly */
+    gap: 20px;
+    /* Adds spacing between cards */
+    padding: 20px;
 }
 .text-card-section {
     display: grid;
     grid-template-columns: 1fr;
+    /* cards centered */
+    justify-items: center;
+    align-items: center;
     margin-bottom: 30px;
 }
 /* includes text card on left, and side content on right */
 .hybrid-section {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 10px;
+    /* gap: 10px; */
+    /* cards centered */
+    justify-items: center;
+    align-items: center;
     margin-bottom: 30px;
 }
 /*#endregion */
 
 /*#region CARD STYLES */
-.card, .card-img-only {
-    width: auto;
-    height: auto;
+/* .card { */
+    /* min-width: 250px;
+    min-height: 275px;
+    margin-left: 25px;
+    margin-right: 25px;
+
     background-color: var(--card-bg);
-    border: 1px solid var(--tertiary-color);
+    border-radius: 10px;
+    border: 2px solid var(--tertiary-color);
+} */
+.card {
+    flex: 1 1 300px;
+    /* Allows the card to grow and shrink, setting a minimum width of 300px */
+    max-width: 850px;
+    /* Limits the maximum size of the cards */
+    min-height: 275px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    border: 2px solid var(--tertiary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    text-align: center;
 }
 .card img {
     width: 100%;
-    height: 50%;
+    object-fit: cover;
+    max-width: 200px;
+    max-height: 200px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--tertiary-color);
 }
 .card h2 {
+    display: block;
     color: var(--secondary-color);
 }
 .card p {
+    display: block;
 
+}
+.card-img-only {
+    width: auto;
+    height: auto;
+    margin-left: 25px;
+    margin-right: 25px;
+    overflow: hidden;
+
+
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    border: 2px solid var(--tertiary-color);
 }
 .card-img-only img {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: 100%;
+    padding-bottom: 15px;
     /* Preserves aspect ratio */
 }
 /*#endregion  */
