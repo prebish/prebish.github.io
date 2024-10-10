@@ -114,15 +114,15 @@ nav {
 /*#endregion  */
 
 /*#region SECTION STYLES  */
+.section-header {
+    margin-top: 15px;
+    color: var(--secondary-color);
+}
 .card-section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     margin-bottom: 30px;
-}
-.section-header {
-    margin-top: 15px;
-    color: var(--secondary-color);
 }
 .text-card-section {
     display: grid;
