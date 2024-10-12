@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Share+Tech+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
-/* TURN OTHER SECTIONS TO FLEXBOXS */
+/* TURN OTHER SECTIONS TO FLEXBOXS  */
+/* font-family: 'Share Tech Mono', monospace; */
 :root {
     --bg-color: #0a0a0a;
     --text-color: #e0e0e0;
@@ -117,86 +118,70 @@ nav {
 .section-header {
     margin-top: 15px;
     color: var(--secondary-color);
+    display: block;
+    /* keeps header inline with cards offset */
+    padding-left: 20px;
 }
-/* .card-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 25px;
-    /* cards centered */
-    /* justify-items: center;
-    align-items: center;
-    margin-bottom: 30px; */
-/* } */ 
-.card-section {
+.card-section, .text-card-section, .hybrid-section {
     display: flex;
     flex-wrap: wrap;
     /* Allows cards to wrap to the next line if needed */
-    justify-content: space-around;
+    justify-content: space-evenly;
     /* Distributes cards evenly */
     gap: 20px;
     /* Adds spacing between cards */
-    padding: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.text-card-section {
+/* .text-card-section {
     display: grid;
     grid-template-columns: 1fr;
-    /* cards centered */
+    /* cards centered * /
     justify-items: center;
     align-items: center;
     margin-bottom: 30px;
-}
+} */
 /* includes text card on left, and side content on right */
-.hybrid-section {
+/* .hybrid-section {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    /* gap: 10px; */
-    /* cards centered */
+    /* gap: 10px; * /
+    /* cards centered * /
     justify-items: center;
     align-items: center;
     margin-bottom: 30px;
-}
+} */
 /*#endregion */
 
 /*#region CARD STYLES */
-/* .card { */
-    /* min-width: 250px;
-    min-height: 275px;
-    margin-left: 25px;
-    margin-right: 25px;
-
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    border: 2px solid var(--tertiary-color);
-} */
 .card {
-    flex: 1 1 300px;
     /* Allows the card to grow and shrink, setting a minimum width of 300px */
-    max-width: 850px;
+    flex: 1 1 300px;
+    max-height: auto;
+    max-width: 100%;
     /* Limits the maximum size of the cards */
-    min-height: 275px;
     background-color: var(--card-bg);
     border-radius: 10px;
     border: 2px solid var(--tertiary-color);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     padding: 15px;
-    text-align: center;
+    text-align: left;
 }
 .card img {
-    width: 100%;
-    object-fit: cover;
-    max-width: 200px;
+    /* Make the image fill the width of the card */
+    width: auto;
+    height: auto;
     max-height: 200px;
-    margin-bottom: 10px;
-    border-bottom: 2px solid var(--tertiary-color);
+    /* keeps img a standard size */
+    object-fit: contain;
 }
 .card h2 {
-    display: block;
-    color: var(--secondary-color);
+
 }
 .card p {
-    display: block;
 
 }
 .card-img-only {
@@ -212,10 +197,11 @@ nav {
     border: 2px solid var(--tertiary-color);
 }
 .card-img-only img {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 15px;
-    /* Preserves aspect ratio */
+    width: auto;
+    height: auto;
+    max-height: 200px;
+    /* keeps img a standard size */
+    object-fit: contain;
 }
 /*#endregion  */
 
