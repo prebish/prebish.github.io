@@ -78,6 +78,15 @@ async function profilePage(element) {
     document.getElementById("container").innerHTML = newPageContent;
 }
 
+async function favoritesPage(element) {
+    activateMenuButton(element); // underline nav list item
+    
+    const newDocument = await getDocument("./components/pages/favorites.html");
+    const newPageContent = newDocument.getElementById("container").innerHTML;
+
+    document.getElementById("container").innerHTML = newPageContent;
+}
+
 window.addEventListener('scroll', onScroll);
 document.addEventListener('DOMContentLoaded', onScroll);
 
