@@ -82,6 +82,7 @@ nav {
     list-style-type: none;
     padding: 1rem 0;
     padding-bottom: 0.75rem;
+    margin-bottom: 40px;
     border-bottom: 2px solid var(--card-hover-bg);
 }
 .navbar li {
@@ -119,39 +120,25 @@ nav {
     margin-top: 15px;
     color: var(--secondary-color);
     display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2.2rem;
     /* keeps header inline with cards offset */
-    padding-left: 20px;
+    padding-left: 50px;
 }
 .card-section, .text-card-section, .hybrid-section {
     display: flex;
     flex-wrap: wrap;
+    font-family: 'Share Tech Mono', monospace;
     /* Allows cards to wrap to the next line if needed */
     justify-content: space-evenly;
     /* Distributes cards evenly */
-    gap: 20px;
+    gap: 35px;
+    margin-bottom: 40px;
     /* Adds spacing between cards */
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
-/* .text-card-section {
-    display: grid;
-    grid-template-columns: 1fr;
-    /* cards centered * /
-    justify-items: center;
-    align-items: center;
-    margin-bottom: 30px;
-} */
-/* includes text card on left, and side content on right */
-/* .hybrid-section {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    /* gap: 10px; * /
-    /* cards centered * /
-    justify-items: center;
-    align-items: center;
-    margin-bottom: 30px;
-} */
 /*#endregion */
 
 /*#region CARD STYLES */
@@ -174,12 +161,16 @@ nav {
     /* Make the image fill the width of the card */
     width: auto;
     height: auto;
-    max-height: 200px;
+    max-height: 150px;
+    border-bottom: 1px solid var(--tertiary-color);
     /* keeps img a standard size */
     object-fit: contain;
 }
 .card h2 {
-
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--secondary-color);
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
 }
 .card p {
 
@@ -187,8 +178,8 @@ nav {
 .card-img-only {
     width: auto;
     height: auto;
-    margin-left: 25px;
-    margin-right: 25px;
+    /* margin-left: 25px;
+    margin-right: 25px; */
     overflow: hidden;
 
 
@@ -205,4 +196,55 @@ nav {
 }
 /*#endregion  */
 
+/* SMALL SCREENS STYLES */
+@media (max-width: 768px) {
 
+    .section-header {
+        margin-top: 15px;
+        color: var(--secondary-color);
+        display: block;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 2.2rem;
+        /* keeps header inline with cards offset */
+        padding-left: 20px;
+    }
+    
+    .card-section, .text-card-section, .hybrid-section {
+        display: flex;
+        flex-wrap: nowrap;
+        font-family: 'Share Tech Mono', monospace;
+        /* Allows cards to wrap to the next line if needed */
+        justify-content: flex-start;
+        /* Distributes cards evenly */
+        gap: 35px;
+        margin-bottom: 40px;
+        /* Adds spacing between cards */
+        padding-top: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        overflow-x: auto ;
+        
+    }
+
+
+    .card img {
+        /* Make the image fill the width of the card */
+        width: auto;
+        height: auto;
+        max-height: 125px;
+        border-bottom: 1px solid var(--tertiary-color);
+        /* keeps img a standard size */
+        object-fit: contain;
+    }
+
+
+
+
+
+
+
+
+
+
+}
