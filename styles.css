@@ -129,14 +129,14 @@ nav {
 /*#region SECTION STYLES  */
 .section-header {
     margin-top: 15px;
-    color: var(--secondary-color);
+    color: var(--accent-color);
     display: block;
     font-family: 'Share Tech Mono', monospace;
     font-size: 2.2rem;
     /* keeps header inline with cards offset */
     padding-left: 50px;
 }
-.card-section, .text-card-section, .hybrid-section {
+.card-section {
     display: flex;
     flex-wrap: wrap;
     font-family: 'Share Tech Mono', monospace;
@@ -161,7 +161,7 @@ nav {
     /* Limits the maximum size of the cards */
     background-color: var(--card-bg);
     border-radius: 10px;
-    border: 2px solid var(--tertiary-color);
+    border: 1px solid var(--secondary-color);
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -182,6 +182,7 @@ nav {
     width: auto;
     height: auto;
     max-height: 150px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--tertiary-color);
     /* keeps img a standard size */
     object-fit: contain;
@@ -197,22 +198,16 @@ nav {
 }
 .card-img-only {
     width: auto;
-    height: auto;
-    /* margin-left: 25px;
-    margin-right: 25px; */
+    height: 200px; /* Or your desired height */
     overflow: hidden;
-
-
     background-color: var(--card-bg);
     border-radius: 10px;
     border: 2px solid var(--tertiary-color);
 }
 .card-img-only img {
-    width: auto;
-    height: auto;
-    max-height: 200px;
-    /* keeps img a standard size */
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 /*#endregion  */
 
