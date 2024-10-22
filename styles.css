@@ -220,6 +220,10 @@ nav {
 @media (max-width: 768px) {
 
     .header-content h1 {
+        text-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .header-content h1 {
         font-size: 2rem;
     }
 
