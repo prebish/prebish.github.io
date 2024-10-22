@@ -219,6 +219,10 @@ nav {
 /* SMALL SCREENS STYLES */
 @media (max-width: 768px) {
 
+    .hide-li-github {
+        display: none;
+    }
+
     .header-content h1 {
         font-size: 2rem;
         text-shadow: 0 0 5px var(--accent-color);
