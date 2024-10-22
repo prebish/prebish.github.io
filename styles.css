@@ -44,7 +44,7 @@ header {
     font-family: 'Share Tech Mono', monospace;
     font-size: 3rem;
     color: var(--accent-color);
-    text-shadow: 0 0 50px var(--accent-color);
+    text-shadow: 0 0 25px var(--accent-color);
 }
 
 /* MATRIX RAIN  */
@@ -220,15 +220,12 @@ nav {
 @media (max-width: 768px) {
 
     .header-content h1 {
-        text-shadow: 0 0 10px var(--accent-color);
-    }
-
-    .header-content h1 {
         font-size: 2rem;
+        text-shadow: 0 0 5px var(--accent-color);
     }
 
     .navbar li {
-        font-size: x-small;
+        font-size: smaller;
     }
 
     .section-header {
