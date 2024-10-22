@@ -97,7 +97,7 @@ nav {
     border-bottom: 2px solid var(--card-hover-bg);
 }
 .navbar li {
-    margin: 0 1rem;
+    /* margin: 0 1rem; */
     position: relative;
     padding-bottom: 5px;
 }
@@ -115,11 +115,16 @@ nav {
     color: var(--text-color);
     text-decoration: none;
     /* font-size: 1.1rem; */
-    transition: color 0.3s ease;
+    transition: color 0.3s ease-out;
 }
 .navbar a:hover {
     cursor: pointer;
     color: var(--accent-color);
+}
+
+.seperator {
+    font-size: smaller;
+    margin: 0px 1rem 0px 1rem;
 }
 .seperator:hover {
     cursor: default;
@@ -214,6 +219,14 @@ nav {
 /* SMALL SCREENS STYLES */
 @media (max-width: 768px) {
 
+    .header-content h1 {
+        font-size: 2rem;
+    }
+
+    .navbar li {
+        font-size: x-small;
+    }
+
     .section-header {
         margin-top: 15px;
         color: var(--secondary-color);
@@ -242,7 +255,6 @@ nav {
         
     }
 
-
     .card img {
         /* Make the image fill the width of the card */
         width: auto;
@@ -252,9 +264,6 @@ nav {
         /* keeps img a standard size */
         object-fit: contain;
     }
-
-
-
 
 
 
