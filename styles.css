@@ -115,7 +115,7 @@ nav {
     color: var(--text-color);
     text-decoration: none;
     /* font-size: 1.1rem; */
-    transition: color 0.3s ease-out;
+    transition: color 0.3s ease;
 }
 .navbar a:hover {
     cursor: pointer;
@@ -260,12 +260,6 @@ nav {
         
     }
 
-    .card {
-        /* Allows the card to grow and shrink, setting a minimum width of 300px */
-        flex: 1 1 300px;
-        max-height: auto;
-        min-width: 100%;
-    }
 
     .card img {
         /* Make the image fill the width of the card */
