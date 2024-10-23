@@ -237,7 +237,7 @@ nav {
         color: var(--secondary-color);
         display: block;
         font-family: 'Share Tech Mono', monospace;
-        font-size: 2.2rem;
+        font-size: 1.8rem;
         /* keeps header inline with cards offset */
         padding-left: 20px;
     }
@@ -258,6 +258,13 @@ nav {
 
         overflow-x: auto ;
         
+    }
+
+    .card {
+        /* Allows the card to grow and shrink, setting a minimum width of 300px */
+        flex: 1 1 300px;
+        max-height: auto;
+        min-width: 100%;
     }
 
     .card img {
