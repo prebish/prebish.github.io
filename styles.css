@@ -260,6 +260,13 @@ nav {
         
     }
 
+    .card {
+        /* Allows the card to grow and shrink, setting a minimum width of 300px */
+        flex: 1 1 300px;
+        max-height: auto;
+        min-width: 100%;
+    }
+
 
     .card img {
         /* Make the image fill the width of the card */
