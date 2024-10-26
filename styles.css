@@ -264,7 +264,7 @@ nav {
         /* Allows the card to grow and shrink, setting a minimum width of 300px */
         flex: 1 1 300px;
         max-height: auto;
-        min-width: 100%;
+        min-width: 75%;
     }
 
 
