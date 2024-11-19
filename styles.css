@@ -122,6 +122,11 @@ nav {
     color: var(--accent-color);
 }
 
+#djrive-link a:hover {
+    cursor: pointer;
+    color: rgb(40, 158, 255);
+}
+
 .seperator {
     font-size: smaller;
     margin: 0px 1rem 0px 1rem;

@@ -42,20 +42,15 @@
     <!-- NAVIGATION BAR -->
     <nav>
         <ul class="navbar">
-            <li class="active" id="nav-home"><a onclick=profilePage(this)>HOME</a></li>
-            <li class="seperator">>_</li>
-            <li><a onclick=worksPage(this)>PROJECTS</a></li>
-            <li class="seperator">>_</li>
-            <li><a onclick=favoritesPage(this)>FAV-SITES</a></li>
-            <li class="seperator">>_</li>
-            <li><a href="http://djrive.com">DJRIVE</a></li>
-            <li class="seperator hide-li-github">>_</li>
+            <li class="active" id="nav-home"><a onclick=profilePage(this)>HOME</a></li><li class="seperator">|</li>
+            <li><a onclick=worksPage(this)>PROJECTS</a></li><li class="seperator">|</li>
+            <li><a onclick=favoritesPage(this)>SITES</a></li><li class="seperator">|</li>
+            <li id="djrive-link"><a href="http://djrive.com">DJRIVE</a></li><li class="seperator hide-li-github">|</li>
             <li class="hide-li-github"><a href="https://github.com/prebish" onclick=activateMenuButton(this)>GITHUB</a></li>
         </ul>
     </nav>
 
-    <div class="container" id="container">
-    </div>
+    <div class="container" id="container"></div>
     
     
 </body>
