@@ -87,6 +87,10 @@ async function favoritesPage(element) {
     document.getElementById("container").innerHTML = newPageContent;
 }
 
+function switchPhoto() {
+    ;
+}
+
 window.addEventListener('scroll', onScroll);
 document.addEventListener('DOMContentLoaded', onScroll);
 

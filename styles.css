@@ -221,6 +221,67 @@ nav {
     height: 100%;
     object-fit: cover;
 }
+.img-container {
+    position: relative;
+    /* Create a positioning context for the buttons */
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    width: 100%;
+    height: 300px;
+    /* Fixed height for consistent sizing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Center the image vertically and horizontally */
+    overflow: hidden;
+}
+
+.img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: inherit;
+    object-fit: contain;
+    /* Keep the aspect ratio intact */
+}
+
+.slideshow-buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Center vertically */
+    color: #008000;
+    width: 5%;
+    height: 100%;
+    /* Match the container's height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center button content */
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Slightly transparent white */
+    backdrop-filter: blur(5px);
+    /* Blur the background under the button */
+    border-radius: 10px;
+    /* Add rounded corners for a smooth look */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Add smooth hover effect */
+}
+
+#slideshow-button-l {
+    left: 0;
+    /* Stick to the left edge */
+}
+
+#slideshow-button-r {
+    right: 0;
+    /* Stick to the right edge */
+}
+.slideshow-buttons:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    /* Increase opacity on hover */
+    color: #006400;
+    /* Darken the green for better contrast */
+}
 /*#endregion  */
 
 /* SMALL SCREENS STYLES */
