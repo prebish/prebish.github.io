@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: "Building and sharing innovative projects."
+subtitle: <i>"Building and sharing innovative projects."</i>
 
 profile:
   align: right
