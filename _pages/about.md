@@ -1,13 +1,13 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Building and sharing innovative projects.
+subtitle: _Software Developer | Problem Solver | Tech Enthusiast_
 
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: true # crops the image to make it circular
   more_info: >
     <p>Pittsburgh, PA</p>
 
@@ -25,8 +25,8 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Hailing from Pittsburgh, I’m a software developer and tutor with a **Bachelor’s in Computer Science** from the University of Pittsburgh. I specialize in **backend development, algorithms, and data structures** areas I find endlessly fascinating because they form the foundation of innovation. 
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+My journey into tech began at 17, when I discovered the limitless potential of programming. Since then, I’ve embraced coding as a superpower that empowers me to create, innovate, and make a meaningful impact. Whether it’s contributing to **open-source projects**, tutoring aspiring developers, or experimenting with new technologies, I’m driven by a passion for learning and collaboration.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+*“The computer was born to solve problems that did not exist before.”*  Bill Gates
