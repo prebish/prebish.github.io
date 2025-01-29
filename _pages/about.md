@@ -29,4 +29,4 @@ Hailing from Pittsburgh, I’m a software developer and tutor with a **Bachelor�
 
 My journey into tech began at 17, when I discovered the limitless potential of programming. Since then, I’ve embraced coding as a superpower that empowers me to create, innovate, and make a meaningful impact. Whether it’s contributing to **open-source projects**, tutoring aspiring developers, or experimenting with new technologies, I’m driven by a passion for learning and collaboration.
 
-> *“The computer was born to solve problems that did not exist before.”*  - Bill Gates
+*“The computer was born to solve problems that did not exist before.”*  - Bill Gates
