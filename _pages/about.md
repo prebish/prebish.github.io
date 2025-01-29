@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: _Software Developer | Problem Solver | Tech Enthusiast_
+subtitle: <i>Software Developer | Problem Solver | Tech Enthusiast</i>
 
 profile:
   align: right
