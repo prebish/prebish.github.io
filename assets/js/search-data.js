@@ -481,18 +481,18 @@ ninja.data = [{
           window.open("https://github.com/prebish", "_blank");
         },
       },{
-        id: 'social-inspire',
-        title: 'Inspire HEP',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://inspirehep.net/authors/1010907", "_blank");
-        },
-      },{
         id: 'social-leetcode',
         title: 'LeetCode',
         section: 'Socials',
         handler: () => {
           window.open("https://leetcode.com/u/prebish/", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/dev-prebish", "_blank");
         },
       },{
         id: 'social-rss',
