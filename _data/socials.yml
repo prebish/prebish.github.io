@@ -7,10 +7,11 @@
 # bluesky_url: # your bluesky URL
 # dblp_url: # your DBLP profile url
 # discord_id: # your discord id (18-digit unique numerical identifier)
+github_username: prebish # your GitHub user name
 email: joel.prebish@pitt.edu # your email address
 # facebook_id: # your facebook id
 # flickr_id: # your flickr id
-github_username: prebish # your GitHub user name
+leetcode_id: prebish # your LeetCode id
 # gitlab_username: # your GitLab user name
 # ieee_id: # your ieeexplore.ieee.org/author/id
 # inspirehep_id: 1010907 # Inspire HEP author ID
@@ -19,7 +20,6 @@ github_username: prebish # your GitHub user name
 # keybase_username: # your keybase user name
 # lastfm_id: # your lastfm id
 # lattes_id: # your ID on Lattes (Brazilian Lattes CV)
-leetcode_id: prebish # your LeetCode id
 linkedin_username: dev-prebish # your LinkedIn user name
 # mastodon_username: # your mastodon instance+username in the format instance.tld/@username
 # medium_username: # your Medium username
@@ -29,7 +29,7 @@ linkedin_username: dev-prebish # your LinkedIn user name
 # publons_id: # your ID on Publons
 # quora_username: # your Quora username
 # research_gate_profile: # your profile on ResearchGate
-rss_icon: false # set to true to show the RSS icon
+# rss_icon: false # set to true to show the RSS icon
 # scholar_userid: qc6CJjYAAAAJ # your Google Scholar ID
 # scopus_id: # your profile on Scopus
 # semanticscholar_id: # your Semantic Scholar ID
