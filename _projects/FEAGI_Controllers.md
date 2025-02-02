@@ -2,7 +2,7 @@
 layout: page
 title: FEAGI Controllers
 description: my teams contributions to the FEAGI project by Neuraville Inc.
-img: assets/img/neuraville-logo.jpg
+img: assets/img/robot-brain.jpg
 importance: 3
 category: opensource
 ---
