@@ -1,8 +1,8 @@
 ---
 layout: page
-title: project 3 with very long name
-description: a project that redirects to another website
-img: assets/img/7.jpg
+title: Diabetes Data Analysis
+description: displaying relations between age, weight, and cholesteral levels
+img: assets/img/modern-simple-dna.jpg
 redirect: https://unsplash.com
 importance: 3
 category: work
