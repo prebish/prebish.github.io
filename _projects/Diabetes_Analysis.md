@@ -5,7 +5,7 @@ description: displaying relations between age, weight, and cholesteral levels
 img: assets/img/modern-simple-dna.jpg
 redirect: https://unsplash.com
 importance: 3
-category: work
+category: research
 ---
 
 Every project has a beautiful feature showcase page.
