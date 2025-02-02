@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
+title: Python Projects Hub
+description: free eduactional python projects for all!
+img: python-matrix.jpg
 importance: 2
-category: work
+category: opensource
 giscus_comments: true
 ---
 
