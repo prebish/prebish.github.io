@@ -421,17 +421,7 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-python-projects-hub",
-          title: 'Python Projects Hub',
-          description: "free eduactional python projects for all!",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/2_project/";
-            },},{id: "projects-project-3-with-very-long-name",
-          title: 'project 3 with very long name',
-          description: "a project that redirects to another website",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/3_project/";
-            },},{id: "projects-project-4",
+          section: "News",},{id: "projects-project-4",
           title: 'project 4',
           description: "another without an image",
           section: "Projects",handler: () => {
@@ -461,11 +451,21 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
+            },},{id: "projects-diabetes-data-analysis",
+          title: 'Diabetes Data Analysis',
+          description: "displaying relations between age, weight, and cholesteral levels",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Diabetes_Analysis/";
             },},{id: "projects-flipper-zero-toolbox",
           title: 'Flipper Zero Toolbox',
           description: "all the tools i use for my flipper zero (va4ky)",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Flipper_Zero/";
+            },},{id: "projects-python-projects-hub",
+          title: 'Python Projects Hub',
+          description: "free eduactional python projects for all!",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Python_Projects_Hub/";
             },},{
         id: 'social-github',
         title: 'GitHub',
