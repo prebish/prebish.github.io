@@ -421,12 +421,7 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-flipper-zero-toolbox",
-          title: 'Flipper Zero Toolbox',
-          description: "all the tools i use for my flipper zero (va4ky)",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/1_project/";
-            },},{id: "projects-project-2",
+          section: "News",},{id: "projects-project-2",
           title: 'project 2',
           description: "a project with a background image and giscus comments",
           section: "Projects",handler: () => {
@@ -466,6 +461,11 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
+            },},{id: "projects-flipper-zero-toolbox",
+          title: 'Flipper Zero Toolbox',
+          description: "all the tools i use for my flipper zero (va4ky)",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Flipper_Zero/";
             },},{
         id: 'social-github',
         title: 'GitHub',
