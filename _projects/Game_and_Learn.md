@@ -1,9 +1,9 @@
 ---
 layout: page
-title: project 4
-description: another without an image
-img:
-importance: 3
+title: Game and Learn
+description: a duolingo inspired app for those wanting to enhance their programming skills
+img: assets/img/app-store-logo.jpg
+importance: 4
 category: fun
 ---
 

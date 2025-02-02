@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 7
-description: with background image
-img: assets/img/4.jpg
+title: Markus (TA)
+description: a discord bot made for educators to manage servers and server members
+img: assets/img/discord-bot.jpg
 importance: 1
-category: work
+category: fun
 related_publications: true
 ---
 
