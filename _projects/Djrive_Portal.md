@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 6
-description: a project with no image
-img:
-importance: 4
-category: fun
+title: Djrive Portal
+description: a web portal made to make your home server management simple
+img: assets/img/code-computer.jpg
+importance: 3
+category: featured
 ---
 
 Every project has a beautiful feature showcase page.

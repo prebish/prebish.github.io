@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 5
-description: a project with a background image
-img: assets/img/1.jpg
+title: FEAGI Controllers
+description: my teams contributions to the FEAGI project by Neuraville Inc.
+img: assets/img/neuraville-logo.jpg
 importance: 3
-category: fun
+category: opensource
 ---
 
 Every project has a beautiful feature showcase page.
