@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 1
-description: with background image
-img: assets/img/12.jpg
+title: Flipper Zero Toolbox
+description: all the tools i use for my flipper zero (va4ky)
+img: assets/img/flipper-zero.png
 importance: 1
-category: work
+category: opensource
 related_publications: true
 ---
 
