@@ -2,7 +2,7 @@
 layout: page
 title: Python Projects Hub
 description: free eduactional python projects for all!
-img: python-matrix.jpg
+img: assets/img/python-matrix.jpg
 importance: 2
 category: opensource
 giscus_comments: true
