@@ -1,8 +1,8 @@
 ---
 layout: page
-title: project 9
-description: another project with an image 🎉
-img: assets/img/6.jpg
+title: MIPS Classic Frogger
+description: the classic game of Frogger written in MIPS asm
+img: assets/img/frogger.png
 importance: 4
 category: fun
 ---
