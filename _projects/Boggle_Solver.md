@@ -1,8 +1,8 @@
 ---
 layout: page
-title: project 9
-description: another project with an image 🎉
-img: assets/img/6.jpg
+title: Boggle Solver
+description: efficient with backtracking and custom dictionary support
+img: assets/img/boggle-board.jpg
 importance: 4
 category: fun
 ---
