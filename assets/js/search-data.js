@@ -421,12 +421,7 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-project-9",
-          title: 'project 9',
-          description: "another project with an image 🎉",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/9_project/";
-            },},{id: "projects-diabetes-data-analysis",
+          section: "News",},{id: "projects-diabetes-data-analysis",
           title: 'Diabetes Data Analysis',
           description: "displaying relations between age, weight, and cholesteral levels",
           section: "Projects",handler: () => {
@@ -451,6 +446,11 @@ ninja.data = [{
           description: "a duolingo inspired app for those wanting to enhance their programming skills",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Game_and_Learn/";
+            },},{id: "projects-auto-complete-system",
+          title: 'Auto-Complete System',
+          description: "a portable autocomplete system written entirely in java",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Jauto_Complete/";
             },},{id: "projects-lzw-compression-tool",
           title: 'LZW Compression Tool',
           description: "my cross platform compression tool",
@@ -466,6 +466,21 @@ ninja.data = [{
           description: "free eduactional python projects for all!",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Python_Projects_Hub/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/x_project-copy-2/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/x_project-copy-3/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/x_project-copy/";
             },},{
         id: 'social-github',
         title: 'GitHub',
