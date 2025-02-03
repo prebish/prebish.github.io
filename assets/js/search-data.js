@@ -461,6 +461,11 @@ ninja.data = [{
           description: "my cross platform compression tool",
           section: "Projects",handler: () => {
               window.location.href = "/projects/LZW_Compression/";
+            },},{id: "projects-mips-classic-frogger",
+          title: 'MIPS Classic Frogger',
+          description: "the classic game of Frogger written in MIPS asm",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/MIPS_Classic_Frogger/";
             },},{id: "projects-markus-ta",
           title: 'Markus (TA)',
           description: "a discord bot made for educators to manage servers and server members",
@@ -476,11 +481,6 @@ ninja.data = [{
           description: "free eduactional python projects for all!",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Python_Projects_Hub/";
-            },},{id: "projects-project-9",
-          title: 'project 9',
-          description: "another project with an image 🎉",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/x_project-copy-3/";
             },},{
         id: 'social-github',
         title: 'GitHub',
