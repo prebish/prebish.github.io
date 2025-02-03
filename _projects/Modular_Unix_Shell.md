@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 9
-description: another project with an image 🎉
-img: assets/img/6.jpg
+title: Modular Unix Shell
+description: a unix shell with plugin support
+img: assets/img/cmd-line.jpg
 importance: 4
-category: fun
+category: tools
 ---
 
 Every project has a beautiful feature showcase page.
