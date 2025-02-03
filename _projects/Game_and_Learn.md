@@ -4,7 +4,7 @@ title: Game and Learn
 description: a duolingo inspired app for those wanting to enhance their programming skills
 img: assets/img/app-store-logo.jpg
 importance: 4
-category: fun
+category: justforfun
 ---
 
 Every project has a beautiful feature showcase page.
