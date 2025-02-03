@@ -2,7 +2,7 @@
 layout: page
 title: Markus (TA)
 description: a discord bot made for educators to manage servers and server members
-img: assets/img/discord-bot.jpg
+img: assets/img/discord-bot.png
 importance: 1
 category: justforfun
 related_publications: true
