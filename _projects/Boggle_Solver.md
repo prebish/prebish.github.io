@@ -4,7 +4,7 @@ title: Boggle Solver
 description: efficient with backtracking and custom dictionary support
 img: assets/img/boggle-board.jpg
 importance: 4
-category: fun
+category: justforfun
 ---
 
 Every project has a beautiful feature showcase page.
