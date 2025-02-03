@@ -4,7 +4,7 @@ title: MIPS Classic Frogger
 description: the classic game of Frogger written in MIPS asm
 img: assets/img/frogger.png
 importance: 4
-category: fun
+category: justforfun
 ---
 
 Every project has a beautiful feature showcase page.
