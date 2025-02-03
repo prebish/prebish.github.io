@@ -421,7 +421,12 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-diabetes-data-analysis",
+          section: "News",},{id: "projects-boggle-solver",
+          title: 'Boggle Solver',
+          description: "efficient with backtracking and custom dictionary support",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Boggle_Solver/";
+            },},{id: "projects-diabetes-data-analysis",
           title: 'Diabetes Data Analysis',
           description: "displaying relations between age, weight, and cholesteral levels",
           section: "Projects",handler: () => {
@@ -476,11 +481,6 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/x_project-copy-3/";
-            },},{id: "projects-project-9",
-          title: 'project 9',
-          description: "another project with an image 🎉",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/x_project-copy/";
             },},{
         id: 'social-github',
         title: 'GitHub',
