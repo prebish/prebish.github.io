@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 8
-description: an other project with a background image and giscus comments
-img: assets/img/9.jpg
+title: LZW Compression Tool
+description: my cross platform compression tool
+img: assets/img/lzw-compression.jpg
 importance: 2
-category: work
+category: tools
 giscus_comments: true
 ---
 
