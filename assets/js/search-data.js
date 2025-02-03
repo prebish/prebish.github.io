@@ -466,16 +466,16 @@ ninja.data = [{
           description: "a discord bot made for educators to manage servers and server members",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Markus_TA/";
+            },},{id: "projects-modular-unix-shell",
+          title: 'Modular Unix Shell',
+          description: "a unix shell with plugin support",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Modular_Unix_Shell/";
             },},{id: "projects-python-projects-hub",
           title: 'Python Projects Hub',
           description: "free eduactional python projects for all!",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Python_Projects_Hub/";
-            },},{id: "projects-project-9",
-          title: 'project 9',
-          description: "another project with an image 🎉",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/x_project-copy-2/";
             },},{id: "projects-project-9",
           title: 'project 9',
           description: "another project with an image 🎉",
