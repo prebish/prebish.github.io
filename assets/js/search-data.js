@@ -421,12 +421,7 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-project-8",
-          title: 'project 8',
-          description: "an other project with a background image and giscus comments",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/8_project/";
-            },},{id: "projects-project-9",
+          section: "News",},{id: "projects-project-9",
           title: 'project 9',
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
@@ -456,6 +451,11 @@ ninja.data = [{
           description: "a duolingo inspired app for those wanting to enhance their programming skills",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Game_and_Learn/";
+            },},{id: "projects-lzw-compression-tool",
+          title: 'LZW Compression Tool',
+          description: "my cross platform compression tool",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/LZW_Compression/";
             },},{id: "projects-markus-ta",
           title: 'Markus (TA)',
           description: "a discord bot made for educators to manage servers and server members",
