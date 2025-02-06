@@ -5,7 +5,7 @@ permalink: /projects/
 description: A growing collection of my cool projects.
 nav: true
 nav_order: 3
-display_categories: [featured, opensource, tools, justforfun, research]
+display_categories: [opensource, tools, justforfun, research]
 horizontal: false
 ---
 
