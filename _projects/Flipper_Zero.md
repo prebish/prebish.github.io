@@ -8,18 +8,17 @@ category: opensource
 related_publications: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+Typically project pages should include code snippets and tons of images, but this one is a little more unique in that most of its work actually involves tinkering with random devices and pieces of hardware out in the world.
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+If you would like to contribute to my Flipper Zero findings I encourage you to clone my repo:
 
     ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
+    git clone https://github.com/prebish/flipper-zero-Va4ky.git
     ---
+
+Additionally, make sure to check out some others which don't belong to me but I still find incredibly useful:
+1. https://github.com/djsime1/awesome-flipperzero
+2. https://github.com/UberGuidoZ/Flipper
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">

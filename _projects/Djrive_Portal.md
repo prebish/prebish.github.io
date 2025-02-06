@@ -4,20 +4,15 @@ title: Djrive Portal
 description: a web portal made to make your home server management simple
 img: assets/img/code-computer.jpg
 importance: 3
-category: featured
+category: tools
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+Welcome to the landing page for my project titled: **Djrive Portal.** This project is one that is special to me. While its private right now, I aim to make it opensource in the future.
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+Djrive Portal runs on Gunicorn. To run, make sure you're using a Unix based device (WSL if on Win10/11). Then use this command: 
 
     ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
+    <command will be put here soon...>
     ---
 
 <div class="row">
