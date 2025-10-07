@@ -41,6 +41,11 @@ body {
 	padding: 2em;
 }
 
+header {
+	text-align: center;
+	margin-bottom: 200px;
+}
+
 h1 { color: var(--accent-color); }
 
 #business-card {
@@ -54,9 +59,11 @@ h1 { color: var(--accent-color); }
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	font-family: var(--font-family);
 	color: var(--text-color);
+	margin-inline: auto;
+	margin-bottom: 100px;
 }
 
 .steam-lift {
@@ -66,4 +73,54 @@ h1 { color: var(--accent-color); }
 .steam-lift:hover {
 	transform: perspective(600px) rotateZ(-2deg) rotateX(4deg) translateY(-6px) scale(1.03);
 	box-shadow: 0 12px 32px rgba(0,0,0,0.25), 8px 0 24px rgba(255,193,18,0.12);
+}
+
+/* Business card content styling */
+.bc-name {
+	font-size: 18px;
+	font-weight: 700;
+	color: var(--accent-color);
+	margin-bottom: 6px;
+}
+.bc-title {
+	font-size: 12px;
+	color: var(--secondary-text-color);
+	margin-bottom: 8px;
+	opacity: 0.95;
+}
+.bc-location {
+	font-size: 11px;
+	color: #cfcfcf;
+	margin-top: 4px;
+}
+
+/* Make card content centered for small screens */
+@media (max-width: 420px) {
+	#business-card {
+		align-items: center;
+		width: 92%;
+		height: auto;
+		padding: 18px;
+	}
+	.bc-name { font-size: 20px; }
+	.bc-title { font-size: 13px; }
+}
+
+#bio {
+	max-width: fit-content;
+	margin-inline: auto;
+	flex-wrap: wrap;
+	overflow: visible;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	margin: 20px auto 0 auto;
+	text-align: center;
+	line-height: 2;
+	font-size: 32px;
+	transition: box-shadow 0.3s cubic-bezier(.4,2,.6,1);
 }
