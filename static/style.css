@@ -31,8 +31,12 @@ body {
 	font-family: var(--font-family);
 	color: var(--text-color);
 	background-color: var(--background-color);
-	background-image: repeating-linear-gradient(135deg, var(--background-gradient-color1), var(--background-gradient-color2) 1%, transparent 1.5%, transparent 50%);
-	background-size: 100px 100px;
+	/* Two layered repeating gradients at 135deg and 45deg create a diamond grid */
+	background-image: 
+		repeating-linear-gradient(135deg, var(--background-gradient-color1), var(--background-gradient-color2) 1%, transparent 1.5%, transparent 50%),
+		repeating-linear-gradient(45deg, var(--background-gradient-color1), var(--background-gradient-color2) 1%, transparent 1.5%, transparent 50%);
+	/* Match sizes so the two gradients form diamonds */
+	background-size: 100px 100px, 100px 100px;
 	margin: 0;
 	padding: 2em;
 }
