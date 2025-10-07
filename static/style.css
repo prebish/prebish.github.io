@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+html, body {
+	margin: 0;
+	height: 100%;
+}
+
+* {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+}
+
+:root {
+	--background-color: #0e0e0e;
+	--background-gradient-color1: #000;
+	--background-gradient-color2: #19191a;
+	--text-color: #fff;
+	--secondary-text-color: #eee;
+	--accent-color: #ffc112;
+	--hover-color: #f09;
+	--strike-color: #222;
+	--card-background-color: #111;
+	--font-family: "Inter", sans-serif;
+	--font-weight-bold: 800;
+	--h1-font-size: 50px;
+	--section-font-size: 41px;
+	--inner-h1-font-size: 55px;
+}
+
+body {
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+	background-image: repeating-linear-gradient(135deg, var(--background-gradient-color1), var(--background-gradient-color2) 1%, transparent 1.5%, transparent 50%);
+	background-size: 100px 100px;
+	margin: 0;
+	padding: 2em;
+}
+
+h1 { color: var(--accent-color); }
