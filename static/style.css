@@ -14,7 +14,7 @@ html, body {
 	--background-color: #0e0e0e;
 	--background-gradient-color1: #000;
 	--background-gradient-color2: #19191a;
-	--text-color: #fff;
+	--text-color: #adadad;
 	--secondary-text-color: #eee;
 	--accent-color: #ffc112;
 	--hover-color: #f09;
@@ -35,21 +35,39 @@ body {
 	background-image: 
 		repeating-linear-gradient(135deg, var(--background-gradient-color1), var(--background-gradient-color2) 1%, transparent 1.5%, transparent 50%),
 		repeating-linear-gradient(45deg, var(--background-gradient-color1), var(--background-gradient-color2) 1%, transparent 1.5%, transparent 50%);
-	/* Match sizes so the two gradients form diamonds */
-	background-size: 100px 100px, 100px 100px;
+	/* Match sizes so the two gradients form diamonds (scaled 1.5x for stronger pattern) */
+	background-size: 150px 150px, 150px 150px;
 	margin: 0;
-	padding: 2em;
+	/* padding: 0 2em 2em 2em; */
 }
 
 header {
-	text-align: center;
+	width: 100%;
+	max-height: 100px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 0; /* touch the very top of the viewport */
 	margin-bottom: 200px;
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	background-color: rgba(14, 14, 14, 0.5);
+	border: 3px solid rgba(255, 193, 18, 0.5);
+}
+
+.header-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* fill the header while preserving aspect */
+	display: block;
+	object-position: center center; /* center the image */
 }
 
 h1 { color: var(--accent-color); }
 
 #business-card {
-	width: 300px;
+	width: 350px;
 	height: 200px;
 	background-color: var(--card-background-color);
 	border: 2px solid var(--accent-color);
