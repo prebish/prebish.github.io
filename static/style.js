@@ -2,9 +2,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = document.getElementById('business-card');
     if (!card) return;
 
-    // Log the mouse x-position (clientX) while hovering over the card
+    // Add 3D tilt effect based on mouse position
     card.addEventListener('mousemove', (e) => {
-        console.log(e.clientX);
+        // Get card dimensions and position
+        const rect = card.getBoundingClientRect();
+        const cardWidth = rect.width;
+        const cardHeight = rect.height;
+        
+        // Calculate mouse position relative to card center
+        // Range: -1 to 1 for both x and y
+        const x = (e.clientX - rect.left) / cardWidth;
+        const y = (e.clientY - rect.top) / cardHeight;
+        
+        // Center the coordinates (0.5, 0.5) becomes (0, 0)
+        const xFromCenter = x - 0.5;
+        const yFromCenter = y - 0.5;
+        
+        // Calculate rotation angles (max 15 degrees)
+        const maxTilt = 15;
+        const rotateY = xFromCenter * maxTilt; // Horizontal movement affects Y-axis rotation
+        const rotateX = -yFromCenter * maxTilt; // Vertical movement affects X-axis rotation (inverted)
+        
+        // Apply the transform
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+
+    // Reset the card when mouse leaves
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     });
 
     // Smooth scrolling for navigation links
