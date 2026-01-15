@@ -175,7 +175,7 @@ h1 { color: var(--accent-color); }
 	
 	backdrop-filter: blur(1px);
 	-webkit-backdrop-filter: blur(1px);
-	transition: backdrop-filter 200ms ease, background-color 200ms ease;
+	transition: backdrop-filter 200ms ease, background-color 200ms ease, transform 200ms ease;
 	border-radius: 12px;
 	padding: 20px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -187,7 +187,8 @@ h1 { color: var(--accent-color); }
 	color: var(--text-color);
 	margin-inline: auto;
 	margin-bottom: 100px;
-	/* transform-style: preserve-3d; */
+	transform-style: preserve-3d;
+	perspective: 1000px;
 }
 
 /* Business card content styling */
