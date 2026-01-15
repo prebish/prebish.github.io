@@ -44,9 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Update active link on scroll
-    const sections = document.querySelectorAll('section[id], div[id]');
+    // Only observe sections that have corresponding navigation links
+    const sections = document.querySelectorAll('#bio');
     const observerOptions = {
         root: null,
+        // Trigger when section crosses the middle of viewport (50% from top)
         rootMargin: '-50% 0px',
         threshold: 0
     };
