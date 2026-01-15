@@ -2,34 +2,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = document.getElementById('business-card');
     if (!card) return;
 
+    // Configuration for 3D tilt effect
+    const MAX_TILT = 15; // Maximum tilt angle in degrees
+    const PERSPECTIVE = 1000; // Perspective distance in pixels
+    const HOVER_SCALE = 1.02; // Scale factor on hover
+
+    let cardRect = card.getBoundingClientRect();
+
+    // Update card dimensions on window resize
+    window.addEventListener('resize', () => {
+        cardRect = card.getBoundingClientRect();
+    });
+
+    // Update card dimensions on mouse enter
+    card.addEventListener('mouseenter', () => {
+        cardRect = card.getBoundingClientRect();
+    });
+
     // Add 3D tilt effect based on mouse position
     card.addEventListener('mousemove', (e) => {
-        // Get card dimensions and position
-        const rect = card.getBoundingClientRect();
-        const cardWidth = rect.width;
-        const cardHeight = rect.height;
+        const cardWidth = cardRect.width;
+        const cardHeight = cardRect.height;
         
         // Calculate mouse position relative to card center
         // Range: -1 to 1 for both x and y
-        const x = (e.clientX - rect.left) / cardWidth;
-        const y = (e.clientY - rect.top) / cardHeight;
+        const x = (e.clientX - cardRect.left) / cardWidth;
+        const y = (e.clientY - cardRect.top) / cardHeight;
         
         // Center the coordinates (0.5, 0.5) becomes (0, 0)
         const xFromCenter = x - 0.5;
         const yFromCenter = y - 0.5;
         
-        // Calculate rotation angles (max 15 degrees)
-        const maxTilt = 15;
-        const rotateY = xFromCenter * maxTilt; // Horizontal movement affects Y-axis rotation
-        const rotateX = -yFromCenter * maxTilt; // Vertical movement affects X-axis rotation (inverted)
+        // Calculate rotation angles
+        const rotateY = xFromCenter * MAX_TILT; // Horizontal movement affects Y-axis rotation
+        const rotateX = -yFromCenter * MAX_TILT; // Vertical movement affects X-axis rotation (inverted)
         
         // Apply the transform
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.transform = `perspective(${PERSPECTIVE}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${HOVER_SCALE}, ${HOVER_SCALE}, ${HOVER_SCALE})`;
     });
 
     // Reset the card when mouse leaves
     card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        card.style.transform = `perspective(${PERSPECTIVE}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     });
 
     // Smooth scrolling for navigation links
