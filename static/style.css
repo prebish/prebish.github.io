@@ -25,6 +25,9 @@ html, body {
 	--h1-font-size: 50px;
 	--section-font-size: 41px;
 	--inner-h1-font-size: 55px;
+	/* Glass etched text effect */
+	--etched-text-primary: 0 1px 0 rgba(0, 0, 0, 0.8), 0 -1px 0 rgba(255, 255, 255, 0.15), 0 2px 3px rgba(0, 0, 0, 0.5);
+	--etched-text-secondary: 0 1px 0 rgba(0, 0, 0, 0.6), 0 -1px 0 rgba(255, 255, 255, 0.1);
 }
 
 a {
@@ -207,10 +210,7 @@ h1 { color: var(--accent-color); }
 	color: var(--accent-color);
 	margin-bottom: 6px;
 	/* Etched text effect - carved into glass */
-	text-shadow: 
-		0 1px 0 rgba(0, 0, 0, 0.8),
-		0 -1px 0 rgba(255, 255, 255, 0.15),
-		0 2px 3px rgba(0, 0, 0, 0.5);
+	text-shadow: var(--etched-text-primary);
 	letter-spacing: 0.03em;
 }
 .bc-title {
@@ -219,18 +219,14 @@ h1 { color: var(--accent-color); }
 	margin-bottom: 8px;
 	opacity: 0.95;
 	/* Subtle etched effect for secondary text */
-	text-shadow: 
-		0 1px 0 rgba(0, 0, 0, 0.6),
-		0 -1px 0 rgba(255, 255, 255, 0.1);
+	text-shadow: var(--etched-text-secondary);
 }
 .bc-location {
 	font-size: 11px;
 	color: #cfcfcf;
 	margin-top: 4px;
 	/* Subtle etched effect */
-	text-shadow: 
-		0 1px 0 rgba(0, 0, 0, 0.6),
-		0 -1px 0 rgba(255, 255, 255, 0.1);
+	text-shadow: var(--etched-text-secondary);
 }
 .bc-socials {
 	padding: 10px;
@@ -240,9 +236,7 @@ h1 { color: var(--accent-color); }
 	font-family: var(--font-family);
 	gap: 12px;
 	/* Etched icons */
-	text-shadow: 
-		0 1px 0 rgba(0, 0, 0, 0.6),
-		0 -1px 0 rgba(255, 255, 255, 0.1);
+	text-shadow: var(--etched-text-secondary);
 }
 
 /* Make card content centered for small screens */
