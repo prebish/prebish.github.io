@@ -170,15 +170,24 @@ h1 { color: var(--accent-color); }
 #business-card {
 	width: 450px;
 	height: 250px;
-	background-color: rgba(128, 128, 128, 0.03);
-	/* border: 2px solid var(--accent-color); */
+	/* Frosted glass background with subtle tint */
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+	/* Glass slab border with highlight effect */
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-top: 1px solid rgba(255, 255, 255, 0.3);
+	border-left: 1px solid rgba(255, 255, 255, 0.3);
 	
-	backdrop-filter: blur(1px);
-	-webkit-backdrop-filter: blur(1px);
-	transition: backdrop-filter 200ms ease, background-color 200ms ease, transform 200ms ease;
+	/* Strong blur for glass effect */
+	backdrop-filter: blur(10px) saturate(180%);
+	-webkit-backdrop-filter: blur(10px) saturate(180%);
+	transition: backdrop-filter 200ms ease, background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 	border-radius: 12px;
 	padding: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	/* Enhanced shadow for depth and glass slab appearance */
+	box-shadow: 
+		0 8px 32px 0 rgba(0, 0, 0, 0.37),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -197,17 +206,31 @@ h1 { color: var(--accent-color); }
 	font-weight: 700;
 	color: var(--accent-color);
 	margin-bottom: 6px;
+	/* Etched text effect - carved into glass */
+	text-shadow: 
+		0 1px 0 rgba(0, 0, 0, 0.8),
+		0 -1px 0 rgba(255, 255, 255, 0.15),
+		0 2px 3px rgba(0, 0, 0, 0.5);
+	letter-spacing: 0.03em;
 }
 .bc-title {
 	font-size: 12px;
 	color: var(--secondary-text-color);
 	margin-bottom: 8px;
 	opacity: 0.95;
+	/* Subtle etched effect for secondary text */
+	text-shadow: 
+		0 1px 0 rgba(0, 0, 0, 0.6),
+		0 -1px 0 rgba(255, 255, 255, 0.1);
 }
 .bc-location {
 	font-size: 11px;
 	color: #cfcfcf;
 	margin-top: 4px;
+	/* Subtle etched effect */
+	text-shadow: 
+		0 1px 0 rgba(0, 0, 0, 0.6),
+		0 -1px 0 rgba(255, 255, 255, 0.1);
 }
 .bc-socials {
 	padding: 10px;
@@ -216,6 +239,10 @@ h1 { color: var(--accent-color); }
 	flex-direction: row;
 	font-family: var(--font-family);
 	gap: 12px;
+	/* Etched icons */
+	text-shadow: 
+		0 1px 0 rgba(0, 0, 0, 0.6),
+		0 -1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* Make card content centered for small screens */
