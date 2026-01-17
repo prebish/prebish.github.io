@@ -214,7 +214,7 @@ h1 { color: var(--accent-color); }
 	letter-spacing: 0.03em;
 }
 .bc-title {
-	font-size: 12px;
+	font-size: 16px;
 	color: var(--secondary-text-color);
 	margin-bottom: 8px;
 	opacity: 0.95;
@@ -222,7 +222,7 @@ h1 { color: var(--accent-color); }
 	text-shadow: var(--etched-text-secondary);
 }
 .bc-location {
-	font-size: 11px;
+	font-size: 14px;
 	color: #cfcfcf;
 	margin-top: 4px;
 	/* Subtle etched effect */
@@ -234,6 +234,7 @@ h1 { color: var(--accent-color); }
 	display: flex;
 	flex-direction: row;
 	font-family: var(--font-family);
+	font-size: 20px;
 	gap: 12px;
 	/* Etched icons */
 	text-shadow: var(--etched-text-secondary);
@@ -248,7 +249,7 @@ h1 { color: var(--accent-color); }
 		padding: 18px;
 	}
 	.bc-name { font-size: 20px; }
-	.bc-title { font-size: 13px; }
+	.bc-title { font-size: 16px; }
 }
 
 #bio {
