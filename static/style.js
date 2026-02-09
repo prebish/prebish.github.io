@@ -139,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!projectTemplate || !projectsGrid) return;
 
     let reposData = [];
+    let selectedTags = new Set();
 
     function formatSize(kb) {
         if (kb >= 1024) return (kb / 1024).toFixed(1) + ' MB';
@@ -191,16 +192,55 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function getFilteredRepos() {
+        if (selectedTags.size === 0) return [...reposData];
+        return reposData.filter(repo =>
+            repo.topics && [...selectedTags].every(tag => repo.topics.includes(tag))
+        );
+    }
+
     function sortRepos(key) {
-        const sorted = [...reposData];
+        const filtered = getFilteredRepos();
         if (key === 'stars') {
-            sorted.sort((a, b) => b.stargazers_count - a.stargazers_count);
+            filtered.sort((a, b) => b.stargazers_count - a.stargazers_count);
         } else if (key === 'size') {
-            sorted.sort((a, b) => b.size - a.size);
+            filtered.sort((a, b) => b.size - a.size);
         } else {
-            sorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         }
-        renderRepos(sorted);
+        renderRepos(filtered);
+    }
+
+    function getCurrentSortKey() {
+        const activeBtn = document.querySelector('.sort-btn.active');
+        return activeBtn ? activeBtn.dataset.sort : 'date';
+    }
+
+    function renderTagFilters() {
+        const tagsList = document.querySelector('.tags-list');
+        if (!tagsList) return;
+        const allTopics = new Set();
+        reposData.forEach(repo => {
+            if (repo.topics) repo.topics.forEach(t => allTopics.add(t));
+        });
+        tagsList.innerHTML = '';
+        [...allTopics].sort().forEach(topic => {
+            const btn = document.createElement('button');
+            btn.className = 'tag-btn';
+            btn.textContent = topic;
+            if (selectedTags.has(topic)) btn.classList.add('active');
+            btn.addEventListener('click', () => {
+                if (selectedTags.has(topic)) {
+                    selectedTags.delete(topic);
+                    btn.classList.remove('active');
+                } else {
+                    selectedTags.add(topic);
+                    btn.classList.add('active');
+                }
+                sortRepos(getCurrentSortKey());
+            });
+            tagsList.appendChild(btn);
+        });
     }
 
     // Sort button listeners
@@ -216,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(repos => {
             reposData = repos;
+            renderTagFilters();
             sortRepos('date');
         })
         .catch(error => console.error('Error fetching repositories:', error));
