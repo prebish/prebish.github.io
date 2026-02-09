@@ -316,15 +316,10 @@ h1 { color: var(--accent-color); }
 	box-shadow:
 		0 8px 32px rgba(0, 0, 0, 0.3),
 		inset 0 1px 0 rgba(255, 255, 255, 0.06);
-	transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+	transition: border-color 0.3s ease;
 }
 
 .project-card:hover {
-	transform: translateY(-4px);
-	box-shadow:
-		0 12px 40px rgba(0, 0, 0, 0.4),
-		0 0 20px rgba(255, 193, 18, 0.08),
-		inset 0 1px 0 rgba(255, 255, 255, 0.08);
 	border-color: rgba(255, 193, 18, 0.25);
 }
 
@@ -394,6 +389,13 @@ h1 { color: var(--accent-color); }
 	gap: 5px;
 }
 
+.project-size,
+.project-date {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
 .lang-dot {
 	width: 10px;
 	height: 10px;
@@ -427,6 +429,46 @@ h1 { color: var(--accent-color); }
 
 .project-link:hover i {
 	transform: translateX(2px);
+}
+
+/* Project sort controls */
+.projects-sort {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+
+.projects-sort label {
+	font-size: 0.85rem;
+	color: var(--text-color);
+	font-weight: 600;
+	opacity: 0.8;
+}
+
+.sort-btn {
+	font-family: var(--font-family);
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: var(--text-color);
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	padding: 6px 14px;
+	cursor: pointer;
+	transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.sort-btn:hover {
+	border-color: rgba(255, 193, 18, 0.3);
+	color: var(--secondary-text-color);
+}
+
+.sort-btn.active {
+	color: var(--accent-color);
+	border-color: rgba(255, 193, 18, 0.4);
+	background: rgba(255, 193, 18, 0.1);
 }
 
 /* Responsive projects grid */

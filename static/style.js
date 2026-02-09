@@ -138,44 +138,85 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectsGrid = document.querySelector('.projects-grid');
     if (!projectTemplate || !projectsGrid) return;
 
+    let reposData = [];
+
+    function formatSize(kb) {
+        if (kb >= 1024) return (kb / 1024).toFixed(1) + ' MB';
+        return kb + ' KB';
+    }
+
+    function formatDate(dateStr) {
+        if (!dateStr) return 'N/A';
+        return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function renderRepos(repos) {
+        projectsGrid.innerHTML = '';
+        repos.forEach(repo => {
+            const projectCard = projectTemplate.content.cloneNode(true);
+            projectCard.querySelector('.project-name').textContent = repo.name;
+            projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
+            projectCard.querySelector('.project-link').href = repo.html_url;
+
+            // Language
+            const langName = projectCard.querySelector('.lang-name');
+            const langDot = projectCard.querySelector('.lang-dot');
+            if (repo.language) {
+                langName.textContent = repo.language;
+                langDot.style.background = langColors[repo.language] || '#ccc';
+            } else {
+                projectCard.querySelector('.project-language').style.display = 'none';
+            }
+
+            // Stars & forks
+            projectCard.querySelector('.stars-count').textContent = repo.stargazers_count;
+            projectCard.querySelector('.forks-count').textContent = repo.forks_count;
+
+            // Size & date
+            projectCard.querySelector('.size-value').textContent = formatSize(repo.size);
+            projectCard.querySelector('.date-value').textContent = formatDate(repo.created_at);
+
+            // Topics
+            const topicsContainer = projectCard.querySelector('.project-topics');
+            if (repo.topics && repo.topics.length) {
+                repo.topics.forEach(topic => {
+                    const tag = document.createElement('span');
+                    tag.className = 'project-topic';
+                    tag.textContent = topic;
+                    topicsContainer.appendChild(tag);
+                });
+            }
+
+            projectsGrid.appendChild(projectCard);
+        });
+    }
+
+    function sortRepos(key) {
+        const sorted = [...reposData];
+        if (key === 'stars') {
+            sorted.sort((a, b) => b.stargazers_count - a.stargazers_count);
+        } else if (key === 'size') {
+            sorted.sort((a, b) => b.size - a.size);
+        } else {
+            sorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        }
+        renderRepos(sorted);
+    }
+
+    // Sort button listeners
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            sortRepos(btn.dataset.sort);
+        });
+    });
+
     fetch('https://api.github.com/users/prebish/repos')
         .then(response => response.json())
         .then(repos => {
-            repos
-                .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-                .forEach(repo => {
-                    const projectCard = projectTemplate.content.cloneNode(true);
-                    projectCard.querySelector('.project-name').textContent = repo.name;
-                    projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
-                    projectCard.querySelector('.project-link').href = repo.html_url;
-
-                    // Language
-                    const langName = projectCard.querySelector('.lang-name');
-                    const langDot = projectCard.querySelector('.lang-dot');
-                    if (repo.language) {
-                        langName.textContent = repo.language;
-                        langDot.style.background = langColors[repo.language] || '#ccc';
-                    } else {
-                        projectCard.querySelector('.project-language').style.display = 'none';
-                    }
-
-                    // Stars & forks
-                    projectCard.querySelector('.stars-count').textContent = repo.stargazers_count;
-                    projectCard.querySelector('.forks-count').textContent = repo.forks_count;
-
-                    // Topics
-                    const topicsContainer = projectCard.querySelector('.project-topics');
-                    if (repo.topics && repo.topics.length) {
-                        repo.topics.forEach(topic => {
-                            const tag = document.createElement('span');
-                            tag.className = 'project-topic';
-                            tag.textContent = topic;
-                            topicsContainer.appendChild(tag);
-                        });
-                    }
-
-                    projectsGrid.appendChild(projectCard);
-                });
+            reposData = repos;
+            sortRepos('date');
         })
         .catch(error => console.error('Error fetching repositories:', error));
 
