@@ -43,11 +43,21 @@
         <!-- Template for project cards -->
         <template id="project-template">
             <div class="project-card">
-                <h3 class="project-name"></h3>
+                <div class="project-header">
+                    <i class="fas fa-code-branch project-icon"></i>
+                    <h3 class="project-name"></h3>
+                </div>
                 <p class="project-description"></p>
-                <a class="project-link" href="#" target="_blank">View Repository</a>
+                <div class="project-topics"></div>
+                <div class="project-meta">
+                    <span class="project-language"><span class="lang-dot"></span><span class="lang-name"></span></span>
+                    <span class="project-stars"><i class="fas fa-star"></i> <span class="stars-count"></span></span>
+                    <span class="project-forks"><i class="fas fa-code-branch"></i> <span class="forks-count"></span></span>
+                </div>
+                <a class="project-link" href="#" target="_blank">View Repository <i class="fas fa-arrow-right"></i></a>
             </div>
         </template>
+        <div class="projects-grid"></div>
     </section>
     <section id="career" class="bio-section">
     </section>

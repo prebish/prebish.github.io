@@ -124,20 +124,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Language color map for dot indicators
+    const langColors = {
+        JavaScript: '#f1e05a', Python: '#3572A5', TypeScript: '#3178c6',
+        HTML: '#e34c26', CSS: '#563d7c', Java: '#b07219', 'C++': '#f34b7d',
+        C: '#555555', 'C#': '#178600', Go: '#00ADD8', Ruby: '#701516',
+        Rust: '#dea584', Shell: '#89e051', PHP: '#4F5D95', Swift: '#F05138',
+        Kotlin: '#A97BFF', Dart: '#00B4AB', Vue: '#41b883', SCSS: '#c6538c'
+    };
+
     // Fetch and populate projects dynamically
     const projectTemplate = document.getElementById('project-template');
-    const projectsSection = document.getElementById('projects');
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectTemplate || !projectsGrid) return;
 
     fetch('https://api.github.com/users/prebish/repos')
         .then(response => response.json())
         .then(repos => {
-            repos.forEach(repo => {
-                const projectCard = projectTemplate.content.cloneNode(true);
-                projectCard.querySelector('.project-name').textContent = repo.name;
-                projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
-                projectCard.querySelector('.project-link').href = repo.html_url;
-                projectsSection.appendChild(projectCard);
-            });
+            repos
+                .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+                .forEach(repo => {
+                    const projectCard = projectTemplate.content.cloneNode(true);
+                    projectCard.querySelector('.project-name').textContent = repo.name;
+                    projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
+                    projectCard.querySelector('.project-link').href = repo.html_url;
+
+                    // Language
+                    const langName = projectCard.querySelector('.lang-name');
+                    const langDot = projectCard.querySelector('.lang-dot');
+                    if (repo.language) {
+                        langName.textContent = repo.language;
+                        langDot.style.background = langColors[repo.language] || '#ccc';
+                    } else {
+                        projectCard.querySelector('.project-language').style.display = 'none';
+                    }
+
+                    // Stars & forks
+                    projectCard.querySelector('.stars-count').textContent = repo.stargazers_count;
+                    projectCard.querySelector('.forks-count').textContent = repo.forks_count;
+
+                    // Topics
+                    const topicsContainer = projectCard.querySelector('.project-topics');
+                    if (repo.topics && repo.topics.length) {
+                        repo.topics.forEach(topic => {
+                            const tag = document.createElement('span');
+                            tag.className = 'project-topic';
+                            tag.textContent = topic;
+                            topicsContainer.appendChild(tag);
+                        });
+                    }
+
+                    projectsGrid.appendChild(projectCard);
+                });
         })
         .catch(error => console.error('Error fetching repositories:', error));
 
