@@ -120,24 +120,144 @@ document.addEventListener('DOMContentLoaded', () => {
             const bioSection = document.getElementById('bio');
             const projectsSection = document.getElementById('projects');
             if (bioSection) bioSection.style.display = 'none';
-            if (projectsSection) projectsSection.style.display = '';
+            if (projectsSection) projectsSection.style.display = 'block';
         });
     }
 
+    // Language color map for dot indicators
+    const langColors = {
+        JavaScript: '#f1e05a', Python: '#3572A5', TypeScript: '#3178c6',
+        HTML: '#e34c26', CSS: '#563d7c', Java: '#b07219', 'C++': '#f34b7d',
+        C: '#555555', 'C#': '#178600', Go: '#00ADD8', Ruby: '#701516',
+        Rust: '#dea584', Shell: '#89e051', PHP: '#4F5D95', Swift: '#F05138',
+        Kotlin: '#A97BFF', Dart: '#00B4AB', Vue: '#41b883', SCSS: '#c6538c'
+    };
+
     // Fetch and populate projects dynamically
     const projectTemplate = document.getElementById('project-template');
-    const projectsSection = document.getElementById('projects');
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectTemplate || !projectsGrid) return;
+
+    let reposData = [];
+    let selectedTags = new Set();
+
+    function formatSize(kb) {
+        if (kb >= 1024) return (kb / 1024).toFixed(1) + ' MB';
+        return kb + ' KB';
+    }
+
+    function formatDate(dateStr) {
+        if (!dateStr) return 'N/A';
+        return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function renderRepos(repos) {
+        projectsGrid.innerHTML = '';
+        repos.forEach(repo => {
+            const projectCard = projectTemplate.content.cloneNode(true);
+            projectCard.querySelector('.project-name').textContent = repo.name;
+            projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
+            projectCard.querySelector('.project-link').href = repo.html_url;
+
+            // Language
+            const langName = projectCard.querySelector('.lang-name');
+            const langDot = projectCard.querySelector('.lang-dot');
+            if (repo.language) {
+                langName.textContent = repo.language;
+                langDot.style.background = langColors[repo.language] || '#ccc';
+            } else {
+                projectCard.querySelector('.project-language').style.display = 'none';
+            }
+
+            // Stars & forks
+            projectCard.querySelector('.stars-count').textContent = repo.stargazers_count;
+            projectCard.querySelector('.forks-count').textContent = repo.forks_count;
+
+            // Size & date
+            projectCard.querySelector('.size-value').textContent = formatSize(repo.size);
+            projectCard.querySelector('.date-value').textContent = formatDate(repo.created_at);
+
+            // Topics
+            const topicsContainer = projectCard.querySelector('.project-topics');
+            if (repo.topics && repo.topics.length) {
+                repo.topics.forEach(topic => {
+                    const tag = document.createElement('span');
+                    tag.className = 'project-topic';
+                    tag.textContent = topic;
+                    topicsContainer.appendChild(tag);
+                });
+            }
+
+            projectsGrid.appendChild(projectCard);
+        });
+    }
+
+    function getFilteredRepos() {
+        if (selectedTags.size === 0) return [...reposData];
+        return reposData.filter(repo =>
+            repo.topics && [...selectedTags].every(tag => repo.topics.includes(tag))
+        );
+    }
+
+    function sortRepos(key) {
+        const filtered = getFilteredRepos();
+        if (key === 'stars') {
+            filtered.sort((a, b) => b.stargazers_count - a.stargazers_count);
+        } else if (key === 'size') {
+            filtered.sort((a, b) => b.size - a.size);
+        } else {
+            filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        }
+        renderRepos(filtered);
+    }
+
+    function getCurrentSortKey() {
+        const activeBtn = document.querySelector('.sort-btn.active');
+        return activeBtn ? activeBtn.dataset.sort : 'date';
+    }
+
+    function renderTagFilters() {
+        const tagsList = document.querySelector('.tags-list');
+        if (!tagsList) return;
+        const allTopics = new Set();
+        reposData.forEach(repo => {
+            if (repo.topics) repo.topics.forEach(t => allTopics.add(t));
+        });
+        tagsList.innerHTML = '';
+        [...allTopics].sort().forEach(topic => {
+            const btn = document.createElement('button');
+            btn.className = 'tag-btn';
+            btn.textContent = topic;
+            if (selectedTags.has(topic)) btn.classList.add('active');
+            btn.addEventListener('click', () => {
+                if (selectedTags.has(topic)) {
+                    selectedTags.delete(topic);
+                    btn.classList.remove('active');
+                } else {
+                    selectedTags.add(topic);
+                    btn.classList.add('active');
+                }
+                sortRepos(getCurrentSortKey());
+            });
+            tagsList.appendChild(btn);
+        });
+    }
+
+    // Sort button listeners
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            sortRepos(btn.dataset.sort);
+        });
+    });
 
     fetch('https://api.github.com/users/prebish/repos')
         .then(response => response.json())
         .then(repos => {
-            repos.forEach(repo => {
-                const projectCard = projectTemplate.content.cloneNode(true);
-                projectCard.querySelector('.project-name').textContent = repo.name;
-                projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
-                projectCard.querySelector('.project-link').href = repo.html_url;
-                projectsSection.appendChild(projectCard);
-            });
+            reposData = repos;
+            renderTagFilters();
+            sortRepos('date');
         })
         .catch(error => console.error('Error fetching repositories:', error));
 

@@ -37,17 +37,38 @@
 
     <section id="bio" class="bio-section">
         <h4>Summary</h4>
-        <p></p>
     </section>
     <section id="projects" class="bio-section">
         <!-- Template for project cards -->
         <template id="project-template">
             <div class="project-card">
-                <h3 class="project-name"></h3>
+                <div class="project-header">
+                    <i class="fas fa-code-branch project-icon"></i>
+                    <h3 class="project-name"></h3>
+                </div>
                 <p class="project-description"></p>
-                <a class="project-link" href="#" target="_blank">View Repository</a>
+                <div class="project-topics"></div>
+                <div class="project-meta">
+                    <span class="project-language"><span class="lang-dot"></span><span class="lang-name"></span></span>
+                    <span class="project-stars"><i class="fas fa-star"></i> <span class="stars-count"></span></span>
+                    <span class="project-forks"><i class="fas fa-code-branch"></i> <span class="forks-count"></span></span>
+                    <span class="project-size"><i class="fas fa-database"></i> <span class="size-value"></span></span>
+                    <span class="project-date"><i class="fas fa-calendar"></i> <span class="date-value"></span></span>
+                </div>
+                <a class="project-link" href="#" target="_blank">View Repository <i class="fas fa-arrow-right"></i></a>
             </div>
         </template>
+        <div class="projects-sort">
+            <label>Sort by:</label>
+            <button class="sort-btn active" data-sort="date">Date Created</button>
+            <button class="sort-btn" data-sort="stars">Stars</button>
+            <button class="sort-btn" data-sort="size">Size</button>
+        </div>
+        <div class="projects-tags">
+            <label>Filter by tag:</label>
+            <div class="tags-list"></div>
+        </div>
+        <div class="projects-grid"></div>
     </section>
     <section id="career" class="bio-section">
     </section>
