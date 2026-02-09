@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const bioSection = document.getElementById('bio');
             const projectsSection = document.getElementById('projects');
             if (bioSection) bioSection.style.display = 'none';
-            if (projectsSection) projectsSection.style.display = '';
+            if (projectsSection) projectsSection.style.display = 'block';
         });
     }
 
