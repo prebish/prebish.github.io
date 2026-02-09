@@ -183,7 +183,7 @@ h1 { color: var(--accent-color); }
 	/* Strong blur for glass effect */
 	backdrop-filter: blur(10px) saturate(180%);
 	-webkit-backdrop-filter: blur(10px) saturate(180%);
-	transition: backdrop-filter 200ms ease, background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+	transition: backdrop-filter 200ms ease, background-color 200ms ease, transform 2ms ease, box-shadow 200ms ease;
 	border-radius: 12px;
 	padding: 20px;
 	/* Enhanced shadow for depth and glass slab appearance */

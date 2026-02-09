@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!card) return;
 
     // Configuration for 3D tilt effect
-    const MAX_TILT = 15; // Maximum tilt angle in degrees
+    const MAX_TILT = 10; // Maximum tilt angle in degrees
     const PERSPECTIVE = 1000; // Perspective distance in pixels
     const HOVER_SCALE = 1.02; // Scale factor on hover
 
@@ -51,19 +51,26 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
-            
+
             // Only handle hash links
             if (href && href.startsWith('#') && href !== '#') {
                 e.preventDefault();
                 const targetId = href.substring(1);
                 const targetElement = document.getElementById(targetId);
-                
+
                 if (targetElement) {
+                    // Hide all sections
+                    sections.forEach(section => section.style.display = 'none');
+
+                    // Show the clicked section
+                    targetElement.style.display = '';
+
+                    // Scroll into view
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    
+
                     // Update active state
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
@@ -74,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     top: 0,
                     behavior: 'smooth'
                 });
-                
+
                 // Update active state
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
@@ -105,6 +112,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, observerOptions);
+
+    // Event listener for the projects button
+    const projectsBtn = document.querySelector('.nav-link[href="#projects"]');
+    if (projectsBtn) {
+        projectsBtn.addEventListener('click', () => {
+            const bioSection = document.getElementById('bio');
+            const projectsSection = document.getElementById('projects');
+            if (bioSection) bioSection.style.display = 'none';
+            if (projectsSection) projectsSection.style.display = '';
+        });
+    }
+
+    // Fetch and populate projects dynamically
+    const projectTemplate = document.getElementById('project-template');
+    const projectsSection = document.getElementById('projects');
+
+    fetch('https://api.github.com/users/prebish/repos')
+        .then(response => response.json())
+        .then(repos => {
+            repos.forEach(repo => {
+                const projectCard = projectTemplate.content.cloneNode(true);
+                projectCard.querySelector('.project-name').textContent = repo.name;
+                projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
+                projectCard.querySelector('.project-link').href = repo.html_url;
+                projectsSection.appendChild(projectCard);
+            });
+        })
+        .catch(error => console.error('Error fetching repositories:', error));
 
     sections.forEach(section => observer.observe(section));
 });
