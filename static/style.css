@@ -471,6 +471,52 @@ h1 { color: var(--accent-color); }
 	background: rgba(255, 193, 18, 0.1);
 }
 
+/* Tag filter controls */
+.projects-tags {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+
+.projects-tags label {
+	font-size: 0.85rem;
+	color: var(--text-color);
+	font-weight: 600;
+	opacity: 0.8;
+}
+
+.tags-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.tag-btn {
+	font-family: var(--font-family);
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--text-color);
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+	padding: 4px 12px;
+	cursor: pointer;
+	transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+
+.tag-btn:hover {
+	border-color: rgba(255, 193, 18, 0.3);
+	color: var(--secondary-text-color);
+}
+
+.tag-btn.active {
+	color: var(--accent-color);
+	border-color: rgba(255, 193, 18, 0.4);
+	background: rgba(255, 193, 18, 0.1);
+}
+
 /* Responsive projects grid */
 @media (max-width: 768px) {
 	.projects-grid {
