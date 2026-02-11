@@ -1,19 +1,5 @@
 [
     {
-        "date": "2024-01-15",
-        "title": "Senior Software Engineer",
-        "organization": "PNC Bank",
-        "description": "Promoted to Senior Software Engineer, leading development of internal tooling and cloud infrastructure projects.",
-        "icon": "fas fa-briefcase"
-    },
-    {
-        "date": "2023-06-01",
-        "title": "Cloud Migration Project",
-        "organization": "PNC Bank",
-        "description": "Led the migration of legacy services to AWS, reducing infrastructure costs and improving deployment speed.",
-        "icon": "fas fa-cloud"
-    },
-    {
         "date": "2022-08-20",
         "title": "Software Engineer",
         "organization": "PNC Bank",
@@ -21,10 +7,17 @@
         "icon": "fas fa-code"
     },
     {
-        "date": "2022-05-15",
+        "date": "2024-12-22",
         "title": "Bachelor of Science in Computer Science",
         "organization": "University of Pittsburgh",
         "description": "Graduated with a degree in Computer Science, focusing on software engineering and distributed systems.",
+        "icon": "fas fa-graduation-cap"
+    },
+    {
+        "date": "2020-06-01",
+        "title": "High School Diploma",
+        "organization": "Apollo-Ridge High School",
+        "description": "Graduated from high school with a focus on science and mathematics.",
         "icon": "fas fa-graduation-cap"
     }
 ]
