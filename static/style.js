@@ -124,6 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Event listener for the career button
+    const careerBtn = document.querySelector('.nav-link[href="#career"]');
+    if (careerBtn) {
+        careerBtn.addEventListener('click', () => {
+            const careerSection = document.getElementById('career');
+            if (careerSection) careerSection.style.display = 'block';
+        });
+    }
+
     // Language color map for dot indicators
     const langColors = {
         JavaScript: '#f1e05a', Python: '#3572A5', TypeScript: '#3178c6',
@@ -260,6 +269,32 @@ document.addEventListener('DOMContentLoaded', () => {
             sortRepos('date');
         })
         .catch(error => console.error('Error fetching repositories:', error));
+
+    // ── Career Timeline ──
+    const milestoneTemplate = document.getElementById('milestone-template');
+    const timelineContainer = document.querySelector('.timeline');
+
+    function renderMilestones(milestones) {
+        if (!milestoneTemplate || !timelineContainer) return;
+        timelineContainer.innerHTML = '';
+        milestones
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .forEach(m => {
+                const item = milestoneTemplate.content.cloneNode(true);
+                item.querySelector('.timeline-date').textContent = formatDate(m.date);
+                item.querySelector('.timeline-title').textContent = m.title;
+                item.querySelector('.timeline-org').textContent = m.organization;
+                item.querySelector('.timeline-description').textContent = m.description;
+                const icon = item.querySelector('.timeline-icon i');
+                if (m.icon) icon.className = m.icon;
+                timelineContainer.appendChild(item);
+            });
+    }
+
+    fetch('static/career.json')
+        .then(response => response.json())
+        .then(milestones => renderMilestones(milestones))
+        .catch(error => console.error('Error loading career data:', error));
 
     sections.forEach(section => observer.observe(section));
 });
