@@ -237,6 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderTagFilters() {
         const tagsList = document.querySelector('.tags-list');
+        const tagsContainer = document.querySelector('.projects-tags');
+        const controlsSep = document.querySelector('.controls-sep');
         if (!tagsList) return;
         const allTopics = new Set();
         reposData.forEach(repo => {
@@ -260,6 +262,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             tagsList.appendChild(btn);
         });
+        if (tagsContainer) tagsContainer.style.display = allTopics.size > 0 ? 'flex' : 'none';
+        if (controlsSep) controlsSep.style.display = allTopics.size > 0 ? 'block' : 'none';
     }
 
     // Sort button listeners
