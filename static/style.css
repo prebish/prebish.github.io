@@ -412,31 +412,32 @@ h1 { color: var(--accent-color); }
 	background: var(--accent-color);
 }
 
+.project-link,
+.project-lock {
+	font-size: 0.9rem;
+	margin-left: auto;
+}
+
 .project-link {
 	display: inline-flex;
 	align-items: center;
-	gap: 6px;
-	font-size: 0.85rem;
-	font-weight: 600;
 	color: var(--accent-color);
 	text-decoration: none;
-	padding: 8px 0 0;
-	transition: gap 0.2s ease;
+	opacity: 0.7;
+	transition: opacity 0.2s ease, text-shadow 0.2s ease;
 	text-shadow: none;
 }
 
 .project-link:hover {
-	gap: 10px;
+	opacity: 1;
 	text-shadow: 0 0 8px var(--accent-color);
 }
 
-.project-link i {
-	font-size: 0.75rem;
-	transition: transform 0.2s ease;
-}
-
-.project-link:hover i {
-	transform: translateX(2px);
+.project-lock {
+	display: none;
+	align-items: center;
+	color: var(--text-color);
+	opacity: 0.4;
 }
 
 /* Project sort controls */
