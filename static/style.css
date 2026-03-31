@@ -653,14 +653,20 @@ h1 { color: var(--accent-color); }
 .timeline-content::after {
 	content: '';
 	position: absolute;
-	top: 0;
-	left: 0;
-	width: 3px;
-	height: 100%;
-	background: var(--accent-color);
-	opacity: 0.4;
-	border-radius: 12px 0 0 12px;
-	transition: opacity 0.3s ease;
+	top: -50%;
+	left: -75%;
+	width: 50%;
+	height: 200%;
+	background: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.08) 50%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	transform: skewX(-15deg);
+	pointer-events: none;
+	transition: left 0.6s ease, opacity 0.3s ease;
+	opacity: 0;
 }
 
 .timeline-content:hover {
@@ -672,6 +678,7 @@ h1 { color: var(--accent-color); }
 }
 
 .timeline-content:hover::after {
+	left: 125%;
 	opacity: 1;
 }
 
