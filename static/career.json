@@ -4,27 +4,31 @@
         "title": "Software Engineer",
         "organization": "PNC Bank",
         "description": "Joined PNC Bank as an L2 SWE.",
-        "icon": "fas fa-code"
+        "icon": "fas fa-code",
+        "size": 3
     },
     {
         "date": "2024-12-22",
         "title": "Bachelor of Science in Computer Science",
         "organization": "University of Pittsburgh",
         "description": "Graduated with a focus on software, algorithms and data structures.",
-        "icon": "fas fa-graduation-cap"
+        "icon": "fas fa-graduation-cap",
+        "size": 3
     },
     {
         "date": "2023-12-01",
         "title": "Freelance Software Developer",
         "organization": "Self",
         "description": "Kickstarted my career by taking on freelance projects.",
-        "icon": "fas fa-code"
+        "icon": "fas fa-code",
+        "size": 2
     },
     {
         "date": "2020-06-01",
         "title": "High School Diploma",
         "organization": "Apollo-Ridge High School",
         "description": "Graduated with a focus on science and mathematics.",
-        "icon": "fas fa-graduation-cap"
+        "icon": "fas fa-graduation-cap",
+        "size": 1
     }
 ]
