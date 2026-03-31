@@ -208,7 +208,7 @@ h1 { color: var(--accent-color); }
 		inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: flex-start;
 	font-family: var(--font-family);
 	color: var(--text-color);
@@ -268,15 +268,30 @@ h1 { color: var(--accent-color); }
 	text-shadow: var(--etched-text-secondary);
 }
 .bc-socials {
-	padding: 10px;
-	margin-top: 100px;
+	padding: 10px 0 0 0;
+	margin-top: auto;
 	display: flex;
 	flex-direction: row;
 	font-family: var(--font-family);
-	font-size: 20px;
-	gap: 12px;
-	/* Etched icons */
+	gap: 10px;
+}
+.bc-socials a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	font-size: 22px;
+	color: var(--accent-color);
+	text-decoration: none;
+	border-radius: 8px;
+	transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 	text-shadow: var(--etched-text-secondary);
+}
+.bc-socials a:hover {
+	color: #fff;
+	background-color: rgba(255, 193, 18, 0.18);
+	box-shadow: 0 0 8px rgba(255, 193, 18, 0.4);
 }
 
 /* Style for the logo in the business card */
