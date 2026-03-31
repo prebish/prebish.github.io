@@ -3,21 +3,28 @@
         "date": "2025-03-06",
         "title": "Software Engineer",
         "organization": "PNC Bank",
-        "description": "Joined PNC Bank as a Software Engineer, working on full-stack development with modern web technologies.",
+        "description": "Joined PNC Bank as an L2 SWE.",
         "icon": "fas fa-code"
     },
     {
         "date": "2024-12-22",
         "title": "Bachelor of Science in Computer Science",
         "organization": "University of Pittsburgh",
-        "description": "Graduated with a degree in Computer Science, focusing on software engineering and distributed systems.",
+        "description": "Graduated with a focus on software, algorithms and data structures.",
         "icon": "fas fa-graduation-cap"
+    },
+    {
+        "date": "2023-12-01",
+        "title": "Freelance Software Developer",
+        "organization": "Self",
+        "description": "Kickstarted my career by taking on freelance projects.",
+        "icon": "fas fa-code"
     },
     {
         "date": "2020-06-01",
         "title": "High School Diploma",
         "organization": "Apollo-Ridge High School",
-        "description": "Graduated from high school with a focus on science and mathematics.",
+        "description": "Graduated with a focus on science and mathematics.",
         "icon": "fas fa-graduation-cap"
     }
 ]
