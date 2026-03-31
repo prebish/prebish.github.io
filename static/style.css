@@ -565,8 +565,8 @@ h1 { color: var(--accent-color); }
 	}
 }
 
-/* ── Career Timeline Section ── */
-#career {
+/* ── Timeline Section ── */
+#timeline {
 	display: none;
 	max-width: 900px;
 	margin: 20px auto 0 auto;
@@ -636,16 +636,43 @@ h1 { color: var(--accent-color); }
 .timeline-content {
 	background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
 	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid rgba(255, 255, 255, 0.18);
+	border-left: 1px solid rgba(255, 255, 255, 0.18);
+	backdrop-filter: blur(10px) saturate(180%);
+	-webkit-backdrop-filter: blur(10px) saturate(180%);
 	border-radius: 12px;
 	padding: 20px;
 	box-shadow:
 		0 8px 32px rgba(0, 0, 0, 0.3),
 		inset 0 1px 0 rgba(255, 255, 255, 0.06);
-	transition: border-color 0.3s ease;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.timeline-content::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 3px;
+	height: 100%;
+	background: var(--accent-color);
+	opacity: 0.4;
+	border-radius: 12px 0 0 12px;
+	transition: opacity 0.3s ease;
 }
 
 .timeline-content:hover {
-	border-color: rgba(255, 193, 18, 0.25);
+	border-color: rgba(255, 193, 18, 0.35);
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.4),
+		0 0 0 1px rgba(255, 193, 18, 0.1),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.timeline-content:hover::after {
+	opacity: 1;
 }
 
 .timeline-date {
