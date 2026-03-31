@@ -759,6 +759,54 @@ h1 { color: var(--accent-color); }
 	opacity: 0.85;
 }
 
+/* ── Timeline card sizes ── */
+
+/* Size 1 — compact: date + title only */
+.timeline-content[data-size="1"] {
+	padding: 12px 16px;
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.timeline-content[data-size="1"] .timeline-title {
+	font-size: 0.95rem;
+	margin: 4px 0 0;
+}
+
+.timeline-content[data-size="1"] .timeline-org,
+.timeline-content[data-size="1"] .timeline-description {
+	display: none;
+}
+
+/* Size 2 — standard: date + title + org */
+.timeline-content[data-size="2"] .timeline-description {
+	display: none;
+}
+
+/* Size 3 — full: all fields, stronger visual weight */
+.timeline-content[data-size="3"] {
+	padding: 24px 28px;
+	border-top: 1px solid rgba(255, 193, 18, 0.22);
+	box-shadow:
+		0 12px 40px rgba(0, 0, 0, 0.35),
+		0 0 0 1px rgba(255, 193, 18, 0.06),
+		inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.timeline-content[data-size="3"] .timeline-title {
+	font-size: 1.2rem;
+}
+
+.timeline-content[data-size="3"] .timeline-org {
+	font-size: 0.9rem;
+	opacity: 0.85;
+}
+
+.timeline-content[data-size="3"] .timeline-description {
+	font-size: 0.9rem;
+	opacity: 0.9;
+}
+
 /* ── Responsive timeline ── */
 @media (max-width: 768px) {
 	.timeline::before {

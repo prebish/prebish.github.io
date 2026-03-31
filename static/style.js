@@ -301,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.querySelector('.timeline-description').textContent = m.description;
                 const icon = item.querySelector('.timeline-icon i');
                 if (m.icon) icon.className = m.icon;
+                if (m.size && [1, 2, 3].includes(m.size)) item.querySelector('.timeline-content').dataset.size = m.size;
                 timelineContainer.appendChild(item);
             });
     }
