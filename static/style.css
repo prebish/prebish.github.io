@@ -268,23 +268,65 @@ h1 { color: var(--accent-color); }
 }
 
 #bio {
-	
-	max-width: fit-content;
-	margin-inline: auto;
-	flex-wrap: wrap;
-	overflow: visible;
-	padding: 20px;
+	max-width: 620px;
+	margin: 20px auto 0 auto;
+	padding: 24px 28px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	gap: 20px;
 	font-family: var(--font-family);
 	color: var(--text-color);
-	margin: 20px auto 0 auto;
-	text-align: center;
-	line-height: 2;
-	font-size: 32px;
-	transition: box-shadow 0.3s cubic-bezier(.4,2,.6,1);
+	/* Glass card */
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid rgba(255, 255, 255, 0.18);
+	border-left: 1px solid rgba(255, 255, 255, 0.18);
+	backdrop-filter: blur(10px) saturate(180%);
+	-webkit-backdrop-filter: blur(10px) saturate(180%);
+	border-radius: 12px;
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.3),
+		inset 0 1px 0 rgba(255, 255, 255, 0.06);
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#bio h4 {
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--accent-color);
+	margin: 0 0 10px 0;
+	text-shadow: var(--etched-text-primary);
+}
+
+#bio p {
+	font-size: 1rem;
+	line-height: 1.75;
+	margin: 0;
+	color: var(--text-color);
+}
+
+.bio-block:not(:last-child) {
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bio-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.bio-tag {
+	font-size: 0.75rem;
+	color: var(--accent-color);
+	background: rgba(255, 193, 18, 0.08);
+	border: 1px solid rgba(255, 193, 18, 0.22);
+	border-radius: 20px;
+	padding: 3px 12px;
+	font-weight: 600;
+	letter-spacing: 0.03em;
 }
 
 /* ── Projects Section ── */
