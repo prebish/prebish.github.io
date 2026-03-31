@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update active link on scroll
     // Only observe sections that have corresponding navigation links
-    const sections = document.querySelectorAll('#bio, #projects, #career, #cv');
+    const sections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
     const observerOptions = {
         root: null,
         // Trigger when section crosses the middle of viewport (50% from top)
@@ -124,12 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event listener for the career button
-    const careerBtn = document.querySelector('.nav-link[href="#career"]');
-    if (careerBtn) {
-        careerBtn.addEventListener('click', () => {
-            const careerSection = document.getElementById('career');
-            if (careerSection) careerSection.style.display = 'block';
+    // Event listener for the timeline button
+    const timelineBtn = document.querySelector('.nav-link[href="#timeline"]');
+    if (timelineBtn) {
+        timelineBtn.addEventListener('click', () => {
+            const timelineSection = document.getElementById('timeline');
+            if (timelineSection) timelineSection.style.display = 'block';
         });
     }
 
