@@ -20,26 +20,30 @@
             <nav class="header-nav">
                 <a href="#bio" class="nav-link active" >Home</a>
                 <a href="#projects" class="nav-link">Projects</a>
-                <a href="#career" class="nav-link">Career</a>
+                <a href="#timeline" class="nav-link">Timeline</a>
                 <a href="#cv" class="nav-link">CV</a>
             </nav>
         </div>
     </header>
-    <div id="business-card" class="steam-lift" title="Business Card">
-        <div class="bc-name">Joel Prebish</div>
-        <div class="bc-title">L2 Software Engineer</div>
-        <div class="bc-location">Pittsburgh, PA</div>
-        <div class="bc-socials"><i class="fab fa-linkedin"></i> <i class="fab fa-github"></i></div>
-        <div class="bc-logo">
-            <img src="static/images/pnc-logo.png" title="PNC Bank Logo">
-        </div>
-    </div>
+    <div id="business-card" class="steam-lift" title="Business Card"></div>
+
+    <div class="card-separator"></div>
 
     <section id="bio" class="bio-section">
-        <h4>Bio</h4>
-        <p>Born and raised in the greater Pittsburgh area, I always had a passion for tech.</p>
-        <h4>Personal Interests</h4>
-        <p>Technology, Gaming, Music, Trying new foods, Homelab projects</p>
+        <div class="bio-block">
+            <h4>Bio</h4>
+            <p>Born and raised in the greater Pittsburgh area, I always had a passion for tech.</p>
+        </div>
+        <div class="bio-block">
+            <h4>Personal Interests</h4>
+            <div class="bio-tags">
+                <span class="bio-tag">Technology</span>
+                <span class="bio-tag">Gaming</span>
+                <span class="bio-tag">Music</span>
+                <span class="bio-tag">Trying new foods</span>
+                <span class="bio-tag">Homelab projects</span>
+            </div>
+        </div>
     </section>
     <section id="projects" class="bio-section">
         <!-- Template for project cards -->
@@ -77,7 +81,7 @@
         </div>
         <div class="projects-grid"></div>
     </section>
-    <section id="career" class="bio-section">
+    <section id="timeline" class="bio-section">
         <template id="milestone-template">
             <div class="timeline-item">
                 <div class="timeline-icon"><i></i></div>
