@@ -198,9 +198,33 @@ h1 { color: var(--accent-color); }
 	font-family: var(--font-family);
 	color: var(--text-color);
 	margin-inline: auto;
-	margin-bottom: 100px;
+	margin-bottom: 40px;
 	transform-style: preserve-3d;
 	perspective: 1000px;
+}
+
+/* Accent glow separator between business card and page content */
+.card-separator {
+	width: 50%;
+	max-width: 420px;
+	height: 1px;
+	margin: 0 auto 40px;
+	background: linear-gradient(
+		to right,
+		transparent 0%,
+		rgba(255, 193, 18, 0.75) 30%,
+		rgba(255, 193, 18, 0.75) 70%,
+		transparent 100%
+	);
+	position: relative;
+}
+.card-separator::after {
+	content: '';
+	position: absolute;
+	inset: -5px -5%;
+	background: inherit;
+	filter: blur(8px);
+	opacity: 0.55;
 }
 
 /* Business card content styling */
