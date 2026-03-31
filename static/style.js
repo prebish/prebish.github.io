@@ -46,6 +46,60 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.transform = `perspective(${PERSPECTIVE}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     });
 
+    // Load business card content from business-card.json
+    function renderBusinessCard(data) {
+        card.innerHTML = '';
+
+        const name = document.createElement('div');
+        name.className = 'bc-name';
+        name.textContent = data.name;
+        card.appendChild(name);
+
+        const title = document.createElement('div');
+        title.className = 'bc-title';
+        title.textContent = data.title;
+        card.appendChild(title);
+
+        if (data.location) {
+            const loc = document.createElement('div');
+            loc.className = 'bc-location';
+            loc.textContent = data.location;
+            card.appendChild(loc);
+        }
+
+        if (data.socials && data.socials.length) {
+            const socials = document.createElement('div');
+            socials.className = 'bc-socials';
+            data.socials.forEach(s => {
+                const a = document.createElement('a');
+                a.href = s.url || '#';
+                if (s.url) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+                a.setAttribute('aria-label', s.label || '');
+                const icon = document.createElement('i');
+                icon.className = s.icon;
+                a.appendChild(icon);
+                socials.appendChild(a);
+            });
+            card.appendChild(socials);
+        }
+
+        if (data.logo) {
+            const logoWrap = document.createElement('div');
+            logoWrap.className = 'bc-logo';
+            const img = document.createElement('img');
+            img.src = data.logo.src;
+            img.alt = data.logo.alt || '';
+            img.title = data.logo.alt || '';
+            logoWrap.appendChild(img);
+            card.appendChild(logoWrap);
+        }
+    }
+
+    fetch('static/business-card.json')
+        .then(response => response.json())
+        .then(data => renderBusinessCard(data))
+        .catch(error => console.error('Error loading business card data:', error));
+
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -91,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update active link on scroll
     // Only observe sections that have corresponding navigation links
-    const sections = document.querySelectorAll('#bio, #projects, #career, #cv');
+    const sections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
     const observerOptions = {
         root: null,
         // Trigger when section crosses the middle of viewport (50% from top)
@@ -124,12 +178,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event listener for the career button
-    const careerBtn = document.querySelector('.nav-link[href="#career"]');
-    if (careerBtn) {
-        careerBtn.addEventListener('click', () => {
-            const careerSection = document.getElementById('career');
-            if (careerSection) careerSection.style.display = 'block';
+    // Event listener for the timeline button
+    const timelineBtn = document.querySelector('.nav-link[href="#timeline"]');
+    if (timelineBtn) {
+        timelineBtn.addEventListener('click', () => {
+            const timelineSection = document.getElementById('timeline');
+            if (timelineSection) timelineSection.style.display = 'block';
         });
     }
 
@@ -278,7 +332,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('https://api.github.com/users/prebish/repos')
         .then(response => response.json())
         .then(repos => {
-            reposData = repos;
+            const EXCLUDED_REPOS = ['prebish', 'prebish.github.io'];
+            reposData = repos.filter(r => !EXCLUDED_REPOS.includes(r.name));
             renderTagFilters();
             sortRepos('date');
         })
@@ -301,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.querySelector('.timeline-description').textContent = m.description;
                 const icon = item.querySelector('.timeline-icon i');
                 if (m.icon) icon.className = m.icon;
+                if (m.size && [1, 2, 3].includes(m.size)) item.querySelector('.timeline-content').dataset.size = m.size;
                 timelineContainer.appendChild(item);
             });
     }

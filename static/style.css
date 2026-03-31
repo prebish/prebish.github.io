@@ -74,9 +74,24 @@ header {
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
 	background-color: rgba(0, 0, 0, 0.9);
-	border-bottom: 3px solid var(--accent-color);
 	padding: 1rem 2rem;
 	margin-bottom: 100px;
+}
+header::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(
+		to right,
+		transparent 0%,
+		rgba(255, 193, 18, 0.8) 20%,
+		rgba(255, 193, 18, 0.8) 80%,
+		transparent 100%
+	);
+	box-shadow: 0 0 10px 3px rgba(255, 193, 18, 0.35);
 }
 
 .header-container {
@@ -193,14 +208,38 @@ h1 { color: var(--accent-color); }
 		inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: flex-start;
 	font-family: var(--font-family);
 	color: var(--text-color);
 	margin-inline: auto;
-	margin-bottom: 100px;
+	margin-bottom: 40px;
 	transform-style: preserve-3d;
 	perspective: 1000px;
+}
+
+/* Accent glow separator between business card and page content */
+.card-separator {
+	width: 50%;
+	max-width: 420px;
+	height: 1px;
+	margin: 0 auto 40px;
+	background: linear-gradient(
+		to right,
+		transparent 0%,
+		rgba(255, 193, 18, 0.75) 30%,
+		rgba(255, 193, 18, 0.75) 70%,
+		transparent 100%
+	);
+	position: relative;
+}
+.card-separator::after {
+	content: '';
+	position: absolute;
+	inset: -5px -5%;
+	background: inherit;
+	filter: blur(8px);
+	opacity: 0.55;
 }
 
 /* Business card content styling */
@@ -229,15 +268,30 @@ h1 { color: var(--accent-color); }
 	text-shadow: var(--etched-text-secondary);
 }
 .bc-socials {
-	padding: 10px;
-	margin-top: 100px;
+	padding: 10px 0 0 0;
+	margin-top: auto;
 	display: flex;
 	flex-direction: row;
 	font-family: var(--font-family);
-	font-size: 20px;
-	gap: 12px;
-	/* Etched icons */
+	gap: 10px;
+}
+.bc-socials a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	font-size: 22px;
+	color: var(--accent-color);
+	text-decoration: none;
+	border-radius: 8px;
+	transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 	text-shadow: var(--etched-text-secondary);
+}
+.bc-socials a:hover {
+	color: #fff;
+	background-color: rgba(255, 193, 18, 0.18);
+	box-shadow: 0 0 8px rgba(255, 193, 18, 0.4);
 }
 
 /* Style for the logo in the business card */
@@ -268,23 +322,65 @@ h1 { color: var(--accent-color); }
 }
 
 #bio {
-	
-	max-width: fit-content;
-	margin-inline: auto;
-	flex-wrap: wrap;
-	overflow: visible;
-	padding: 20px;
+	max-width: 620px;
+	margin: 20px auto 0 auto;
+	padding: 24px 28px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	gap: 20px;
 	font-family: var(--font-family);
 	color: var(--text-color);
-	margin: 20px auto 0 auto;
-	text-align: center;
-	line-height: 2;
-	font-size: 32px;
-	transition: box-shadow 0.3s cubic-bezier(.4,2,.6,1);
+	/* Glass card */
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid rgba(255, 255, 255, 0.18);
+	border-left: 1px solid rgba(255, 255, 255, 0.18);
+	backdrop-filter: blur(10px) saturate(180%);
+	-webkit-backdrop-filter: blur(10px) saturate(180%);
+	border-radius: 12px;
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.3),
+		inset 0 1px 0 rgba(255, 255, 255, 0.06);
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#bio h4 {
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--accent-color);
+	margin: 0 0 10px 0;
+	text-shadow: var(--etched-text-primary);
+}
+
+#bio p {
+	font-size: 1rem;
+	line-height: 1.75;
+	margin: 0;
+	color: var(--text-color);
+}
+
+.bio-block:not(:last-child) {
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bio-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.bio-tag {
+	font-size: 0.75rem;
+	color: var(--accent-color);
+	background: rgba(255, 193, 18, 0.08);
+	border: 1px solid rgba(255, 193, 18, 0.22);
+	border-radius: 20px;
+	padding: 3px 12px;
+	font-weight: 600;
+	letter-spacing: 0.03em;
 }
 
 /* ── Projects Section ── */
@@ -356,7 +452,7 @@ h1 { color: var(--accent-color); }
 	overflow: scroll;
 	height: 140px;
 	border-top: 1px solid rgba(255, 193, 18, 0.3);
-	border-radius: 10px;
+	border-bottom: 1px solid rgba(255, 193, 18, 0.3);
 	padding-top: 10px;
 	padding-left: 6px;
 }
@@ -565,8 +661,8 @@ h1 { color: var(--accent-color); }
 	}
 }
 
-/* ── Career Timeline Section ── */
-#career {
+/* ── Timeline Section ── */
+#timeline {
 	display: none;
 	max-width: 900px;
 	margin: 20px auto 0 auto;
@@ -636,16 +732,50 @@ h1 { color: var(--accent-color); }
 .timeline-content {
 	background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
 	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid rgba(255, 255, 255, 0.18);
+	border-left: 1px solid rgba(255, 255, 255, 0.18);
+	backdrop-filter: blur(10px) saturate(180%);
+	-webkit-backdrop-filter: blur(10px) saturate(180%);
 	border-radius: 12px;
 	padding: 20px;
 	box-shadow:
 		0 8px 32px rgba(0, 0, 0, 0.3),
 		inset 0 1px 0 rgba(255, 255, 255, 0.06);
-	transition: border-color 0.3s ease;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.timeline-content::after {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -75%;
+	width: 50%;
+	height: 200%;
+	background: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.08) 50%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	transform: skewX(-15deg);
+	pointer-events: none;
+	transition: left 0.6s ease, opacity 0.3s ease;
+	opacity: 0;
 }
 
 .timeline-content:hover {
-	border-color: rgba(255, 193, 18, 0.25);
+	border-color: rgba(255, 193, 18, 0.35);
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.4),
+		0 0 0 1px rgba(255, 193, 18, 0.1),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.timeline-content:hover::after {
+	left: 125%;
+	opacity: 1;
 }
 
 .timeline-date {
@@ -681,6 +811,54 @@ h1 { color: var(--accent-color); }
 	line-height: 1.6;
 	margin: 8px 0 0;
 	opacity: 0.85;
+}
+
+/* ── Timeline card sizes ── */
+
+/* Size 1 — compact: date + title only */
+.timeline-content[data-size="1"] {
+	padding: 12px 16px;
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.timeline-content[data-size="1"] .timeline-title {
+	font-size: 0.95rem;
+	margin: 4px 0 0;
+}
+
+.timeline-content[data-size="1"] .timeline-org,
+.timeline-content[data-size="1"] .timeline-description {
+	display: none;
+}
+
+/* Size 2 — standard: date + title + org */
+.timeline-content[data-size="2"] .timeline-description {
+	display: none;
+}
+
+/* Size 3 — full: all fields, stronger visual weight */
+.timeline-content[data-size="3"] {
+	padding: 24px 28px;
+	border-top: 1px solid rgba(255, 193, 18, 0.22);
+	box-shadow:
+		0 12px 40px rgba(0, 0, 0, 0.35),
+		0 0 0 1px rgba(255, 193, 18, 0.06),
+		inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.timeline-content[data-size="3"] .timeline-title {
+	font-size: 1.2rem;
+}
+
+.timeline-content[data-size="3"] .timeline-org {
+	font-size: 0.9rem;
+	opacity: 0.85;
+}
+
+.timeline-content[data-size="3"] .timeline-description {
+	font-size: 0.9rem;
+	opacity: 0.9;
 }
 
 /* ── Responsive timeline ── */
