@@ -278,7 +278,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('https://api.github.com/users/prebish/repos')
         .then(response => response.json())
         .then(repos => {
-            reposData = repos;
+            const EXCLUDED_REPOS = ['prebish', 'prebish.github.io'];
+            reposData = repos.filter(r => !EXCLUDED_REPOS.includes(r.name));
             renderTagFilters();
             sortRepos('date');
         })
