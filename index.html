@@ -61,15 +61,18 @@
                 </div>
             </div>
         </template>
-        <div class="projects-sort">
-            <label>Sort by:</label>
-            <button class="sort-btn active" data-sort="date">Date Created</button>
-            <button class="sort-btn" data-sort="stars">Stars</button>
-            <button class="sort-btn" data-sort="size">Size</button>
-        </div>
-        <div class="projects-tags">
-            <label>Filter by tag:</label>
-            <div class="tags-list"></div>
+        <div class="projects-controls">
+            <div class="projects-sort">
+                <span class="controls-label"><i class="fas fa-sort-amount-down"></i> Sort</span>
+                <button class="sort-btn active" data-sort="date">Date</button>
+                <button class="sort-btn" data-sort="stars">Stars</button>
+                <button class="sort-btn" data-sort="size">Size</button>
+            </div>
+            <div class="controls-sep"></div>
+            <div class="projects-tags">
+                <span class="controls-label"><i class="fas fa-tag"></i> Filter</span>
+                <div class="tags-list"></div>
+            </div>
         </div>
         <div class="projects-grid"></div>
     </section>
