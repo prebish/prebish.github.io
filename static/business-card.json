@@ -1,0 +1,21 @@
+{
+    "name": "Joel Prebish",
+    "title": "L2 Software Engineer",
+    "location": "Pittsburgh, PA",
+    "logo": {
+        "src": "static/images/pnc-logo.png",
+        "alt": "PNC Bank Logo"
+    },
+    "socials": [
+        {
+            "icon": "fab fa-linkedin",
+            "label": "LinkedIn",
+            "url": "https://www.linkedin.com/in/joelprebish"
+        },
+        {
+            "icon": "fab fa-github",
+            "label": "GitHub",
+            "url": "https://github.com/prebish"
+        }
+    ]
+}
