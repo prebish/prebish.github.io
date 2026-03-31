@@ -243,10 +243,10 @@ h1 { color: var(--accent-color); }
 /* Style for the logo in the business card */
 .bc-logo {
     position: absolute;
-    top: 10px;
+    top: -10px;
     right: 10px;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
 }
 
 .bc-logo img {
@@ -317,6 +317,8 @@ h1 { color: var(--accent-color); }
 		0 8px 32px rgba(0, 0, 0, 0.3),
 		inset 0 1px 0 rgba(255, 255, 255, 0.06);
 	transition: border-color 0.3s ease;
+	max-height: 300px;
+	overflow: scroll;
 }
 
 .project-card:hover {
@@ -350,7 +352,13 @@ h1 { color: var(--accent-color); }
 	line-height: 1.6;
 	margin: 0;
 	flex-grow: 1;
-	opacity: 0.85;
+	max-height: 150px;
+	overflow: scroll;
+	height: 140px;
+	border-top: 1px solid rgba(255, 193, 18, 0.3);
+	border-radius: 10px;
+	padding-top: 10px;
+	padding-left: 6px;
 }
 
 .project-topics {
