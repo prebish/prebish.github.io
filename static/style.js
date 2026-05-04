@@ -102,6 +102,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
+    let projectsActive = false;
+    let isAnimating = false;
+    const CARD_ANIM_DURATION = 600;
+
+    function activateProjectsSection() {
+        if (isAnimating || projectsActive) return;
+        isAnimating = true;
+
+        const businessCard = document.getElementById('business-card');
+        const cardSeparator = document.querySelector('.card-separator');
+        const projectsSection = document.getElementById('projects');
+
+        // Ensure viewport is at the top so the animation originates correctly
+        window.scrollTo(0, 0);
+
+        // Clear any inline transform left by the 3D tilt effect
+        if (businessCard) businessCard.style.transform = '';
+
+        // Hide all content sections
+        sections.forEach(section => { section.style.display = 'none'; });
+
+        // Prevent scrollbar while the off-screen element animates into view
+        document.documentElement.style.overflow = 'hidden';
+
+        // Animate card and separator upward off-screen
+        if (businessCard) businessCard.classList.add('card-exit');
+        if (cardSeparator) cardSeparator.classList.add('card-exit');
+
+        // Reveal projects with slide-in-from-bottom animation
+        if (projectsSection) projectsSection.classList.add('projects-enter');
+
+        projectsActive = true;
+
+        setTimeout(() => {
+            if (businessCard) {
+                businessCard.classList.remove('card-exit');
+                businessCard.style.display = 'none';
+            }
+            if (cardSeparator) {
+                cardSeparator.classList.remove('card-exit');
+                cardSeparator.style.display = 'none';
+            }
+            if (projectsSection) {
+                projectsSection.classList.remove('projects-enter');
+                projectsSection.style.display = 'block';
+            }
+            document.documentElement.style.overflow = '';
+            isAnimating = false;
+        }, CARD_ANIM_DURATION);
+    }
+
+    function deactivateProjectsSection() {
+        const businessCard = document.getElementById('business-card');
+        const cardSeparator = document.querySelector('.card-separator');
+        const projectsSection = document.getElementById('projects');
+
+        if (businessCard) {
+            businessCard.classList.remove('card-exit');
+            businessCard.style.display = '';
+            businessCard.style.transform = '';
+        }
+        if (cardSeparator) {
+            cardSeparator.classList.remove('card-exit');
+            cardSeparator.style.display = '';
+        }
+        if (projectsSection) projectsSection.style.display = 'none';
+
+        projectsActive = false;
+    }
+
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
@@ -113,24 +183,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetElement = document.getElementById(targetId);
 
                 if (targetElement) {
-                    // Hide all sections
-                    sections.forEach(section => section.style.display = 'none');
-
-                    // Show the clicked section
-                    targetElement.style.display = '';
-
-                    // Scroll into view
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-
                     // Update active state
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
+
+                    if (targetId === 'projects') {
+                        activateProjectsSection();
+                    } else {
+                        if (projectsActive) deactivateProjectsSection();
+
+                        // Hide all sections, then show target
+                        sections.forEach(section => { section.style.display = 'none'; });
+                        targetElement.style.display = '';
+
+                        // Scroll into view
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             } else if (href === '#') {
                 e.preventDefault();
+                if (projectsActive) deactivateProjectsSection();
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
@@ -166,26 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, observerOptions);
-
-    // Event listener for the projects button
-    const projectsBtn = document.querySelector('.nav-link[href="#projects"]');
-    if (projectsBtn) {
-        projectsBtn.addEventListener('click', () => {
-            const bioSection = document.getElementById('bio');
-            const projectsSection = document.getElementById('projects');
-            if (bioSection) bioSection.style.display = 'none';
-            if (projectsSection) projectsSection.style.display = 'block';
-        });
-    }
-
-    // Event listener for the timeline button
-    const timelineBtn = document.querySelector('.nav-link[href="#timeline"]');
-    if (timelineBtn) {
-        timelineBtn.addEventListener('click', () => {
-            const timelineSection = document.getElementById('timeline');
-            if (timelineSection) timelineSection.style.display = 'block';
-        });
-    }
 
     // Language color map for dot indicators
     const langColors = {
