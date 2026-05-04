@@ -260,6 +260,14 @@ h1 { color: var(--accent-color); }
 	/* Subtle etched effect for secondary text */
 	text-shadow: var(--etched-text-secondary);
 }
+.bc-tagline {
+	font-size: 13px;
+	color: #cfcfcf;
+	margin-bottom: 4px;
+	font-style: italic;
+	opacity: 0.85;
+	text-shadow: var(--etched-text-secondary);
+}
 .bc-location {
 	font-size: 14px;
 	color: #cfcfcf;
