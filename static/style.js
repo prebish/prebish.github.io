@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const switchToSection = () => {
                             // Hide all sections, then show target
                             sections.forEach(section => { section.style.display = 'none'; });
-                            targetElement.style.display = '';
+                            targetElement.style.display = 'block';
 
                             // Scroll into view
                             targetElement.scrollIntoView({
