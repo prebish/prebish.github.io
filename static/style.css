@@ -897,7 +897,7 @@ h1 { color: var(--accent-color); }
 
 #business-card.card-exit,
 .card-separator.card-exit {
-	animation: cardSlideUpExit 0.55s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+	animation: cardSlideUpExit 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
 	pointer-events: none;
 }
 
