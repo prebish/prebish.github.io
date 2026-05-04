@@ -60,6 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
         title.textContent = data.title;
         card.appendChild(title);
 
+        if (data.tagline) {
+            const tagline = document.createElement('div');
+            tagline.className = 'bc-tagline';
+            tagline.textContent = data.tagline;
+            card.appendChild(tagline);
+        }
+
         if (data.location) {
             const loc = document.createElement('div');
             loc.className = 'bc-location';
@@ -73,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.socials.forEach(s => {
                 const a = document.createElement('a');
                 a.href = s.url || '#';
-                if (s.url) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+                if (s.url && !s.url.startsWith('mailto:')) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
                 a.setAttribute('aria-label', s.label || '');
                 const icon = document.createElement('i');
                 icon.className = s.icon;
@@ -224,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const switchToSection = () => {
                             // Hide all sections, then show target
                             sections.forEach(section => { section.style.display = 'none'; });
-                            targetElement.style.display = '';
+                            targetElement.style.display = 'block';
 
                             // Scroll into view
                             targetElement.scrollIntoView({

@@ -1,6 +1,7 @@
 {
     "name": "Joel Prebish",
     "title": "L2 Software Engineer",
+    "tagline": "Building and sharing innovative projects.",
     "location": "Pittsburgh, PA",
     "logo": {
         "src": "static/images/pnc-logo.png",
@@ -16,6 +17,11 @@
             "icon": "fab fa-github",
             "label": "GitHub",
             "url": "https://github.com/prebish"
+        },
+        {
+            "icon": "fas fa-envelope",
+            "label": "Email",
+            "url": "mailto:prebish.j@outlook.com"
         }
     ]
 }

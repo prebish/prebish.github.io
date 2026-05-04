@@ -260,6 +260,14 @@ h1 { color: var(--accent-color); }
 	/* Subtle etched effect for secondary text */
 	text-shadow: var(--etched-text-secondary);
 }
+.bc-tagline {
+	font-size: 13px;
+	color: #cfcfcf;
+	margin-bottom: 4px;
+	font-style: italic;
+	opacity: 0.85;
+	text-shadow: var(--etched-text-secondary);
+}
 .bc-location {
 	font-size: 14px;
 	color: #cfcfcf;
@@ -344,7 +352,8 @@ h1 { color: var(--accent-color); }
 	font-weight: 800;
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
-	padding: 7px 22px 7px 16px;
+	padding: 7px 36px 7px 44px;
+	margin-left: -28px;
 	/* Left side: V-notch pointing inward; right side: pointed arrow tip */
 	clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 50%, 100% 100%, 14px 100%, 0% 50%);
 	box-shadow: 0 2px 12px rgba(255, 193, 18, 0.45);
