@@ -885,10 +885,15 @@ h1 { color: var(--accent-color); }
 	}
 }
 
-/* ── Projects entrance animation ── */
+/* ── Projects entrance / exit animations ── */
 @keyframes cardSlideUpExit {
-	from { transform: translateY(0); opacity: 1; }
+	from { transform: translateY(0);     opacity: 1; }
 	to   { transform: translateY(-150%); opacity: 0; }
+}
+
+@keyframes cardSlideDownEnter {
+	from { transform: translateY(-150%); opacity: 0; }
+	to   { transform: translateY(0);     opacity: 1; }
 }
 
 @keyframes projectsSlideInFromBottom {
@@ -896,13 +901,30 @@ h1 { color: var(--accent-color); }
 	to   { transform: translateY(0);     opacity: 1; }
 }
 
+@keyframes projectsSlideOutToBottom {
+	from { transform: translateY(0);     opacity: 1; }
+	to   { transform: translateY(100vh); opacity: 0; }
+}
+
 #business-card.card-exit,
 .card-separator.card-exit {
-	animation: cardSlideUpExit 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+	animation: cardSlideUpExit 0.6s ease-in forwards;
+	pointer-events: none;
+}
+
+#business-card.card-enter,
+.card-separator.card-enter {
+	animation: cardSlideDownEnter 0.6s ease-out forwards;
 	pointer-events: none;
 }
 
 #projects.projects-enter {
 	display: block !important;
-	animation: projectsSlideInFromBottom 0.6s cubic-bezier(0.2, 0, 0.4, 1) forwards;
+	animation: projectsSlideInFromBottom 0.6s ease-out forwards;
+}
+
+#projects.projects-exit {
+	display: block !important;
+	animation: projectsSlideOutToBottom 0.6s ease-in forwards;
+	pointer-events: none;
 }
