@@ -883,3 +883,25 @@ h1 { color: var(--accent-color); }
 		right: auto;
 	}
 }
+
+/* ── Projects entrance animation ── */
+@keyframes cardSlideUpExit {
+	from { transform: translateY(0); opacity: 1; }
+	to   { transform: translateY(-150%); opacity: 0; }
+}
+
+@keyframes projectsSlideInFromBottom {
+	from { transform: translateY(100vh); opacity: 0; }
+	to   { transform: translateY(0);     opacity: 1; }
+}
+
+#business-card.card-exit,
+.card-separator.card-exit {
+	animation: cardSlideUpExit 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+	pointer-events: none;
+}
+
+#projects.projects-enter {
+	display: block !important;
+	animation: projectsSlideInFromBottom 0.6s cubic-bezier(0.2, 0, 0.4, 1) forwards;
+}
