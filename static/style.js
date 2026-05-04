@@ -102,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
+    // Sections observed by the IntersectionObserver and used by animation helpers
+    const sections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
     let projectsActive = false;
     let isAnimating = false;
     const CARD_ANIM_DURATION = 600;
@@ -220,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update active link on scroll
     // Only observe sections that have corresponding navigation links
-    const sections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
     const observerOptions = {
         root: null,
         // Trigger when section crosses the middle of viewport (50% from top)
