@@ -155,23 +155,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }, CARD_ANIM_DURATION);
     }
 
-    function deactivateProjectsSection() {
+    function deactivateProjectsSection(callback) {
+        if (isAnimating) return;
+        if (!projectsActive) {
+            if (callback) callback();
+            return;
+        }
+        isAnimating = true;
+        projectsActive = false;
+
         const businessCard = document.getElementById('business-card');
         const cardSeparator = document.querySelector('.card-separator');
         const projectsSection = document.getElementById('projects');
 
+        // Ensure viewport is at the top so the animation originates correctly
+        window.scrollTo(0, 0);
+
+        // Prevent scrollbar while elements animate
+        document.documentElement.style.overflow = 'hidden';
+
+        // Animate projects sliding down off-screen
+        if (projectsSection) projectsSection.classList.add('projects-exit');
+
+        // Restore card/separator and animate them sliding down from above
         if (businessCard) {
-            businessCard.classList.remove('card-exit');
             businessCard.style.display = '';
             businessCard.style.transform = '';
+            businessCard.classList.remove('card-exit');
+            businessCard.classList.add('card-enter');
         }
         if (cardSeparator) {
-            cardSeparator.classList.remove('card-exit');
             cardSeparator.style.display = '';
+            cardSeparator.classList.remove('card-exit');
+            cardSeparator.classList.add('card-enter');
         }
-        if (projectsSection) projectsSection.style.display = 'none';
 
-        projectsActive = false;
+        setTimeout(() => {
+            if (businessCard) businessCard.classList.remove('card-enter');
+            if (cardSeparator) cardSeparator.classList.remove('card-enter');
+            if (projectsSection) {
+                projectsSection.classList.remove('projects-exit');
+                projectsSection.style.display = 'none';
+            }
+            document.documentElement.style.overflow = '';
+            isAnimating = false;
+            if (callback) callback();
+        }, CARD_ANIM_DURATION);
     }
 
     navLinks.forEach(link => {
@@ -192,26 +221,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (targetId === 'projects') {
                         activateProjectsSection();
                     } else {
-                        if (projectsActive) deactivateProjectsSection();
+                        const switchToSection = () => {
+                            // Hide all sections, then show target
+                            sections.forEach(section => { section.style.display = 'none'; });
+                            targetElement.style.display = '';
 
-                        // Hide all sections, then show target
-                        sections.forEach(section => { section.style.display = 'none'; });
-                        targetElement.style.display = '';
+                            // Scroll into view
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        };
 
-                        // Scroll into view
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                        if (projectsActive) {
+                            deactivateProjectsSection(switchToSection);
+                        } else {
+                            switchToSection();
+                        }
                     }
                 }
             } else if (href === '#') {
                 e.preventDefault();
-                if (projectsActive) deactivateProjectsSection();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+                const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (projectsActive) {
+                    deactivateProjectsSection(scrollTop);
+                } else {
+                    scrollTop();
+                }
 
                 // Update active state
                 navLinks.forEach(l => l.classList.remove('active'));
