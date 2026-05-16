@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     // Sections observed by the IntersectionObserver and used by animation helpers
-    const sections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
+    const sections = document.querySelectorAll('#bio, #projects, #cv');
     let projectsActive = false;
     let isAnimating = false;
     const CARD_ANIM_DURATION = 600;
@@ -302,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let reposData = [];
     let selectedTags = new Set();
+    let searchQuery = '';
 
     function formatSize(kb) {
         if (kb >= 1024) return (kb / 1024).toFixed(1) + ' MB';
@@ -320,15 +321,10 @@ document.addEventListener('DOMContentLoaded', () => {
             projectCard.querySelector('.project-name').textContent = repo.name;
             projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
 
-            // Link or lock depending on visibility
-            const projectLink = projectCard.querySelector('.project-link');
+            // Show lock for private repos
             const projectLock = projectCard.querySelector('.project-lock');
-            if (repo.private) {
-                projectLink.removeAttribute('href');
-                projectLink.style.display = 'none';
+            if (repo.private && projectLock) {
                 projectLock.style.display = 'inline-flex';
-            } else {
-                projectLink.href = repo.html_url;
             }
 
             // Language
@@ -344,10 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Stars & forks
             projectCard.querySelector('.stars-count').textContent = repo.stargazers_count;
             projectCard.querySelector('.forks-count').textContent = repo.forks_count;
-
-            // Size & date
-            projectCard.querySelector('.size-value').textContent = formatSize(repo.size);
-            projectCard.querySelector('.date-value').textContent = formatDate(repo.created_at);
 
             // Topics
             const topicsContainer = projectCard.querySelector('.project-topics');
@@ -365,10 +357,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getFilteredRepos() {
-        if (selectedTags.size === 0) return [...reposData];
-        return reposData.filter(repo =>
-            repo.topics && [...selectedTags].every(tag => repo.topics.includes(tag))
-        );
+        let filtered = [...reposData];
+        if (selectedTags.size > 0) {
+            filtered = filtered.filter(repo =>
+                repo.topics && [...selectedTags].every(tag => repo.topics.includes(tag))
+            );
+        }
+        if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            filtered = filtered.filter(repo =>
+                repo.name.toLowerCase().includes(q) ||
+                (repo.description && repo.description.toLowerCase().includes(q))
+            );
+        }
+        return filtered;
     }
 
     function sortRepos(key) {
@@ -393,12 +395,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const tagsContainer = document.querySelector('.projects-tags');
         const controlsSep = document.querySelector('.controls-sep');
         if (!tagsList) return;
-        const allTopics = new Set();
+        const topicCounts = new Map();
         reposData.forEach(repo => {
-            if (repo.topics) repo.topics.forEach(t => allTopics.add(t));
+            if (repo.topics) repo.topics.forEach(t => topicCounts.set(t, (topicCounts.get(t) || 0) + 1));
         });
+        const qualifiedTopics = [...topicCounts.entries()].filter(([, count]) => count > 1).map(([t]) => t);
         tagsList.innerHTML = '';
-        [...allTopics].sort().forEach(topic => {
+        qualifiedTopics.sort().forEach(topic => {
             const btn = document.createElement('button');
             btn.className = 'tag-btn';
             btn.textContent = topic;
@@ -415,8 +418,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             tagsList.appendChild(btn);
         });
-        if (tagsContainer) tagsContainer.style.display = allTopics.size > 0 ? 'flex' : 'none';
-        if (controlsSep) controlsSep.style.display = allTopics.size > 0 ? 'block' : 'none';
+        if (tagsContainer) tagsContainer.style.display = qualifiedTopics.length > 0 ? 'flex' : 'none';
+        if (controlsSep) controlsSep.style.display = qualifiedTopics.length > 0 ? 'block' : 'none';
     }
 
     // Sort button listeners
@@ -427,6 +430,15 @@ document.addEventListener('DOMContentLoaded', () => {
             sortRepos(btn.dataset.sort);
         });
     });
+
+    // Search input listener
+    const searchInput = document.querySelector('.projects-search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            searchQuery = searchInput.value.trim();
+            sortRepos(getCurrentSortKey());
+        });
+    }
 
     fetch('https://api.github.com/users/prebish/repos')
         .then(response => response.json())

@@ -20,7 +20,6 @@
             <nav class="header-nav">
                 <a href="#bio" class="nav-link active" >Featured</a>
                 <a href="#projects" class="nav-link">Projects</a>
-                <a href="#timeline" class="nav-link">Timeline</a>
                 <a href="#cv" class="nav-link">CV</a>
             </nav>
         </div>
@@ -30,46 +29,6 @@
     <div class="card-separator"></div>
 
     <section id="bio" class="bio-section">
-        <div class="bio-ribbon-label">Bio</div>
-        <p class="bio-text">Born and raised in the greater Pittsburgh area, I always had a passion for tech.</p>
-    </section>
-    <section id="projects" class="bio-section">
-        <!-- Template for project cards -->
-        <template id="project-template">
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-code-branch project-icon"></i>
-                    <h3 class="project-name"></h3>
-                    <a class="project-link" href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                    <span class="project-lock"><i class="fas fa-lock"></i></span>
-                </div>
-                <p class="project-description"></p>
-                <div class="project-topics"></div>
-                <div class="project-meta">
-                    <span class="project-language"><span class="lang-dot"></span><span class="lang-name"></span></span>
-                    <span class="project-stars"><i class="fas fa-star"></i> <span class="stars-count"></span></span>
-                    <span class="project-forks"><i class="fas fa-code-branch"></i> <span class="forks-count"></span></span>
-                    <span class="project-size"><i class="fas fa-database"></i> <span class="size-value"></span></span>
-                    <span class="project-date"><i class="fas fa-calendar"></i> <span class="date-value"></span></span>
-                </div>
-            </div>
-        </template>
-        <div class="projects-controls">
-            <div class="projects-sort">
-                <span class="controls-label"><i class="fas fa-sort-amount-down"></i> Sort</span>
-                <button class="sort-btn active" data-sort="date">Date</button>
-                <button class="sort-btn" data-sort="stars">Stars</button>
-                <button class="sort-btn" data-sort="size">Size</button>
-            </div>
-            <div class="controls-sep"></div>
-            <div class="projects-tags">
-                <span class="controls-label"><i class="fas fa-tag"></i> Filter</span>
-                <div class="tags-list"></div>
-            </div>
-        </div>
-        <div class="projects-grid"></div>
-    </section>
-    <section id="timeline" class="bio-section">
         <template id="milestone-template">
             <div class="timeline-item">
                 <div class="timeline-icon"><i></i></div>
@@ -83,6 +42,46 @@
         </template>
         <div class="timeline"></div>
     </section>
+    <section id="projects" class="bio-section">
+        <!-- Template for project cards -->
+        <template id="project-template">
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-code-branch project-icon"></i>
+                    <h3 class="project-name"></h3>
+                    <span class="project-stars"><i class="fas fa-star"></i> <span class="stars-count"></span></span>
+                    <span class="project-lock"><i class="fas fa-lock"></i></span>
+                </div>
+                <p class="project-description"></p>
+                <div class="project-topics"></div>
+                <div class="project-meta">
+                    <span class="project-language"><span class="lang-dot"></span><span class="lang-name"></span></span>
+                    <span class="project-forks"><i class="fas fa-code-branch"></i> <span class="forks-count"></span></span>
+                </div>
+            </div>
+        </template>
+        <div class="projects-controls">
+            <div class="projects-search">
+                <i class="fas fa-search projects-search-icon"></i>
+                <input type="text" class="projects-search-input" placeholder="Search projects…" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="projects-controls-row">
+                <div class="projects-sort">
+                    <span class="controls-label"><i class="fas fa-sort-amount-down"></i> Sort</span>
+                    <button class="sort-btn active" data-sort="date">Date</button>
+                    <button class="sort-btn" data-sort="stars">Stars</button>
+                    <button class="sort-btn" data-sort="size">Size</button>
+                </div>
+                <div class="controls-sep"></div>
+                <div class="projects-tags">
+                    <span class="controls-label"><i class="fas fa-tag"></i> Filter</span>
+                    <div class="tags-list"></div>
+                </div>
+            </div>
+        </div>
+        <div class="projects-grid"></div>
+    </section>
+
     <section id="cv" class="bio-section">
     </section>
     <script src="static/style.js"></script>
