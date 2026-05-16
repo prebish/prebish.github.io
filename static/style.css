@@ -330,7 +330,7 @@ h1 { color: var(--accent-color); }
 }
 
 #bio {
-	max-width: 620px;
+	max-width: 1100px;
 	margin: 20px auto 0 auto;
 	padding: 0 28px 28px 28px;
 	display: flex;
@@ -423,8 +423,8 @@ h1 { color: var(--accent-color); }
 		0 8px 32px rgba(0, 0, 0, 0.3),
 		inset 0 1px 0 rgba(255, 255, 255, 0.06);
 	transition: border-color 0.3s ease;
-	max-height: 300px;
-	overflow: scroll;
+	max-height: 220px;
+	overflow: hidden;
 }
 
 .project-card:hover {
@@ -458,9 +458,9 @@ h1 { color: var(--accent-color); }
 	line-height: 1.6;
 	margin: 0;
 	flex-grow: 1;
-	max-height: 150px;
-	overflow: scroll;
-	height: 140px;
+	max-height: 80px;
+	overflow: hidden;
+	height: 80px;
 	border-top: 1px solid rgba(255, 193, 18, 0.3);
 	border-bottom: 1px solid rgba(255, 193, 18, 0.3);
 	padding-top: 10px;
@@ -518,30 +518,17 @@ h1 { color: var(--accent-color); }
 	background: var(--accent-color);
 }
 
-.project-link,
-.project-lock {
-	font-size: 0.9rem;
+.project-header .project-stars {
 	margin-left: auto;
-}
-
-.project-link {
-	display: inline-flex;
-	align-items: center;
+	font-size: 0.85rem;
 	color: var(--accent-color);
-	text-decoration: none;
-	opacity: 0.7;
-	transition: opacity 0.2s ease, text-shadow 0.2s ease;
-	text-shadow: none;
-}
-
-.project-link:hover {
-	opacity: 1;
-	text-shadow: 0 0 8px var(--accent-color);
+	opacity: 0.8;
 }
 
 .project-lock {
 	display: none;
 	align-items: center;
+	font-size: 0.9rem;
 	color: var(--text-color);
 	opacity: 0.4;
 }
@@ -549,17 +536,60 @@ h1 { color: var(--accent-color); }
 /* Project controls bar */
 .projects-controls {
 	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 24px;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.07));
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-top: 1px solid rgba(255, 255, 255, 0.22);
+	border-left: 1px solid rgba(255, 255, 255, 0.22);
+	border-radius: 10px;
+	padding: 14px 16px;
+}
+
+.projects-search {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.projects-search-icon {
+	position: absolute;
+	left: 11px;
+	color: var(--text-color);
+	opacity: 0.4;
+	font-size: 0.85rem;
+	pointer-events: none;
+}
+
+.projects-search-input {
+	width: 100%;
+	font-family: var(--font-family);
+	font-size: 0.9rem;
+	color: var(--secondary-text-color);
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	padding: 8px 12px 8px 32px;
+	outline: none;
+	transition: border-color 0.2s ease;
+}
+
+.projects-search-input::placeholder {
+	color: var(--text-color);
+	opacity: 0.45;
+}
+
+.projects-search-input:focus {
+	border-color: rgba(255, 193, 18, 0.45);
+}
+
+.projects-controls-row {
+	display: flex;
 	align-items: center;
 	gap: 0;
-	margin-bottom: 24px;
-	background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	border-top: 1px solid rgba(255, 255, 255, 0.12);
-	border-left: 1px solid rgba(255, 255, 255, 0.12);
-	border-radius: 10px;
-	padding: 10px 16px;
 	flex-wrap: wrap;
-	row-gap: 10px;
+	row-gap: 8px;
 }
 
 .controls-label {
@@ -699,7 +729,7 @@ h1 { color: var(--accent-color); }
 .timeline-item {
 	position: relative;
 	width: 50%;
-	padding: 0 40px 40px;
+	padding: 0 24px 24px;
 	box-sizing: border-box;
 }
 
@@ -915,15 +945,35 @@ h1 { color: var(--accent-color); }
 	to   { transform: translateY(100vh); opacity: 0; }
 }
 
-#business-card.card-exit,
-.card-separator.card-exit {
+@keyframes separatorCollapse {
+	from { transform: scaleX(1); opacity: 1; }
+	to   { transform: scaleX(0); opacity: 0; }
+}
+
+@keyframes separatorExpand {
+	from { transform: scaleX(0); opacity: 0; }
+	to   { transform: scaleX(1); opacity: 1; }
+}
+
+#business-card.card-exit {
 	animation: cardSlideUpExit 0.6s ease-in forwards;
 	pointer-events: none;
 }
 
-#business-card.card-enter,
-.card-separator.card-enter {
+.card-separator.card-exit {
+	animation: separatorCollapse 0.5s ease-in forwards;
+	transform-origin: center;
+	pointer-events: none;
+}
+
+#business-card.card-enter {
 	animation: cardSlideDownEnter 0.6s ease-out forwards;
+	pointer-events: none;
+}
+
+.card-separator.card-enter {
+	animation: separatorExpand 0.5s ease-out forwards;
+	transform-origin: center;
 	pointer-events: none;
 }
 
