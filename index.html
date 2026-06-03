@@ -31,6 +31,7 @@
     <div class="card-separator"></div>
 
     <section id="bio" class="bio-section">
+        <h2 class="section-title">Featured</h2>
         <div class="featured-grid"></div>
     </section>
 
@@ -90,51 +91,11 @@
     </section>
 
     <section id="cv" class="bio-section">
-        <template id="cv-experience-template">
-            <div class="cv-exp-item">
-                <div class="cv-exp-header">
-                    <span class="cv-exp-role"></span>
-                    <span class="cv-exp-dates"></span>
-                </div>
-                <span class="cv-exp-company"></span>
-                <ul class="cv-exp-bullets"></ul>
-            </div>
-        </template>
-        <template id="cv-education-template">
-            <div class="cv-edu-item">
-                <div class="cv-edu-header">
-                    <span class="cv-edu-degree"></span>
-                    <span class="cv-edu-graduated"></span>
-                </div>
-                <span class="cv-edu-school"></span>
-                <p class="cv-edu-notes"></p>
-            </div>
-        </template>
         <div class="cv-page-bar">
-            <a class="cv-download-btn" href="#" download><i class="fas fa-download"></i> Download PDF</a>
+            <a class="cv-download-btn" href="Joel_Prebish_Resume_public.pdf" download><i class="fas fa-download"></i> Download PDF</a>
         </div>
-        <div class="cv-paper">
-            <div class="cv-paper-header">
-                <h1 class="cv-paper-name"></h1>
-                <p class="cv-paper-title"></p>
-                <div class="cv-paper-contact"></div>
-            </div>
-            <div class="cv-section cv-summary-section">
-                <h2 class="cv-section-heading">Summary</h2>
-                <p class="cv-summary"></p>
-            </div>
-            <div class="cv-section cv-skills-section">
-                <h2 class="cv-section-heading">Skills</h2>
-                <div class="cv-skills-list"></div>
-            </div>
-            <div class="cv-section cv-experience-section">
-                <h2 class="cv-section-heading">Experience</h2>
-                <div class="cv-experience-list"></div>
-            </div>
-            <div class="cv-section cv-education-section">
-                <h2 class="cv-section-heading">Education</h2>
-                <div class="cv-education-list"></div>
-            </div>
+        <div class="cv-pdf-viewer">
+            <iframe src="Joel_Prebish_Resume_public.pdf" class="cv-pdf-iframe" title="Joel Prebish Resume"></iframe>
         </div>
     </section>
     <script src="static/style.js"></script>
