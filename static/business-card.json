@@ -22,6 +22,11 @@
             "icon": "fas fa-envelope",
             "label": "Email",
             "url": "mailto:prebish.j@outlook.com"
+        },
+        {
+            "icon": "fab fa-fiverr",
+            "label": "Fiverr",
+            "url": "https://www.fiverr.com/prebish"
         }
     ]
 }

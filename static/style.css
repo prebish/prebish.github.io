@@ -336,6 +336,18 @@ h1 { color: var(--accent-color); }
 	color: var(--text-color);
 }
 
+/* ── Section Title ── */
+.section-title {
+	text-align: center;
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--text-color);
+	opacity: 0.45;
+	margin: 0 auto 20px;
+}
+
 /* ── Featured Cards ── */
 .featured-grid {
 	display: grid;
@@ -371,6 +383,7 @@ h1 { color: var(--accent-color); }
 	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 	text-decoration: none;
 	color: inherit;
+	user-select: none;
 	transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 	/* Start off-screen — JS adds .featured-animate to trigger animation */
 	opacity: 0;
@@ -1166,225 +1179,29 @@ h1 { color: var(--accent-color); }
 	color: #000;
 }
 
-/* The paper document */
-.cv-paper {
-	max-width: 780px;
+/* The PDF viewer container */
+.cv-pdf-viewer {
+	max-width: 900px;
 	margin: 0 auto;
-	background: #fafafa;
-	color: #1c1c1c;
-	padding: 52px 64px;
-	border-radius: 2px;
 	box-shadow:
 		0 2px 4px rgba(0, 0, 0, 0.15),
 		0 8px 40px rgba(0, 0, 0, 0.45);
-	font-family: var(--font-family);
+	border-radius: 2px;
+	overflow: hidden;
+	background: #1c1c1c;
 }
 
-/* Paper top: name, title, contact */
-.cv-paper-header {
-	text-align: center;
-	padding-bottom: 24px;
-	margin-bottom: 28px;
-	border-bottom: 2px solid #1c1c1c;
-}
-
-.cv-paper-name {
-	font-size: 2.2rem;
-	font-weight: 800;
-	color: #1c1c1c;
-	margin: 0 0 6px;
-	letter-spacing: 0.04em;
-	text-shadow: none;
-}
-
-.cv-paper-title {
-	font-size: 0.9rem;
-	font-weight: 600;
-	color: #555;
-	margin: 0 0 14px;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-}
-
-.cv-paper-contact {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 0;
-}
-
-/* Each contact item — separated by a centred dot */
-.cv-contact-item {
-	display: inline-flex;
-	align-items: center;
-	gap: 5px;
-	font-size: 0.78rem;
-	color: #444;
-	text-decoration: none;
-	font-weight: 500;
-}
-
-.cv-contact-item i {
-	font-size: 0.72rem;
-	color: #888;
-}
-
-/* Dot separator between contact items */
-.cv-contact-sep {
-	display: inline-block;
-	width: 3px;
-	height: 3px;
-	background: #bbb;
-	border-radius: 50%;
-	margin: 0 10px;
-	vertical-align: middle;
-	flex-shrink: 0;
-}
-
-/* Section layout inside the paper */
-.cv-section {
-	display: flex;
-	flex-direction: column;
-	gap: 14px;
-	margin-bottom: 28px;
-}
-
-.cv-section:last-child {
-	margin-bottom: 0;
-}
-
-.cv-section-heading {
-	font-size: 0.65rem;
-	font-weight: 800;
-	letter-spacing: 0.2em;
-	text-transform: uppercase;
-	color: #1c1c1c;
-	margin: 0 0 2px;
-	padding-bottom: 6px;
-	border-bottom: 1.5px solid #1c1c1c;
-	text-shadow: none;
-}
-
-/* Summary */
-.cv-summary {
-	font-size: 0.9rem;
-	line-height: 1.85;
-	color: #333;
-	margin: 0;
-}
-
-/* Skills */
-.cv-skills-list {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 7px;
-}
-
-.cv-skill-tag {
-	font-size: 0.75rem;
-	font-weight: 600;
-	color: #2a2a2a;
-	background: #efefef;
-	border: 1px solid #d8d8d8;
-	border-radius: 3px;
-	padding: 3px 10px;
-	letter-spacing: 0.02em;
-}
-
-/* Experience entries */
-.cv-exp-item,
-.cv-edu-item {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	padding-bottom: 18px;
-	border-bottom: 1px solid #e8e8e8;
-}
-
-.cv-exp-item:last-child,
-.cv-edu-item:last-child {
-	border-bottom: none;
-	padding-bottom: 0;
-}
-
-.cv-exp-header,
-.cv-edu-header {
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	gap: 12px;
-}
-
-.cv-exp-role,
-.cv-edu-degree {
-	font-size: 0.95rem;
-	font-weight: 700;
-	color: #1c1c1c;
-}
-
-.cv-exp-dates,
-.cv-edu-graduated {
-	font-size: 0.78rem;
-	font-weight: 600;
-	color: #666;
-	white-space: nowrap;
-	flex-shrink: 0;
-}
-
-.cv-exp-company,
-.cv-edu-school {
-	font-size: 0.83rem;
-	color: #555;
-	font-weight: 600;
-	font-style: italic;
-}
-
-.cv-exp-bullets {
-	margin: 6px 0 0;
-	padding-left: 1.2rem;
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-}
-
-.cv-exp-bullets li {
-	font-size: 0.865rem;
-	color: #333;
-	line-height: 1.65;
-}
-
-.cv-edu-notes {
-	font-size: 0.83rem;
-	color: #666;
-	line-height: 1.6;
-	margin: 2px 0 0;
-	font-style: italic;
+.cv-pdf-iframe {
+	display: block;
+	width: 100%;
+	height: 85vh;
+	min-height: 600px;
+	border: none;
 }
 
 @media (max-width: 860px) {
-	.cv-paper {
-		padding: 36px 32px;
-	}
-}
-
-@media (max-width: 540px) {
-	.cv-paper {
-		padding: 28px 20px;
-	}
-
-	.cv-paper-name {
-		font-size: 1.6rem;
-	}
-
-	.cv-exp-header,
-	.cv-edu-header {
-		flex-direction: column;
-		gap: 2px;
-	}
-
-	.cv-exp-dates,
-	.cv-edu-graduated {
-		color: #888;
+	.cv-pdf-iframe {
+		height: 75vh;
 	}
 }
 
