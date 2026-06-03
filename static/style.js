@@ -82,9 +82,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 a.href = s.url || '#';
                 if (s.url && !s.url.startsWith('mailto:')) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
                 a.setAttribute('aria-label', s.label || '');
-                const icon = document.createElement('i');
-                icon.className = s.icon;
-                a.appendChild(icon);
+                if (s.img) {
+                    const img = document.createElement('img');
+                    img.src = s.img;
+                    img.alt = s.label || '';
+                    img.className = 'bc-social-img';
+                    a.appendChild(img);
+                } else {
+                    const icon = document.createElement('i');
+                    icon.className = s.icon;
+                    a.appendChild(icon);
+                }
                 socials.appendChild(a);
             });
             card.appendChild(socials);
