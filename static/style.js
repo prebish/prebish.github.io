@@ -107,10 +107,61 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => renderBusinessCard(data))
         .catch(error => console.error('Error loading business card data:', error));
 
+    // ── Featured Section ──
+    function triggerFeaturedAnimation() {
+        const grid = document.querySelector('.featured-grid');
+        if (!grid) return;
+        grid.classList.remove('featured-animate');
+        void grid.offsetWidth; // force reflow so animation restarts
+        grid.classList.add('featured-animate');
+    }
+
+    function renderFeatured(cards) {
+        const grid = document.querySelector('.featured-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        cards.forEach(card => {
+            const a = document.createElement('a');
+            a.className = 'featured-card';
+            a.href = card.url || '#';
+            if (card.url && !card.url.startsWith('#')) {
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+            }
+
+            const icon = document.createElement('i');
+            icon.className = `${card.icon} featured-card-icon`;
+            a.appendChild(icon);
+
+            const title = document.createElement('h3');
+            title.className = 'featured-card-title';
+            title.textContent = card.title;
+            a.appendChild(title);
+
+            const desc = document.createElement('p');
+            desc.className = 'featured-card-description';
+            desc.textContent = card.description;
+            a.appendChild(desc);
+
+            const cta = document.createElement('span');
+            cta.className = 'featured-card-cta';
+            cta.innerHTML = `${card.label} <i class="fas fa-arrow-right"></i>`;
+            a.appendChild(cta);
+
+            grid.appendChild(a);
+        });
+        triggerFeaturedAnimation();
+    }
+
+    fetch('static/featured.json')
+        .then(r => r.json())
+        .then(cards => renderFeatured(cards))
+        .catch(err => console.error('Error loading featured data:', err));
+
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     // Sections observed by the IntersectionObserver and used by animation helpers
-    const sections = document.querySelectorAll('#bio, #projects, #cv');
+    const sections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
     let projectsActive = false;
     let isAnimating = false;
     const CARD_ANIM_DURATION = 600;
@@ -232,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Hide all sections, then show target
                             sections.forEach(section => { section.style.display = 'none'; });
                             targetElement.style.display = 'block';
+                            if (targetId === 'bio') triggerFeaturedAnimation();
 
                             // Scroll into view
                             targetElement.scrollIntoView({
@@ -352,7 +404,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            projectsGrid.appendChild(projectCard);
+            const cardEl = projectCard.querySelector('.project-card');
+            if (repo.html_url && cardEl) {
+                const link = document.createElement('a');
+                link.href = repo.html_url;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'project-card-link';
+                link.appendChild(cardEl);
+                projectsGrid.appendChild(link);
+            } else {
+                projectsGrid.appendChild(projectCard);
+            }
         });
     }
 
@@ -465,6 +528,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.querySelector('.timeline-title').textContent = m.title;
                 item.querySelector('.timeline-org').textContent = m.organization;
                 item.querySelector('.timeline-description').textContent = m.description;
+                const detailsEl = item.querySelector('.timeline-details');
+                if (m.details && detailsEl) {
+                    detailsEl.textContent = m.details;
+                } else if (detailsEl) {
+                    detailsEl.style.display = 'none';
+                }
                 const icon = item.querySelector('.timeline-icon i');
                 if (m.icon) icon.className = m.icon;
                 if (m.size && [1, 2, 3].includes(m.size)) item.querySelector('.timeline-content').dataset.size = m.size;
@@ -476,6 +545,110 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(milestones => renderMilestones(milestones))
         .catch(error => console.error('Error loading career data:', error));
+
+    // ── CV Section ──
+    const cvExpTemplate = document.getElementById('cv-experience-template');
+    const cvEduTemplate = document.getElementById('cv-education-template');
+
+    function renderCV(data) {
+        // Paper header: name, title, contact
+        const nameEl = document.querySelector('.cv-paper-name');
+        if (nameEl && data.name) nameEl.textContent = data.name;
+
+        const titleEl = document.querySelector('.cv-paper-title');
+        if (titleEl && data.title) titleEl.textContent = data.title;
+
+        const contactEl = document.querySelector('.cv-paper-contact');
+        if (contactEl && data.contact) {
+            const c = data.contact;
+            const items = [];
+            if (c.location) items.push({ icon: 'fas fa-map-marker-alt', text: c.location, href: null });
+            if (c.email)    items.push({ icon: 'fas fa-envelope', text: c.email, href: `mailto:${c.email}` });
+            if (c.linkedin) items.push({ icon: 'fab fa-linkedin', text: 'LinkedIn', href: c.linkedin });
+            if (c.github)   items.push({ icon: 'fab fa-github', text: 'GitHub', href: c.github });
+            items.forEach((item, i) => {
+                if (i > 0) {
+                    const sep = document.createElement('span');
+                    sep.className = 'cv-contact-sep';
+                    contactEl.appendChild(sep);
+                }
+                const el = item.href ? document.createElement('a') : document.createElement('span');
+                el.className = 'cv-contact-item';
+                if (item.href) {
+                    el.href = item.href;
+                    if (!item.href.startsWith('mailto:')) { el.target = '_blank'; el.rel = 'noopener noreferrer'; }
+                }
+                const icon = document.createElement('i');
+                icon.className = item.icon;
+                el.appendChild(icon);
+                el.appendChild(document.createTextNode(item.text));
+                contactEl.appendChild(el);
+            });
+        }
+
+        const summaryEl = document.querySelector('.cv-summary');
+        if (summaryEl && data.summary) summaryEl.textContent = data.summary;
+
+        const skillsList = document.querySelector('.cv-skills-list');
+        if (skillsList && data.skills) {
+            data.skills.forEach(skill => {
+                const tag = document.createElement('span');
+                tag.className = 'cv-skill-tag';
+                tag.textContent = skill;
+                skillsList.appendChild(tag);
+            });
+        }
+
+        const downloadBtn = document.querySelector('.cv-download-btn');
+        if (downloadBtn) {
+            if (data.downloadUrl) {
+                downloadBtn.href = data.downloadUrl;
+            } else {
+                downloadBtn.style.display = 'none';
+            }
+        }
+
+        const expList = document.querySelector('.cv-experience-list');
+        if (expList && cvExpTemplate && data.experience) {
+            data.experience.forEach(exp => {
+                const item = cvExpTemplate.content.cloneNode(true);
+                item.querySelector('.cv-exp-role').textContent = exp.title;
+                item.querySelector('.cv-exp-company').textContent = `${exp.company} — ${exp.location}`;
+                item.querySelector('.cv-exp-dates').textContent = `${exp.start} – ${exp.end}`;
+                const bullets = item.querySelector('.cv-exp-bullets');
+                if (exp.bullets) {
+                    exp.bullets.forEach(b => {
+                        const li = document.createElement('li');
+                        li.textContent = b;
+                        bullets.appendChild(li);
+                    });
+                }
+                expList.appendChild(item);
+            });
+        }
+
+        const eduList = document.querySelector('.cv-education-list');
+        if (eduList && cvEduTemplate && data.education) {
+            data.education.forEach(edu => {
+                const item = cvEduTemplate.content.cloneNode(true);
+                item.querySelector('.cv-edu-degree').textContent = edu.degree;
+                item.querySelector('.cv-edu-school').textContent = edu.school;
+                item.querySelector('.cv-edu-graduated').textContent = edu.graduated;
+                const notesEl = item.querySelector('.cv-edu-notes');
+                if (edu.notes && notesEl) {
+                    notesEl.textContent = edu.notes;
+                } else if (notesEl) {
+                    notesEl.style.display = 'none';
+                }
+                eduList.appendChild(item);
+            });
+        }
+    }
+
+    fetch('static/cv.json')
+        .then(r => r.json())
+        .then(data => renderCV(data))
+        .catch(err => console.error('Error loading CV data:', err));
 
     sections.forEach(section => observer.observe(section));
 });

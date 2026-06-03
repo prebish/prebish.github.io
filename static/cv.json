@@ -1,0 +1,50 @@
+{
+    "name": "Joel Prebish",
+    "title": "L2 Software Engineer",
+    "contact": {
+        "location": "Pittsburgh, PA",
+        "email": "prebish.j@outlook.com",
+        "linkedin": "https://www.linkedin.com/in/joelprebish",
+        "github": "https://github.com/prebish"
+    },
+    "downloadUrl": "",
+    "summary": "Add a short professional summary here — who you are, what you do, and what you bring to the table.",
+    "skills": [
+        "Java", "Python", "JavaScript", "TypeScript", "SQL",
+        "Spring Boot", "React", "Git", "REST APIs", "Docker"
+    ],
+    "experience": [
+        {
+            "title": "L2 Software Engineer",
+            "company": "PNC Bank",
+            "location": "Pittsburgh, PA",
+            "start": "March 2025",
+            "end": "Present",
+            "bullets": [
+                "Add a key responsibility or accomplishment here.",
+                "Describe a system or feature you contributed to.",
+                "Quantify impact where possible (e.g., reduced latency by X%)."
+            ]
+        },
+        {
+            "title": "Freelance Software Developer",
+            "company": "Self-Employed",
+            "location": "Pittsburgh, PA",
+            "start": "December 2023",
+            "end": "February 2025",
+            "bullets": [
+                "Describe a notable freelance project here.",
+                "List tools, languages, or frameworks used.",
+                "Describe the outcome or client impact."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "Bachelor of Science in Computer Science",
+            "school": "University of Pittsburgh",
+            "graduated": "December 2024",
+            "notes": "Focus on software engineering, algorithms, and data structures."
+        }
+    ]
+}

@@ -17,7 +17,6 @@ html, body {
 	--text-color: #adadad;
 	--secondary-text-color: #eee;
 	--accent-color: #ffc112;
-	--hover-color: #f09;
 	--strike-color: #222;
 	--card-background-color: #111;
 	--font-family: "Montserrat", Inter, sans-serif;
@@ -63,6 +62,7 @@ body {
 	/* Match sizes so the two gradients form diamonds (scaled 1.5x for stronger pattern) */
 	background-size: 150px 150px, 150px 150px;
 	margin: 0;
+	overflow-x: hidden;
 	/* padding: 0 2em 2em 2em; */
 }
 
@@ -186,8 +186,8 @@ header::after {
 h1 { color: var(--accent-color); }
 
 #business-card {
-	width: 450px;
-	height: 250px;
+	width: 510px;
+	height: 280px;
 	/* Frosted glass background with subtle tint */
 	background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
 	/* Glass slab border with highlight effect */
@@ -220,8 +220,8 @@ h1 { color: var(--accent-color); }
 
 /* Accent glow separator between business card and page content */
 .card-separator {
-	width: 50%;
-	max-width: 420px;
+	width: 65%;
+	max-width: 560px;
 	height: 1px;
 	margin: 0 auto 40px;
 	background: linear-gradient(
@@ -330,67 +330,164 @@ h1 { color: var(--accent-color); }
 }
 
 #bio {
-	max-width: 1100px;
-	margin: 20px auto 0 auto;
-	padding: 0 28px 28px 28px;
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
+	padding: 40px 20px 60px;
+	overflow: hidden; /* contain slide-in animations */
 	font-family: var(--font-family);
 	color: var(--text-color);
 }
 
-/* Prize ribbon turned sideways — points right */
-.bio-ribbon-label {
-	align-self: flex-start;
-	position: relative;
+/* ── Featured Cards ── */
+.featured-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	justify-items: stretch;
+	max-width: 860px;
+	margin: 0 auto;
+}
+
+/* Top card spans both columns, centered */
+.featured-card:nth-child(1) {
+	grid-column: 1 / -1;
+	justify-self: center;
+	width: 100%;
+	max-width: 420px;
+}
+
+.featured-card {
+	min-width: 0;
+	max-width: 100%;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-top: 1px solid rgba(255, 255, 255, 0.25);
+	border-left: 1px solid rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(12px) saturate(180%);
+	-webkit-backdrop-filter: blur(12px) saturate(180%);
+	border-radius: 16px;
+	padding: 22px 28px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	text-decoration: none;
+	color: inherit;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+	/* Start off-screen — JS adds .featured-animate to trigger animation */
+	opacity: 0;
+}
+
+/* Off-screen starting positions per animation direction */
+.featured-card:nth-child(1) { transform: translateX(-120vw); } /* top — slides from left */
+.featured-card:nth-child(2) { transform: translateX(-120vw); } /* bottom-left — slides from left */
+.featured-card:nth-child(3) { transform: translateX(120vw);  } /* bottom-right — slides from right */
+
+.featured-card:hover {
+	border-color: rgba(255, 193, 18, 0.4);
+	box-shadow:
+		0 14px 50px rgba(0, 0, 0, 0.45),
+		0 0 0 1px rgba(255, 193, 18, 0.12),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	transform: translateY(-5px);
+}
+
+.featured-card-icon {
+	font-size: 1.7rem;
+	color: var(--accent-color);
+	margin-bottom: 2px;
+	text-shadow: 0 0 20px rgba(255, 193, 18, 0.35);
+}
+
+.featured-card-title {
+	font-size: 1.35rem;
+	font-weight: 800;
+	color: var(--secondary-text-color);
+	margin: 0;
+	text-shadow: var(--etched-text-secondary);
+}
+
+.featured-card-description {
+	font-size: 0.875rem;
+	color: var(--text-color);
+	line-height: 1.75;
+	flex-grow: 1;
+	margin: 0;
+	opacity: 0.85;
+}
+
+.featured-card-cta {
 	display: inline-flex;
 	align-items: center;
-	background: var(--accent-color);
-	color: #000;
+	gap: 7px;
+	margin-top: 10px;
 	font-size: 0.75rem;
-	font-weight: 800;
-	letter-spacing: 0.18em;
-	text-transform: uppercase;
-	padding: 7px 36px 7px 44px;
-	margin-left: -28px;
-	/* Left side: V-notch pointing inward; right side: pointed arrow tip */
-	clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 50%, 100% 100%, 14px 100%, 0% 50%);
-	box-shadow: 0 2px 12px rgba(255, 193, 18, 0.45);
-}
-
-.bio-text {
-	font-size: 1rem;
-	line-height: 1.75;
-	margin: 0;
-	color: var(--text-color);
-}
-
-.bio-interests-heading {
-	font-size: 0.7rem;
 	font-weight: 700;
-	letter-spacing: 0.14em;
+	color: var(--accent-color);
+	letter-spacing: 0.07em;
 	text-transform: uppercase;
-	color: var(--accent-color);
-	margin: 4px 0 0 0;
-	text-shadow: var(--etched-text-primary);
+	opacity: 0.8;
+	transition: opacity 0.2s ease;
 }
 
-.bio-tags {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
+.featured-card:hover .featured-card-cta {
+	opacity: 1;
 }
 
-.bio-tag {
-	font-size: 0.75rem;
-	color: var(--accent-color);
-	background: rgba(255, 193, 18, 0.08);
-	border: 1px solid rgba(255, 193, 18, 0.22);
-	border-radius: 20px;
-	padding: 3px 12px;
-	font-weight: 600;
-	letter-spacing: 0.03em;
+/* Slide-in keyframes */
+@keyframes featuredFromLeft {
+	from { transform: translateX(-120vw); opacity: 0; }
+	to   { transform: translateX(0);      opacity: 1; }
+}
+
+@keyframes featuredFromBelow {
+	from { transform: translateY(60px); opacity: 0; }
+	to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes featuredFromRight {
+	from { transform: translateX(120vw); opacity: 0; }
+	to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* Sequence: bottom-right first → top → bottom-left */
+.featured-grid.featured-animate .featured-card:nth-child(3) {
+	animation: featuredFromRight 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s both;
+}
+
+.featured-grid.featured-animate .featured-card:nth-child(1) {
+	animation: featuredFromLeft 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.38s both;
+}
+
+.featured-grid.featured-animate .featured-card:nth-child(2) {
+	animation: featuredFromLeft 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.52s both;
+}
+
+@media (max-width: 680px) {
+	.featured-grid {
+		grid-template-columns: 1fr;
+		max-width: 400px;
+	}
+
+	/* All cards full-width, top card no longer spans */
+	.featured-card:nth-child(1) {
+		grid-column: 1;
+		justify-self: stretch;
+		max-width: 100%;
+	}
+
+	/* All slide up from below on mobile */
+	.featured-card:nth-child(1),
+	.featured-card:nth-child(2),
+	.featured-card:nth-child(3) { transform: translateY(60px); }
+
+	.featured-grid.featured-animate .featured-card:nth-child(1) {
+		animation: featuredFromBelow 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s both;
+	}
+	.featured-grid.featured-animate .featured-card:nth-child(2) {
+		animation: featuredFromBelow 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.18s both;
+	}
+	.featured-grid.featured-animate .featured-card:nth-child(3) {
+		animation: featuredFromBelow 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.31s both;
+	}
 }
 
 /* ── Projects Section ── */
@@ -706,7 +803,9 @@ h1 { color: var(--accent-color); }
 	display: none;
 	max-width: 900px;
 	margin: 20px auto 0 auto;
-	padding: 20px;
+	padding: 20px 28px 40px;
+	font-family: var(--font-family);
+	color: var(--text-color);
 }
 
 .timeline {
@@ -986,4 +1085,349 @@ h1 { color: var(--accent-color); }
 	display: block !important;
 	animation: projectsSlideOutToBottom 0.6s ease-in forwards;
 	pointer-events: none;
+}
+
+/* ── Bio intro ── */
+.bio-intro {
+	font-size: 1rem;
+	line-height: 1.8;
+	color: var(--text-color);
+	margin: 0 0 16px;
+	opacity: 0.9;
+	max-width: 700px;
+}
+
+/* ── Timeline details ── */
+.timeline-details {
+	font-size: 0.85rem;
+	color: var(--text-color);
+	line-height: 1.7;
+	margin: 6px 0 0;
+	opacity: 0.8;
+}
+
+.timeline-content[data-size="1"] .timeline-details,
+.timeline-content[data-size="2"] .timeline-details {
+	display: none;
+}
+
+/* ── Project card link ── */
+.project-card-link {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
+
+.project-card-link:hover .project-card {
+	border-color: rgba(255, 193, 18, 0.45);
+	box-shadow:
+		0 12px 40px rgba(0, 0, 0, 0.4),
+		0 0 0 1px rgba(255, 193, 18, 0.15),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	cursor: pointer;
+}
+
+/* ── CV Section ── */
+#cv {
+	display: none;
+	padding: 40px 20px 60px;
+}
+
+/* Bar above the paper holding the download button */
+.cv-page-bar {
+	max-width: 780px;
+	margin: 0 auto 14px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.cv-download-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	font-family: var(--font-family);
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: #000;
+	background: var(--accent-color);
+	padding: 0.45rem 1.2rem;
+	border-radius: 6px;
+	text-shadow: none;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
+	box-shadow: 0 2px 12px rgba(255, 193, 18, 0.35);
+	letter-spacing: 0.03em;
+}
+
+.cv-download-btn:hover {
+	opacity: 0.85;
+	text-shadow: none;
+	color: #000;
+}
+
+/* The paper document */
+.cv-paper {
+	max-width: 780px;
+	margin: 0 auto;
+	background: #fafafa;
+	color: #1c1c1c;
+	padding: 52px 64px;
+	border-radius: 2px;
+	box-shadow:
+		0 2px 4px rgba(0, 0, 0, 0.15),
+		0 8px 40px rgba(0, 0, 0, 0.45);
+	font-family: var(--font-family);
+}
+
+/* Paper top: name, title, contact */
+.cv-paper-header {
+	text-align: center;
+	padding-bottom: 24px;
+	margin-bottom: 28px;
+	border-bottom: 2px solid #1c1c1c;
+}
+
+.cv-paper-name {
+	font-size: 2.2rem;
+	font-weight: 800;
+	color: #1c1c1c;
+	margin: 0 0 6px;
+	letter-spacing: 0.04em;
+	text-shadow: none;
+}
+
+.cv-paper-title {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #555;
+	margin: 0 0 14px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.cv-paper-contact {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 0;
+}
+
+/* Each contact item — separated by a centred dot */
+.cv-contact-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 0.78rem;
+	color: #444;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.cv-contact-item i {
+	font-size: 0.72rem;
+	color: #888;
+}
+
+/* Dot separator between contact items */
+.cv-contact-sep {
+	display: inline-block;
+	width: 3px;
+	height: 3px;
+	background: #bbb;
+	border-radius: 50%;
+	margin: 0 10px;
+	vertical-align: middle;
+	flex-shrink: 0;
+}
+
+/* Section layout inside the paper */
+.cv-section {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin-bottom: 28px;
+}
+
+.cv-section:last-child {
+	margin-bottom: 0;
+}
+
+.cv-section-heading {
+	font-size: 0.65rem;
+	font-weight: 800;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: #1c1c1c;
+	margin: 0 0 2px;
+	padding-bottom: 6px;
+	border-bottom: 1.5px solid #1c1c1c;
+	text-shadow: none;
+}
+
+/* Summary */
+.cv-summary {
+	font-size: 0.9rem;
+	line-height: 1.85;
+	color: #333;
+	margin: 0;
+}
+
+/* Skills */
+.cv-skills-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7px;
+}
+
+.cv-skill-tag {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: #2a2a2a;
+	background: #efefef;
+	border: 1px solid #d8d8d8;
+	border-radius: 3px;
+	padding: 3px 10px;
+	letter-spacing: 0.02em;
+}
+
+/* Experience entries */
+.cv-exp-item,
+.cv-edu-item {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding-bottom: 18px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.cv-exp-item:last-child,
+.cv-edu-item:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.cv-exp-header,
+.cv-edu-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.cv-exp-role,
+.cv-edu-degree {
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #1c1c1c;
+}
+
+.cv-exp-dates,
+.cv-edu-graduated {
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: #666;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.cv-exp-company,
+.cv-edu-school {
+	font-size: 0.83rem;
+	color: #555;
+	font-weight: 600;
+	font-style: italic;
+}
+
+.cv-exp-bullets {
+	margin: 6px 0 0;
+	padding-left: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.cv-exp-bullets li {
+	font-size: 0.865rem;
+	color: #333;
+	line-height: 1.65;
+}
+
+.cv-edu-notes {
+	font-size: 0.83rem;
+	color: #666;
+	line-height: 1.6;
+	margin: 2px 0 0;
+	font-style: italic;
+}
+
+@media (max-width: 860px) {
+	.cv-paper {
+		padding: 36px 32px;
+	}
+}
+
+@media (max-width: 540px) {
+	.cv-paper {
+		padding: 28px 20px;
+	}
+
+	.cv-paper-name {
+		font-size: 1.6rem;
+	}
+
+	.cv-exp-header,
+	.cv-edu-header {
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.cv-exp-dates,
+	.cv-edu-graduated {
+		color: #888;
+	}
+}
+
+/* ── Footer ── */
+.site-footer {
+	width: 100%;
+	padding: 2.5rem 2rem;
+	margin-top: 2rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.06);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.footer-inner {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.footer-label {
+	font-size: 0.9rem;
+	color: var(--text-color);
+	opacity: 0.65;
+}
+
+.footer-cta {
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: #000;
+	background: var(--accent-color);
+	padding: 0.5rem 1.5rem;
+	border-radius: 8px;
+	text-shadow: none;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
+	box-shadow: 0 2px 12px rgba(255, 193, 18, 0.3);
+}
+
+.footer-cta:hover {
+	opacity: 0.85;
+	text-shadow: none;
+	color: #000;
 }
