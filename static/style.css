@@ -302,6 +302,12 @@ h1 { color: var(--accent-color); }
 	box-shadow: 0 0 8px rgba(255, 193, 18, 0.4);
 }
 
+.bc-social-img {
+	width: 22px;
+	height: 22px;
+	object-fit: contain;
+}
+
 /* Style for the logo in the business card */
 .bc-logo {
     position: absolute;
@@ -336,23 +342,57 @@ h1 { color: var(--accent-color); }
 	color: var(--text-color);
 }
 
-/* ── Section Title ── */
+/* ── Section Title ribbon ── */
 .section-title {
-	text-align: center;
-	font-size: 0.7rem;
-	font-weight: 700;
-	letter-spacing: 0.2em;
+	position: relative;
+	display: inline-flex;
+	align-items: stretch;
+	margin: 0 0 24px 64px;
+	padding: 0;
+	user-select: none;
+}
+
+/* Left notch */
+.section-title::before {
+	content: '';
+	width: 0;
+	height: 0;
+	border-top: 14px solid transparent;
+	border-bottom: 14px solid transparent;
+	border-right: 12px solid var(--accent-color);
+	filter: drop-shadow(-3px 2px 6px rgba(255, 193, 18, 0.35));
+}
+
+/* Right notch */
+.section-title::after {
+	content: '';
+	width: 0;
+	height: 0;
+	border-top: 14px solid transparent;
+	border-bottom: 14px solid transparent;
+	border-left: 12px solid var(--accent-color);
+	filter: drop-shadow(3px 2px 6px rgba(255, 193, 18, 0.35));
+}
+
+.section-title span {
+	display: inline-flex;
+	align-items: center;
+	background: var(--accent-color);
+	box-shadow: 0 2px 18px rgba(255, 193, 18, 0.45);
+	padding: 0 22px;
+	font-size: 0.65rem;
+	font-weight: 800;
+	letter-spacing: 0.25em;
 	text-transform: uppercase;
-	color: var(--text-color);
-	opacity: 0.45;
-	margin: 0 auto 20px;
+	color: #000;
+	text-shadow: none;
 }
 
 /* ── Featured Cards ── */
 .featured-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 20px;
+	gap: 36px;
 	justify-items: stretch;
 	max-width: 860px;
 	margin: 0 auto;

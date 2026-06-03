@@ -24,7 +24,7 @@
             "url": "mailto:prebish.j@outlook.com"
         },
         {
-            "icon": "fab fa-fiverr",
+            "img": "static/images/fiverr-logo.svg",
             "label": "Fiverr",
             "url": "https://www.fiverr.com/prebish"
         }

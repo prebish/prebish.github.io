@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-labelledby="title">
+	<title id="title">Fiverr</title>
+	<circle cx="12" cy="12" r="12" fill="#ffc112"/>
+	<text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Montserrat,Inter,Arial,Helvetica,sans-serif" font-weight="700" font-size="13" fill="#ffffff">f</text>
+</svg>
