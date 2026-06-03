@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joel Prebish – Software Engineer at PNC Bank. Explore my projects, work history, and background.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Joel Prebish</title>
     <link rel="stylesheet" href="static/style.css">
@@ -18,8 +19,9 @@
                 <span class="brand-tagline">Software Engineer | Developer</span>
             </div>
             <nav class="header-nav">
-                <a href="#bio" class="nav-link active" >Featured</a>
+                <a href="#bio" class="nav-link active">Featured</a>
                 <a href="#projects" class="nav-link">Projects</a>
+                <a href="#timeline" class="nav-link">Timeline</a>
                 <a href="#cv" class="nav-link">CV</a>
             </nav>
         </div>
@@ -29,6 +31,10 @@
     <div class="card-separator"></div>
 
     <section id="bio" class="bio-section">
+        <div class="featured-grid"></div>
+    </section>
+
+    <section id="timeline" class="bio-section">
         <template id="milestone-template">
             <div class="timeline-item">
                 <div class="timeline-icon"><i></i></div>
@@ -37,6 +43,7 @@
                     <h3 class="timeline-title"></h3>
                     <span class="timeline-org"></span>
                     <p class="timeline-description"></p>
+                    <p class="timeline-details"></p>
                 </div>
             </div>
         </template>
@@ -83,6 +90,52 @@
     </section>
 
     <section id="cv" class="bio-section">
+        <template id="cv-experience-template">
+            <div class="cv-exp-item">
+                <div class="cv-exp-header">
+                    <span class="cv-exp-role"></span>
+                    <span class="cv-exp-dates"></span>
+                </div>
+                <span class="cv-exp-company"></span>
+                <ul class="cv-exp-bullets"></ul>
+            </div>
+        </template>
+        <template id="cv-education-template">
+            <div class="cv-edu-item">
+                <div class="cv-edu-header">
+                    <span class="cv-edu-degree"></span>
+                    <span class="cv-edu-graduated"></span>
+                </div>
+                <span class="cv-edu-school"></span>
+                <p class="cv-edu-notes"></p>
+            </div>
+        </template>
+        <div class="cv-page-bar">
+            <a class="cv-download-btn" href="#" download><i class="fas fa-download"></i> Download PDF</a>
+        </div>
+        <div class="cv-paper">
+            <div class="cv-paper-header">
+                <h1 class="cv-paper-name"></h1>
+                <p class="cv-paper-title"></p>
+                <div class="cv-paper-contact"></div>
+            </div>
+            <div class="cv-section cv-summary-section">
+                <h2 class="cv-section-heading">Summary</h2>
+                <p class="cv-summary"></p>
+            </div>
+            <div class="cv-section cv-skills-section">
+                <h2 class="cv-section-heading">Skills</h2>
+                <div class="cv-skills-list"></div>
+            </div>
+            <div class="cv-section cv-experience-section">
+                <h2 class="cv-section-heading">Experience</h2>
+                <div class="cv-experience-list"></div>
+            </div>
+            <div class="cv-section cv-education-section">
+                <h2 class="cv-section-heading">Education</h2>
+                <div class="cv-education-list"></div>
+            </div>
+        </div>
     </section>
     <script src="static/style.js"></script>
 </body>
