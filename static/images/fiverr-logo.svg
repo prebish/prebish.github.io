@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-labelledby="title">
-	<title id="title">Fiverr</title>
-	<circle cx="12" cy="12" r="12" fill="#ffc112"/>
-	<text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Montserrat,Inter,Arial,Helvetica,sans-serif" font-weight="700" font-size="13" fill="#ffffff">f</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="Fiverr">
+	<title>Fiverr</title>
+	<circle cx="12" cy="12" r="12" fill="#1DBF73"/>
+	<!-- "fi" ligature from the Fiverr wordmark (Simple Icons, CC0) -->
+	<path fill="#fff" transform="translate(7.5 -7.08) scale(1.6)" d="M0.908 15.44H2.51v-3.558h1.524v3.558h1.591v-4.874H2.51v-.302c0-.332.235-.536.606-.536h.918V8.412H2.85c-1.162 0-1.943.712-1.943 1.755v.4H0v1.316h.908v3.558z"/>
 </svg>

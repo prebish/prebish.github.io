@@ -1150,6 +1150,27 @@ header::after {
 	to   { transform: scaleX(1); opacity: 1; }
 }
 
+/* Keep tab-switch animations on the compositor: backdrop blur has to
+   re-sample its backdrop every frame while a layer moves, which makes
+   the slide choppy. Suspend it for the 600ms the animation classes
+   are on (JS removes them when the transition ends). */
+#projects.projects-enter,
+#projects.projects-exit,
+#business-card.card-exit,
+#business-card.card-enter {
+	will-change: transform, opacity;
+}
+
+#projects.projects-enter .project-card,
+#projects.projects-exit .project-card,
+#projects.projects-enter .projects-controls,
+#projects.projects-exit .projects-controls,
+#business-card.card-exit,
+#business-card.card-enter {
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+}
+
 #business-card.card-exit {
 	animation: cardSlideUpExit 0.6s ease-in forwards;
 	pointer-events: none;
