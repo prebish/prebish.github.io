@@ -1,7 +1,7 @@
 [
     {
         "title": "Djrive",
-        "description": "Add a description of what Djrive does here.",
+        "description": "TODO(Joel): describe Djrive here.",
         "url": "https://djrive.com",
         "icon": "fas fa-compact-disc",
         "label": "djrive.com"
@@ -15,7 +15,7 @@
     },
     {
         "title": "Tutoring",
-        "description": "Add a description of your tutoring resources here.",
+        "description": "TODO(Joel): describe tutoring here.",
         "url": "#",
         "icon": "fas fa-graduation-cap",
         "label": "Coming soon"

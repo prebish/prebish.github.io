@@ -5,6 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Joel Prebish – Software Engineer at PNC Bank. Explore my projects, work history, and background.">
+    <meta name="theme-color" content="#0e0e0e">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://prebish.github.io/">
+    <meta property="og:title" content="Joel Prebish – Software Engineer">
+    <meta property="og:description" content="Software Engineer at PNC Bank. Explore my projects, work history, and background.">
+    <!-- TODO: og:image — add a 1200x630 preview image and reference it here -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Joel Prebish – Software Engineer">
+    <meta name="twitter:description" content="Software Engineer at PNC Bank. Explore my projects, work history, and background.">
+
+    <link rel="icon" href="static/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Joel Prebish</title>
     <link rel="stylesheet" href="static/style.css">
@@ -15,7 +30,7 @@
     <header>
         <div class="header-container">
             <div class="header-brand">
-                <span class="brand-name">Joel Prebish</span>
+                <h1 class="brand-name">Joel Prebish</h1>
                 <span class="brand-tagline">Software Engineer | Developer</span>
             </div>
             <nav class="header-nav">
@@ -26,12 +41,15 @@
             </nav>
         </div>
     </header>
-    <div id="business-card" class="steam-lift" title="Business Card"></div>
+    <div id="business-card" aria-label="Business card"></div>
 
     <div class="card-separator"></div>
 
     <section id="bio" class="bio-section">
-        <h2 class="section-title"><span>Highlights</span></h2>
+        <h2 class="section-title"><span>Featured</span></h2>
+        <!-- TODO: Joel — review/replace intro copy -->
+        <p class="bio-intro">I'm a software engineer at PNC Bank in Pittsburgh, PA. Here you'll find the
+            projects I'm building, my open-source work on GitHub, and where my career has taken me so far.</p>
         <div class="featured-grid"></div>
     </section>
 
@@ -98,7 +116,25 @@
         <div class="cv-pdf-viewer">
             <iframe src="Joel_Prebish_Resume_public.pdf" class="cv-pdf-iframe" title="Joel Prebish Resume"></iframe>
         </div>
+        <!-- Shown instead of the iframe on small screens, where embedded PDFs don't render -->
+        <div class="cv-mobile-card">
+            <i class="fas fa-file-pdf cv-mobile-icon"></i>
+            <h3 class="cv-mobile-title">Resume</h3>
+            <p class="cv-mobile-note">The inline preview isn't available on small screens — view or download the PDF instead.</p>
+            <div class="cv-mobile-actions">
+                <a class="cv-download-btn" href="Joel_Prebish_Resume_public.pdf" target="_blank" rel="noopener"><i class="fas fa-eye"></i> View PDF</a>
+                <a class="cv-download-btn cv-btn-outline" href="Joel_Prebish_Resume_public.pdf" download><i class="fas fa-download"></i> Download</a>
+            </div>
+        </div>
     </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="footer-label">© 2026 Joel Prebish · Pittsburgh, PA</span>
+            <a class="footer-cta" href="mailto:prebish.j@outlook.com"><i class="fas fa-envelope"></i> Get in Touch</a>
+        </div>
+    </footer>
+
     <script src="static/style.js"></script>
 </body>
 
