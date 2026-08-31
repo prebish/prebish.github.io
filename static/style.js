@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function initTilt() {
         if (!card || prefersReducedMotion) return;
 
-        const MAX_TILT = 10; // Maximum tilt angle in degrees
-        const PERSPECTIVE = 1000; // Perspective distance in pixels
-        const HOVER_SCALE = 1.02; // Scale factor on hover
+        const MAX_TILT = 6; // Maximum tilt angle in degrees (subtle)
+        const PERSPECTIVE = 1200; // Perspective distance in pixels
+        const HOVER_SCALE = 1.01; // Scale factor on hover
 
         let cardRect = card.getBoundingClientRect();
 
@@ -165,11 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const allSections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
     const businessCard = card;
     const cardSeparator = document.querySelector('.card-separator');
-    const projectsSection = document.getElementById('projects');
     const VALID_SECTIONS = ['bio', 'projects', 'timeline', 'cv'];
-    let projectsActive = false;
-    let isAnimating = false;
-    const CARD_ANIM_DURATION = 600;
 
     function setActiveLink(id) {
         navLinks.forEach(link => {
@@ -177,147 +173,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function activateProjectsSection(animate) {
-        if (isAnimating || projectsActive) return;
-
-        // Clear any inline transform left by the 3D tilt effect
-        if (businessCard) businessCard.style.transform = '';
-
-        // Hide all content sections
-        allSections.forEach(section => {
-            section.style.display = 'none';
-            section.classList.remove('section-fade');
+    // The business card + separator are the hero for the home (Featured) view
+    // only; every other tab is its own focused page.
+    function setHeroVisible(visible, animate) {
+        [businessCard, cardSeparator].forEach(el => {
+            if (!el) return;
+            el.classList.remove('hero-fade');
+            if (visible) {
+                el.style.display = '';
+                if (el === businessCard) el.style.transform = ''; // clear tilt leftovers
+                if (animate) { void el.offsetWidth; el.classList.add('hero-fade'); }
+            } else {
+                el.style.display = 'none';
+            }
         });
-
-        if (!animate) {
-            if (businessCard) businessCard.style.display = 'none';
-            if (cardSeparator) cardSeparator.style.display = 'none';
-            if (projectsSection) projectsSection.style.display = 'block';
-            projectsActive = true;
-            window.scrollTo(0, 0);
-            return;
-        }
-
-        isAnimating = true;
-
-        // Ensure viewport is at the top so the animation originates correctly
-        window.scrollTo(0, 0);
-
-        // Prevent scrollbar while the off-screen element animates into view
-        document.documentElement.style.overflow = 'hidden';
-
-        // Animate card and separator upward off-screen
-        if (businessCard) businessCard.classList.add('card-exit');
-        if (cardSeparator) cardSeparator.classList.add('card-exit');
-
-        // Reveal projects with slide-in-from-bottom animation
-        if (projectsSection) projectsSection.classList.add('projects-enter');
-
-        projectsActive = true;
-
-        setTimeout(() => {
-            if (businessCard) {
-                businessCard.classList.remove('card-exit');
-                businessCard.style.display = 'none';
-            }
-            if (cardSeparator) {
-                cardSeparator.classList.remove('card-exit');
-                cardSeparator.style.display = 'none';
-            }
-            if (projectsSection) {
-                projectsSection.classList.remove('projects-enter');
-                projectsSection.style.display = 'block';
-            }
-            document.documentElement.style.overflow = '';
-            isAnimating = false;
-        }, CARD_ANIM_DURATION);
-    }
-
-    function deactivateProjectsSection(callback, animate) {
-        if (isAnimating) return;
-        if (!projectsActive) {
-            if (callback) callback();
-            return;
-        }
-        projectsActive = false;
-
-        if (!animate) {
-            if (projectsSection) projectsSection.style.display = 'none';
-            if (businessCard) {
-                businessCard.style.display = '';
-                businessCard.style.transform = '';
-            }
-            if (cardSeparator) cardSeparator.style.display = '';
-            if (callback) callback();
-            return;
-        }
-
-        isAnimating = true;
-
-        // Ensure viewport is at the top so the animation originates correctly
-        window.scrollTo(0, 0);
-
-        // Prevent scrollbar while elements animate
-        document.documentElement.style.overflow = 'hidden';
-
-        // Animate projects sliding down off-screen
-        if (projectsSection) projectsSection.classList.add('projects-exit');
-
-        // Restore card/separator and animate them sliding down from above
-        if (businessCard) {
-            businessCard.style.display = '';
-            businessCard.style.transform = '';
-            businessCard.classList.remove('card-exit');
-            businessCard.classList.add('card-enter');
-        }
-        if (cardSeparator) {
-            cardSeparator.style.display = '';
-            cardSeparator.classList.remove('card-exit');
-            cardSeparator.classList.add('card-enter');
-        }
-
-        setTimeout(() => {
-            if (businessCard) businessCard.classList.remove('card-enter');
-            if (cardSeparator) cardSeparator.classList.remove('card-enter');
-            if (projectsSection) {
-                projectsSection.classList.remove('projects-exit');
-                projectsSection.style.display = 'none';
-            }
-            document.documentElement.style.overflow = '';
-            isAnimating = false;
-            if (callback) callback();
-        }, CARD_ANIM_DURATION);
     }
 
     function showSection(id, { animate = true } = {}) {
         const target = document.getElementById(id);
         if (!target) return;
         const anim = animate && !prefersReducedMotion;
+        const isHome = id === 'bio';
 
-        if (id === 'projects') {
-            activateProjectsSection(anim);
-            return;
+        allSections.forEach(section => {
+            section.style.display = 'none';
+            section.classList.remove('section-fade');
+        });
+
+        setHeroVisible(isHome, anim);
+
+        target.style.display = 'block';
+        if (anim) {
+            void target.offsetWidth; // restart the entrance animation
+            target.classList.add('section-fade');
         }
+        if (isHome) triggerFeaturedAnimation();
 
-        const switchToSection = () => {
-            allSections.forEach(section => {
-                section.style.display = 'none';
-                section.classList.remove('section-fade');
-            });
-            target.style.display = 'block';
-            if (anim) {
-                void target.offsetWidth; // restart the entrance animation
-                target.classList.add('section-fade');
-            }
-            if (id === 'bio') triggerFeaturedAnimation();
-            target.scrollIntoView({ behavior: anim ? 'smooth' : 'auto', block: 'start' });
-        };
-
-        if (projectsActive) {
-            deactivateProjectsSection(switchToSection, anim);
-        } else {
-            switchToSection();
-        }
+        window.scrollTo({ top: 0, behavior: anim ? 'smooth' : 'auto' });
     }
 
     function initNav() {
@@ -327,7 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!href || !href.startsWith('#') || href === '#') return;
 
                 e.preventDefault();
-                if (isAnimating) return;
 
                 const targetId = href.substring(1);
                 if (!document.getElementById(targetId)) return;
@@ -348,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Handle manual hash edits / external hash links
         window.addEventListener('hashchange', () => {
             const id = location.hash.replace('#', '') || 'bio';
-            if (!VALID_SECTIONS.includes(id) || isAnimating) return;
+            if (!VALID_SECTIONS.includes(id)) return;
             setActiveLink(id);
             showSection(id);
         });

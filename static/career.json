@@ -3,8 +3,7 @@
         "date": "2025-03-06",
         "title": "Software Engineer",
         "organization": "PNC Bank",
-        "description": "Joined PNC Bank as an L2 SWE.",
-        "details": "Add 1–2 sentences of context here — technologies used, team size, key projects, and measurable impact.",
+        "description": "Joined PNC Bank as an L2 Software Engineer, building and maintaining internal applications.",
         "icon": "fas fa-code",
         "size": 3
     },
@@ -12,8 +11,7 @@
         "date": "2024-12-22",
         "title": "Bachelor of Science in Computer Science",
         "organization": "University of Pittsburgh",
-        "description": "Graduated with a focus on software, algorithms and data structures.",
-        "details": "Add any notable coursework, projects, or academic achievements here.",
+        "description": "Graduated with a focus on software, algorithms, and data structures.",
         "icon": "fas fa-graduation-cap",
         "size": 3
     },
@@ -21,8 +19,7 @@
         "date": "2023-12-01",
         "title": "Freelance Software Developer",
         "organization": "Self",
-        "description": "Kickstarted my career by taking on freelance projects.",
-        "details": "Add details about freelance work here — types of projects, clients, and what you built.",
+        "description": "Kickstarted my career taking on freelance software projects.",
         "icon": "fas fa-code",
         "size": 2
     },

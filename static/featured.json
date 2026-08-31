@@ -1,10 +1,10 @@
 [
     {
         "title": "Djrive",
-        "description": "TODO(Joel): describe Djrive here.",
+        "description": "A project of mine, live at djrive.com. Take a look to see what I've been building.",
         "url": "https://djrive.com",
         "icon": "fas fa-compact-disc",
-        "label": "djrive.com"
+        "label": "Visit djrive.com"
     },
     {
         "title": "Consulting",
@@ -15,7 +15,7 @@
     },
     {
         "title": "Tutoring",
-        "description": "TODO(Joel): describe tutoring here.",
+        "description": "One-on-one help with programming and computer-science fundamentals for students and career switchers.",
         "url": "#",
         "icon": "fas fa-graduation-cap",
         "label": "Coming soon"
