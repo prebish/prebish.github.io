@@ -3,13 +3,16 @@
     "title": "L2 Software Engineer",
     "tagline": "Building for the web — and sharing the code.",
     "location": "Pittsburgh, PA",
+    "email": "prebish.j@outlook.com",
+    "website": "prebish.github.io",
+    "websiteUrl": "https://prebish.github.io",
     "logo": {
         "src": "static/images/pnc-logo.png",
         "alt": "PNC Bank Logo"
     },
     "socials": [
         {
-            "icon": "fab fa-linkedin",
+            "icon": "fab fa-linkedin-in",
             "label": "LinkedIn",
             "url": "https://www.linkedin.com/in/joelprebish"
         },
@@ -17,11 +20,6 @@
             "icon": "fab fa-github",
             "label": "GitHub",
             "url": "https://github.com/prebish"
-        },
-        {
-            "icon": "fas fa-envelope",
-            "label": "Email",
-            "url": "mailto:prebish.j@outlook.com"
         },
         {
             "img": "static/images/fiverr-logo.svg",

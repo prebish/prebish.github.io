@@ -38,30 +38,77 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderBusinessCard(data) {
         card.innerHTML = '';
 
+        // Brand mark (employer logo), pinned to the top-right corner
+        if (data.logo) {
+            const logoWrap = document.createElement('div');
+            logoWrap.className = 'bc-logo';
+            const img = document.createElement('img');
+            img.src = data.logo.src;
+            img.alt = data.logo.alt || '';
+            img.title = data.logo.alt || '';
+            logoWrap.appendChild(img);
+            card.appendChild(logoWrap);
+        }
+
+        // Identity: name + title + tagline
+        const identity = document.createElement('div');
+        identity.className = 'bc-identity';
+
         const name = document.createElement('div');
         name.className = 'bc-name';
         name.textContent = data.name;
-        card.appendChild(name);
+        identity.appendChild(name);
 
-        const title = document.createElement('div');
-        title.className = 'bc-title';
-        title.textContent = data.title;
-        card.appendChild(title);
+        if (data.title) {
+            const title = document.createElement('div');
+            title.className = 'bc-title';
+            title.textContent = data.title;
+            identity.appendChild(title);
+        }
 
         if (data.tagline) {
             const tagline = document.createElement('div');
             tagline.className = 'bc-tagline';
             tagline.textContent = data.tagline;
-            card.appendChild(tagline);
+            identity.appendChild(tagline);
+        }
+        card.appendChild(identity);
+
+        // Lower block, anchored to the card bottom: divider + contact + socials
+        const lower = document.createElement('div');
+        lower.className = 'bc-lower';
+
+        const divider = document.createElement('div');
+        divider.className = 'bc-divider';
+        lower.appendChild(divider);
+
+        // Contact details — the lines that make it read as a business card
+        const contacts = [];
+        if (data.location) contacts.push({ icon: 'fas fa-location-dot', text: data.location });
+        if (data.email) contacts.push({ icon: 'fas fa-envelope', text: data.email, url: 'mailto:' + data.email });
+        if (data.website) contacts.push({ icon: 'fas fa-globe', text: data.website, url: data.websiteUrl || ('https://' + data.website) });
+
+        if (contacts.length) {
+            const contact = document.createElement('div');
+            contact.className = 'bc-contact';
+            contacts.forEach(c => {
+                const item = document.createElement(c.url ? 'a' : 'div');
+                item.className = 'bc-contact-item';
+                if (c.url) {
+                    item.href = c.url;
+                    if (!c.url.startsWith('mailto:')) { item.target = '_blank'; item.rel = 'noopener noreferrer'; }
+                }
+                const icon = document.createElement('i');
+                icon.className = c.icon;
+                const span = document.createElement('span');
+                span.textContent = c.text;
+                item.append(icon, span);
+                contact.appendChild(item);
+            });
+            lower.appendChild(contact);
         }
 
-        if (data.location) {
-            const loc = document.createElement('div');
-            loc.className = 'bc-location';
-            loc.textContent = data.location;
-            card.appendChild(loc);
-        }
-
+        // Social / profile links
         if (data.socials && data.socials.length) {
             const socials = document.createElement('div');
             socials.className = 'bc-socials';
@@ -83,19 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 socials.appendChild(a);
             });
-            card.appendChild(socials);
+            lower.appendChild(socials);
         }
 
-        if (data.logo) {
-            const logoWrap = document.createElement('div');
-            logoWrap.className = 'bc-logo';
-            const img = document.createElement('img');
-            img.src = data.logo.src;
-            img.alt = data.logo.alt || '';
-            img.title = data.logo.alt || '';
-            logoWrap.appendChild(img);
-            card.appendChild(logoWrap);
-        }
+        card.appendChild(lower);
     }
 
     function initBusinessCard() {
