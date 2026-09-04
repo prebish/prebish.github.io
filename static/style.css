@@ -220,22 +220,21 @@ header {
 
 /* ── Business card (hero) ── */
 #business-card {
-	/* Fluid below 542px so the card never clips on phones */
-	width: min(510px, calc(100vw - 32px));
-	height: 280px;
+	/* Landscape business-card proportions (~1.75:1); fluid on phones */
+	width: min(520px, calc(100vw - 32px));
+	height: 300px;
 	background:
-		linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)) ,
+		linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
 		var(--surface-1);
 	border: 1px solid var(--border);
 	border-top-color: var(--border-strong);
 	border-radius: var(--radius-lg);
-	padding: var(--space-5);
+	padding: var(--space-6);
 	box-shadow: var(--shadow-lg);
 	transition: transform 0.15s var(--ease), box-shadow 0.3s var(--ease);
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
+	align-items: stretch;
 	font-family: var(--font-family);
 	color: var(--text-secondary);
 	margin-inline: auto;
@@ -259,58 +258,115 @@ header {
 	);
 }
 
-/* Business card content styling */
+/* ── Identity ── */
+.bc-identity {
+	display: flex;
+	flex-direction: column;
+	padding-right: 88px; /* leave room for the corner brand mark */
+}
+
 .bc-name {
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	font-weight: 700;
 	color: var(--text-primary);
-	margin-bottom: var(--space-1);
 	letter-spacing: -0.01em;
+	line-height: 1.15;
 }
+
 .bc-title {
-	font-size: 0.95rem;
-	font-weight: 600;
+	margin-top: var(--space-2);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
 	color: var(--accent);
-	margin-bottom: var(--space-3);
 }
+
 .bc-tagline {
-	font-size: 0.85rem;
+	margin-top: var(--space-3);
+	font-size: 0.82rem;
 	color: var(--text-secondary);
-	margin-bottom: var(--space-1);
+	max-width: 34ch;
 }
-.bc-location {
-	font-size: 0.85rem;
-	color: var(--text-tertiary);
-	margin-top: var(--space-1);
-}
-.bc-socials {
-	padding-top: var(--space-3);
+
+/* ── Lower block: divider + contact + socials, anchored to the bottom ── */
+.bc-lower {
 	margin-top: auto;
 	display: flex;
+	flex-direction: column;
+	gap: var(--space-3);
+}
+
+/* Gold "tab" then a hairline — a classic business-card motif */
+.bc-divider {
+	height: 1px;
+	width: 100%;
+	background: linear-gradient(
+		to right,
+		var(--accent-strong) 0,
+		var(--accent-strong) 34px,
+		var(--border-strong) 34px,
+		var(--border-strong) 100%
+	);
+}
+
+.bc-contact {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-1);
+}
+
+.bc-contact-item {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2);
+	width: fit-content;
+	font-size: 0.8rem;
+	font-weight: 500;
+	color: var(--text-secondary);
+	transition: color 0.2s var(--ease);
+}
+
+a.bc-contact-item:hover {
+	color: var(--accent);
+}
+
+.bc-contact-item i {
+	width: 14px;
+	text-align: center;
+	font-size: 0.78rem;
+	color: var(--accent);
+	flex-shrink: 0;
+}
+
+.bc-socials {
+	display: flex;
 	flex-direction: row;
-	font-family: var(--font-family);
 	gap: var(--space-2);
 }
+
 .bc-socials a {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 40px;
-	height: 40px;
-	font-size: 1.15rem;
+	width: 34px;
+	height: 34px;
+	font-size: 1rem;
 	color: var(--text-secondary);
 	text-decoration: none;
+	border: 1px solid var(--border);
 	border-radius: var(--radius-sm);
-	transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
+	transition: color 0.2s var(--ease), background-color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 .bc-socials a:hover {
 	color: var(--accent);
 	background-color: var(--accent-soft);
+	border-color: var(--accent-line);
 }
 
 .bc-social-img {
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
 	object-fit: contain;
 	/* Neutralize so the logo reads with the mono icon set; recolors on hover */
 	filter: grayscale(1) opacity(0.8);
@@ -320,13 +376,13 @@ header {
 	filter: grayscale(0) opacity(1);
 }
 
-/* PNC (or employer) logo on the business card */
+/* Employer brand mark, corner-pinned */
 .bc-logo {
 	position: absolute;
-	top: var(--space-4);
-	right: var(--space-4);
-	width: 84px;
-	height: 84px;
+	top: var(--space-5);
+	right: var(--space-5);
+	width: 68px;
+	height: 68px;
 	opacity: 0.9;
 }
 
@@ -336,23 +392,39 @@ header {
 	object-fit: contain;
 }
 
-/* Make card content centered for small screens */
+/* Small screens: center everything, logo above the name */
 @media (max-width: 420px) {
 	#business-card {
-		align-items: center;
-		text-align: center;
 		width: 92%;
 		height: auto;
 		padding: var(--space-5);
+		align-items: center;
+		text-align: center;
 	}
-	.bc-name { font-size: 1.25rem; }
-	.bc-socials { justify-content: center; }
-
+	.bc-identity {
+		align-items: center;
+		padding-right: 0;
+	}
+	.bc-lower {
+		width: 100%;
+		align-items: center;
+		margin-top: var(--space-5);
+	}
+	.bc-contact {
+		align-items: center;
+	}
+	.bc-divider {
+		width: 60%;
+		background: linear-gradient(to right, transparent, var(--accent-line), transparent);
+	}
+	.bc-socials {
+		justify-content: center;
+	}
 	.bc-logo {
-		width: 52px;
-		height: 52px;
-		top: var(--space-3);
-		right: var(--space-3);
+		position: static;
+		margin: 0 auto var(--space-3);
+		width: 48px;
+		height: 48px;
 	}
 }
 
