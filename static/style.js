@@ -247,185 +247,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Projects ──
 
-    // Language color map for dot indicators
-    const langColors = {
-        JavaScript: '#f1e05a', Python: '#3572A5', TypeScript: '#3178c6',
-        HTML: '#e34c26', CSS: '#563d7c', Java: '#b07219', 'C++': '#f34b7d',
-        C: '#555555', 'C#': '#178600', Go: '#00ADD8', Ruby: '#701516',
-        Rust: '#dea584', Shell: '#89e051', PHP: '#4F5D95', Swift: '#F05138',
-        Kotlin: '#A97BFF', Dart: '#00B4AB', Vue: '#41b883', SCSS: '#c6538c'
-    };
-
     function formatDate(dateStr) {
         if (!dateStr) return 'N/A';
         return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
     function initProjects() {
-        const projectTemplate = document.getElementById('project-template');
-        const projectsGrid = document.querySelector('.projects-grid');
-        if (!projectTemplate || !projectsGrid) return;
+        const spotlightTemplate = document.getElementById('spotlight-template');
+        const spotlightGrid = document.querySelector('.spotlight-grid');
+        const introEl = document.querySelector('.projects-intro');
 
-        const REPOS_URL = 'https://api.github.com/users/prebish/repos';
-        const EXCLUDED_REPOS = ['prebish', 'prebish.github.io'];
+        function makeLink(href, label, iconClass, className) {
+            const a = document.createElement('a');
+            a.href = href;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.className = className;
+            a.innerHTML = `<i class="${iconClass}"></i> <span>${label}</span>`;
+            return a;
+        }
+
+        // ── Curated spotlight (authored, from projects.json) ──
+        function renderSpotlight(data) {
+            if (introEl && data.intro) introEl.textContent = data.intro;
+            if (!spotlightTemplate || !spotlightGrid || !Array.isArray(data.spotlight)) return;
+            spotlightGrid.innerHTML = '';
+            data.spotlight.forEach(p => {
+                const node = spotlightTemplate.content.cloneNode(true);
+
+                node.querySelector('.spotlight-icon').className = `${p.icon || 'fas fa-code'} spotlight-icon`;
+
+                const status = node.querySelector('.spotlight-status');
+                if (p.status) {
+                    status.textContent = p.status;
+                    status.classList.add(`status-${p.status.toLowerCase().replace(/\s+/g, '-')}`);
+                } else {
+                    status.remove();
+                }
+
+                node.querySelector('.spotlight-name').textContent = p.name || '';
+                node.querySelector('.spotlight-blurb').textContent = p.blurb || '';
+
+                const highlight = node.querySelector('.spotlight-highlight');
+                if (p.highlight) {
+                    node.querySelector('.spotlight-highlight-text').textContent = p.highlight;
+                } else {
+                    highlight.remove();
+                }
+
+                const tech = node.querySelector('.spotlight-tech');
+                if (Array.isArray(p.tech) && p.tech.length) {
+                    p.tech.forEach(t => {
+                        const chip = document.createElement('span');
+                        chip.className = 'tech-chip';
+                        chip.textContent = t;
+                        tech.appendChild(chip);
+                    });
+                } else {
+                    tech.remove();
+                }
+
+                const links = node.querySelector('.spotlight-links');
+                if (p.demo) links.appendChild(makeLink(p.demo, 'Visit', 'fas fa-arrow-up-right-from-square', 'spotlight-link primary'));
+                if (p.repo) links.appendChild(makeLink(p.repo, 'Code', 'fab fa-github', 'spotlight-link'));
+                if (!links.children.length) links.remove();
+
+                spotlightGrid.appendChild(node);
+            });
+        }
+
+        if (spotlightGrid) {
+            fetch('static/projects.json')
+                .then(r => r.json())
+                .then(renderSpotlight)
+                .catch(err => console.error('Error loading projects data:', err));
+        }
+
+        // ── "More on GitHub" backstop (auto-pulled, deliberately secondary) ──
+        const moreList = document.querySelector('.projects-more-list');
+        const moreNote = document.querySelector('.projects-more-note');
+        if (!moreList) return;
+
+        const REPOS_URL = 'https://api.github.com/users/prebish/repos?per_page=100&sort=pushed';
         const CACHE_KEY = 'gh-repos-cache';
         const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+        // Repos already featured in the spotlight, plus the profile + this site,
+        // are hidden from the backstop so it doesn't repeat what's above.
+        const SPOTLIGHT_REPOS = ['cpu2247-schematic', 'lzw-compression-tool', 'boggle-solver', 'mips-classic-frogger'];
+        const EXCLUDED_REPOS = ['prebish', 'prebish.github.io', 'prebish.github.io.old', ...SPOTLIGHT_REPOS];
 
-        let reposData = [];
-        let selectedTags = new Set();
-        let searchQuery = '';
-
-        function showStatus(iconClass, html) {
-            projectsGrid.innerHTML = '';
-            const status = document.createElement('div');
-            status.className = 'projects-status';
-            status.innerHTML = `<i class="${iconClass}"></i>${html}`;
-            projectsGrid.appendChild(status);
-        }
-
-        function renderRepos(repos) {
-            if (!repos.length) {
-                showStatus('fas fa-search', 'No projects match your search or filters.');
-                return;
-            }
-            projectsGrid.innerHTML = '';
-            repos.forEach(repo => {
-                const projectCard = projectTemplate.content.cloneNode(true);
-                projectCard.querySelector('.project-name').textContent = repo.name;
-                projectCard.querySelector('.project-description').textContent = repo.description || 'No description provided.';
-
-                // Show lock for private repos
-                const projectLock = projectCard.querySelector('.project-lock');
-                if (repo.private && projectLock) {
-                    projectLock.style.display = 'inline-flex';
-                }
-
-                // Language
-                const langName = projectCard.querySelector('.lang-name');
-                const langDot = projectCard.querySelector('.lang-dot');
-                if (repo.language) {
-                    langName.textContent = repo.language;
-                    langDot.style.background = langColors[repo.language] || '#ccc';
-                } else {
-                    projectCard.querySelector('.project-language').style.display = 'none';
-                }
-
-                // Stars & forks
-                projectCard.querySelector('.stars-count').textContent = repo.stargazers_count;
-                projectCard.querySelector('.forks-count').textContent = repo.forks_count;
-
-                // Topics
-                const topicsContainer = projectCard.querySelector('.project-topics');
-                if (repo.topics && repo.topics.length) {
-                    repo.topics.forEach(topic => {
-                        const tag = document.createElement('span');
-                        tag.className = 'project-topic';
-                        tag.textContent = topic;
-                        topicsContainer.appendChild(tag);
-                    });
-                }
-
-                const cardEl = projectCard.querySelector('.project-card');
-                if (repo.html_url && cardEl) {
-                    const link = document.createElement('a');
-                    link.href = repo.html_url;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                    link.className = 'project-card-link';
-                    link.appendChild(cardEl);
-                    projectsGrid.appendChild(link);
-                } else {
-                    projectsGrid.appendChild(projectCard);
-                }
-            });
-        }
-
-        function getFilteredRepos() {
-            let filtered = [...reposData];
-            if (selectedTags.size > 0) {
-                filtered = filtered.filter(repo =>
-                    repo.topics && [...selectedTags].every(tag => repo.topics.includes(tag))
-                );
-            }
-            if (searchQuery) {
-                const q = searchQuery.toLowerCase();
-                filtered = filtered.filter(repo =>
-                    repo.name.toLowerCase().includes(q) ||
-                    (repo.description && repo.description.toLowerCase().includes(q))
-                );
-            }
-            return filtered;
-        }
-
-        function sortRepos(key) {
-            const filtered = getFilteredRepos();
-            if (key === 'stars') {
-                filtered.sort((a, b) => b.stargazers_count - a.stargazers_count);
-            } else if (key === 'size') {
-                filtered.sort((a, b) => b.size - a.size);
-            } else {
-                filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-            }
-            renderRepos(filtered);
-        }
-
-        function getCurrentSortKey() {
-            const activeBtn = document.querySelector('.sort-btn.active');
-            return activeBtn ? activeBtn.dataset.sort : 'date';
-        }
-
-        function renderTagFilters() {
-            const tagsList = document.querySelector('.tags-list');
-            const tagsContainer = document.querySelector('.projects-tags');
-            const controlsSep = document.querySelector('.controls-sep');
-            if (!tagsList) return;
-            const topicCounts = new Map();
-            reposData.forEach(repo => {
-                if (repo.topics) repo.topics.forEach(t => topicCounts.set(t, (topicCounts.get(t) || 0) + 1));
-            });
-            const qualifiedTopics = [...topicCounts.entries()].filter(([, count]) => count > 1).map(([t]) => t);
-            tagsList.innerHTML = '';
-            qualifiedTopics.sort().forEach(topic => {
-                const btn = document.createElement('button');
-                btn.className = 'tag-btn';
-                btn.textContent = topic;
-                if (selectedTags.has(topic)) btn.classList.add('active');
-                btn.addEventListener('click', () => {
-                    if (selectedTags.has(topic)) {
-                        selectedTags.delete(topic);
-                        btn.classList.remove('active');
-                    } else {
-                        selectedTags.add(topic);
-                        btn.classList.add('active');
-                    }
-                    sortRepos(getCurrentSortKey());
-                });
-                tagsList.appendChild(btn);
-            });
-            if (tagsContainer) tagsContainer.style.display = qualifiedTopics.length > 0 ? 'flex' : 'none';
-            if (controlsSep) controlsSep.style.display = qualifiedTopics.length > 0 ? 'block' : 'none';
-        }
-
-        // Sort button listeners
-        document.querySelectorAll('.sort-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                sortRepos(btn.dataset.sort);
-            });
-        });
-
-        // Search input listener
-        const searchInput = document.querySelector('.projects-search-input');
-        if (searchInput) {
-            searchInput.addEventListener('input', () => {
-                searchQuery = searchInput.value.trim();
-                sortRepos(getCurrentSortKey());
-            });
-        }
-
-        // Fetch repos, using a session cache to avoid the unauthenticated
-        // GitHub API rate limit (60 requests/hour per IP) on repeat visits
+        // Session cache avoids the unauthenticated GitHub rate limit on repeat visits
         function loadRepos() {
             try {
                 const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY));
@@ -448,20 +359,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         }
 
-        showStatus('fas fa-circle-notch fa-spin', 'Loading projects…');
-
         loadRepos()
             .then(repos => {
-                reposData = repos.filter(r => !EXCLUDED_REPOS.includes(r.name));
-                renderTagFilters();
-                sortRepos('date');
+                const rest = repos.filter(r => !r.fork && !EXCLUDED_REPOS.includes(r.name));
+                if (moreNote) {
+                    moreNote.textContent = rest.length
+                        ? `Plus ${rest.length} more on GitHub — algorithms, systems, data, and experiments.`
+                        : 'Browse the full list of repositories on GitHub.';
+                }
+                moreList.innerHTML = '';
+                rest.forEach(repo => {
+                    const a = document.createElement('a');
+                    a.href = repo.html_url;
+                    a.target = '_blank';
+                    a.rel = 'noopener noreferrer';
+                    a.className = 'more-chip';
+                    a.textContent = repo.name;
+                    if (repo.description) a.title = repo.description;
+                    moreList.appendChild(a);
+                });
             })
             .catch(error => {
                 console.error('Error fetching repositories:', error);
-                showStatus(
-                    'fas fa-triangle-exclamation',
-                    'Couldn\'t load projects right now. Browse them directly on <a href="https://github.com/prebish" target="_blank" rel="noopener noreferrer">GitHub</a>.'
-                );
+                if (moreNote) moreNote.textContent = 'Browse the full list of repositories on GitHub.';
             });
     }
 

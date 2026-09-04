@@ -69,43 +69,34 @@
         <div class="timeline"></div>
     </section>
     <section id="projects" class="bio-section">
-        <!-- Template for project cards -->
-        <template id="project-template">
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-code-branch project-icon"></i>
-                    <h3 class="project-name"></h3>
-                    <span class="project-stars"><i class="fas fa-star"></i> <span class="stars-count"></span></span>
-                    <span class="project-lock"><i class="fas fa-lock"></i></span>
+        <h2 class="section-title"><span>Projects</span></h2>
+        <p class="projects-intro"></p>
+
+        <!-- Template for a spotlighted project card -->
+        <template id="spotlight-template">
+            <article class="spotlight-card">
+                <div class="spotlight-top">
+                    <i class="spotlight-icon"></i>
+                    <span class="spotlight-status"></span>
                 </div>
-                <p class="project-description"></p>
-                <div class="project-topics"></div>
-                <div class="project-meta">
-                    <span class="project-language"><span class="lang-dot"></span><span class="lang-name"></span></span>
-                    <span class="project-forks"><i class="fas fa-code-branch"></i> <span class="forks-count"></span></span>
-                </div>
-            </div>
+                <h3 class="spotlight-name"></h3>
+                <p class="spotlight-blurb"></p>
+                <p class="spotlight-highlight"><i class="fas fa-arrow-trend-up"></i> <span class="spotlight-highlight-text"></span></p>
+                <div class="spotlight-tech"></div>
+                <div class="spotlight-links"></div>
+            </article>
         </template>
-        <div class="projects-controls">
-            <div class="projects-search">
-                <i class="fas fa-search projects-search-icon"></i>
-                <input type="text" class="projects-search-input" placeholder="Search projects…" autocomplete="off" spellcheck="false">
+
+        <div class="spotlight-grid"></div>
+
+        <aside class="projects-more">
+            <div class="projects-more-head">
+                <h3 class="projects-more-title">More on GitHub</h3>
+                <a class="projects-more-cta" href="https://github.com/prebish" target="_blank" rel="noopener noreferrer">View profile <i class="fas fa-arrow-up-right-from-square"></i></a>
             </div>
-            <div class="projects-controls-row">
-                <div class="projects-sort">
-                    <span class="controls-label"><i class="fas fa-sort-amount-down"></i> Sort</span>
-                    <button class="sort-btn active" data-sort="date">Date</button>
-                    <button class="sort-btn" data-sort="stars">Stars</button>
-                    <button class="sort-btn" data-sort="size">Size</button>
-                </div>
-                <div class="controls-sep"></div>
-                <div class="projects-tags">
-                    <span class="controls-label"><i class="fas fa-tag"></i> Filter</span>
-                    <div class="tags-list"></div>
-                </div>
-            </div>
-        </div>
-        <div class="projects-grid"></div>
+            <p class="projects-more-note"></p>
+            <div class="projects-more-list"></div>
+        </aside>
     </section>
 
     <section id="cv" class="bio-section">
