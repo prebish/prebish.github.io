@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const identity = document.createElement('div');
         identity.className = 'bc-identity';
 
-        const name = document.createElement('div');
+        const name = document.createElement('h1'); // the site's only <h1>; the name appears once
         name.className = 'bc-name';
         name.textContent = data.name;
         identity.appendChild(name);

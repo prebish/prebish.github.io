@@ -27,20 +27,14 @@
 
 
 <body>
-    <header>
-        <div class="header-container">
-            <div class="header-brand">
-                <h1 class="brand-name">Joel Prebish</h1>
-                <span class="brand-tagline">Software Engineer | Developer</span>
-            </div>
-            <nav class="header-nav">
-                <a href="#bio" class="nav-link active">Featured</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#timeline" class="nav-link">Timeline</a>
-                <a href="#cv" class="nav-link">CV</a>
-            </nav>
-        </div>
-    </header>
+    <!-- No header: the business card is the hero and the floating dock is the only navigation. -->
+    <nav class="dock" aria-label="Primary">
+        <a href="#bio" class="nav-link dock-item active"><i class="fas fa-house"></i><span>Home</span></a>
+        <a href="#projects" class="nav-link dock-item"><i class="fas fa-layer-group"></i><span>Projects</span></a>
+        <a href="#timeline" class="nav-link dock-item"><i class="fas fa-timeline"></i><span>Timeline</span></a>
+        <a href="#cv" class="nav-link dock-item"><i class="fas fa-file-lines"></i><span>CV</span></a>
+    </nav>
+
     <div id="business-card" aria-label="Business card"></div>
 
     <div class="card-separator"></div>
@@ -117,7 +111,7 @@
 
     <footer class="site-footer">
         <div class="footer-inner">
-            <span class="footer-label">© 2026 Joel Prebish · Pittsburgh, PA</span>
+            <span class="footer-label">© 2026 · Pittsburgh, PA</span>
             <a class="footer-cta" href="mailto:prebish.j@outlook.com"><i class="fas fa-envelope"></i> Get in Touch</a>
         </div>
     </footer>
