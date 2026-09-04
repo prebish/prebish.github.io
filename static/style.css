@@ -169,7 +169,7 @@ input:focus-visible {
 		right: 12px;
 		transform: none;
 		justify-content: space-around;
-		border-radius: 22px;
+		/* radius stays the pill from desktop — no shape change across breakpoints */
 		padding: 6px 4px;
 	}
 	.dock-item {
@@ -360,39 +360,75 @@ a.bc-contact-item:hover {
 	object-fit: contain;
 }
 
-/* Small screens: center everything, logo above the name */
-@media (max-width: 420px) {
+/* Phones: keep the landscape business-card composition, just scaled down.
+   (A stacked/centered layout reads as a profile card, not a business card.) */
+@media (max-width: 560px) {
 	#business-card {
-		width: 92%;
+		width: calc(100vw - 32px);
 		height: auto;
-		padding: var(--space-5);
-		align-items: center;
-		text-align: center;
+		aspect-ratio: 1.75 / 1; /* grows only if the content needs more */
+		padding: var(--space-4) var(--space-5);
 	}
 	.bc-identity {
-		align-items: center;
-		padding-right: 0;
+		padding-right: 64px;
 	}
+	.bc-name {
+		font-size: 1.25rem;
+	}
+	.bc-title {
+		margin-top: var(--space-1);
+		font-size: 0.62rem;
+		letter-spacing: 0.12em;
+	}
+	.bc-tagline {
+		margin-top: var(--space-2);
+		font-size: 0.74rem;
+	}
+	/* Contact left, socials bottom-right — saves height and reads like a real card */
 	.bc-lower {
-		width: 100%;
-		align-items: center;
-		margin-top: var(--space-5);
-	}
-	.bc-contact {
-		align-items: center;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		column-gap: var(--space-3);
+		row-gap: var(--space-2);
+		align-items: end;
 	}
 	.bc-divider {
-		width: 60%;
-		background: linear-gradient(to right, transparent, var(--accent-line), transparent);
+		grid-column: 1 / -1;
+	}
+	.bc-contact {
+		gap: 2px;
+	}
+	.bc-contact-item {
+		font-size: 0.72rem;
+	}
+	.bc-contact-item i {
+		font-size: 0.7rem;
+		width: 12px;
 	}
 	.bc-socials {
-		justify-content: center;
+		justify-self: end;
+	}
+	.bc-socials a {
+		width: 30px;
+		height: 30px;
+		font-size: 0.9rem;
+	}
+	.bc-social-img {
+		width: 16px;
+		height: 16px;
 	}
 	.bc-logo {
-		position: static;
-		margin: 0 auto var(--space-3);
+		top: var(--space-4);
+		right: var(--space-4);
 		width: 48px;
 		height: 48px;
+	}
+}
+
+/* Very small phones: drop the tagline so the card keeps its proportions */
+@media (max-width: 400px) {
+	.bc-tagline {
+		display: none;
 	}
 }
 
@@ -1120,8 +1156,7 @@ a.bc-contact-item:hover {
 	.timeline-item.timeline-pos-right {
 		width: 100%;
 		left: 0;
-		padding-left: 48px;
-		padding-right: 0;
+		padding: 0 0 var(--space-5) 48px;
 		text-align: left;
 	}
 
@@ -1131,17 +1166,23 @@ a.bc-contact-item:hover {
 		right: auto;
 	}
 
-	/* Year marker moves off the (now left-side) spine and sits left-aligned,
-	   inline with where card content starts, instead of centred/cut into the line. */
+	/* Cards fill the column on phones — the desktop content-hugging widths
+	   look ragged in a single column. */
+	.timeline-content {
+		display: block;
+		width: 100%;
+		max-width: none;
+	}
+
+	/* Year marker sits left-aligned in line with the card content, off the spine */
 	.timeline-year {
 		width: auto;
 		max-width: none;
-		margin: var(--space-2) 0 var(--space-4);
-		padding: 0;
+		margin: var(--space-1) 0 var(--space-3);
+		padding: 0 0 0 48px;
 		background: none;
 		border: none;
 		text-align: left;
-		padding-left: 48px;
 	}
 
 	.timeline-now-cap {
