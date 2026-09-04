@@ -1344,26 +1344,8 @@ a.bc-contact-item:hover {
 	color: var(--text-tertiary);
 }
 
-.footer-cta {
-	font-size: 0.85rem;
-	font-weight: 600;
-	color: var(--accent-ink);
-	background: var(--accent-strong);
-	padding: 0.5rem 1.25rem;
-	border-radius: var(--radius-sm);
-	text-decoration: none;
-	transition: transform 0.15s var(--ease), filter 0.2s var(--ease);
-	box-shadow: var(--shadow-sm);
-	display: inline-flex;
-	align-items: center;
-	gap: var(--space-2);
-}
-
-.footer-cta:hover {
-	color: var(--accent-ink);
-	transform: translateY(-1px);
-	filter: brightness(1.05);
-}
+/* (The footer "Get in Touch" mailto button was removed — on phones it sat under the
+   fixed dock. Email lives on the business card.) */
 
 /* ── Section tab-switch entrance ── */
 @keyframes sectionFade {
