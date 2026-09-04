@@ -466,32 +466,116 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Career Timeline ──
+
+    // Short "Mon YYYY" form, e.g. "Mar 2025" — distinct from the longer formatDate() above.
+    function formatMonthYear(dateStr) {
+        if (!dateStr) return '';
+        return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+    }
+
+    // "N yr M mo" between two dates, omitting a zero unit (e.g. "6 mo", "2 yr").
+    function formatDuration(startStr, endStr) {
+        const start = new Date(startStr);
+        const end = endStr ? new Date(endStr) : new Date();
+        let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+        // Round to the nearest month rather than floor, so a day or two short of
+        // the boundary still reads as the rounder, more natural figure.
+        const dayShortfall = start.getDate() - end.getDate();
+        if (dayShortfall > 15) months -= 1;
+        else if (dayShortfall < -15) months += 1;
+        months = Math.max(0, months);
+        const years = Math.floor(months / 12);
+        const remMonths = months % 12;
+        const parts = [];
+        if (years > 0) parts.push(`${years} yr`);
+        if (remMonths > 0 || !years) parts.push(`${remMonths} mo`);
+        return parts.join(' ');
+    }
+
+    // Builds the date/duration line per milestone shape: current → "Mon YYYY — Present · duration";
+    // has an end → "Mon YYYY — Mon YYYY · duration"; otherwise a bare point-in-time "Mon YYYY".
+    function formatTimelineDate(m) {
+        const start = formatMonthYear(m.date);
+        if (!start) return '';
+        if (m.current) return `${start} — Present · ${formatDuration(m.date)}`;
+        if (m.end) return `${start} — ${formatMonthYear(m.end)} · ${formatDuration(m.date, m.end)}`;
+        return start;
+    }
+
     function initTimeline() {
         const milestoneTemplate = document.getElementById('milestone-template');
         const timelineContainer = document.querySelector('.timeline');
         if (!milestoneTemplate || !timelineContainer) return;
 
+        const TYPE_LABELS = { work: 'Work', education: 'Education' };
+
         function renderMilestones(milestones) {
             timelineContainer.innerHTML = '';
-            milestones
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .forEach(m => {
-                    const item = milestoneTemplate.content.cloneNode(true);
-                    item.querySelector('.timeline-date').textContent = formatDate(m.date);
-                    item.querySelector('.timeline-title').textContent = m.title;
-                    item.querySelector('.timeline-org').textContent = m.organization;
-                    item.querySelector('.timeline-description').textContent = m.description;
-                    const detailsEl = item.querySelector('.timeline-details');
-                    if (m.details && detailsEl) {
-                        detailsEl.textContent = m.details;
-                    } else if (detailsEl) {
-                        detailsEl.style.display = 'none';
-                    }
-                    const icon = item.querySelector('.timeline-icon i');
-                    if (m.icon) icon.className = m.icon;
-                    if (m.size && [1, 2, 3].includes(m.size)) item.querySelector('.timeline-content').dataset.size = m.size;
-                    timelineContainer.appendChild(item);
-                });
+
+            const sorted = milestones.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Subtle "Now" cap at the top of the spine when a current milestone exists.
+            if (sorted.some(m => m.current)) {
+                const nowCap = document.createElement('div');
+                nowCap.className = 'timeline-now-cap';
+                nowCap.innerHTML = '<span class="timeline-now-dot"></span><span class="timeline-now-label">Now</span>';
+                timelineContainer.appendChild(nowCap);
+            }
+
+            let lastYear = null;
+            let position = 0; // counts only actual milestone items, for left/right alternation
+
+            sorted.forEach(m => {
+                const year = m.date ? new Date(m.date).getFullYear() : null;
+                if (year !== null && year !== lastYear) {
+                    const yearMarker = document.createElement('div');
+                    yearMarker.className = 'timeline-year';
+                    yearMarker.textContent = String(year);
+                    timelineContainer.appendChild(yearMarker);
+                    lastYear = year;
+                }
+
+                position += 1;
+                const item = milestoneTemplate.content.cloneNode(true);
+                const itemEl = item.querySelector('.timeline-item');
+                itemEl.classList.add(position % 2 === 1 ? 'timeline-pos-left' : 'timeline-pos-right');
+
+                const eyebrowEl = item.querySelector('.timeline-eyebrow');
+                if (eyebrowEl) eyebrowEl.textContent = TYPE_LABELS[m.type] || '';
+
+                const badgeEl = item.querySelector('.timeline-badge-current');
+                if (badgeEl) badgeEl.style.display = m.current ? 'inline-block' : 'none';
+
+                const dateEl = item.querySelector('.timeline-date');
+                if (dateEl) dateEl.textContent = formatTimelineDate(m);
+
+                item.querySelector('.timeline-title').textContent = m.title || '';
+                item.querySelector('.timeline-org').textContent = m.organization || '';
+                item.querySelector('.timeline-description').textContent = m.description || '';
+
+                const detailsEl = item.querySelector('.timeline-details');
+                if (m.details && detailsEl) {
+                    detailsEl.textContent = m.details;
+                } else if (detailsEl) {
+                    detailsEl.style.display = 'none';
+                }
+
+                const tagsEl = item.querySelector('.timeline-tags');
+                if (tagsEl && Array.isArray(m.tags)) {
+                    m.tags.forEach(tag => {
+                        const chip = document.createElement('span');
+                        chip.className = 'timeline-tag';
+                        chip.textContent = tag;
+                        tagsEl.appendChild(chip);
+                    });
+                }
+
+                const icon = item.querySelector('.timeline-icon i');
+                if (icon && m.icon) icon.className = m.icon;
+                if (m.size && [1, 2, 3].includes(m.size)) item.querySelector('.timeline-content').dataset.size = m.size;
+
+                timelineContainer.appendChild(item);
+            });
         }
 
         fetch('static/career.json')

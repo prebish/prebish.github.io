@@ -881,12 +881,16 @@ header {
 	box-sizing: border-box;
 }
 
-.timeline-item:nth-child(odd) {
+/* Left/right alternation is assigned by JS (position counter, skipping the
+   year-marker and "now" spine elements) rather than nth-child, since those
+   extra spine elements are siblings of .timeline-item inside .timeline and
+   would otherwise throw off odd/even counting. */
+.timeline-item.timeline-pos-left {
 	left: 0;
 	text-align: right;
 }
 
-.timeline-item:nth-child(even) {
+.timeline-item.timeline-pos-right {
 	left: 50%;
 	text-align: left;
 }
@@ -908,11 +912,11 @@ header {
 	z-index: 1;
 }
 
-.timeline-item:nth-child(odd) .timeline-icon {
+.timeline-item.timeline-pos-left .timeline-icon {
 	right: -17px;
 }
 
-.timeline-item:nth-child(even) .timeline-icon {
+.timeline-item.timeline-pos-right .timeline-icon {
 	left: -17px;
 }
 
@@ -922,7 +926,7 @@ header {
 	border-top-color: var(--border-strong);
 	border-radius: var(--radius);
 	padding: var(--space-5);
-	box-shadow: var(--shadow-sm);
+	box-shadow: var(--shadow-md);
 	transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 	position: relative;
 	display: inline-block;
@@ -933,19 +937,73 @@ header {
 .timeline-content:hover {
 	border-color: var(--border-strong);
 	transform: translateY(-2px);
-	box-shadow: var(--shadow-md);
+	box-shadow: var(--shadow-lg);
+}
+
+/* Eyebrow ("Work"/"Education") + Current badge, side by side above the date line */
+.timeline-meta {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	margin-bottom: var(--space-1);
+}
+
+.timeline-eyebrow {
+	font-size: 0.68rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--text-tertiary);
+}
+
+.timeline-eyebrow:empty {
+	display: none;
+}
+
+.timeline-badge-current {
+	display: none;
+	font-size: 0.66rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--accent);
+	background: var(--accent-soft);
+	border: 1px solid var(--accent-line);
+	border-radius: var(--radius-pill);
+	padding: 1px 9px;
 }
 
 .timeline-date {
-	display: inline-block;
-	font-size: 0.72rem;
+	display: block;
+	font-size: 0.78rem;
 	font-weight: 600;
-	color: var(--accent);
-	background: var(--accent-soft);
-	border-radius: var(--radius-pill);
-	padding: 2px 10px;
+	color: var(--text-secondary);
 	margin-bottom: var(--space-2);
 	letter-spacing: 0.01em;
+}
+
+/* Tag chips */
+.timeline-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-1);
+	margin-top: var(--space-3);
+}
+
+.timeline-tags:empty {
+	display: none;
+	margin-top: 0;
+}
+
+.timeline-tag {
+	font-size: 0.7rem;
+	font-weight: 600;
+	color: var(--text-secondary);
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-pill);
+	padding: 2px 10px;
+	white-space: nowrap;
 }
 
 .timeline-title {
@@ -974,6 +1032,53 @@ header {
 	color: var(--text-tertiary);
 	line-height: 1.6;
 	margin: var(--space-1) 0 0;
+}
+
+/* Year marker on the spine — sits between milestone items as its own row,
+   centred over the centre line on desktop like a quiet chapter divider. */
+.timeline-year {
+	position: relative;
+	z-index: 2;
+	width: max-content;
+	max-width: 80%;
+	margin: var(--space-2) auto var(--space-4);
+	padding: 2px var(--space-4);
+	background: var(--bg);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-pill);
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	color: var(--text-tertiary);
+	text-align: center;
+}
+
+/* Small "Now" cap at the very top of the spine, above the most recent item */
+.timeline-now-cap {
+	position: absolute;
+	top: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 3px;
+	z-index: 2;
+}
+
+.timeline-now-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--accent);
+}
+
+.timeline-now-label {
+	font-size: 0.6rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--accent);
 }
 
 /* ── Timeline card sizes ── */
@@ -1012,6 +1117,11 @@ header {
 	display: none;
 }
 
+.timeline-content[data-size="1"] .timeline-tags,
+.timeline-content[data-size="2"] .timeline-tags {
+	display: none;
+}
+
 /* ── Responsive timeline ── */
 @media (max-width: 768px) {
 	#timeline {
@@ -1023,8 +1133,8 @@ header {
 	}
 
 	.timeline-item,
-	.timeline-item:nth-child(odd),
-	.timeline-item:nth-child(even) {
+	.timeline-item.timeline-pos-left,
+	.timeline-item.timeline-pos-right {
 		width: 100%;
 		left: 0;
 		padding-left: 48px;
@@ -1032,10 +1142,27 @@ header {
 		text-align: left;
 	}
 
-	.timeline-item:nth-child(odd) .timeline-icon,
-	.timeline-item:nth-child(even) .timeline-icon {
+	.timeline-item.timeline-pos-left .timeline-icon,
+	.timeline-item.timeline-pos-right .timeline-icon {
 		left: 0;
 		right: auto;
+	}
+
+	/* Year marker moves off the (now left-side) spine and sits left-aligned,
+	   inline with where card content starts, instead of centred/cut into the line. */
+	.timeline-year {
+		width: auto;
+		max-width: none;
+		margin: var(--space-2) 0 var(--space-4);
+		padding: 0;
+		background: none;
+		border: none;
+		text-align: left;
+		padding-left: 48px;
+	}
+
+	.timeline-now-cap {
+		left: 16px;
 	}
 }
 
