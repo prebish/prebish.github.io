@@ -5,7 +5,10 @@
         "organization": "PNC Bank",
         "description": "Joined PNC Bank as an L2 Software Engineer, building and maintaining internal applications.",
         "icon": "fas fa-code",
-        "size": 3
+        "size": 3,
+        "type": "work",
+        "current": true,
+        "tags": []
     },
     {
         "date": "2024-12-22",
@@ -13,7 +16,9 @@
         "organization": "University of Pittsburgh",
         "description": "Graduated with a focus on software, algorithms, and data structures.",
         "icon": "fas fa-graduation-cap",
-        "size": 3
+        "size": 3,
+        "type": "education",
+        "tags": ["Computer Science"]
     },
     {
         "date": "2023-12-01",
@@ -21,7 +26,9 @@
         "organization": "Self",
         "description": "Kickstarted my career taking on freelance software projects.",
         "icon": "fas fa-code",
-        "size": 2
+        "size": 2,
+        "type": "work",
+        "tags": []
     },
     {
         "date": "2020-06-01",
@@ -29,6 +36,8 @@
         "organization": "Apollo-Ridge High School",
         "description": "Graduated with a focus on science and mathematics.",
         "icon": "fas fa-graduation-cap",
-        "size": 1
+        "size": 1,
+        "type": "education",
+        "tags": []
     }
 ]
