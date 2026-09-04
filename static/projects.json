@@ -1,0 +1,44 @@
+{
+    "intro": "I like building things from the ground up — processors, allocators, shells, compression. A selected few are below; the rest live on GitHub.",
+    "spotlight": [
+        {
+            "name": "cpu2247",
+            "blurb": "A processor built gate-by-gate — ALU, registers, and control unit.",
+            "highlight": "Runs real compiled programs",
+            "tech": ["Logisim", "Digital logic", "Assembly"],
+            "icon": "fas fa-microchip",
+            "repo": "https://github.com/prebish/cpu2247-schematic"
+        },
+        {
+            "name": "LZW Compressor",
+            "blurb": "An LZW compressor in Java: classic 12-bit and adaptive 9–16-bit.",
+            "highlight": "Benchmarked against Unix compress",
+            "tech": ["Java", "Algorithms"],
+            "icon": "fas fa-compress",
+            "repo": "https://github.com/prebish/lzw-compression-tool"
+        },
+        {
+            "name": "Djrive",
+            "blurb": "A web product I designed and built, live at djrive.com.",
+            "tech": [],
+            "icon": "fas fa-compact-disc",
+            "demo": "https://djrive.com"
+        },
+        {
+            "name": "Boggle Solver",
+            "blurb": "A Boggle solver in Java — built-in dictionary or bring your own.",
+            "highlight": "Solves any board instantly",
+            "tech": ["Java", "Data structures"],
+            "icon": "fas fa-table-cells",
+            "repo": "https://github.com/prebish/boggle-solver"
+        },
+        {
+            "name": "MIPS Frogger",
+            "blurb": "The classic Frogger game, written in MIPS assembly.",
+            "highlight": "Runs on the MARS simulator",
+            "tech": ["Assembly", "MIPS"],
+            "icon": "fas fa-gamepad",
+            "repo": "https://github.com/prebish/mips-classic-frogger"
+        }
+    ]
+}
