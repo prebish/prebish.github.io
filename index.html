@@ -45,7 +45,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
     </div>
 
     <!-- No header: the business card is the hero and the floating dock is the only navigation.
-         The button after the divider is a utility (theme), not a destination. -->
+         The two buttons after the divider are utilities (theme, fridge mode), not destinations. -->
     <nav class="dock" aria-label="Primary">
         <a href="#bio" class="nav-link dock-item active" data-magnetic><i class="fas fa-house"></i><span>Home</span></a>
         <a href="#projects" class="nav-link dock-item" data-magnetic><i class="fas fa-layer-group"></i><span>Projects</span></a>
@@ -53,15 +53,20 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
         <a href="#cv" class="nav-link dock-item" data-magnetic><i class="fas fa-file-lines"></i><span>CV</span></a>
         <span class="dock-divider" aria-hidden="true"></span>
         <button type="button" class="dock-item dock-toggle" id="theme-toggle" aria-pressed="false" aria-label="Terminal theme" title="Terminal theme" data-magnetic><i class="fas fa-terminal" aria-hidden="true"></i></button>
+        <button type="button" class="dock-item dock-toggle" id="fridge-toggle" aria-pressed="false" aria-label="Fridge mode" title="Fridge mode: drag things around; everyone sees where you left them" data-magnetic><i class="fas fa-magnet" aria-hidden="true"></i></button>
     </nav>
 
-    <div id="business-card" aria-label="Business card"></div>
+    <!-- The "door": an invisible wrapper (display: contents) until fridge mode turns it into a
+         positioned surface whose children become draggable magnets. -->
+    <div class="door" id="fridge-door">
+        <div id="business-card" aria-label="Business card"></div>
 
-    <div class="ticker" aria-label="Technologies" hidden>
-        <div class="ticker-viewport"><div class="ticker-track"></div></div>
+        <div class="ticker" aria-label="Technologies" hidden>
+            <div class="ticker-viewport"><div class="ticker-track"></div></div>
+        </div>
+
+        <div class="card-separator"></div>
     </div>
-
-    <div class="card-separator"></div>
 
     <section id="bio" class="bio-section">
         <div class="featured-grid"></div>
@@ -144,7 +149,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
         </div>
     </footer>
 
-    <!-- Status toast (email copy). Hidden until something needs it. -->
+    <!-- Status toast (email copy, fridge saves). Hidden until something needs it. -->
     <div class="toast" id="toast" role="status" aria-live="polite" hidden>
         <span class="toast-text"></span>
         <button type="button" class="toast-btn">Copy</button>
@@ -152,6 +157,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
 
     <script src="static/style.js"></script>
     <script src="static/effects.js"></script>
+    <script src="static/fridge.js"></script>
 </body>
 
 </html>

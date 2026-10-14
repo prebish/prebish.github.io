@@ -1667,6 +1667,102 @@ html.show-loader .intro-text {
 	}
 }
 
+/* ── Fridge mode (static/fridge.js): the home view becomes a door with draggable magnets ── */
+.door {
+	display: contents; /* invisible wrapper until fridge mode */
+}
+
+html.fridge-on .door {
+	display: block;
+	position: relative;
+	width: min(1120px, calc(100vw - 32px));
+	aspect-ratio: var(--door-aspect, 1.3);
+	min-height: 640px;
+	margin: 0 auto var(--space-7);
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
+		var(--surface-1);
+	border: 1px solid var(--border);
+	border-top-color: var(--border-strong);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-md);
+}
+
+/* Phones: a portrait door, so five magnets have room without piling up */
+@media (max-width: 640px) {
+	html.fridge-on .door {
+		aspect-ratio: auto;
+		min-height: 960px;
+	}
+}
+
+html.fridge-on .card-separator {
+	display: none;
+}
+
+/* The featured grid moves into the door; its cards position themselves */
+html.fridge-on .featured-grid {
+	display: contents;
+}
+html.fridge-on .featured-card {
+	opacity: 1;
+	transform: none;
+	width: min(420px, calc(100% - 16px));
+}
+html.fridge-on .ticker {
+	margin: 0;
+	width: min(580px, calc(100% - 16px));
+}
+html.fridge-on #business-card.magnet {
+	position: absolute;
+	margin: 0;
+	transition: left 0.45s var(--ease), top 0.45s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+/* --mx/--my: the magnet's top-centre anchor as a fraction of the door; set by fridge.js */
+html.fridge-on .magnet {
+	position: absolute;
+	left: calc(var(--mx, 0.5) * 100%);
+	top: calc(var(--my, 0) * 100%);
+	translate: -50% 0;
+	rotate: var(--tilt, 0deg);
+	z-index: var(--mz, 1);
+	margin: 0;
+	touch-action: none;
+	cursor: grab;
+	user-select: none;
+	-webkit-user-select: none;
+	transition: left 0.45s var(--ease), top 0.45s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+html.fridge-on .magnet.is-dragging,
+html.fridge-on #business-card.magnet.is-dragging {
+	cursor: grabbing;
+	transition: none;
+	box-shadow: var(--shadow-lg);
+	z-index: 999;
+}
+
+/* The magnet itself: a small gold disc pinning the top edge */
+html.fridge-on .magnet::after {
+	content: '';
+	position: absolute;
+	top: -7px;
+	left: 50%;
+	translate: -50% 0;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: var(--accent-strong);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+	pointer-events: none;
+}
+
+html.fridge-on .magnet:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 4px;
+}
+
 /* ── Reduced motion: every effect above degrades to its final state ── */
 @media (prefers-reduced-motion: reduce) {
 	[data-split] .w,
@@ -1678,5 +1774,9 @@ html.show-loader .intro-text {
 	}
 	.ticker-track {
 		animation: none;
+	}
+	html.fridge-on .magnet,
+	html.fridge-on #business-card.magnet {
+		transition: none;
 	}
 }

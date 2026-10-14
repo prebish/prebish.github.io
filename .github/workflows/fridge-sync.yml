@@ -1,0 +1,44 @@
+# Folds visitors' fridge-magnet moves (published to a public ntfy.sh topic by static/fridge.js)
+# into static/fridge.json and commits them, so the repo stays the source of truth for the
+# shared layout. Runs every 20 minutes; only commits when a magnet actually moved.
+name: Fridge sync
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fridge-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fold recent moves into fridge.json
+        id: sync
+        run: node scripts/fridge-sync.mjs
+
+      - name: Commit the new layout
+        if: steps.sync.outputs.moves != '0'
+        run: |
+          # Commits under the repo owner's own identity (no bot in the contributor list)
+          git config user.name "prebish"
+          git config user.email "prebish.j@outlook.com"
+          git add static/fridge.json
+          if git diff --cached --quiet; then
+            echo "no change"
+          else
+            git commit -m "fridge: ${{ steps.sync.outputs.moves }} magnet move(s) from visitors"
+            git push
+          fi

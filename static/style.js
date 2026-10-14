@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3D tilt based on mouse position relative to card center
         card.addEventListener('mousemove', (e) => {
+            if (document.documentElement.classList.contains('fridge-on')) return; // fridge.js owns the card while it's a magnet
             const x = (e.clientX - cardRect.left) / cardRect.width;
             const y = (e.clientY - cardRect.top) / cardRect.height;
             const rotateY = (x - 0.5) * MAX_TILT;
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         card.addEventListener('mouseleave', () => {
+            if (document.documentElement.classList.contains('fridge-on')) return;
             card.style.transform = `perspective(${PERSPECTIVE}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
     }
