@@ -1,0 +1,235 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   crt.css — the "terminal" skin, toggled from the dock (html[data-theme="crt"]).
+   Same content and layout; amber phosphor on near-black, monospace, scanlines,
+   square corners, TUI-style section frames, dock as a status bar.
+   Every rule is scoped so removing this file restores the default theme.
+   ────────────────────────────────────────────────────────────────────────── */
+
+html[data-theme="crt"] {
+	--bg: #050403;
+	--surface-1: #0a0805;
+	--surface-2: #110d06;
+	--surface-input: #0e0b05;
+
+	--text-primary: #ffd37a;
+	--text-secondary: #d9a94a;
+	--text-tertiary: #9c7a35;
+
+	--accent: #ffb000;
+	--accent-strong: #ffb000;
+	--accent-ink: #140e00;
+	--accent-soft: rgba(255, 176, 0, 0.10);
+	--accent-line: rgba(255, 176, 0, 0.45);
+
+	--border: rgba(255, 176, 0, 0.22);
+	--border-strong: rgba(255, 176, 0, 0.45);
+
+	--shadow-sm: none;
+	--shadow-md: none;
+	--shadow-lg: none;
+
+	--radius-sm: 0;
+	--radius: 0;
+	--radius-lg: 0;
+	--radius-pill: 0;
+
+	--font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+	--crt-glow: 0 0 8px rgba(255, 176, 0, 0.35);
+
+	color-scheme: dark;
+	scrollbar-color: #5a4312 #050403;
+}
+
+html[data-theme="crt"] ::selection {
+	background: #ffb000;
+	color: #140e00;
+}
+
+html[data-theme="crt"] body {
+	background-image: none;
+	letter-spacing: 0;
+}
+
+/* Scanlines + vignette over everything but the intro overlay */
+html[data-theme="crt"] body::before,
+html[data-theme="crt"] body::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 1500;
+	pointer-events: none;
+}
+html[data-theme="crt"] body::before {
+	background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.22) 2px 3px);
+}
+html[data-theme="crt"] body::after {
+	background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.55));
+}
+
+/* Phosphor bloom on headings and the active tab */
+html[data-theme="crt"] .bc-name,
+html[data-theme="crt"] .section-title span,
+html[data-theme="crt"] h3,
+html[data-theme="crt"] .dock-item.active {
+	text-shadow: var(--crt-glow);
+}
+
+/* Hard-coded circles square off too */
+html[data-theme="crt"] .timeline-icon,
+html[data-theme="crt"] .ticker-dot,
+html[data-theme="crt"] .timeline-now-dot,
+html[data-theme="crt"] .spotlight-status::before,
+html[data-theme="crt"] .intro-frame,
+html[data-theme="crt"] .magnet::after {
+	border-radius: 0;
+	rx: 0;
+}
+
+/* Hover = brighter border, no lift */
+html[data-theme="crt"] .featured-card:hover,
+html[data-theme="crt"] .spotlight-card:hover,
+html[data-theme="crt"] .timeline-content:hover,
+html[data-theme="crt"] .spotlight-link:hover,
+html[data-theme="crt"] .cv-download-btn:hover {
+	transform: none;
+	border-color: var(--accent);
+}
+
+/* ── Business card: a prompt line and a blinking block cursor after the name ── */
+html[data-theme="crt"] #business-card {
+	background: var(--surface-1);
+	border-top-color: var(--border-strong);
+}
+html[data-theme="crt"] #business-card::before {
+	content: '$ whoami';
+	position: absolute;
+	top: 8px;
+	left: 12px;
+	font-size: 0.7rem;
+	color: var(--text-tertiary);
+}
+html[data-theme="crt"] .bc-name::after {
+	content: '█';
+	margin-left: 0.15em;
+	color: var(--accent);
+	animation: crt-blink 1s steps(1) infinite;
+}
+@keyframes crt-blink {
+	50% { opacity: 0; }
+}
+html[data-theme="crt"] .bc-divider {
+	background: linear-gradient(to right, var(--accent-strong) 0, var(--accent-strong) 34px, var(--border-strong) 34px, var(--border-strong) 100%);
+}
+
+/* Brand marks tinted amber so nothing full-colour breaks the phosphor */
+html[data-theme="crt"] .bc-logo img,
+html[data-theme="crt"] .bc-social-img {
+	filter: grayscale(1) sepia(1) saturate(3) hue-rotate(-15deg) opacity(0.85);
+}
+
+html[data-theme="crt"] .ticker-item {
+	color: var(--text-secondary);
+}
+
+/* ── TUI frames: ┌─ Projects ──────┐ ── */
+html[data-theme="crt"] #projects,
+html[data-theme="crt"] #timeline {
+	position: relative;
+	max-width: calc(880px + 2 * var(--space-5));
+	border: 1px solid var(--border-strong);
+	margin-top: var(--space-4);
+	padding: var(--space-6) var(--space-5) var(--space-5);
+}
+html[data-theme="crt"] .section-title {
+	position: absolute;
+	top: -0.75em;
+	left: var(--space-5);
+	margin: 0;
+	padding: 0 1ch;
+	max-width: none;
+	background: var(--bg);
+	gap: 0;
+}
+html[data-theme="crt"] .section-title::after {
+	display: none;
+}
+html[data-theme="crt"] .section-title span {
+	font-size: 1rem;
+	letter-spacing: 0;
+	text-transform: lowercase;
+}
+html[data-theme="crt"] .section-title span::before { content: '─ '; color: var(--border-strong); }
+html[data-theme="crt"] .section-title span::after { content: ' ─'; color: var(--border-strong); }
+
+html[data-theme="crt"] .timeline-year {
+	background: var(--bg);
+}
+
+@media (max-width: 920px) {
+	html[data-theme="crt"] #projects,
+	html[data-theme="crt"] #timeline {
+		margin-inline: var(--space-3);
+	}
+}
+@media (max-width: 768px) {
+	html[data-theme="crt"] #projects,
+	html[data-theme="crt"] #timeline {
+		padding: var(--space-6) var(--space-4) var(--space-5);
+	}
+	html[data-theme="crt"] .section-title {
+		left: var(--space-4);
+	}
+}
+
+/* ── Dock → status bar ── */
+html[data-theme="crt"] .dock {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transform: none;
+	border-radius: 0;
+	border-width: 1px 0 0;
+	background: var(--surface-1);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+	box-shadow: none;
+	justify-content: center;
+	padding: 4px 8px calc(4px + env(safe-area-inset-bottom, 0px));
+}
+html[data-theme="crt"] .dock-item {
+	border-radius: 0;
+	text-transform: lowercase;
+}
+html[data-theme="crt"] .dock-item:hover {
+	background-color: var(--accent-soft);
+}
+html[data-theme="crt"] .dock-item.active::before { content: '['; }
+html[data-theme="crt"] .dock-item.active::after { content: ']'; }
+html[data-theme="crt"] .dock-divider {
+	background: var(--border-strong);
+}
+/* Phones stack icon over label, where the brackets would stack too — drop them there */
+@media (max-width: 560px) {
+	html[data-theme="crt"] .dock-item.active::before,
+	html[data-theme="crt"] .dock-item.active::after {
+		content: none;
+	}
+}
+
+/* ── Toast, intro, fridge in phosphor ── */
+html[data-theme="crt"] .toast {
+	border-color: var(--accent);
+}
+html[data-theme="crt"] .intro-text {
+	font-family: var(--font-family);
+}
+html[data-theme="crt"] .door {
+	border-color: var(--border-strong);
+}
+
+/* Reduced motion: the block cursor stays solid */
+@media (prefers-reduced-motion: reduce) {
+	html[data-theme="crt"] .bc-name::after {
+		animation: none;
+	}
+}

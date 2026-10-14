@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         card.appendChild(lower);
+        document.dispatchEvent(new CustomEvent('site:rendered', { detail: { part: 'card' } }));
     }
 
     function initBusinessCard() {
@@ -189,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.appendChild(a);
         });
         triggerFeaturedAnimation();
+        document.dispatchEvent(new CustomEvent('site:rendered', { detail: { part: 'featured' } }));
     }
 
     function initFeatured() {
@@ -202,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const allSections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
     const businessCard = card;
+    const ticker = document.querySelector('.ticker');
     const cardSeparator = document.querySelector('.card-separator');
     const VALID_SECTIONS = ['bio', 'projects', 'timeline', 'cv'];
 
@@ -214,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // The business card + separator are the hero for the home (Featured) view
     // only; every other tab is its own focused page.
     function setHeroVisible(visible, animate) {
-        [businessCard, cardSeparator].forEach(el => {
+        [businessCard, ticker, cardSeparator].forEach(el => {
             if (!el) return;
             el.classList.remove('hero-fade');
             if (visible) {
@@ -246,6 +249,9 @@ document.addEventListener('DOMContentLoaded', () => {
             target.classList.add('section-fade');
         }
         if (isHome) triggerFeaturedAnimation();
+
+        // effects.js / fridge.js listen for this (the section is already display:block, not yet painted)
+        document.dispatchEvent(new CustomEvent('site:section', { detail: { id, animate: anim } }));
 
         window.scrollTo({ top: 0, behavior: anim ? 'smooth' : 'auto' });
     }
@@ -352,6 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 spotlightGrid.appendChild(node);
             });
+            document.dispatchEvent(new CustomEvent('site:rendered', { detail: { part: 'projects' } }));
         }
 
         if (spotlightGrid) {
@@ -534,6 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 timelineContainer.appendChild(item);
             });
+            document.dispatchEvent(new CustomEvent('site:rendered', { detail: { part: 'timeline' } }));
         }
 
         fetch('static/career.json')

@@ -16,6 +16,14 @@
     <meta name="twitter:title" content="Joel Prebish – Software Engineer">
     <meta name="twitter:description" content="Software Engineer at PNC Bank. Explore my projects, work history, and background.">
 
+    <!-- Runs before any stylesheet: restores the saved theme (no flash) and decides whether the
+         first-visit intro overlay shows (never under reduced motion, once per session). -->
+    <script>(function(){try{var d=document.documentElement;
+if(localStorage.getItem('theme')==='crt')d.setAttribute('data-theme','crt');
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('intro-seen'))d.classList.add('show-loader');
+}catch(e){}})();</script>
+    <style>html{background:#0d0d0f}html[data-theme=crt]{background:#050403}html.show-loader .intro{position:fixed;inset:0;z-index:20000;background:inherit}</style>
+
     <link rel="icon" href="static/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,19 +31,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Joel Prebish</title>
     <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/crt.css">
 </head>
 
 
 <body>
-    <!-- No header: the business card is the hero and the floating dock is the only navigation. -->
+    <!-- First-visit intro: draws the JP mark, then lifts. Only rendered when <html> has .show-loader. -->
+    <div class="intro" id="intro" aria-hidden="true">
+        <svg class="intro-mark" viewBox="0 0 64 64" width="72" height="72">
+            <rect class="intro-frame" x="2" y="2" width="60" height="60" rx="11" pathLength="1"/>
+            <text class="intro-text" x="32" y="43" text-anchor="middle">JP</text>
+        </svg>
+    </div>
+
+    <!-- No header: the business card is the hero and the floating dock is the only navigation.
+         The button after the divider is a utility (theme), not a destination. -->
     <nav class="dock" aria-label="Primary">
-        <a href="#bio" class="nav-link dock-item active"><i class="fas fa-house"></i><span>Home</span></a>
-        <a href="#projects" class="nav-link dock-item"><i class="fas fa-layer-group"></i><span>Projects</span></a>
-        <a href="#timeline" class="nav-link dock-item"><i class="fas fa-timeline"></i><span>Timeline</span></a>
-        <a href="#cv" class="nav-link dock-item"><i class="fas fa-file-lines"></i><span>CV</span></a>
+        <a href="#bio" class="nav-link dock-item active" data-magnetic><i class="fas fa-house"></i><span>Home</span></a>
+        <a href="#projects" class="nav-link dock-item" data-magnetic><i class="fas fa-layer-group"></i><span>Projects</span></a>
+        <a href="#timeline" class="nav-link dock-item" data-magnetic><i class="fas fa-timeline"></i><span>Timeline</span></a>
+        <a href="#cv" class="nav-link dock-item" data-magnetic><i class="fas fa-file-lines"></i><span>CV</span></a>
+        <span class="dock-divider" aria-hidden="true"></span>
+        <button type="button" class="dock-item dock-toggle" id="theme-toggle" aria-pressed="false" aria-label="Terminal theme" title="Terminal theme" data-magnetic><i class="fas fa-terminal" aria-hidden="true"></i></button>
     </nav>
 
     <div id="business-card" aria-label="Business card"></div>
+
+    <div class="ticker" aria-label="Technologies" hidden>
+        <div class="ticker-viewport"><div class="ticker-track"></div></div>
+    </div>
 
     <div class="card-separator"></div>
 
@@ -53,7 +77,7 @@
                         <span class="timeline-badge-current">Current</span>
                     </div>
                     <span class="timeline-date"></span>
-                    <h3 class="timeline-title"></h3>
+                    <h3 class="timeline-title" data-split></h3>
                     <span class="timeline-org"></span>
                     <p class="timeline-description"></p>
                     <p class="timeline-details"></p>
@@ -61,11 +85,11 @@
                 </div>
             </div>
         </template>
-        <h2 class="section-title"><span>Timeline</span></h2>
+        <h2 class="section-title"><span data-split>Timeline</span></h2>
         <div class="timeline"></div>
     </section>
     <section id="projects" class="bio-section">
-        <h2 class="section-title"><span>Projects</span></h2>
+        <h2 class="section-title"><span data-split>Projects</span></h2>
         <p class="projects-intro"></p>
 
         <!-- Template for a spotlighted project card -->
@@ -75,7 +99,7 @@
                     <i class="spotlight-icon"></i>
                     <span class="spotlight-status"></span>
                 </div>
-                <h3 class="spotlight-name"></h3>
+                <h3 class="spotlight-name" data-split></h3>
                 <p class="spotlight-blurb"></p>
                 <p class="spotlight-highlight"><i class="fas fa-arrow-trend-up"></i> <span class="spotlight-highlight-text"></span></p>
                 <div class="spotlight-tech"></div>
@@ -100,7 +124,7 @@
             <a class="cv-download-btn" href="Joel_Prebish_Resume_public.pdf" download><i class="fas fa-download"></i> Download PDF</a>
         </div>
         <div class="cv-pdf-viewer">
-            <iframe src="Joel_Prebish_Resume_public.pdf" class="cv-pdf-iframe" title="Joel Prebish Resume"></iframe>
+            <iframe src="Joel_Prebish_Resume_public.pdf" class="cv-pdf-iframe cursor-native" title="Joel Prebish Resume"></iframe>
         </div>
         <!-- Shown instead of the iframe on small screens, where embedded PDFs don't render -->
         <div class="cv-mobile-card">
@@ -120,7 +144,14 @@
         </div>
     </footer>
 
+    <!-- Status toast (email copy). Hidden until something needs it. -->
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+        <span class="toast-text"></span>
+        <button type="button" class="toast-btn">Copy</button>
+    </div>
+
     <script src="static/style.js"></script>
+    <script src="static/effects.js"></script>
 </body>
 
 </html>
