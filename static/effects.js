@@ -84,7 +84,7 @@
     }
 
     /* ── Style cycle: default → terminal → Wall Street, each with its own wipe ── */
-    const THEME_META = { default: '#0d0d0f', crt: '#050403', wallst: '#000000' };
+    const THEME_META = { default: '#0d0d0f', crt: '#030603', wallst: '#000000' };
     const THEME_ICON = { default: 'fa-palette', crt: 'fa-terminal', wallst: 'fa-chart-line' };
     const THEME_NAME = { default: 'default', crt: 'terminal', wallst: 'Wall Street' };
     const themeBtn = document.getElementById('theme-toggle');
@@ -229,6 +229,19 @@
         m.addEventListener('pointerleave', () => { rect = null; m.style.translate = ''; });
     }
     document.querySelectorAll('[data-magnetic]').forEach(bindMagnetic);
+
+    /* ── Card spotlight: a soft highlight that follows the pointer (themes decide its colour) ── */
+    (() => {
+        const SPOT = '.featured-card, .spotlight-card, .timeline-content, #business-card, .projects-more';
+        document.addEventListener('pointermove', e => {
+            if (!mqFine.matches || mqRM.matches) return;
+            const c = e.target.closest && e.target.closest(SPOT);
+            if (!c) return;
+            const r = c.getBoundingClientRect();
+            c.style.setProperty('--px', `${e.clientX - r.left}px`);
+            c.style.setProperty('--py', `${e.clientY - r.top}px`);
+        }, { passive: true });
+    })();
 
     /* ── Reveals: words of [data-split] headings, and .reveal blocks ────────── */
     const reveal = (() => {

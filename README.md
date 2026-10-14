@@ -7,7 +7,7 @@ Personal portfolio site for Joel Prebish, hosted on GitHub Pages at [prebish.git
 - `index.html` — the one portfolio page (Home, Projects, Timeline, CV tabs; the floating dock is the only navigation)
 - `static/style.css` / `static/style.js` — base styles and page logic (card, tabs, projects, timeline)
 - `static/effects.js` — the extras: style cycle (default → terminal → Wall Street, each with its own wipe), custom cursor + magnetic dock, word-split and scroll reveals, the ticker header, intro, email-copy toast
-- `static/crt.css` — the "terminal" skin (`html[data-theme="crt"]`); `static/wallst.css` — the "Wall Street" skin (`html[data-theme="wallst"]`), where the ticker header becomes an LED quote board
+- `static/crt.css` — the "terminal" skin (`html[data-theme="crt"]`: green phosphor, VT323, typed prompts, rolling scan band); `static/wallst.css` — the "Wall Street" skin (`html[data-theme="wallst"]`: Playfair Display, gold shimmer, trading grid, sparkline, and the ticker header as an LED quote board)
 - `static/fridge.js` + `static/fridge.json` — fridge mode (see below)
 - `static/*.json` — content data
 - `scripts/fridge-sync.mjs` + `.github/workflows/fridge-sync.yml` — folds visitors' fridge moves into `fridge.json`

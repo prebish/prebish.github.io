@@ -1510,6 +1510,19 @@ html.has-cursor .cursor-native * {
 	cursor: auto !important;
 }
 
+/* ── Card spotlight (default theme): a quiet radial highlight under the pointer ── */
+html:not([data-theme]) .featured-card:hover,
+html:not([data-theme]) .spotlight-card:hover,
+html:not([data-theme]) .timeline-content:hover,
+html:not([data-theme]) .projects-more:hover {
+	background-image: radial-gradient(260px circle at var(--px, 50%) var(--py, 50%), rgba(255, 255, 255, 0.06), transparent 65%);
+}
+html:not([data-theme]) #business-card:hover {
+	background-image:
+		radial-gradient(320px circle at var(--px, 50%) var(--py, 50%), rgba(255, 255, 255, 0.05), transparent 65%),
+		linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+}
+
 /* ── Word-split heading reveal ── */
 [data-split] .w {
 	display: inline-block;

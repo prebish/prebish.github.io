@@ -33,7 +33,7 @@ html[data-theme="wallst"] {
 	--radius-lg: 8px;
 
 	--font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	--font-serif: Georgia, "Times New Roman", Times, serif;
+	--font-serif: "Playfair Display", Georgia, "Times New Roman", Times, serif;
 	--money-up: #19e26b;
 	--money-down: #ff3d3d;
 	--gold-metal: linear-gradient(180deg, #fff3b8 0%, #e6c868 38%, #b8912a 62%, #7a5d16 100%);
@@ -48,8 +48,13 @@ html[data-theme="wallst"] ::selection {
 	color: #001a08;
 }
 
+/* A trading-screen grid under a warm gold glow */
 html[data-theme="wallst"] body {
-	background-image: radial-gradient(120% 70% at 50% -20%, rgba(212, 175, 55, 0.12), transparent 60%);
+	background-image:
+		radial-gradient(120% 70% at 50% -20%, rgba(212, 175, 55, 0.12), transparent 60%),
+		repeating-linear-gradient(0deg, rgba(212, 175, 55, 0.045) 0 1px, transparent 1px 40px),
+		repeating-linear-gradient(90deg, rgba(212, 175, 55, 0.045) 0 1px, transparent 1px 40px);
+	background-repeat: no-repeat, repeat, repeat;
 }
 
 html[data-theme="wallst"] a:hover {
@@ -72,11 +77,20 @@ html[data-theme="wallst"] .bc-name {
 }
 html[data-theme="wallst"] .bc-name .w,
 html[data-theme="wallst"] .bc-name:not(:has(.w)) {
-	background: var(--gold-metal);
+	background:
+		linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.55) 50%, transparent 60%),
+		var(--gold-metal);
+	background-size: 250% 100%, 100% 100%;
+	background-position: 150% 0, 0 0;
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 	-webkit-text-fill-color: transparent;
+	animation: gold-shimmer 5s ease-in-out infinite; /* a highlight sweeps the brushed gold */
+}
+@keyframes gold-shimmer {
+	0%, 60% { background-position: 150% 0, 0 0; }
+	100%    { background-position: -50% 0, 0 0; }
 }
 html[data-theme="wallst"] .bc-title {
 	color: var(--accent);
@@ -99,6 +113,32 @@ html[data-theme="wallst"] .featured-card:hover,
 html[data-theme="wallst"] .spotlight-card:hover,
 html[data-theme="wallst"] .timeline-content:hover {
 	border-color: var(--accent);
+}
+
+/* Business card: a sparkline climbing in the corner, and a quote line where the terminal has its prompt */
+html[data-theme="wallst"] #business-card {
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.02) 42%, rgba(0, 0, 0, 0) 60%),
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Cpolyline points='0,70 25,62 45,66 70,48 95,52 120,36 145,40 170,22 195,26 220,8' fill='none' stroke='%23d4af37' stroke-width='2' stroke-opacity='.45' stroke-linejoin='round'/%3E%3Cpolygon points='0,70 25,62 45,66 70,48 95,52 120,36 145,40 170,22 195,26 220,8 220,80 0,80' fill='%23d4af37' fill-opacity='.08'/%3E%3C/svg%3E") no-repeat right 24px bottom 18px / 220px 80px,
+		var(--surface-1);
+}
+html[data-theme="wallst"] #business-card:hover {
+	background-image:
+		radial-gradient(320px circle at var(--px, 50%) var(--py, 50%), rgba(226, 196, 102, 0.10), transparent 65%),
+		linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.02) 42%, rgba(0, 0, 0, 0) 60%),
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Cpolyline points='0,70 25,62 45,66 70,48 95,52 120,36 145,40 170,22 195,26 220,8' fill='none' stroke='%23d4af37' stroke-width='2' stroke-opacity='.45' stroke-linejoin='round'/%3E%3Cpolygon points='0,70 25,62 45,66 70,48 95,52 120,36 145,40 170,22 195,26 220,8 220,80 0,80' fill='%23d4af37' fill-opacity='.08'/%3E%3C/svg%3E");
+	background-repeat: no-repeat, no-repeat, no-repeat;
+	background-size: auto, auto, 220px 80px;
+	background-position: 0 0, 0 0, right 24px bottom 18px;
+}
+/* Gold spotlight under the pointer on the other cards */
+html[data-theme="wallst"] .featured-card:hover,
+html[data-theme="wallst"] .spotlight-card:hover,
+html[data-theme="wallst"] .timeline-content:hover,
+html[data-theme="wallst"] .projects-more:hover {
+	background-image:
+		radial-gradient(260px circle at var(--px, 50%) var(--py, 50%), rgba(226, 196, 102, 0.10), transparent 65%),
+		linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.02) 42%, rgba(0, 0, 0, 0) 60%);
 }
 
 /* Business card: a quote line where the terminal theme has its prompt */
@@ -213,5 +253,13 @@ html[data-theme="wallst"] .intro-frame {
 @media (max-width: 560px) {
 	html[data-theme="wallst"] #business-card {
 		padding-top: 30px;
+	}
+}
+
+/* Reduced motion: the shimmer holds still */
+@media (prefers-reduced-motion: reduce) {
+	html[data-theme="wallst"] .bc-name .w,
+	html[data-theme="wallst"] .bc-name:not(:has(.w)) {
+		animation: none;
 	}
 }

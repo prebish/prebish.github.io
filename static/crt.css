@@ -1,28 +1,29 @@
 /* ──────────────────────────────────────────────────────────────────────────
    crt.css — the "terminal" skin, toggled from the dock (html[data-theme="crt"]).
-   Same content and layout; amber phosphor on near-black, monospace, scanlines,
-   square corners, TUI-style section frames, dock as a status bar.
+   Same content and layout; green P1 phosphor on near-black, a pixel terminal
+   face (VT323) for display text, scanlines with a rolling scan band, typed
+   prompts, square corners, TUI-style section frames, dock as a status bar.
    Every rule is scoped so removing this file restores the default theme.
    ────────────────────────────────────────────────────────────────────────── */
 
 html[data-theme="crt"] {
-	--bg: #050403;
-	--surface-1: #0a0805;
-	--surface-2: #110d06;
-	--surface-input: #0e0b05;
+	--bg: #030603;
+	--surface-1: #06100a;
+	--surface-2: #0a1a0f;
+	--surface-input: #081509;
 
-	--text-primary: #ffd37a;
-	--text-secondary: #d9a94a;
-	--text-tertiary: #9c7a35;
+	--text-primary: #b6ffb6;
+	--text-secondary: #6fdc6f;
+	--text-tertiary: #3f9a3f;
 
-	--accent: #ffb000;
-	--accent-strong: #ffb000;
-	--accent-ink: #140e00;
-	--accent-soft: rgba(255, 176, 0, 0.10);
-	--accent-line: rgba(255, 176, 0, 0.45);
+	--accent: #33ff33;
+	--accent-strong: #33ff33;
+	--accent-ink: #001a00;
+	--accent-soft: rgba(51, 255, 51, 0.10);
+	--accent-line: rgba(51, 255, 51, 0.45);
 
-	--border: rgba(255, 176, 0, 0.22);
-	--border-strong: rgba(255, 176, 0, 0.45);
+	--border: rgba(51, 255, 51, 0.22);
+	--border-strong: rgba(51, 255, 51, 0.45);
 
 	--shadow-sm: none;
 	--shadow-md: none;
@@ -34,15 +35,16 @@ html[data-theme="crt"] {
 	--radius-pill: 0;
 
 	--font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-	--crt-glow: 0 0 8px rgba(255, 176, 0, 0.35);
+	--font-display: "VT323", ui-monospace, Menlo, Consolas, monospace; /* pixel terminal face for display text */
+	--crt-glow: 0 0 8px rgba(51, 255, 51, 0.4);
 
 	color-scheme: dark;
-	scrollbar-color: #5a4312 #050403;
+	scrollbar-color: #1f5c1f #030603;
 }
 
 html[data-theme="crt"] ::selection {
-	background: #ffb000;
-	color: #140e00;
+	background: #33ff33;
+	color: #001a00;
 }
 
 html[data-theme="crt"] body {
@@ -50,7 +52,7 @@ html[data-theme="crt"] body {
 	letter-spacing: 0;
 }
 
-/* Scanlines + vignette over everything but the intro overlay */
+/* Scanlines, a vignette, and a faint scan band rolling down the tube */
 html[data-theme="crt"] body::before,
 html[data-theme="crt"] body::after {
 	content: '';
@@ -63,8 +65,39 @@ html[data-theme="crt"] body::before {
 	background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.22) 2px 3px);
 }
 html[data-theme="crt"] body::after {
-	background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.55));
+	background:
+		radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.55)),
+		linear-gradient(to bottom, transparent 0%, rgba(51, 255, 51, 0.07) 50%, transparent 100%);
+	background-size: 100% 100%, 100% 22vh;
+	background-repeat: no-repeat;
+	background-position: 0 0, 0 -22vh;
+	animation: crt-roll 7s linear infinite;
 }
+@keyframes crt-roll {
+	to { background-position: 0 0, 0 122vh; }
+}
+
+/* Display text in the pixel face; it draws small, so it gets a size bump */
+html[data-theme="crt"] .bc-name,
+html[data-theme="crt"] .section-title span,
+html[data-theme="crt"] h3,
+html[data-theme="crt"] .dock-item,
+html[data-theme="crt"] .ticker-sym,
+html[data-theme="crt"] .bc-title,
+html[data-theme="crt"] .timeline-year,
+html[data-theme="crt"] .timeline-now-label {
+	font-family: var(--font-display);
+	font-weight: 400;
+	letter-spacing: 0.02em;
+}
+html[data-theme="crt"] .bc-name { font-size: 2.2rem; }
+html[data-theme="crt"] .section-title span { font-size: 1.35rem; }
+html[data-theme="crt"] h3 { font-size: 1.45rem; }
+html[data-theme="crt"] .spotlight-card:first-child .spotlight-name { font-size: 1.8rem; }
+html[data-theme="crt"] .bc-title { font-size: 0.95rem; }
+html[data-theme="crt"] .dock-item { font-size: 1.05rem; }
+html[data-theme="crt"] .ticker-sym { font-size: 1rem; letter-spacing: 0.08em; }
+html[data-theme="crt"] .timeline-year { font-size: 0.95rem; }
 
 /* Phosphor bloom on headings and the active tab */
 html[data-theme="crt"] .bc-name,
@@ -95,18 +128,39 @@ html[data-theme="crt"] .cv-download-btn:hover {
 	border-color: var(--accent);
 }
 
-/* ── Business card: a prompt line and a blinking block cursor after the name ── */
+/* ── Business card: a typed prompt line and a blinking block cursor after the name ── */
 html[data-theme="crt"] #business-card {
 	background: var(--surface-1);
 	border-top-color: var(--border-strong);
 }
-html[data-theme="crt"] #business-card::before {
-	content: '$ whoami';
+html[data-theme="crt"] #business-card::before,
+html[data-theme="crt"] .featured-card::before {
 	position: absolute;
 	top: 8px;
 	left: 12px;
-	font-size: 0.7rem;
+	font-family: var(--font-display);
+	font-size: 0.95rem;
 	color: var(--text-tertiary);
+	white-space: nowrap;
+	overflow: hidden;
+}
+html[data-theme="crt"] #business-card::before {
+	content: '$ whoami';
+	width: 8ch;
+	animation: crt-type 0.8s steps(8) both;
+}
+/* The three home cards are what `ls` would list */
+html[data-theme="crt"] .featured-card {
+	position: relative;
+	padding-top: 36px; /* room for the typed prompt above the icon */
+}
+html[data-theme="crt"] .featured-card::before {
+	content: '$ ls';
+	width: 4ch;
+	animation: crt-type 0.5s steps(4) 0.3s both;
+}
+@keyframes crt-type {
+	from { width: 0; }
 }
 html[data-theme="crt"] .bc-name::after {
 	content: '█';
@@ -117,30 +171,19 @@ html[data-theme="crt"] .bc-name::after {
 @keyframes crt-blink {
 	50% { opacity: 0; }
 }
-/* The three home cards are what `ls` would list */
-html[data-theme="crt"] .featured-card {
-	position: relative;
-}
-html[data-theme="crt"] .featured-card::before {
-	content: '$ ls';
-	position: absolute;
-	top: 8px;
-	left: 12px;
-	font-size: 0.7rem;
-	color: var(--text-tertiary);
-}
 html[data-theme="crt"] .bc-divider {
 	background: linear-gradient(to right, var(--accent-strong) 0, var(--accent-strong) 34px, var(--border-strong) 34px, var(--border-strong) 100%);
 }
 
-/* Brand marks tinted amber so nothing full-colour breaks the phosphor */
+/* Brand marks tinted green so nothing full-colour breaks the phosphor */
 html[data-theme="crt"] .bc-logo img,
 html[data-theme="crt"] .bc-social-img {
-	filter: grayscale(1) sepia(1) saturate(3) hue-rotate(-15deg) opacity(0.85);
+	filter: grayscale(1) sepia(1) saturate(4) hue-rotate(70deg) opacity(0.85);
 }
 
+/* ── Ribbon header in phosphor ── */
 html[data-theme="crt"] .ticker {
-	background: rgba(5, 4, 3, 0.92);
+	background: rgba(3, 6, 3, 0.92);
 	backdrop-filter: none;
 	-webkit-backdrop-filter: none;
 	border-bottom-color: var(--border-strong);
@@ -148,6 +191,28 @@ html[data-theme="crt"] .ticker {
 html[data-theme="crt"] .ticker-item {
 	color: var(--text-secondary);
 }
+
+/* ── ASCII rules: the hero separator and the timeline spine ── */
+html[data-theme="crt"] .card-separator {
+	height: auto;
+	width: max-content;
+	max-width: 100%;
+	background: none;
+	color: var(--text-tertiary);
+	font-family: var(--font-display);
+	font-size: 0.95rem;
+	letter-spacing: 0.04em;
+	white-space: nowrap;
+	overflow: hidden;
+}
+html[data-theme="crt"] .card-separator::before {
+	content: '─────────────────────────── EOF ───────────────────────────';
+}
+html[data-theme="crt"] .timeline::before {
+	background: repeating-linear-gradient(to bottom, var(--border-strong) 0 6px, transparent 6px 12px);
+}
+html[data-theme="crt"] .timeline-year::before { content: '['; }
+html[data-theme="crt"] .timeline-year::after { content: ']'; }
 
 /* ── TUI frames: ┌─ Projects ──────┐ ── */
 html[data-theme="crt"] #projects,
@@ -172,8 +237,6 @@ html[data-theme="crt"] .section-title::after {
 	display: none;
 }
 html[data-theme="crt"] .section-title span {
-	font-size: 1rem;
-	letter-spacing: 0;
 	text-transform: lowercase;
 }
 html[data-theme="crt"] .section-title span::before { content: '─ '; color: var(--border-strong); }
@@ -251,22 +314,26 @@ html[data-theme="crt"] .toast {
 	border-color: var(--accent);
 }
 html[data-theme="crt"] .intro-text {
-	font-family: var(--font-family);
+	font-family: var(--font-display);
+	font-size: 38px;
 }
 html[data-theme="crt"] .door.is-live {
 	border-color: var(--border-strong);
-}
-
-/* Reduced motion: the block cursor stays solid */
-@media (prefers-reduced-motion: reduce) {
-	html[data-theme="crt"] .bc-name::after {
-		animation: none;
-	}
 }
 
 /* Phones: the card's top padding shrinks, so make room for the prompt line above the name */
 @media (max-width: 560px) {
 	html[data-theme="crt"] #business-card {
 		padding-top: 30px;
+	}
+}
+
+/* Reduced motion: solid cursor, no typing, no rolling band */
+@media (prefers-reduced-motion: reduce) {
+	html[data-theme="crt"] .bc-name::after,
+	html[data-theme="crt"] body::after,
+	html[data-theme="crt"] #business-card::before,
+	html[data-theme="crt"] .featured-card::before {
+		animation: none;
 	}
 }
