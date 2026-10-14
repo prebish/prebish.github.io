@@ -6,8 +6,8 @@ Personal portfolio site for Joel Prebish, hosted on GitHub Pages at [prebish.git
 
 - `index.html` — the one portfolio page (Home, Projects, Timeline, CV tabs; the floating dock is the only navigation)
 - `static/style.css` / `static/style.js` — base styles and page logic (card, tabs, projects, timeline)
-- `static/effects.js` — the extras: terminal theme toggle, custom cursor + magnetic dock, word-split and scroll reveals, tech ticker, intro, email-copy toast
-- `static/crt.css` — the "terminal" skin, scoped under `html[data-theme="crt"]`
+- `static/effects.js` — the extras: style cycle (default → terminal → Wall Street, each with its own wipe), custom cursor + magnetic dock, word-split and scroll reveals, the ticker header, intro, email-copy toast
+- `static/crt.css` — the "terminal" skin (`html[data-theme="crt"]`); `static/wallst.css` — the "Wall Street" skin (`html[data-theme="wallst"]`), where the ticker header becomes an LED quote board
 - `static/fridge.js` + `static/fridge.json` — fridge mode (see below)
 - `static/*.json` — content data
 - `scripts/fridge-sync.mjs` + `.github/workflows/fridge-sync.yml` — folds visitors' fridge moves into `fridge.json`
@@ -22,11 +22,11 @@ The Projects tab is curated from `static/projects.json`; the "More on GitHub" li
 - Featured cards: `static/featured.json`
 - Spotlight projects: `static/projects.json`
 - Career timeline: `static/career.json`
-- Tech ticker (the ribbon under the card): `static/skills.json`
+- Ticker header (the ribbon across the top): `static/skills.json`
 
 ## Fridge mode
 
-The magnet button in the dock turns the current tab into a fridge door: on Home the business card, ticker and featured cards; on Projects the title, intro, project cards and the GitHub box; on Timeline the title and each entry; on CV the toolbar and the viewer. Anyone can drag them (mouse, touch, or arrow keys on a focused magnet; the gold disc is a handle). The arrangement is **shared**: whatever the last visitor left is what the next one sees.
+The magnet button in the dock turns the current tab into a fridge door: on Home the business card and featured cards; on Projects the title, intro, project cards and the GitHub box; on Timeline the title and each entry; on CV the toolbar and the viewer. Anyone can drag them (mouse, touch, or arrow keys on a focused magnet; the gold disc is a handle). The arrangement is **shared**: whatever the last visitor left is what the next one sees.
 
 How it works without a backend:
 

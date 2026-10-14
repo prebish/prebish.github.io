@@ -1,0 +1,217 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   wallst.css — the "Wall Street, new money" skin (html[data-theme="wallst"]).
+   Early-2000s trading floor: black glass, metallic gold, LED green and red,
+   serif headlines, a quote board for a header. Same content and layout.
+   Every rule is scoped so removing this file restores the default theme.
+   ────────────────────────────────────────────────────────────────────────── */
+
+html[data-theme="wallst"] {
+	--bg: #000000;
+	--surface-1: #0b0d10;
+	--surface-2: #12151a;
+	--surface-input: #0f1115;
+
+	--text-primary: #f3f3f3;
+	--text-secondary: #b9bdc5;
+	--text-tertiary: #7f848e;
+
+	--accent: #e2c466;
+	--accent-strong: #d4af37;
+	--accent-ink: #141000;
+	--accent-soft: rgba(212, 175, 55, 0.14);
+	--accent-line: rgba(212, 175, 55, 0.45);
+
+	--border: rgba(212, 175, 55, 0.25);
+	--border-strong: rgba(212, 175, 55, 0.5);
+
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+	--shadow-md: 0 0 0 1px #000, 0 8px 24px rgba(0, 0, 0, 0.7);
+	--shadow-lg: 0 0 0 1px #000, 0 20px 48px rgba(0, 0, 0, 0.8);
+
+	--radius-sm: 4px;
+	--radius: 6px;
+	--radius-lg: 8px;
+
+	--font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--font-serif: Georgia, "Times New Roman", Times, serif;
+	--money-up: #19e26b;
+	--money-down: #ff3d3d;
+	--gold-metal: linear-gradient(180deg, #fff3b8 0%, #e6c868 38%, #b8912a 62%, #7a5d16 100%);
+	--ticker-h: 40px;
+
+	color-scheme: dark;
+	scrollbar-color: #5a4a1a #000;
+}
+
+html[data-theme="wallst"] ::selection {
+	background: var(--money-up);
+	color: #001a08;
+}
+
+html[data-theme="wallst"] body {
+	background-image: radial-gradient(120% 70% at 50% -20%, rgba(212, 175, 55, 0.12), transparent 60%);
+}
+
+html[data-theme="wallst"] a:hover {
+	color: var(--money-up);
+}
+
+/* Serif headlines, like a masthead */
+html[data-theme="wallst"] .bc-name,
+html[data-theme="wallst"] .section-title span,
+html[data-theme="wallst"] h3,
+html[data-theme="wallst"] .cv-mobile-title {
+	font-family: var(--font-serif);
+	letter-spacing: 0;
+}
+
+/* Metallic gold name: the "new money" touch. The gradient is clipped per word span (clipping on
+   the parent mis-paints inline-block children in Chromium); the whole h1 only when it has no spans. */
+html[data-theme="wallst"] .bc-name {
+	color: var(--accent);
+}
+html[data-theme="wallst"] .bc-name .w,
+html[data-theme="wallst"] .bc-name:not(:has(.w)) {
+	background: var(--gold-metal);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+}
+html[data-theme="wallst"] .bc-title {
+	color: var(--accent);
+}
+
+/* Cards: black glass with a 2000s gloss highlight and a gold hairline */
+html[data-theme="wallst"] #business-card,
+html[data-theme="wallst"] .featured-card,
+html[data-theme="wallst"] .spotlight-card,
+html[data-theme="wallst"] .timeline-content,
+html[data-theme="wallst"] .projects-more,
+html[data-theme="wallst"] .cv-mobile-card,
+html[data-theme="wallst"] .cv-pdf-viewer {
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.02) 42%, rgba(0, 0, 0, 0) 60%),
+		var(--surface-1);
+	border-color: var(--border-strong);
+}
+html[data-theme="wallst"] .featured-card:hover,
+html[data-theme="wallst"] .spotlight-card:hover,
+html[data-theme="wallst"] .timeline-content:hover {
+	border-color: var(--accent);
+}
+
+/* Business card: a quote line where the terminal theme has its prompt */
+html[data-theme="wallst"] #business-card::before {
+	content: 'NYSE: JP  ▲ 1.00';
+	position: absolute;
+	top: 8px;
+	left: 12px;
+	font: 700 0.68rem "Courier New", Courier, monospace;
+	letter-spacing: 0.06em;
+	color: var(--money-up);
+	text-shadow: 0 0 6px rgba(25, 226, 107, 0.6);
+}
+
+/* Buttons and chips in gold; "Live" stays LED green */
+html[data-theme="wallst"] .spotlight-link.primary,
+html[data-theme="wallst"] .cv-download-btn,
+html[data-theme="wallst"] .toast-btn {
+	background: var(--gold-metal);
+	color: #1a1300;
+	border-color: transparent;
+}
+html[data-theme="wallst"] .spotlight-status.status-live {
+	color: var(--money-up);
+	border-color: rgba(25, 226, 107, 0.4);
+	background: rgba(25, 226, 107, 0.1);
+}
+
+/* ── The header becomes a quote board ── */
+html[data-theme="wallst"] .ticker {
+	background: #000;
+	border-bottom: 2px solid var(--accent-strong);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+	box-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
+}
+html[data-theme="wallst"] .ticker-track {
+	animation-duration: 34s;
+}
+html[data-theme="wallst"] .ticker-item {
+	gap: 8px;
+}
+html[data-theme="wallst"] .ticker-sym {
+	font: 700 0.8rem "Courier New", Courier, monospace;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: #ffffff;
+}
+html[data-theme="wallst"] .ticker-quote {
+	display: inline;
+	font: 700 0.8rem "Courier New", Courier, monospace;
+	letter-spacing: 0.04em;
+	text-shadow: 0 0 6px currentColor;
+}
+html[data-theme="wallst"] .ticker-quote[data-dir="up"] { color: var(--money-up); }
+html[data-theme="wallst"] .ticker-quote[data-dir="down"] { color: var(--money-down); }
+html[data-theme="wallst"] .ticker-quote.flash {
+	animation: led-flash 0.6s steps(2, jump-none);
+}
+@keyframes led-flash {
+	50% { filter: brightness(2.2); }
+}
+html[data-theme="wallst"] .ticker-dot {
+	width: 4px;
+	height: 4px;
+	border-radius: 0;
+	background: var(--accent-strong);
+	opacity: 1;
+}
+
+/* Dock: black bar, gold rim, LED-green active tab */
+html[data-theme="wallst"] .dock {
+	background: rgba(0, 0, 0, 0.9);
+	border-color: var(--accent-strong);
+	box-shadow: 0 0 0 1px #000, 0 12px 32px rgba(0, 0, 0, 0.8);
+}
+html[data-theme="wallst"] .dock-item.active {
+	color: var(--money-up);
+	background-color: rgba(25, 226, 107, 0.12);
+}
+html[data-theme="wallst"] .dock-divider {
+	background: var(--border-strong);
+}
+
+/* Timeline spine and dots in gold; year chips on black */
+html[data-theme="wallst"] .timeline::before {
+	background: var(--accent-line);
+}
+html[data-theme="wallst"] .timeline-icon {
+	border-color: var(--accent-strong);
+}
+html[data-theme="wallst"] .timeline-year {
+	background: #000;
+	border-color: var(--border-strong);
+	color: var(--accent);
+}
+
+/* Fridge door rim and the intro mark in gold */
+html[data-theme="wallst"] .door.is-live {
+	border-color: var(--accent-strong);
+}
+html[data-theme="wallst"] .intro-frame,
+html[data-theme="wallst"] .intro-text {
+	stroke: var(--accent-strong);
+	fill: var(--accent-strong);
+}
+html[data-theme="wallst"] .intro-frame {
+	fill: none;
+}
+
+/* Phones: the card's top padding shrinks, so make room for the prompt line above the name */
+@media (max-width: 560px) {
+	html[data-theme="wallst"] #business-card {
+		padding-top: 30px;
+	}
+}

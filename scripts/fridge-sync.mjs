@@ -13,7 +13,7 @@ import { readFile, writeFile, appendFile } from 'node:fs/promises';
 const FILE = new URL('../static/fridge.json', import.meta.url);
 const BASE = (process.env.FRIDGE_NTFY_BASE || 'https://ntfy.sh').replace(/\/+$/, '');
 // Mirrored in static/fridge.js; keep in sync.
-const ID_RE = /^(card|ticker|featured-[0-9]|projects-title|projects-intro|spotlight-[0-9]|projects-more|timeline-title|timeline-[0-9]{1,2}|cv-bar|cv-viewer|cv-mobile)$/;
+const ID_RE = /^(card|featured-[0-9]|projects-title|projects-intro|spotlight-[0-9]|projects-more|timeline-title|timeline-[0-9]{1,2}|cv-bar|cv-viewer|cv-mobile)$/;
 
 const round = v => Math.round(v * 1000) / 1000;
 const validPos = m => !!m && Number.isFinite(+m.x) && Number.isFinite(+m.y) && +m.x >= 0 && +m.x <= 1 && +m.y >= 0 && +m.y <= 1;

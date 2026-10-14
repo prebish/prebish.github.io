@@ -139,6 +139,12 @@ html[data-theme="crt"] .bc-social-img {
 	filter: grayscale(1) sepia(1) saturate(3) hue-rotate(-15deg) opacity(0.85);
 }
 
+html[data-theme="crt"] .ticker {
+	background: rgba(5, 4, 3, 0.92);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+	border-bottom-color: var(--border-strong);
+}
 html[data-theme="crt"] .ticker-item {
 	color: var(--text-secondary);
 }
@@ -255,5 +261,12 @@ html[data-theme="crt"] .door.is-live {
 @media (prefers-reduced-motion: reduce) {
 	html[data-theme="crt"] .bc-name::after {
 		animation: none;
+	}
+}
+
+/* Phones: the card's top padding shrinks, so make room for the prompt line above the name */
+@media (max-width: 560px) {
+	html[data-theme="crt"] #business-card {
+		padding-top: 30px;
 	}
 }

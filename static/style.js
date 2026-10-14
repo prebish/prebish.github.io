@@ -206,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const allSections = document.querySelectorAll('#bio, #projects, #timeline, #cv');
     const businessCard = card;
-    const ticker = document.querySelector('.ticker');
     const cardSeparator = document.querySelector('.card-separator');
     const VALID_SECTIONS = ['bio', 'projects', 'timeline', 'cv'];
 
@@ -219,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // The business card + separator are the hero for the home (Featured) view
     // only; every other tab is its own focused page.
     function setHeroVisible(visible, animate) {
-        [businessCard, ticker, cardSeparator].forEach(el => {
+        [businessCard, cardSeparator].forEach(el => {
             if (!el) return;
             el.classList.remove('hero-fade');
             if (visible) {

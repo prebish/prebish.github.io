@@ -1,6 +1,7 @@
 /* ──────────────────────────────────────────────────────────────────────────
-   effects.js — theme toggle (CRT), custom cursor + magnetic buttons,
-   word-split and scroll reveals, tech ticker, toast, first-visit intro.
+   effects.js — style cycle (default → terminal → Wall Street), custom cursor
+   + magnetic buttons, word-split and scroll reveals, the ticker header,
+   toast, first-visit intro.
 
    Vanilla, no dependencies. Runs synchronously at the end of <body>, before
    style.js's DOMContentLoaded handler, and only talks to style.js through two
@@ -15,7 +16,9 @@
     const root = document.documentElement;
     const mqRM = matchMedia('(prefers-reduced-motion: reduce)');
     const mqFine = matchMedia('(pointer: fine) and (hover: hover)');
-    const isCRT = () => root.dataset.theme === 'crt';
+    const THEMES = ['default', 'crt', 'wallst'];
+    const currentTheme = () => (THEMES.includes(root.dataset.theme) ? root.dataset.theme : 'default');
+    const isCRT = () => currentTheme() === 'crt';
     const fxAllowed = () => mqFine.matches && !mqRM.matches && !isCRT();
     const onChange = (mq, fn) => { if (mq.addEventListener) mq.addEventListener('change', fn); else if (mq.addListener) mq.addListener(fn); };
     const themeListeners = new Set();
@@ -80,44 +83,56 @@
         });
     }
 
-    /* ── Theme (default ↔ CRT) with a circular View Transition wipe ───────── */
+    /* ── Style cycle: default → terminal → Wall Street, each with its own wipe ── */
+    const THEME_META = { default: '#0d0d0f', crt: '#050403', wallst: '#000000' };
+    const THEME_ICON = { default: 'fa-palette', crt: 'fa-terminal', wallst: 'fa-chart-line' };
+    const THEME_NAME = { default: 'default', crt: 'terminal', wallst: 'Wall Street' };
     const themeBtn = document.getElementById('theme-toggle');
     const themeMeta = document.querySelector('meta[name="theme-color"]');
 
     function applyTheme(next, notify = true) {
-        if (next === 'crt') { root.dataset.theme = 'crt'; store.set('theme', 'crt'); }
-        else { delete root.dataset.theme; store.del('theme'); }
-        if (themeBtn) themeBtn.setAttribute('aria-pressed', String(next === 'crt'));
-        if (themeMeta) themeMeta.content = next === 'crt' ? '#050403' : '#0d0d0f';
+        if (next === 'default') { delete root.dataset.theme; store.del('theme'); }
+        else { root.dataset.theme = next; store.set('theme', next); }
+        if (themeBtn) {
+            const after = THEMES[(THEMES.indexOf(next) + 1) % THEMES.length];
+            themeBtn.dataset.style = next;
+            themeBtn.classList.toggle('is-on', next !== 'default');
+            themeBtn.setAttribute('aria-label', `Style: ${THEME_NAME[next]}. Switch to ${THEME_NAME[after]}`);
+            themeBtn.title = `Style: ${THEME_NAME[next]} · click for ${THEME_NAME[after]}`;
+            const icon = themeBtn.querySelector('i');
+            if (icon) {
+                icon.className = `fas ${THEME_ICON[next]}`;
+                if (notify && !mqRM.matches) { void icon.offsetWidth; icon.classList.add('icon-pop'); }
+            }
+        }
+        if (themeMeta) themeMeta.content = THEME_META[next];
         if (notify) themeListeners.forEach(fn => { try { fn(next); } catch (err) { console.error(err); } });
     }
-    applyTheme(isCRT() ? 'crt' : 'default', false); // sync the button with the pre-paint script
+    applyTheme(currentTheme(), false); // sync the button with the pre-paint script
 
-    let switching = false;
+    let activeVT = null;
     if (themeBtn) {
         themeBtn.addEventListener('click', async () => {
-            if (switching) return;
-            const next = isCRT() ? 'default' : 'crt';
+            const next = THEMES[(THEMES.indexOf(currentTheme()) + 1) % THEMES.length];
             if (!document.startViewTransition || mqRM.matches) { applyTheme(next); return; }
-            // Wipe origin = the button's centre (works for keyboard activation too)
+            if (activeVT) { try { activeVT.skipTransition(); } catch (err) { /* already done */ } } // a quick second click cuts the running wipe short
+            // The default wipe is a circle growing from the button; the others are keyed off html.vt-*
             const r = themeBtn.getBoundingClientRect();
             const x = r.left + r.width / 2, y = r.top + r.height / 2;
-            const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-            switching = true;
-            root.classList.add('theme-switching');
+            root.style.setProperty('--vt-x', `${x}px`);
+            root.style.setProperty('--vt-y', `${y}px`);
+            root.style.setProperty('--vt-r', `${Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))}px`);
+            root.classList.add('theme-switching', `vt-${next}`);
+            let vt = null;
             try {
-                const vt = document.startViewTransition(() => applyTheme(next));
-                await vt.ready;
-                root.animate(
-                    { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-                    { duration: 550, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', pseudoElement: '::view-transition-new(root)' }
-                );
+                vt = document.startViewTransition(() => applyTheme(next));
+                activeVT = vt;
                 await vt.finished;
             } catch (err) {
-                if (isCRT() !== (next === 'crt')) applyTheme(next); // transition refused: swap instantly
+                if (currentTheme() !== next) applyTheme(next); // transition refused: swap instantly
             } finally {
-                root.classList.remove('theme-switching');
-                switching = false;
+                root.classList.remove(`vt-${next}`);
+                if (activeVT === vt) { activeVT = null; root.classList.remove('theme-switching'); }
             }
         });
     }
@@ -327,23 +342,58 @@
         if (section && e.detail.animate) reveal.replay(section);
     });
 
-    /* ── Tech ticker ────────────────────────────────────────────────────────── */
+    /* ── Ticker header: the skills ribbon; in Wall Street style it's a quote board ── */
     (() => {
         const ticker = document.querySelector('.ticker');
         const track = ticker && ticker.querySelector('.ticker-track');
         if (!track) return;
+        let labels = [];
+        let values = [];   // one fake "move" per label, random-walked while the board is on
+        let walker = 0;
+
+        const hash = s => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
+        function render(flashIdx) {
+            ticker.querySelectorAll('.ticker-quote').forEach(q => {
+                const i = +q.dataset.i;
+                const v = values[i];
+                q.dataset.dir = v >= 0 ? 'up' : 'down';
+                q.textContent = `${v >= 0 ? '▲' : '▼'} ${Math.abs(v).toFixed(2)}`;
+                if (flashIdx && flashIdx.has(i)) { q.classList.remove('flash'); void q.offsetWidth; q.classList.add('flash'); }
+            });
+        }
+        function walk() {
+            const picks = new Set();
+            for (let k = 0; k < Math.min(3, labels.length); k++) picks.add(Math.floor(Math.random() * labels.length));
+            picks.forEach(i => { values[i] = Math.max(-9.99, Math.min(9.99, values[i] + (Math.random() - 0.5) * 0.6)); });
+            render(picks);
+        }
+        function syncBoard() {
+            clearInterval(walker); walker = 0;
+            if (currentTheme() === 'wallst' && !mqRM.matches && labels.length) walker = setInterval(walk, 3000);
+        }
+        themeListeners.add(syncBoard);
+        onChange(mqRM, syncBoard);
+
         fetch('static/skills.json')
             .then(r => r.json())
             .then(items => {
                 if (!Array.isArray(items) || !items.length) return;
+                labels = items.map(String);
+                values = labels.map(l => (hash(l) % 400) / 100 - 2);
                 const makeSet = hidden => {
                     const set = document.createElement('div');
                     set.className = 'ticker-set';
                     if (hidden) set.setAttribute('aria-hidden', 'true');
-                    items.forEach(label => {
+                    labels.forEach((label, i) => {
                         const item = document.createElement('span');
                         item.className = 'ticker-item';
-                        item.textContent = String(label);
+                        const sym = document.createElement('span');
+                        sym.className = 'ticker-sym';
+                        sym.textContent = label;
+                        const quote = document.createElement('b');
+                        quote.className = 'ticker-quote';
+                        quote.dataset.i = String(i);
+                        item.append(sym, quote);
                         const dot = document.createElement('i');
                         dot.className = 'ticker-dot';
                         set.append(item, dot);
@@ -351,7 +401,9 @@
                     return set;
                 };
                 track.append(makeSet(false), makeSet(true));
+                render();
                 ticker.hidden = false;
+                syncBoard();
             })
             .catch(err => console.error('Error loading skills data:', err));
     })();
@@ -370,7 +422,7 @@
             const section = document.getElementById(id);
             if (section) { section.classList.remove('section-fade'); void section.offsetWidth; section.classList.add('section-fade'); }
             if (id === 'bio') {
-                document.querySelectorAll('#business-card, .ticker, .card-separator').forEach(el => {
+                document.querySelectorAll('#business-card, .card-separator').forEach(el => {
                     el.classList.remove('hero-fade'); void el.offsetWidth; el.classList.add('hero-fade');
                 });
                 const grid = document.querySelector('.featured-grid');

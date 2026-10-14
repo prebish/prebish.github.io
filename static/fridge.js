@@ -1,6 +1,6 @@
 /* ──────────────────────────────────────────────────────────────────────────
    fridge.js — "fridge mode": every tab becomes a door and its pieces become
-   draggable magnets (Home: card, ticker, featured cards; Projects: title,
+   draggable magnets (Home: card, featured cards; Projects: title,
    intro, project cards, "More on GitHub"; Timeline: title and each entry;
    CV: toolbar and the viewer).
 
@@ -27,7 +27,7 @@
     const NTFY = 'https://ntfy.sh';
     const TABS = ['bio', 'projects', 'timeline', 'cv'];
     // Mirrored in scripts/fridge-sync.mjs; keep in sync.
-    const ID_RE = /^(card|ticker|featured-[0-9]|projects-title|projects-intro|spotlight-[0-9]|projects-more|timeline-title|timeline-[0-9]{1,2}|cv-bar|cv-viewer|cv-mobile)$/;
+    const ID_RE = /^(card|featured-[0-9]|projects-title|projects-intro|spotlight-[0-9]|projects-more|timeline-title|timeline-[0-9]{1,2}|cv-bar|cv-viewer|cv-mobile)$/;
     const mqRM = matchMedia('(prefers-reduced-motion: reduce)');
     const store = {
         get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -106,7 +106,7 @@
     }
     function collect(t) {
         let items = [];
-        if (t === 'bio') items = [...pick('card', '#business-card'), ...pick('ticker', '.ticker'), ...pick('featured', '.featured-grid .featured-card', true)];
+        if (t === 'bio') items = [...pick('card', '#business-card'), ...pick('featured', '.featured-grid .featured-card', true)];
         else if (t === 'projects') items = [...pick('projects-title', '#projects .section-title'), ...pick('projects-intro', '.projects-intro'), ...pick('spotlight', '.spotlight-card', true), ...pick('projects-more', '.projects-more')];
         else if (t === 'timeline') items = [...pick('timeline-title', '#timeline .section-title'), ...pick('timeline', '.timeline-item', true)];
         else if (t === 'cv') items = [...pick('cv-bar', '.cv-page-bar'), ...pick('cv-viewer', '.cv-pdf-viewer'), ...pick('cv-mobile', '.cv-mobile-card')];
