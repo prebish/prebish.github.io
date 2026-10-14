@@ -67,7 +67,16 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
          wraps the hero; the other tabs have a door inside their section. -->
     <div class="door" id="fridge-door">
         <div id="business-card" aria-label="Business card"></div>
-        <div class="card-separator"></div>
+        <!-- Hero separator. In the default (Pittsburgh) style it is one of the gold Sister Bridges,
+             drawn in on arrival; the other styles swap it for their own rule. -->
+        <div class="card-separator" aria-hidden="true">
+            <svg class="bridge" viewBox="0 0 420 36" preserveAspectRatio="none" focusable="false">
+                <path class="bridge-deck" d="M0,28 H420" pathLength="1"/>
+                <path class="bridge-towers" d="M120,28 V8 M300,28 V8" pathLength="1"/>
+                <path class="bridge-cable" d="M10,28 Q65,8 120,8 Q210,34 300,8 Q355,8 410,28" pathLength="1"/>
+                <path class="bridge-hangers" d="M60,14 V28 M87,10 V28 M140,13 V28 M160,17 V28 M180,19.6 V28 M200,20.8 V28 M220,20.8 V28 M240,19.6 V28 M260,17 V28 M280,13 V28 M333,10 V28 M360,14 V28" pathLength="1"/>
+            </svg>
+        </div>
     </div>
 
     <section id="bio" class="bio-section">
@@ -153,7 +162,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
 
     <footer class="site-footer">
         <div class="footer-inner">
-            <span class="footer-label">© 2026 · Pittsburgh, PA</span>
+            <span class="footer-label">© 2026 · Pittsburgh, PA · 412</span>
         </div>
     </footer>
 

@@ -236,6 +236,15 @@ html[data-theme="wallst"] .timeline-year {
 	color: var(--accent);
 }
 
+/* Hero separator: a plain gold hairline here (the bridge belongs to Pittsburgh) */
+html[data-theme="wallst"] .card-separator {
+	height: 1px;
+	background: linear-gradient(to right, transparent 0%, var(--accent-line) 30%, var(--accent-line) 70%, transparent 100%);
+}
+html[data-theme="wallst"] .card-separator .bridge {
+	display: none;
+}
+
 /* Fridge door rim and the intro mark in gold */
 html[data-theme="wallst"] .door.is-live {
 	border-color: var(--accent-strong);

@@ -208,6 +208,9 @@ html[data-theme="crt"] .card-separator {
 html[data-theme="crt"] .card-separator::before {
 	content: '─────────────────────────── EOF ───────────────────────────';
 }
+html[data-theme="crt"] .card-separator .bridge {
+	display: none;
+}
 html[data-theme="crt"] .timeline::before {
 	background: repeating-linear-gradient(to bottom, var(--border-strong) 0 6px, transparent 6px 12px);
 }

@@ -214,18 +214,58 @@ input:focus-visible {
 	position: relative;
 }
 
-/* Quiet separator between the hero card and page content */
+/* Quiet separator between the hero card and page content: in the default style it is one of the
+   gold Sister Bridges (Pittsburgh, city of bridges) drawn in as a line silhouette; other styles
+   restyle it. */
 .card-separator {
 	width: min(420px, 60%);
-	height: 1px;
 	margin: 0 auto var(--space-7);
-	background: linear-gradient(
-		to right,
-		transparent 0%,
-		var(--border-strong) 30%,
-		var(--border-strong) 70%,
-		transparent 100%
-	);
+}
+.bridge {
+	display: block;
+	width: 100%;
+	height: 28px;
+	overflow: visible;
+	fill: none;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+.bridge-deck {
+	stroke: var(--border-strong);
+	stroke-width: 1;
+}
+.bridge-towers {
+	stroke: var(--accent);
+	stroke-opacity: 0.55;
+	stroke-width: 1.5;
+}
+.bridge-cable {
+	stroke: var(--accent);
+	stroke-opacity: 0.6;
+	stroke-width: 1.4;
+	stroke-dasharray: 1;
+	stroke-dashoffset: 0;
+}
+.bridge-hangers {
+	stroke: var(--accent);
+	stroke-opacity: 0.3;
+	stroke-width: 1;
+}
+/* On arrival the cable draws itself across, then the hangers and towers settle in */
+html:not([data-theme]) .bridge-cable {
+	animation: bridge-draw 1.1s var(--ease) 0.15s both;
+}
+html:not([data-theme]) .bridge-hangers,
+html:not([data-theme]) .bridge-towers {
+	animation: bridge-fade 0.5s var(--ease) 1.0s both;
+}
+@keyframes bridge-draw {
+	from { stroke-dashoffset: 1; }
+	to   { stroke-dashoffset: 0; }
+}
+@keyframes bridge-fade {
+	from { opacity: 0; }
+	to   { opacity: 1; }
 }
 
 /* ── Identity ── */
@@ -1329,7 +1369,7 @@ a.bc-contact-item:hover {
 	}
 }
 
-/* ── Footer ── */
+/* ── Footer: the downtown skyline as faint line art, in the default style ── */
 .site-footer {
 	width: 100%;
 	padding: var(--space-7) var(--space-6);
@@ -1338,6 +1378,10 @@ a.bc-contact-item:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+html:not([data-theme]) .site-footer {
+	padding-top: calc(var(--space-7) + 72px);
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1100 90'%3E%3Cpath fill='none' stroke='%23ffc94d' stroke-opacity='.16' stroke-width='1.2' stroke-linejoin='round' d='M0,90 H1100 M0,90 V78 H40 V70 H70 V90 M90,90 V40 H100 V30 H110 V22 H118 V14 L122,8 L126,14 V22 H134 V30 H144 V40 H154 V90 M175,90 V36 H205 V90 M225,90 V44 L240,30 L255,44 V90 M290,90 V6 H380 V90 M400,90 V34 H412 V26 H436 V34 H448 V90 M470,90 V28 H480 V20 H500 V28 H510 V90 M540,90 V34 H556 V24 L566,10 L576,24 V34 H592 V90 M566,10 V0 M620,90 V30 L626,22 L632,30 L638,22 L644,30 L650,22 L656,30 L662,22 L668,30 V90 M700,90 V26 L730,22 V90 M760,90 V60 H790 V50 H810 V90 M840,90 V66 H870 V90 M900,90 V48 H930 V90 M960,90 V72 H1000 V90 M1030,90 V58 H1060 V90 M1080,90 V80 H1100 V90'/%3E%3C/svg%3E") no-repeat center top 24px / min(1100px, 100%) auto;
 }
 
 .footer-inner {
@@ -1913,5 +1957,14 @@ html.fridge-on .cv-mobile-card.magnet {
 	html.fridge-on .door .magnet,
 	html.fridge-on #business-card.magnet {
 		transition: none;
+	}
+}
+
+/* ── Reduced motion: the bridge is simply there ── */
+@media (prefers-reduced-motion: reduce) {
+	.bridge-cable,
+	.bridge-hangers,
+	.bridge-towers {
+		animation: none;
 	}
 }
