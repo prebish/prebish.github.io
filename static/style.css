@@ -1667,60 +1667,60 @@ html.show-loader .intro-text {
 	}
 }
 
-/* ── Fridge mode (static/fridge.js): the home view becomes a door with draggable magnets ── */
+/* ── Fridge mode (static/fridge.js): the current tab becomes a door with draggable magnets ── */
 .door {
-	display: contents; /* invisible wrapper until fridge mode */
+	display: contents; /* invisible wrapper until fridge mode makes this tab's door live */
 }
 
-html.fridge-on .door {
+html.fridge-on .door.is-live {
 	display: block;
 	position: relative;
-	width: min(1120px, calc(100vw - 32px));
-	aspect-ratio: var(--door-aspect, 1.3);
-	min-height: 640px;
+	width: min(1400px, calc(100vw - 32px));
+	aspect-ratio: 1.25;
+	min-height: var(--door-min, 760px);
 	margin: 0 auto var(--space-7);
-	background:
-		linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
-		var(--surface-1);
-	border: 1px solid var(--border);
-	border-top-color: var(--border-strong);
+	background: transparent;
+	border: 1px solid var(--border-strong);
 	border-radius: var(--radius-lg);
-	box-shadow: var(--shadow-md);
 }
 
-/* Phones: a portrait door, so five magnets have room without piling up */
+/* Phones: a portrait door, so the magnets have room without piling up */
 @media (max-width: 640px) {
-	html.fridge-on .door {
+	html.fridge-on .door.is-live {
 		aspect-ratio: auto;
-		min-height: 960px;
 	}
 }
 
-html.fridge-on .card-separator {
+/* Sections stop constraining width while their door is live */
+html.fridge-on #projects,
+html.fridge-on #timeline,
+html.fridge-on #cv {
+	max-width: none;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* Containers that would box the magnets in become transparent to layout; spine decorations go */
+html.fridge-on .featured-grid,
+html.fridge-on .spotlight-grid,
+html.fridge-on .timeline {
+	display: contents;
+}
+html.fridge-on .card-separator,
+html.fridge-on .timeline::before,
+html.fridge-on .timeline-year,
+html.fridge-on .timeline-now-cap,
+html.fridge-on .timeline-item.magnet .timeline-icon {
 	display: none;
 }
 
-/* The featured grid moves into the door; its cards position themselves */
-html.fridge-on .featured-grid {
-	display: contents;
-}
-html.fridge-on .featured-card {
-	opacity: 1;
-	transform: none;
-	width: min(420px, calc(100% - 16px));
-}
-html.fridge-on .ticker {
-	margin: 0;
-	width: min(580px, calc(100% - 16px));
-}
-html.fridge-on #business-card.magnet {
-	position: absolute;
-	margin: 0;
-	transition: left 0.45s var(--ease), top 0.45s var(--ease), box-shadow 0.2s var(--ease);
+/* While a magnet is dragged, iframes must not swallow the pointer */
+html.fridge-dragging iframe {
+	pointer-events: none;
 }
 
 /* --mx/--my: the magnet's top-centre anchor as a fraction of the door; set by fridge.js */
-html.fridge-on .magnet {
+html.fridge-on .door .magnet {
 	position: absolute;
 	left: calc(var(--mx, 0.5) * 100%);
 	top: calc(var(--my, 0) * 100%);
@@ -1734,8 +1734,13 @@ html.fridge-on .magnet {
 	-webkit-user-select: none;
 	transition: left 0.45s var(--ease), top 0.45s var(--ease), box-shadow 0.2s var(--ease);
 }
+html.fridge-on #business-card.magnet {
+	position: absolute;
+	margin: 0;
+	transition: left 0.45s var(--ease), top 0.45s var(--ease), box-shadow 0.2s var(--ease);
+}
 
-html.fridge-on .magnet.is-dragging,
+html.fridge-on .door .magnet.is-dragging,
 html.fridge-on #business-card.magnet.is-dragging {
 	cursor: grabbing;
 	transition: none;
@@ -1743,24 +1748,83 @@ html.fridge-on #business-card.magnet.is-dragging {
 	z-index: 999;
 }
 
-/* The magnet itself: a small gold disc pinning the top edge */
-html.fridge-on .magnet::after {
+/* The magnet itself: a gold disc pinning the top edge. It is also a drag handle. */
+html.fridge-on .door .magnet::after {
 	content: '';
 	position: absolute;
-	top: -7px;
+	top: -8px;
 	left: 50%;
 	translate: -50% 0;
-	width: 14px;
-	height: 14px;
+	width: 16px;
+	height: 16px;
 	border-radius: 50%;
 	background: var(--accent-strong);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), inset 0 -2px 0 rgba(0, 0, 0, 0.25);
-	pointer-events: none;
+	cursor: grab;
 }
 
-html.fridge-on .magnet:focus-visible {
+html.fridge-on .door .magnet:focus-visible {
 	outline: 2px solid var(--accent);
 	outline-offset: 4px;
+}
+
+/* ── Per-piece sizing once it floats ── */
+html.fridge-on .featured-card {
+	opacity: 1;
+	transform: none;
+	width: min(420px, calc(100% - 16px));
+}
+html.fridge-on .ticker {
+	margin: 0;
+	width: min(580px, calc(100% - 16px));
+}
+html.fridge-on .section-title.magnet {
+	width: 320px;
+	max-width: calc(100% - 16px);
+	margin: 0;
+	padding: 0;
+}
+html.fridge-on .projects-intro.magnet {
+	width: min(560px, calc(100% - 16px));
+	margin: 0;
+}
+html.fridge-on .spotlight-card.magnet {
+	width: min(420px, calc(100% - 16px));
+}
+html.fridge-on .spotlight-card.magnet:first-child {
+	width: min(560px, calc(100% - 16px));
+}
+html.fridge-on .projects-more.magnet {
+	width: min(640px, calc(100% - 16px));
+	margin: 0;
+}
+html.fridge-on .timeline-item.magnet {
+	width: min(440px, calc(100% - 16px));
+	padding: 0;
+	text-align: left;
+}
+html.fridge-on .timeline-item.magnet .timeline-content {
+	display: block;
+	width: 100%;
+	max-width: none;
+}
+html.fridge-on .cv-page-bar.magnet {
+	width: auto;
+	margin: 0;
+}
+html.fridge-on .cv-pdf-viewer.magnet {
+	width: min(900px, calc(100% - 16px));
+	margin: 0;
+	overflow: visible;
+}
+html.fridge-on .cv-pdf-viewer.magnet .cv-pdf-iframe {
+	height: 60vh;
+	min-height: 420px;
+	border-radius: var(--radius);
+}
+html.fridge-on .cv-mobile-card.magnet {
+	width: min(400px, calc(100% - 16px));
+	margin: 0;
 }
 
 /* ── Reduced motion: every effect above degrades to its final state ── */
@@ -1775,7 +1839,7 @@ html.fridge-on .magnet:focus-visible {
 	.ticker-track {
 		animation: none;
 	}
-	html.fridge-on .magnet,
+	html.fridge-on .door .magnet,
 	html.fridge-on #business-card.magnet {
 		transition: none;
 	}

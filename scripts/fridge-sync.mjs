@@ -12,7 +12,8 @@ import { readFile, writeFile, appendFile } from 'node:fs/promises';
 
 const FILE = new URL('../static/fridge.json', import.meta.url);
 const BASE = (process.env.FRIDGE_NTFY_BASE || 'https://ntfy.sh').replace(/\/+$/, '');
-const IDS = ['card', 'ticker', 'featured-0', 'featured-1', 'featured-2'];
+// Mirrored in static/fridge.js; keep in sync.
+const ID_RE = /^(card|ticker|featured-[0-9]|projects-title|projects-intro|spotlight-[0-9]|projects-more|timeline-title|timeline-[0-9]{1,2}|cv-bar|cv-viewer|cv-mobile)$/;
 
 const round = v => Math.round(v * 1000) / 1000;
 const validPos = m => !!m && Number.isFinite(+m.x) && Number.isFinite(+m.y) && +m.x >= 0 && +m.x <= 1 && +m.y >= 0 && +m.y <= 1;
@@ -28,7 +29,7 @@ function foldMessages(magnets, text, minTime = 0) {
         try { msg = JSON.parse(line); } catch { continue; }
         if (!msg || msg.event !== 'message' || typeof msg.message !== 'string') continue;
         try { move = JSON.parse(msg.message); } catch { continue; }
-        if (!move || !IDS.includes(move.id) || !validPos(move)) continue;
+        if (!move || typeof move.id !== 'string' || !ID_RE.test(move.id) || !validPos(move)) continue;
         const t = +msg.time || 0;
         if (t < minTime) continue;
         if (seen[move.id] && seen[move.id] > t) continue;
@@ -37,7 +38,8 @@ function foldMessages(magnets, text, minTime = 0) {
         if (t > latest) latest = t;
     }
     const after = JSON.parse(JSON.stringify(magnets)), was = JSON.parse(before);
-    const changed = IDS.filter(id => JSON.stringify(after[id]) !== JSON.stringify(was[id])).length;
+    const ids = new Set([...Object.keys(after), ...Object.keys(was)]);
+    const changed = [...ids].filter(id => JSON.stringify(after[id]) !== JSON.stringify(was[id])).length;
     return { latest, changed };
 }
 

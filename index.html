@@ -56,8 +56,9 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
         <button type="button" class="dock-item dock-toggle" id="fridge-toggle" aria-pressed="false" aria-label="Fridge mode" title="Fridge mode: drag things around; everyone sees where you left them" data-magnetic><i class="fas fa-magnet" aria-hidden="true"></i></button>
     </nav>
 
-    <!-- The "door": an invisible wrapper (display: contents) until fridge mode turns it into a
-         positioned surface whose children become draggable magnets. -->
+    <!-- "Doors": invisible wrappers (display: contents) until fridge mode turns the current tab's
+         door into a positioned surface whose children become draggable magnets. The home door
+         wraps the hero; the other tabs have a door inside their section. -->
     <div class="door" id="fridge-door">
         <div id="business-card" aria-label="Business card"></div>
 
@@ -90,13 +91,12 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
                 </div>
             </div>
         </template>
-        <h2 class="section-title"><span data-split>Timeline</span></h2>
-        <div class="timeline"></div>
+        <div class="door">
+            <h2 class="section-title"><span data-split>Timeline</span></h2>
+            <div class="timeline"></div>
+        </div>
     </section>
     <section id="projects" class="bio-section">
-        <h2 class="section-title"><span data-split>Projects</span></h2>
-        <p class="projects-intro"></p>
-
         <!-- Template for a spotlighted project card -->
         <template id="spotlight-template">
             <article class="spotlight-card">
@@ -112,6 +112,10 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
             </article>
         </template>
 
+        <div class="door">
+        <h2 class="section-title"><span data-split>Projects</span></h2>
+        <p class="projects-intro"></p>
+
         <div class="spotlight-grid"></div>
 
         <aside class="projects-more">
@@ -122,9 +126,11 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
             <p class="projects-more-note"></p>
             <div class="projects-more-list"></div>
         </aside>
+        </div>
     </section>
 
     <section id="cv" class="bio-section">
+        <div class="door">
         <div class="cv-page-bar">
             <a class="cv-download-btn" href="Joel_Prebish_Resume_public.pdf" download><i class="fas fa-download"></i> Download PDF</a>
         </div>
@@ -140,6 +146,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getI
                 <a class="cv-download-btn" href="Joel_Prebish_Resume_public.pdf" target="_blank" rel="noopener"><i class="fas fa-eye"></i> View PDF</a>
                 <a class="cv-download-btn cv-btn-outline" href="Joel_Prebish_Resume_public.pdf" download><i class="fas fa-download"></i> Download</a>
             </div>
+        </div>
         </div>
     </section>
 

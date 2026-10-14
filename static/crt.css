@@ -117,6 +117,18 @@ html[data-theme="crt"] .bc-name::after {
 @keyframes crt-blink {
 	50% { opacity: 0; }
 }
+/* The three home cards are what `ls` would list */
+html[data-theme="crt"] .featured-card {
+	position: relative;
+}
+html[data-theme="crt"] .featured-card::before {
+	content: '$ ls';
+	position: absolute;
+	top: 8px;
+	left: 12px;
+	font-size: 0.7rem;
+	color: var(--text-tertiary);
+}
 html[data-theme="crt"] .bc-divider {
 	background: linear-gradient(to right, var(--accent-strong) 0, var(--accent-strong) 34px, var(--border-strong) 34px, var(--border-strong) 100%);
 }
@@ -163,6 +175,18 @@ html[data-theme="crt"] .section-title span::after { content: ' ─'; color: var(
 
 html[data-theme="crt"] .timeline-year {
 	background: var(--bg);
+}
+/* A live fridge door brings its own border; the TUI frame and legend step aside */
+html.fridge-on[data-theme="crt"] #projects,
+html.fridge-on[data-theme="crt"] #timeline {
+	max-width: none;
+	border: 0;
+	padding: 0;
+	margin-top: 0;
+	margin-inline: auto;
+}
+html.fridge-on[data-theme="crt"] .section-title.magnet {
+	background: transparent;
 }
 
 @media (max-width: 920px) {
@@ -223,7 +247,7 @@ html[data-theme="crt"] .toast {
 html[data-theme="crt"] .intro-text {
 	font-family: var(--font-family);
 }
-html[data-theme="crt"] .door {
+html[data-theme="crt"] .door.is-live {
 	border-color: var(--border-strong);
 }
 

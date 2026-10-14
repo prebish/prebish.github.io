@@ -1,141 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Prebish Consulting – On-call IT support and technology consulting for small businesses in the Pittsburgh area.">
+    <meta name="description" content="Prebish Consulting – on-call IT support and technology consulting for small businesses in the Pittsburgh area. Work in progress.">
     <meta name="theme-color" content="#ffffff">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://prebish.github.io/consulting/">
-    <meta property="og:title" content="Prebish Consulting – Technology &amp; IT Solutions">
-    <meta property="og:description" content="On-call IT support and technology consulting for small businesses in the Pittsburgh area.">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Prebish Consulting – Technology &amp; IT Solutions">
-    <meta name="twitter:description" content="On-call IT support and technology consulting for small businesses in the Pittsburgh area.">
-
+    <meta name="robots" content="noindex">
     <link rel="icon" href="../static/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Prebish Consulting</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* One file, no dependencies. Light theme on purpose: this is a separate business page. */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #ffffff;
+            --text: #111827;
+            --muted: #6b7280;
+            --accent: #2563eb;
+            --accent-ink: #1d4ed8;
+            --border: #e5e7eb;
+            --soft: #f4f6fb;
+        }
+        html { background: var(--bg); }
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            padding: 24px 16px 48px;
+            -webkit-font-smoothing: antialiased;
+        }
+        main { max-width: 560px; margin: 0 auto; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-ink); text-decoration: underline; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+        .wip {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 4px 10px;
+            border: 1px solid #f59e0b;
+            border-radius: 999px;
+            background: #fffbeb;
+            color: #92400e;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        h1 { font-size: 1.75rem; line-height: 1.2; letter-spacing: -0.01em; }
+        h1 span { color: var(--accent); }
+        .tagline { margin-top: 8px; color: var(--muted); font-size: 1.05rem; }
+
+        .note {
+            margin: 24px 0;
+            padding: 14px 16px;
+            border-left: 3px solid var(--accent);
+            background: var(--soft);
+            border-radius: 0 10px 10px 0;
+            font-size: 0.95rem;
+        }
+        h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+        ul { list-style: none; }
+        li { padding: 8px 0; border-top: 1px solid var(--border); }
+        li:last-child { border-bottom: 1px solid var(--border); }
+
+        .contact { display: flex; flex-wrap: wrap; gap: 10px; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: #fff;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn:hover { background: var(--accent-ink); color: #fff; text-decoration: none; }
+        .btn.outline { background: transparent; color: var(--accent); }
+        .btn.outline:hover { background: var(--soft); }
+        .status { margin-top: 10px; color: var(--muted); font-size: 0.9rem; min-height: 1.4em; }
+
+        footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    </style>
 </head>
-
 <body>
-    <header>
-        <div class="header-container">
-            <div class="header-brand">
-                <span class="brand-name"><span class="brand-name-accent">Prebish</span> Consulting</span>
-                <span class="brand-tagline">Technology &amp; IT Solutions</span>
-            </div>
-            <nav class="header-nav">
-                <a href="../index.html" class="nav-link">← Portfolio</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
+    <main>
+        <span class="wip">Work in progress</span>
+        <h1><span>Prebish</span> Consulting</h1>
+        <p class="tagline">On-call IT support and technology consulting for small businesses in Pittsburgh, PA.</p>
+
+        <p class="note">This page is a placeholder while the practice takes shape. The details below are the plan, not a menu yet. If any of it sounds useful, get in touch and we'll talk it through.</p>
+
+        <h2>What I can help with</h2>
+        <ul>
+            <li>Fixing what's broken: devices, networks, software, backups. Remote or on-site.</li>
+            <li>Picking the right tools for a small team, and setting them up properly.</li>
+            <li>Replacing manual, spreadsheet-driven processes with something simpler.</li>
+        </ul>
+
+        <h2>Contact</h2>
+        <div class="contact">
+            <a class="btn" href="mailto:prebish.j@outlook.com">Email</a>
+            <button class="btn outline" type="button" id="copy">Copy address</button>
+            <a class="btn outline" href="https://linkedin.com/in/joelprebish" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
-    </header>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
 
-    <!-- Hero -->
-    <section id="hero">
-        <div class="hero-inner">
-            <span class="hero-eyebrow"><i class="fas fa-briefcase"></i> Serving the Pittsburgh Area</span>
-            <h1 class="hero-headline">Technology that works<br><span class="hero-headline-accent">for your business.</span></h1>
-            <p class="hero-sub">On-call IT support and strategic technology consulting tailored for small and local businesses. No jargon — just practical solutions that save time and money.</p>
-            <a href="#contact" class="hero-cta">Let's Talk <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </section>
+        <footer>
+            <span>© <span id="year">2026</span> Prebish Consulting · Pittsburgh, PA</span>
+            <a href="../index.html">← Portfolio</a>
+        </footer>
+    </main>
 
-    <!-- Services -->
-    <section id="services">
-        <div class="section-inner">
-        <h2 class="section-heading">What I Offer</h2>
-        <div class="services-grid">
-
-            <div class="service-card">
-                <i class="fas fa-headset service-icon"></i>
-                <h3 class="service-title">On-Call IT Support</h3>
-                <p class="service-desc">Fast, reliable support when something breaks. Hardware issues, network problems, software troubleshooting — handled remotely or on-site so you can get back to work.</p>
-                <ul class="service-bullets">
-                    <li>Remote &amp; on-site support</li>
-                    <li>Device setup &amp; maintenance</li>
-                    <li>Network &amp; connectivity fixes</li>
-                    <li>Data backup &amp; recovery</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <i class="fas fa-chess-knight service-icon"></i>
-                <h3 class="service-title">Technology Consulting</h3>
-                <p class="service-desc">Strategic guidance to help you choose the right tools and systems for your team. Cut through the noise and invest in technology that actually fits your workflow.</p>
-                <ul class="service-bullets">
-                    <li>Software recommendations</li>
-                    <li>Cloud &amp; infrastructure planning</li>
-                    <li>Vendor evaluation &amp; setup</li>
-                    <li>Security best practices</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <i class="fas fa-chart-line service-icon"></i>
-                <h3 class="service-title">Management &amp; Process Advice</h3>
-                <p class="service-desc">Improve how your business operates by identifying inefficiencies and modernizing workflows. From manual spreadsheets to automated systems — streamline operations.</p>
-                <ul class="service-bullets">
-                    <li>Workflow analysis &amp; optimization</li>
-                    <li>Automation opportunities</li>
-                    <li>Tool adoption &amp; training</li>
-                    <li>Operational cost reduction</li>
-                </ul>
-            </div>
-
-        </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-        <div class="section-inner">
-        <div class="about-inner">
-            <div class="about-text">
-                <h2 class="section-heading" style="text-align:left; margin-bottom: 20px;">About Me</h2>
-                <p>I'm Joel Prebish — a software engineer at PNC Bank and a Computer Science graduate from the University of Pittsburgh. I've spent years building and maintaining production systems at enterprise scale, and I started this consulting practice to bring that same level of expertise to the businesses in my community.</p>
-                <p>Whether you're a restaurant that needs reliable Wi-Fi and a working POS, a law office overwhelmed by paper processes, or a startup trying to figure out the right software stack — I can help you cut through the complexity and get things working.</p>
-                <p>Based in Pittsburgh, PA. Available for remote and on-site engagements.</p>
-                <div class="about-badges">
-                    <span class="about-badge"><i class="fas fa-graduation-cap"></i> B.S. Computer Science, Pitt</span>
-                    <span class="about-badge"><i class="fas fa-map-marker-alt"></i> Pittsburgh, PA</span>
-                    <span class="about-badge"><i class="fas fa-building"></i> SWE @ PNC Bank</span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-        <div class="section-inner">
-        <div class="contact-inner">
-            <h2 class="section-heading">Get in Touch</h2>
-            <p class="contact-sub">Have a project or just want to talk through your options? Reach out — first consultation is free.</p>
-            <div class="contact-options">
-                <a href="mailto:prebish.j@outlook.com" class="contact-btn">
-                    <i class="fas fa-envelope"></i>
-                    prebish.j@outlook.com
-                </a>
-                <a href="https://linkedin.com/in/joelprebish" target="_blank" rel="noopener noreferrer" class="contact-btn contact-btn-outline">
-                    <i class="fab fa-linkedin"></i>
-                    LinkedIn
-                </a>
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <div class="consult-footer">
-        <span>© 2026 Prebish Consulting · Pittsburgh, PA</span>
-        <a href="../index.html">← Back to Portfolio</a>
-    </div>
-
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const status = document.getElementById('status');
+        document.getElementById('copy').addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText('prebish.j@outlook.com');
+                status.textContent = 'Copied prebish.j@outlook.com';
+            } catch (e) {
+                status.textContent = 'prebish.j@outlook.com';
+            }
+            setTimeout(() => { status.textContent = ''; }, 2500);
+        });
+    </script>
 </body>
 </html>

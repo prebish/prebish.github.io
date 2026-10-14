@@ -1,6 +1,8 @@
 /* ──────────────────────────────────────────────────────────────────────────
-   fridge.js — "fridge mode": the home view becomes a door and its pieces
-   (business card, tech ticker, featured cards) become draggable magnets.
+   fridge.js — "fridge mode": every tab becomes a door and its pieces become
+   draggable magnets (Home: card, ticker, featured cards; Projects: title,
+   intro, project cards, "More on GitHub"; Timeline: title and each entry;
+   CV: toolbar and the viewer).
 
    The arrangement is shared. The source of truth is static/fridge.json in
    this repo. Visitors' moves are published as tiny JSON messages to a public
@@ -10,26 +12,22 @@
    history is the fridge's history. See README "Fridge mode".
 
    Positions are the magnet's top-centre anchor as fractions (0..1) of the
-   door's width and height, so one layout maps onto any viewport.
+   door's width and height, so one layout maps onto any viewport. A magnet
+   nobody has moved yet starts where the normal layout puts it.
    ────────────────────────────────────────────────────────────────────────── */
 (() => {
     'use strict';
 
     const root = document.documentElement;
-    const door = document.getElementById('fridge-door');
     const toggle = document.getElementById('fridge-toggle');
+    const heroDoor = document.getElementById('fridge-door');
     const bio = document.getElementById('bio');
-    if (!door || !toggle || !bio) return;
+    if (!toggle || !heroDoor || !bio) return;
 
     const NTFY = 'https://ntfy.sh';
-    const IDS = ['card', 'ticker', 'featured-0', 'featured-1', 'featured-2'];
-    const DEFAULTS = {
-        'card': { x: 0.5, y: 0.04 },
-        'ticker': { x: 0.5, y: 0.46 },
-        'featured-0': { x: 0.5, y: 0.58 },
-        'featured-1': { x: 0.25, y: 0.8 },
-        'featured-2': { x: 0.75, y: 0.8 },
-    };
+    const TABS = ['bio', 'projects', 'timeline', 'cv'];
+    // Mirrored in scripts/fridge-sync.mjs; keep in sync.
+    const ID_RE = /^(card|ticker|featured-[0-9]|projects-title|projects-intro|spotlight-[0-9]|projects-more|timeline-title|timeline-[0-9]{1,2}|cv-bar|cv-viewer|cv-mobile)$/;
     const mqRM = matchMedia('(prefers-reduced-motion: reduce)');
     const store = {
         get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -40,7 +38,7 @@
     const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
     const round = v => Math.round(v * 1000) / 1000;
 
-    // ── Shared validation (mirrored in scripts/fridge-sync.mjs; keep in sync) ──
+    // ── Shared validation ──
     function validPos(m) {
         return !!m && Number.isFinite(+m.x) && Number.isFinite(+m.y) && +m.x >= 0 && +m.x <= 1 && +m.y >= 0 && +m.y <= 1;
     }
@@ -54,7 +52,7 @@
             try { msg = JSON.parse(line); } catch (e) { return; }
             if (!msg || msg.event !== 'message' || typeof msg.message !== 'string') return;
             try { move = JSON.parse(msg.message); } catch (e) { return; }
-            if (!move || !IDS.includes(move.id) || !validPos(move)) return;
+            if (!move || typeof move.id !== 'string' || !ID_RE.test(move.id) || !validPos(move)) return;
             const t = +msg.time || 0;
             if (t < (minTime || 0)) return;
             if (seen[move.id] && seen[move.id] > t) return;
@@ -64,10 +62,11 @@
     }
 
     // ── State ──
-    let layout = null;                       // { topic, updated, aspect, magnets }
-    let wanted = store.get('fridge') === '1'; // this visitor turned the mode on
-    let onHome = (location.hash.replace('#', '') || 'bio') === 'bio';
-    let active = false;
+    let layout = null;                        // { topic, updated, magnets }
+    let wanted = store.get('fridge') === '1';  // this visitor turned the mode on
+    let tab = location.hash.replace('#', '') || 'bio';
+    if (!TABS.includes(tab)) tab = 'bio';
+    let liveTab = null, liveDoor = null, liveMagnets = [];
     let zTop = 1;
 
     // ── Load: committed layout, then recent moves from the topic ──
@@ -77,12 +76,11 @@
             layout = {
                 topic: typeof data.topic === 'string' && data.topic !== 'PLACEHOLDER' ? data.topic.trim() : '',
                 updated: Math.max(0, Math.floor(+data.updated || 0)),
-                aspect: +(data.door && data.door.aspect) || 1.3,
                 magnets: {},
             };
-            IDS.forEach(id => {
-                const m = data.magnets && data.magnets[id];
-                layout.magnets[id] = validPos(m) ? { x: round(+m.x), y: round(+m.y) } : { ...DEFAULTS[id] };
+            Object.keys(data.magnets || {}).forEach(id => {
+                const m = data.magnets[id];
+                if (ID_RE.test(id) && validPos(m)) layout.magnets[id] = { x: round(+m.x), y: round(+m.y) };
             });
             if (!layout.topic) return;
             try {
@@ -96,16 +94,32 @@
         })
         .catch(err => {
             console.error('Error loading fridge layout:', err);
-            layout = { topic: '', updated: 0, aspect: 1.3, magnets: {} };
-            IDS.forEach(id => { layout.magnets[id] = { ...DEFAULTS[id] }; });
+            layout = { topic: '', updated: 0, magnets: {} };
         });
 
-    // ── Magnets ↔ elements ──
-    function magnetEls() {
-        const out = { card: document.getElementById('business-card'), ticker: document.querySelector('.ticker') };
-        document.querySelectorAll('.featured-grid .featured-card').forEach((el, i) => { if (i < 3) out['featured-' + i] = el; });
+    // ── Which elements are magnets on each tab, in document order ──
+    function pick(id, sel, all) {
+        const out = [];
+        if (all) document.querySelectorAll(sel).forEach((el, i) => { if (i < 10 || id === 'timeline') out.push({ id: `${id}-${i}`, el }); });
+        else { const el = document.querySelector(sel); if (el) out.push({ id, el }); }
         return out;
     }
+    function collect(t) {
+        let items = [];
+        if (t === 'bio') items = [...pick('card', '#business-card'), ...pick('ticker', '.ticker'), ...pick('featured', '.featured-grid .featured-card', true)];
+        else if (t === 'projects') items = [...pick('projects-title', '#projects .section-title'), ...pick('projects-intro', '.projects-intro'), ...pick('spotlight', '.spotlight-card', true), ...pick('projects-more', '.projects-more')];
+        else if (t === 'timeline') items = [...pick('timeline-title', '#timeline .section-title'), ...pick('timeline', '.timeline-item', true)];
+        else if (t === 'cv') items = [...pick('cv-bar', '.cv-page-bar'), ...pick('cv-viewer', '.cv-pdf-viewer'), ...pick('cv-mobile', '.cv-mobile-card')];
+        // only things that are actually laid out on this viewport (e.g. the CV mobile card is phone-only)
+        return items.filter(({ id, el }) => ID_RE.test(id) && el.getBoundingClientRect().width > 0);
+    }
+    function doorFor(t) {
+        if (t === 'bio') return heroDoor;
+        const section = document.getElementById(t);
+        return section && section.querySelector(':scope > .door');
+    }
+
+    // ── Positioning helpers ──
     // A small, stable tilt per magnet (−2.5…2.5°) so the door reads as hand-placed
     function tiltFor(id) {
         let h = 0;
@@ -121,97 +135,97 @@
     }
     // Keep a magnet inside the door for *this* viewport (shared positions may come from a wider screen)
     function clampTo(el, x, y) {
-        const dr = door.getBoundingClientRect();
+        if (!liveDoor) return { x, y };
+        const dr = liveDoor.getBoundingClientRect();
         if (!dr.width || !dr.height) return { x, y };
         const hw = el.offsetWidth / 2 / dr.width, hh = el.offsetHeight / dr.height;
         return { x: clamp(x, hw, Math.max(hw, 1 - hw)), y: clamp(y, 0, Math.max(0, 1 - hh)) };
     }
-    function applyPositions(glideFrom) {
-        const els = magnetEls();
-        IDS.forEach(id => {
-            const el = els[id];
-            if (!el) return;
-            const isNew = !el.classList.contains('magnet');
+
+    // ── Enter / leave a tab's door ──
+    function activate(t) {
+        const door = doorFor(t);
+        if (!door || !layout) return;
+        const items = collect(t);
+        // Natural positions (page coordinates) from the normal layout, measured before anything moves
+        const natural = items.map(({ el }) => { const r = el.getBoundingClientRect(); return { cx: r.left + r.width / 2 + scrollX, top: r.top + scrollY }; });
+
+        if (t === 'bio') { const grid = bio.querySelector('.featured-grid'); if (grid) door.append(grid); }
+        const narrow = innerWidth <= 640;
+        door.style.setProperty('--door-min', `${Math.max(760, items.length * (narrow ? 230 : 120))}px`);
+        door.classList.add('is-live');
+        root.classList.add('fridge-on');
+        liveTab = t; liveDoor = door; liveMagnets = items.map(i => i.el);
+
+        const dr = door.getBoundingClientRect();
+        const doorLeft = dr.left + scrollX, doorTop = dr.top + scrollY;
+        items.forEach(({ id, el }, i) => {
             el.classList.add('magnet');
             el.dataset.magnet = id;
             el.style.setProperty('--tilt', tiltFor(id));
             el.setAttribute('aria-roledescription', 'draggable magnet');
             if (el.tagName !== 'A') el.tabIndex = 0;
-            if (isNew && glideFrom && !mqRM.matches) {
-                // start at the "normal layout" spot, then glide to the shared one
-                setPos(el, glideFrom[id].x, glideFrom[id].y);
-                void el.offsetWidth;
-            }
-            const p = clampTo(el, layout.magnets[id].x, layout.magnets[id].y);
+            const start = clampTo(el, (natural[i].cx - doorLeft) / dr.width, (natural[i].top - doorTop) / dr.height);
+            setPos(el, start.x, start.y);
+            const stored = layout.magnets[id];
+            if (!stored) return;
+            if (!mqRM.matches) void el.offsetWidth; // paint the natural spot first, then glide to the shared one
+            const p = clampTo(el, stored.x, stored.y);
             setPos(el, p.x, p.y);
         });
     }
-
-    function enter() {
-        if (active || !layout) return;
-        active = true;
-        root.classList.add('fridge-on');
-        door.style.setProperty('--door-aspect', String(layout.aspect));
-        const grid = bio.querySelector('.featured-grid');
-        if (grid) door.append(grid);
-        applyPositions(DEFAULTS);
-    }
-    function exit() {
-        if (!active) return;
-        active = false;
-        root.classList.remove('fridge-on');
-        const magnets = [...document.querySelectorAll('.magnet')];
-        const grid = door.querySelector('.featured-grid');
-        if (grid) bio.prepend(grid);
-        magnets.forEach(el => {
+    function deactivate() {
+        if (!liveDoor) return;
+        liveMagnets.forEach(el => {
             el.classList.remove('magnet', 'is-dragging');
             el.removeAttribute('aria-roledescription');
+            el.removeAttribute('data-magnet');
             if (el.tagName !== 'A') el.removeAttribute('tabindex');
         });
+        if (liveTab === 'bio') { const grid = liveDoor.querySelector('.featured-grid'); if (grid) bio.prepend(grid); }
+        liveDoor.classList.remove('is-live');
+        root.classList.remove('fridge-on');
+        liveTab = null; liveDoor = null; liveMagnets = [];
     }
     function sync() {
         toggle.setAttribute('aria-pressed', String(wanted));
-        if (wanted && onHome && layout) enter(); else exit();
+        if (!wanted || !layout) { deactivate(); return; }
+        if (liveTab !== tab) { deactivate(); activate(tab); }
     }
+    function refresh() { if (liveDoor) { const t = liveTab; deactivate(); activate(t); } }
 
     toggle.addEventListener('click', () => {
         wanted = !wanted;
         if (wanted) store.set('fridge', '1'); else store.del('fridge');
-        if (wanted && !onHome) {
-            const home = document.querySelector('.nav-link[href="#bio"]');
-            if (home) home.click(); // showSection('bio') → site:section → sync()
-        }
         sync();
     });
     document.addEventListener('site:section', e => {
-        onHome = !!e.detail && e.detail.id === 'bio';
+        if (e.detail && TABS.includes(e.detail.id)) tab = e.detail.id;
         sync();
     });
+    const PART_TAB = { card: 'bio', featured: 'bio', projects: 'projects', timeline: 'timeline' };
     document.addEventListener('site:rendered', e => {
-        if (e.detail && e.detail.part === 'featured' && active) {
-            const grid = bio.querySelector('.featured-grid');
-            if (grid) door.append(grid);
-            applyPositions(null);
-        }
+        const t = e.detail && PART_TAB[e.detail.part];
+        if (t && t === liveTab && e.detail.part !== 'card') refresh();
     });
     ready.then(sync);
     let resizeT = 0;
     addEventListener('resize', () => {
         clearTimeout(resizeT);
-        resizeT = setTimeout(() => { if (active) applyPositions(null); }, 150);
+        resizeT = setTimeout(() => liveMagnets.forEach(el => { const c = getPos(el); const p = clampTo(el, c.x, c.y); setPos(el, p.x, p.y); }), 150);
     });
 
-    // ── Drag (Pointer Events; touch too) ──
+    // ── Drag (Pointer Events; touch too). The gold disc on top is a handle, useful on the PDF viewer. ──
     let drag = null;
-    door.addEventListener('pointerdown', e => {
-        if (!active || drag) return;
+    document.addEventListener('pointerdown', e => {
+        if (!liveDoor || drag) return;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         const m = e.target.closest && e.target.closest('.magnet');
-        if (!m || !door.contains(m)) return;
+        if (!m || !liveDoor.contains(m)) return;
         const control = e.target.closest('a, button, input, textarea, select');
         if (control && control !== m) return; // links and buttons *inside* a magnet still work
         e.preventDefault();
-        const dr = door.getBoundingClientRect();
+        const dr = liveDoor.getBoundingClientRect();
         const mr = m.getBoundingClientRect();
         drag = {
             el: m, id: m.dataset.magnet, pid: e.pointerId, dr,
@@ -221,9 +235,10 @@
         };
         try { m.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
         m.classList.add('is-dragging');
+        root.classList.add('fridge-dragging');
         m.style.setProperty('--mz', String(++zTop));
     });
-    door.addEventListener('pointermove', e => {
+    document.addEventListener('pointermove', e => {
         if (!drag || e.pointerId !== drag.pid) return;
         const d = drag;
         if (!d.moved && Math.hypot(e.clientX - d.sx, e.clientY - d.sy) > 4) d.moved = true;
@@ -237,6 +252,7 @@
         const d = drag;
         drag = null;
         d.el.classList.remove('is-dragging');
+        root.classList.remove('fridge-dragging');
         try { d.el.releasePointerCapture(d.pid); } catch (err) { /* ignore */ }
         if (!d.moved) return;
         // A drag that ends on a link magnet would otherwise count as a click on it
@@ -244,19 +260,19 @@
         setTimeout(() => { delete d.el.dataset.dragged; }, 350);
         if (d.x !== null) commit(d.id, d.x, d.y);
     }
-    door.addEventListener('pointerup', endDrag);
-    door.addEventListener('pointercancel', endDrag);
-    door.addEventListener('click', e => {
+    document.addEventListener('pointerup', endDrag);
+    document.addEventListener('pointercancel', endDrag);
+    document.addEventListener('click', e => {
         const m = e.target.closest && e.target.closest('.magnet');
         if (m && m.dataset.dragged) { e.preventDefault(); e.stopPropagation(); }
     }, true);
-    door.addEventListener('dragstart', e => { if (active) e.preventDefault(); }); // no native link/image drag
+    document.addEventListener('dragstart', e => { if (liveDoor) e.preventDefault(); }); // no native link/image drag
 
     // ── Keyboard: arrows nudge a focused magnet (2 %, shift = 10 %) ──
-    door.addEventListener('keydown', e => {
-        if (!active) return;
+    document.addEventListener('keydown', e => {
+        if (!liveDoor) return;
         const m = e.target && e.target.classList && e.target.classList.contains('magnet') ? e.target : null;
-        if (!m) return;
+        if (!m || !m.dataset.magnet) return;
         const step = e.shiftKey ? 0.1 : 0.02;
         let dx = 0, dy = 0;
         if (e.key === 'ArrowLeft') dx = -step;
@@ -265,11 +281,10 @@
         else if (e.key === 'ArrowDown') dy = step;
         else return;
         e.preventDefault();
-        const id = m.dataset.magnet;
         const cur = getPos(m);
         const p = clampTo(m, cur.x + dx, cur.y + dy);
         setPos(m, p.x, p.y);
-        commit(id, p.x, p.y);
+        commit(m.dataset.magnet, p.x, p.y);
     });
 
     // ── Publish: one tiny message per settled move ──
